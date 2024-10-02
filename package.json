@@ -2,7 +2,7 @@
   "name": "triumph_motorcycles",
   "private": true,
   "version": "0.0.0",
-  "type": "commonjs",
+  "type": "module",
   "config": {
     "commitizen": {
       "path": "git-cz"
@@ -21,20 +21,20 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "clean": "rm -rf node_modules",
+    "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && find . -name 'dist' -type d -prune -exec rm -rf '{}' +",
     "cm": "git cz",
     "cm:retry": "git cz --retry",
     "cy:open": "npx cypress open",
     "lint:css": "stylelint \"src/**/*.css\"",
-    "lint:js": "eslint . --ext .jsx,.js,.tsx,.ts,.json",
-    "lint:types": "tsc --noemit -p tsconfig.json --module esnext",
+    "lint:js": "eslint .",
+    "lint:types": "tsc --noEmit -p tsconfig.json",
     "lint": "npm run lint:css && npm run lint:js",
     "reinstall": "npm run clean && npm install",
     "rebuild": "npm run clean && npm install && npm run build",
     "preview": "vite preview",
     "prepare": "husky",
     "precommit": "npx lint-staged",
-    "prepush": "npm run lint:types && npm run test:unit",
+    "prepush": "npm run lint:types && npm run test:unit && npm run build",
     "prettier": "npx prettier . --write --ignore-unknown",
     "postmerge": "npm install",
     "postrewrite": "npm install",
@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "commitizen": "^4.3.1",
+    "exhaustive": "^1.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
