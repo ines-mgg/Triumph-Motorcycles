@@ -2,7 +2,7 @@
   "name": "triumph_motorcycles",
   "private": true,
   "version": "0.0.0",
-  "type": "commonjs",
+  "type": "module",
   "config": {
     "commitizen": {
       "path": "git-cz"
@@ -26,7 +26,7 @@
     "cm:retry": "git cz --retry",
     "cy:open": "npx cypress open",
     "lint:css": "stylelint \"src/**/*.css\"",
-    "lint:js": "eslint . --ext .jsx,.js,.tsx,.ts,.json",
+    "lint:js": "eslint .",
     "lint:types": "tsc --noemit -p tsconfig.json --module esnext",
     "lint": "npm run lint:css && npm run lint:js",
     "reinstall": "npm run clean && npm install",
