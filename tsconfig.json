@@ -1,40 +1,7 @@
 {
-  "compilerOptions": {
-    // Base Options
-    "allowJs": true,
-    "allowImportingTsExtensions": true,
-    "composite": true,
-    "declaration": true,
-    "esModuleInterop": true,
-    "jsx": "react-jsx",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "NodeNext",
-    "skipLibCheck": true,
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "moduleResolution": "NodeNext",
-
-    // Strictness
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "noImplicitAny": false,
-    "noUnusedParameters": true,
-    "noUnusedLocals": true,
-    "noFallthroughCasesInSwitch": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-
-    "isolatedModules": true,
-    "moduleDetection": "force"
-  },
-  "include": ["src"],
-  "exclude": [
-    "node_modules",
-    "./node_modules",
-    "./node_modules/*",
-    "./build",
-    "**/build",
-    "build/"
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
   ]
 }
