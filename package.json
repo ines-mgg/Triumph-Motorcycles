@@ -34,7 +34,7 @@
     "preview": "vite preview",
     "prepare": "husky",
     "precommit": "npx lint-staged",
-    "prepush": "npm run lint:types && npm run test:unit",
+    "prepush": "npm run lint:types && npm run test:unit && npm run build",
     "prettier": "npx prettier . --write --ignore-unknown",
     "postmerge": "npm install",
     "postrewrite": "npm install",
