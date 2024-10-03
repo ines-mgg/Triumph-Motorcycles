@@ -1,6 +1,7 @@
 /.cache
 /build
 .env
+*.tsbuildinfo
 cypress/downloads
 # Logs
 logs
