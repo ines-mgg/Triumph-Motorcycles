@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { User } from './index';
+import { User } from './index.js';
 
 const validUser: User = {
   id: 'validUser',

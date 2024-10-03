@@ -1,1 +1,1 @@
-export * from './HTTPRepository';
+export * from './HTTPRepository.js';
