@@ -1,4 +1,3 @@
-import { expect, test, describe } from 'vitest';
 import { User } from './index.js';
 
 const validUser: User = {
