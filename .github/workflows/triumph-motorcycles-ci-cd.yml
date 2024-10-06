@@ -26,29 +26,51 @@ jobs:
 
   # Setup for e2e testing with Cypress
 
-  # on Chrome
-  chrome:
+  # on Chrome - Components
+  chrome-component:
+    runs-on: ubuntu-latest
+    name: Components on Chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cypress-io/github-action@v6
+        with:
+          component: true
+          browser: chrome
+
+  # on Chrome - E2E
+  chrome-e2e:
     runs-on: ubuntu-latest
     name: E2E on Chrome
     steps:
       - uses: actions/checkout@v4
       - uses: cypress-io/github-action@v6
         with:
-          component: true
-          # build: npm run build
-          # start: npm run dev
           browser: chrome
+          build: npm run build
+          start: npm run dev
+          wait-on: ${{ secrets.WAIT_ON_URL }}
 
-  # on Firefox
-  firefox:
+  # on Firefox - Components
+  firefox-component:
+    runs-on: ubuntu-latest
+    name: Components on Firefox
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cypress-io/github-action@v6
+        with:
+          component: true
+          browser: firefox
+
+  # on Chrome - E2E
+  firefox-e2e:
     runs-on: ubuntu-latest
     name: E2E on Firefox
     steps:
       - uses: actions/checkout@v4
       - uses: cypress-io/github-action@v6
         with:
-          component: true
-          # build: npm run build
-          # start: npm run dev
           browser: firefox
+          build: npm run build
+          start: npm run dev
+          wait-on: ${{ secrets.WAIT_ON_URL }}
 # TODO : deploy
