@@ -36,7 +36,7 @@ jobs:
         with:
           component: true
           build: npm run build
-          start: npm start
+          start: npm run dev
           browser: chrome
 
   # on Firefox
@@ -49,6 +49,6 @@ jobs:
         with:
           component: true
           build: npm run build
-          start: npm start
+          start: npm run dev
           browser: firefox
 # TODO : deploy

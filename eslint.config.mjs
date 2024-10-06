@@ -12,6 +12,8 @@ export default tseslint.config(
       'node_modules/*',
       'coverage',
       '.husky/*',
+      'cypress/support',
+      'cypress/downloads',
       '.stylelintrc.json',
       'package-lock.json',
       'package.json',
