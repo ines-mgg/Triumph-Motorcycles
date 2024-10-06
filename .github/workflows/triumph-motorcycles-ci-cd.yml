@@ -48,7 +48,7 @@ jobs:
           browser: chrome
           build: npm run build
           start: npm run dev
-          wait-on: ${{ secrets.WAIT_ON_URL }}
+          wait-on: ${{ secrets.APP_BASE_URL }}
 
   # on Firefox - Components
   firefox-component:
@@ -72,5 +72,5 @@ jobs:
           browser: firefox
           build: npm run build
           start: npm run dev
-          wait-on: ${{ secrets.WAIT_ON_URL }}
+          wait-on: ${{ secrets.APP_BASE_URL }}
 # TODO : deploy
