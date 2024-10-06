@@ -3,7 +3,7 @@
 - [ ] :pizza: Feature
 - [ ] :bug: Bug(s) fix
 - [ ] :pencil: Wiki update
-- [ ] :lipstick: Style 
+- [ ] :lipstick: Style
 - [ ] :fire: Performance improvements
 - [ ] :white_check_mark: Tests (unit and/or E2E)
 - [ ] :repeat: CI/CD
@@ -17,7 +17,9 @@
 - Closes #
 
 ## UI accessibility checklist
+
 _If your PR includes UI changes, please utilize this checklist:_
+
 - [ ] Semantic HTML implemented?
 - [ ] Keyboard operability supported?
 - [ ] Checked with [axe DevTools](https://www.deque.com/axe/) and addressed `Critical` and `Serious` issues?
@@ -26,8 +28,8 @@ _If your PR includes UI changes, please utilize this checklist:_
 ## Added/updated tests?
 
 - [ ] :+1: Yes
-- [ ] :no_good: No, and this is why: _please replace this line with details on why tests
-      have not been included_
+- [ ] :no*good: No, and this is why: \_please replace this line with details on why tests
+      have not been included*
 - [ ] :raising_hand: I need help with writing tests
 
 ## [optional] Are there any post deployment tasks we need to perform?

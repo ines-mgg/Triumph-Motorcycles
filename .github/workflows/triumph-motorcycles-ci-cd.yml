@@ -35,8 +35,8 @@ jobs:
       - uses: cypress-io/github-action@v6
         with:
           component: true
-          build: npm run build
-          start: npm run dev
+          # build: npm run build
+          # start: npm run dev
           browser: chrome
 
   # on Firefox
@@ -48,7 +48,7 @@ jobs:
       - uses: cypress-io/github-action@v6
         with:
           component: true
-          build: npm run build
-          start: npm run dev
+          # build: npm run build
+          # start: npm run dev
           browser: firefox
 # TODO : deploy
