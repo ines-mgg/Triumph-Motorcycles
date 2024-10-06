@@ -8,4 +8,8 @@ module.exports = {
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
+  testPathIgnorePatterns: [
+    '<rootDir>/cypress/',
+    '<rootDir>/.*\\.cy\\.[jt]sx?$',
+  ],
 };
