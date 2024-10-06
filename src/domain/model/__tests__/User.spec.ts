@@ -1,4 +1,5 @@
-import { User } from './index.js';
+/// <reference types="jest" />
+import { User } from '../index.js';
 
 const validUser: User = {
   id: 'validUser',
