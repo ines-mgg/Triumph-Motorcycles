@@ -49,6 +49,7 @@ jobs:
           build: npm run build
           start: npm run dev
           wait-on: ${{ secrets.APP_BASE_URL }}
+          config: baseUrl=${{ secrets.APP_BASE_URL }}
 
   # on Firefox - Components
   firefox-component:
@@ -73,4 +74,5 @@ jobs:
           build: npm run build
           start: npm run dev
           wait-on: ${{ secrets.APP_BASE_URL }}
+          config: baseUrl=${{ secrets.APP_BASE_URL }}
 # TODO : deploy
