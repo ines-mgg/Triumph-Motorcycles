@@ -46,5 +46,12 @@
     "font-family-no-missing-generic-family-keyword": null,
     "declaration-block-no-redundant-longhand-properties": null
   },
-  "ignoreFiles": ["**/*.jsx", "**/*.tsx", "**/*.ts", "**/*.js", "dist/*", "node_modules/*"]
+  "ignoreFiles": [
+    "**/*.jsx", 
+    "**/*.tsx", 
+    "**/*.ts", 
+    "**/*.js", 
+    "**/dist/**", 
+    "**/node_modules/**"
+  ]
 }
