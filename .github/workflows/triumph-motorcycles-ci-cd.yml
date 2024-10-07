@@ -48,7 +48,8 @@ jobs:
           browser: chrome
           build: npm run build
           start: npm run dev
-          config: baseUrl=${{ secrets.APP_BASE_URL }}
+          wait-on: 'http://localhost:5173/'
+          config: baseUrl=http://localhost:5173/
 
   # on Firefox - Components
   firefox-component:
@@ -72,5 +73,6 @@ jobs:
           browser: firefox
           build: npm run build
           start: npm run dev
-          config: baseUrl=${{ secrets.APP_BASE_URL }}
+          wait-on: 'http://localhost:5173/'
+          config: baseUrl=http://localhost:5173/
 # TODO : deploy
