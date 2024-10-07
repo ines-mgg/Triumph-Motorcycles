@@ -3,9 +3,6 @@ name: Triumph Motorcycles CI CD
 on:
   pull_request:
     types: [opened, reopened]
-    branches:
-      - master
-      - develop
 
 jobs:
   build:
