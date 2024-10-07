@@ -3,6 +3,7 @@
 .env
 *.tsbuildinfo
 cypress/downloads
+
 # Logs
 logs
 *.log
