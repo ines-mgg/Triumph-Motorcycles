@@ -1,6 +1,11 @@
-name: Triumph Motorcycles CI
+name: Triumph Motorcycles CI CD
 
-on: [pull_request]
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches:
+      - master
+      - develop
 
 jobs:
   build:
@@ -21,6 +26,8 @@ jobs:
         run: npm ci
       - name: Building the App
         run: npm run build --if-present
+      - name: Running prettier
+        run: npm run prettier
       - name: Running lint and unit tests
         run: npm run test:unit
 

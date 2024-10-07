@@ -37,7 +37,7 @@
     "prettier": "npx prettier . --write --ignore-unknown",
     "postmerge": "npm install",
     "postrewrite": "npm install",
-    "test:unit": "npm run lint:types && npm run test",
+    "test:unit": "npm run lint:types && npm run lint && npm run test",
     "test": "jest"
   },
   "dependencies": {
