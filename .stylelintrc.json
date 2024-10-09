@@ -47,11 +47,11 @@
     "declaration-block-no-redundant-longhand-properties": null
   },
   "ignoreFiles": [
-    "**/*.jsx", 
-    "**/*.tsx", 
-    "**/*.ts", 
-    "**/*.js", 
-    "**/dist/**", 
+    "**/*.jsx",
+    "**/*.tsx",
+    "**/*.ts",
+    "**/*.js",
+    "**/dist/**",
     "**/node_modules/**"
   ]
 }
