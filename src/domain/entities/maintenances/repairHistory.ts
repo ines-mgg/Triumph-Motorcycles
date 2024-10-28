@@ -1,7 +1,7 @@
 import { Breakdown } from './breakdown';
 
 export class RepairHistory {
-  private breakdownRecords: Breakdown[] = [];
+  private readonly breakdownRecords: Breakdown[] = [];
 
   addBreakdown(breakdown: Breakdown): void {
     this.breakdownRecords.push(breakdown);
@@ -13,7 +13,7 @@ export class RepairHistory {
 
   getBreakdownsByMotorcycle(motorcycleId: string): Breakdown[] {
     return this.breakdownRecords.filter(
-      (breakdown) => breakdown.motorcycleId === motorcycleId,
+      (breakdown) => breakdown.id === motorcycleId,
     );
   }
 }
