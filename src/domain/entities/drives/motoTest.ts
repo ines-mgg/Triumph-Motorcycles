@@ -10,7 +10,7 @@ export class MotoTest {
     public endDate: Date | null = null,
   ) {}
 
-  // Calculate the duration of the test in days, returns null if test is ongoing
+ 
   getTestDuration(): number | null {
     if (this.endDate) {
       const duration = Math.floor(
@@ -22,19 +22,18 @@ export class MotoTest {
     return null;
   }
 
-  // End the test and set the end date
+
   endTest(endDate: Date): void {
     if (endDate >= this.startDate) {
       this.endDate = endDate;
     }
   }
 
-  // Check if the test is currently active
   isTestOngoing(): boolean {
     return this.endDate === null;
   }
 
-  // Retrieve summary information about the test
+
   getTestSummary(): string {
     const duration = this.getTestDuration();
     const status = this.isTestOngoing()

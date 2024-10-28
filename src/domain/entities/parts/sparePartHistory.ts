@@ -14,7 +14,6 @@ export class SparePartOrderRecord {
     public remainingQuantity: number = 0,
   ) {}
 
-  // Update delivered quantity and calculate remaining stock
   updateDelivery(deliveredQty: number): void {
     this.deliveredQuantity += deliveredQty;
     this.remainingQuantity = Math.max(
@@ -25,9 +24,8 @@ export class SparePartOrderRecord {
 }
 
 export class SparePartHistory {
-  private orderRecords: SparePartOrderRecord[] = []; // List of all order records
+  private readonly orderRecords: SparePartOrderRecord[] = []; 
 
-  // Add a new spare part order record to the history
   addOrderRecord(
     orderId: string,
     sparePart: SparePart,
@@ -45,13 +43,12 @@ export class SparePartHistory {
       costPerUnit,
       totalCost,
       estimatedDeliveryDate,
-      0, // Delivered quantity starts at 0
-      quantityOrdered, // Initially, remaining quantity equals the ordered quantity
+      0,
+      quantityOrdered, 
     );
     this.orderRecords.push(record);
   }
 
-  // Update delivery information for a specific order by orderId
   updateOrderDelivery(orderId: string, deliveredQty: number): void {
     const orderRecord = this.orderRecords.find(
       (record) => record.orderId === orderId,
@@ -61,19 +58,16 @@ export class SparePartHistory {
     }
   }
 
-  // Retrieve the full history of orders
   getFullHistory(): SparePartOrderRecord[] {
     return this.orderRecords;
   }
 
-  // Retrieve orders for a specific spare part by its ID
   getHistoryBySparePartId(sparePartId: string): SparePartOrderRecord[] {
     return this.orderRecords.filter(
       (record) => record.sparePartId === sparePartId,
     );
   }
 
-  // Retrieve order history within a specific date range
   getHistoryByDateRange(
     startDate: Date,
     endDate: Date,
@@ -83,7 +77,6 @@ export class SparePartHistory {
     );
   }
 
-  // Calculate total expenditure on spare part orders within a date range or overall
   calculateTotalExpenditure(startDate?: Date, endDate?: Date): number {
     const relevantRecords =
       startDate && endDate

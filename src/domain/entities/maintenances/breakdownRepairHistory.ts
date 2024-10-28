@@ -1,19 +1,16 @@
-import { Repair } from './repair'; // Ensure correct import path
+import { Repair } from './repair';
 
 export class BreakdownRepairHistory {
-  private repairRecords: Repair[] = []; // Store all repair records related to breakdowns
+  private readonly repairRecords: Repair[] = []; 
 
-  // Add a repair record to the history
   addRepairRecord(repair: Repair): void {
     this.repairRecords.push(repair);
   }
 
-  // Retrieve the full repair history
   getRepairHistory(): Repair[] {
     return this.repairRecords;
   }
 
-  // Get repairs for a specific breakdown
   getRepairsByBreakdown(breakdownId: string): Repair[] {
     return this.repairRecords.filter(
       (repair) => repair.breakdownId === breakdownId,
