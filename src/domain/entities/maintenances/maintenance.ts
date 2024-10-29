@@ -15,15 +15,15 @@ export class Maintenance {
       this.motorcycle.lastServiceDate || new Date(),
     );
     nextServiceDate.setDate(
-      nextServiceDate.getDate() + this.maintenanceIntervalTime,
+      nextServiceDate.getDate() + this.maintenanceIntervalTime, 
     );
-
+  
     this.motorcycle.updateServiceDetails(nextMileage, nextServiceDate);
   }
 
   needsMaintenance(): boolean | null {
     return (
-      this.motorcycle.needsService() ||
+      this.motorcycle.needsService() || 
       (this.motorcycle.lastServiceDate &&
         (new Date().getTime() - this.motorcycle.lastServiceDate.getTime()) /
           (1000 * 3600 * 24) >=

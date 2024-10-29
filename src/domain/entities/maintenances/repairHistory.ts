@@ -13,7 +13,7 @@ export class RepairHistory {
 
   getBreakdownsByMotorcycle(motorcycleId: string): Breakdown[] {
     return this.breakdownRecords.filter(
-      (breakdown) => breakdown.id === motorcycleId,
+      (breakdown) => breakdown.motorcycle.id === motorcycleId,
     );
   }
 }
