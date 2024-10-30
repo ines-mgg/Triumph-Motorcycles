@@ -1,3 +1,5 @@
+/// <reference types="jest" />
+
 import { MaintenanceNotification } from "../../entities/maintenances/maintenanceNotification";
 
 

@@ -1,3 +1,5 @@
+/// <reference types="jest" />
+
 import { BreakdownRepairHistory } from "../../entities/maintenances/breakdownRepairHistory";
 import { Repair } from "../../entities/maintenances/repair";
 

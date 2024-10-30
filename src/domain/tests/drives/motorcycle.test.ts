@@ -1,3 +1,5 @@
+/// <reference types="jest" />
+
 import { Motorcycle } from "../../entities/drives/motorcycle";
 
 describe('Moto', () => {

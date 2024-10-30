@@ -1,3 +1,5 @@
+/// <reference types="jest" />
+
 import { Warranty } from "../../entities/maintenances/warranty";
 
 

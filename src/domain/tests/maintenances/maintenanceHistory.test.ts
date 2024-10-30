@@ -1,3 +1,5 @@
+/// <reference types="jest" />
+
 import { MaintenanceHistory, MaintenanceRecord } from "../../entities/maintenances/maintenanceHistory";
 import { SparePart } from "../../entities/parts/sparePart";
 

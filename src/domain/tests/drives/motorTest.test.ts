@@ -1,3 +1,5 @@
+/// <reference types="jest" />
+
 import { Driver } from "../../entities/drives/driver";
 import { Motorcycle } from "../../entities/drives/motorcycle";
 import { MotoTest } from "../../entities/drives/motoTest";

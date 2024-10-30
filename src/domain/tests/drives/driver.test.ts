@@ -1,3 +1,5 @@
+/// <reference types="jest" />
+
 import { Driver, DrivingRecord } from "../../entities/drives/driver";
 
 
