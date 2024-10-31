@@ -1,4 +1,6 @@
+import { DeliveryError, InvalidOrderError, InvalidQuantityError } from '../../errors/parts';
 import { SparePart } from './sparePart';
+
 
 export class SparePartOrderRecord {
   constructor(
@@ -12,13 +14,35 @@ export class SparePartOrderRecord {
     public estimatedDeliveryDate: Date,
     public deliveredQuantity: number = 0,
     public remainingQuantity: number = 0,
-  ) {}
+  ) {
+    this.validateInputs();
+  }
+
+  private validateInputs(): void {
+    if (!this.orderId || !this.sparePartId) {
+      throw new InvalidOrderError("L'ID de la commande et l'ID de la pièce sont obligatoires.");
+    }
+    if (this.quantityOrdered < 0) {
+      throw new InvalidQuantityError("La quantité commandée ne peut pas être négative.");
+    }
+    if (this.costPerUnit < 0) {
+      throw new InvalidQuantityError("Le coût unitaire ne peut pas être négatif.");
+    }
+  }
 
   updateDelivery(deliveredQty: number): void {
+    if (deliveredQty < 0) {
+        throw new InvalidQuantityError("La quantité livrée ne peut pas être négative.");
+    }
+
+    if (this.deliveredQuantity + deliveredQty > this.quantityOrdered) {
+        throw new DeliveryError("La quantité livrée dépasse la quantité commandée.");
+    }
+
     this.deliveredQuantity += deliveredQty;
     this.remainingQuantity = Math.max(
-      0,
-      this.quantityOrdered - this.deliveredQuantity,
+        0,
+        this.quantityOrdered - this.deliveredQuantity,
     );
   }
 }
@@ -53,9 +77,10 @@ export class SparePartHistory {
     const orderRecord = this.orderRecords.find(
       (record) => record.orderId === orderId,
     );
-    if (orderRecord) {
-      orderRecord.updateDelivery(deliveredQty);
+    if (!orderRecord) {
+      throw new InvalidOrderError("L'enregistrement de commande spécifié n'existe pas.");
     }
+    orderRecord.updateDelivery(deliveredQty);
   }
 
   getFullHistory(): SparePartOrderRecord[] {

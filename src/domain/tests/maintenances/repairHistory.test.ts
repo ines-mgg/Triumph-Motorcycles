@@ -3,6 +3,7 @@
 import { Motorcycle } from "../../entities/drives/motorcycle";
 import { Breakdown } from "../../entities/maintenances/breakdown";
 import { RepairHistory } from "../../entities/maintenances/repairHistory";
+import { InvalidBreakdownError, MissingMotorcycleError } from "../../errors/maintenances";
 
 describe('RepairHistory', () => {
   let repairHistory: RepairHistory;
@@ -63,6 +64,19 @@ describe('RepairHistory', () => {
       expect(repairHistory.getBreakdowns()).toContain(breakdown1);
       expect(repairHistory.getBreakdowns()).toContain(breakdown2);
     });
+
+    it('devrait lancer une erreur si le breakdown est invalide', () => {
+      expect(() => {
+        repairHistory.addBreakdown({} as Breakdown); 
+      }).toThrow(InvalidBreakdownError);
+    });
+
+    it('devrait lancer une erreur si la moto n\'est pas associée au breakdown', () => {
+      expect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        repairHistory.addBreakdown(new Breakdown('breakdown3', null as any, 'description', new Date(), null));
+      }).toThrow(MissingMotorcycleError);
+    });
   });
 
   describe('getBreakdowns', () => {
@@ -80,6 +94,17 @@ describe('RepairHistory', () => {
 
       expect(repairHistory.getBreakdownsByMotorcycle(motorcycleId)).toContain(breakdown1);
       expect(repairHistory.getBreakdownsByMotorcycle(motorcycleId)).not.toContain(breakdown2);
+    });
+
+    it('devrait retourner un tableau vide si aucun breakdown ne correspond à l\'ID de la motocyclette', () => {
+      repairHistory.addBreakdown(breakdown1);
+      expect(repairHistory.getBreakdownsByMotorcycle('motorcycle2')).toEqual([]);
+    });
+
+    it('devrait lancer une erreur si l\'ID de la moto est vide', () => {
+      expect(() => {
+        repairHistory.getBreakdownsByMotorcycle('');
+      }).toThrow(Error);
     });
   });
 });

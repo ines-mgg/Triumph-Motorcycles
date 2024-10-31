@@ -1,3 +1,5 @@
+import { InvalidRepairActionError } from "../../errors/maintenances";
+
 export class Repair {
   public static readonly commonActions: string[] = [
     "Oil Change",
@@ -34,7 +36,7 @@ export class Repair {
     const actionList = actions.split(',').map(action => action.trim());
     for (const action of actionList) {
       if (!Repair.commonActions.includes(action)) {
-        throw new Error(`Action "${action}" is not a recognized repair action.`);
+        throw new InvalidRepairActionError(action);
       }
     }
   }

@@ -1,7 +1,7 @@
 /// <reference types="jest" />
-
 import { SparePart } from "../../entities/parts/sparePart";
 import { SparePartHistory, SparePartOrderRecord } from "../../entities/parts/sparePartHistory";
+import { DeliveryError, InvalidOrderError } from "../../errors/parts";
 
 describe('SparePartOrderRecord', () => {
   let orderRecord: SparePartOrderRecord;
@@ -31,6 +31,20 @@ describe('SparePartOrderRecord', () => {
     orderRecord.updateDelivery(100);
     expect(orderRecord.deliveredQuantity).toBe(100);
     expect(orderRecord.remainingQuantity).toBe(0);
+  });
+
+  test('updateDelivery doit lancer une erreur si la quantité livrée dépasse la quantité commandée', () => {
+    orderRecord.updateDelivery(50); 
+    expect(() => {
+        orderRecord.updateDelivery(60); 
+    }).toThrow(DeliveryError);
+  });
+
+  test('updateDelivery doit lancer une erreur si la quantité livrée dépasse la quantité commandée', () => {
+    orderRecord.updateDelivery(50);
+    expect(() => {
+      orderRecord.updateDelivery(60);
+    }).toThrow(DeliveryError);
   });
 });
 
@@ -68,6 +82,12 @@ describe('SparePartHistory', () => {
     const record = sparePartHistory.getFullHistory()[0];
     expect(record.deliveredQuantity).toBe(30);
     expect(record.remainingQuantity).toBe(70);
+  });
+
+  test('updateOrderDelivery doit lancer une erreur si l\'enregistrement de commande n\'existe pas', () => {
+    expect(() => {
+      sparePartHistory.updateOrderDelivery('nonexistent-order', 30);
+    }).toThrow(InvalidOrderError);
   });
 
   test('getHistoryBySparePartId doit retourner les enregistrements d\'une pièce spécifique', () => {

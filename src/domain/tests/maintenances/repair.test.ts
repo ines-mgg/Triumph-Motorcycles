@@ -1,76 +1,34 @@
 /// <reference types="jest" />
 
-import { Repair } from "../../entities/maintenances/repair";
+import { Repair } from '../../entities/maintenances/repair';
+import {InvalidRepairActionError } from '../../errors/maintenances';
 
-
-describe('Repair', () => {
-  let repair: Repair;
-
-  describe('constructeur', () => {
-    it('devrait créer une instance de Repair avec des actions valides', () => {
-      repair = new Repair(
-        'repair123',
-        'breakdown456',
-        new Date('2023-10-29'),
-        'Oil Change, Brake Replacement',
-        150
-      );
-
-      expect(repair.id).toBe('repair123');
-      expect(repair.breakdownId).toBe('breakdown456');
-      expect(repair.repairDate).toEqual(new Date('2023-10-29'));
-      expect(repair.actions).toBe('Oil Change, Brake Replacement');
-      expect(repair.cost).toBe(150);
-    });
-
-    it('devrait lancer une erreur si des actions non reconnues sont fournies', () => {
-      expect(() => {
-        new Repair(
-          'repair124',
-          'breakdown457',
-          new Date('2023-10-29'),
-          'Invalid Action, Brake Replacement',
-          100
-        );
-      }).toThrowError('Action "Invalid Action" is not a recognized repair action.');
-    });
-
-    it('devrait lancer une erreur si une action non reconnue est fournie', () => {
-      expect(() => {
-        new Repair(
-          'repair125',
-          'breakdown458',
-          new Date('2023-10-29'),
-          'Tire Replacement, Unknown Action',
-          200
-        );
-      }).toThrowError('Action "Unknown Action" is not a recognized repair action.');
-    });
+describe('Réparation', () => {
+  it('devrait créer une instance de réparation valide', () => {
+    const repair = new Repair('1', 'breakdown1', new Date(), 'Oil Change, Brake Replacement', 150);
+    expect(repair.id).toBe('1');
+    expect(repair.breakdownId).toBe('breakdown1');
+    expect(repair.repairDate).toBeInstanceOf(Date);
+    expect(repair.actions).toBe('Oil Change, Brake Replacement');
+    expect(repair.cost).toBe(150);
   });
 
-  describe('validateActions', () => {
-    it('devrait valider les actions valides sans erreur', () => {
-      expect(() => {
-        repair = new Repair(
-          'repair126',
-          'breakdown459',
-          new Date('2023-10-29'),
-          'Oil Change, Tire Replacement',
-          250
-        );
-      }).not.toThrow();
-    });
+  it('devrait lancer une erreur pour des actions de réparation invalides', () => {
+    expect(() => {
+      new Repair('1', 'breakdown1', new Date(), 'Action invalide', 100);
+    }).toThrow(InvalidRepairActionError);
+    expect(() => {
+      new Repair('2', 'breakdown2', new Date(), 'Oil Change, Action invalide', 200);
+    }).toThrow(InvalidRepairActionError);
+  });
 
-    it('devrait lancer une erreur si des actions invalides sont détectées', () => {
-      expect(() => {
-        repair = new Repair(
-          'repair127',
-          'breakdown460',
-          new Date('2023-10-29'),
-          'Clutch Adjustment, Invalid Action',
-          300
-        );
-      }).toThrowError('Action "Invalid Action" is not a recognized repair action.');
-    });
+  it('ne devrait pas lancer d\'erreur pour des actions de réparation valides', () => {
+    expect(() => {
+      new Repair('3', 'breakdown3', new Date(), 'Tire Replacement', 250);
+    }).not.toThrow();
+    
+    expect(() => {
+      new Repair('4', 'breakdown4', new Date(), 'Battery Replacement, Clutch Adjustment', 300);
+    }).not.toThrow();
   });
 });

@@ -1,3 +1,5 @@
+import { InvalidWarrantyError } from "../../errors/maintenances";
+
 export class Warranty {
   constructor(
     public id: string,
@@ -6,7 +8,27 @@ export class Warranty {
     public endDate: Date,
     public coverageDetails: string,
     public isActive: boolean,
-  ) {}
+  ) {
+    this.validate();
+  }
+
+  private validate(): void {
+    if (!this.id) {
+      throw new InvalidWarrantyError("L'identifiant de la garantie ne peut pas être vide.");
+    }
+    if (!this.motorcycleId) {
+      throw new InvalidWarrantyError("L'identifiant de la motocyclette ne peut pas être vide.");
+    }
+    if (!(this.startDate instanceof Date) || isNaN(this.startDate.getTime())) {
+      throw new InvalidWarrantyError("La date de début est invalide.");
+    }
+    if (!(this.endDate instanceof Date) || isNaN(this.endDate.getTime())) {
+      throw new InvalidWarrantyError("La date de fin est invalide.");
+    }
+    if (this.startDate >= this.endDate) {
+      throw new InvalidWarrantyError("La date de début doit être antérieure à la date de fin.");
+    }
+  }
 
   isWarrantyValid(checkDate: Date): boolean {
     return (

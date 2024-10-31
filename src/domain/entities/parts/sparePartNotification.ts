@@ -1,9 +1,24 @@
-import { SparePart } from './sparePart';
+import { SparePart } from "../../entities/parts/sparePart";
+import { InvalidSparePartError } from "../../errors/parts";
 
 export class SparePartNotification {
   private notifications: string[] = [];
 
-  constructor(private readonly spareParts: SparePart[]) {}
+  constructor(private readonly spareParts: SparePart[]) {
+    this.validateSpareParts();
+  }
+
+  private validateSpareParts(): void {
+    if (!Array.isArray(this.spareParts)) {
+      throw new InvalidSparePartError("La liste des pièces de rechange doit être un tableau.");
+    }
+    
+    this.spareParts.forEach((part, index) => {
+      if (!(part instanceof SparePart)) {
+        throw new InvalidSparePartError(`Élément à l'index ${index} n'est pas une instance de SparePart.`);
+      }
+    });
+  }
 
   checkStockLevels(): void {
     this.spareParts.forEach((part) => {

@@ -2,6 +2,7 @@
 
 import { BreakdownRepairHistory } from "../../entities/maintenances/breakdownRepairHistory";
 import { Repair } from "../../entities/maintenances/repair";
+import { IncompleteRepairError } from "../../errors/maintenances";
 
 describe('Repair History', () => {
   let history: BreakdownRepairHistory;
@@ -26,6 +27,16 @@ describe('Repair History', () => {
       history.addRepairRecord(repair2);
       expect(history.getRepairHistory().length).toBe(2);
       expect(history.getRepairHistory()).toEqual(expect.arrayContaining([repair1, repair2]));
+    });
+
+    it("should throw an error for an invalid repair record without breakdownId", () => {
+      const invalidRepair = new Repair("3", "", new Date('2023-07-03'), 'Engine Repair', 200);
+      expect(() => history.addRepairRecord(invalidRepair)).toThrow(IncompleteRepairError);
+    });
+
+    it("should throw an error for an invalid repair record with a cost of 0", () => {
+      const invalidRepair = new Repair("4", "breakdown1", new Date('2023-07-03'), 'Engine Repair', 0);
+      expect(() => history.addRepairRecord(invalidRepair)).toThrow(IncompleteRepairError);
     });
   });
 

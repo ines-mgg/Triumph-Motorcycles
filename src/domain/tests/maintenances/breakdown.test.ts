@@ -1,8 +1,13 @@
 /// <reference types="jest" />
 
-import { Motorcycle } from "../../entities/drives/motorcycle";
-import { Breakdown } from "../../entities/maintenances/breakdown";
-import { Warranty } from "../../entities/maintenances/warranty";
+import { Motorcycle } from '../../entities/drives/motorcycle';
+import { Breakdown } from '../../entities/maintenances/breakdown';
+import { Warranty } from '../../entities/maintenances/warranty';
+import {
+  MissingMotorcycleError,
+  IncompleteRepairError,
+  InvalidWarrantyError,
+} from '../../errors/maintenances';
 
 describe('Breakdown', () => {
   let moto: Motorcycle;
@@ -56,17 +61,29 @@ describe('Breakdown', () => {
       panne.addRepair('Engine Repair', new Date('2023-07-02'), 300);
       expect(moto.status).toBe('Available');
     });
+
+    it("should throw an error if repair actions are missing", () => {
+      expect(() => {
+        panne.addRepair("", new Date('2023-07-02'), 300);
+      }).toThrow(IncompleteRepairError);
+    });
+
+    it("should throw an error if repair cost is invalid", () => {
+      expect(() => {
+        panne.addRepair('Bodywork Repair', new Date('2023-07-02'), 0);
+      }).toThrow(IncompleteRepairError);
+    });
   });
 
   describe('getRepairHistory', () => {
     it("should return the repair history for the breakdown", () => {
-      panne.addRepair('Engine Repair', new Date('2023-07-02'), 300); 
-      panne.addRepair('Battery Replacement', new Date('2023-07-03'), 150); 
+      panne.addRepair('Engine Repair', new Date('2023-07-02'), 300);
+      panne.addRepair('Battery Replacement', new Date('2023-07-03'), 150);
       const historique = panne.getRepairHistory();
 
       expect(historique.length).toBe(2);
-      expect(historique[0].actions).toBe('Engine Repair'); 
-      expect(historique[1].actions).toBe('Battery Replacement'); 
+      expect(historique[0].actions).toBe('Engine Repair');
+      expect(historique[1].actions).toBe('Battery Replacement');
     });
   });
 
@@ -81,7 +98,7 @@ describe('Breakdown', () => {
       expect(panne.isCoveredByWarranty(dateNonCouverte)).toBe(false);
     });
 
-    it("should return false if the warranty is null", () => {
+    it("should throw an error if the warranty is null", () => {
       panne = new Breakdown(
         'breakdown2',
         moto,
@@ -91,7 +108,18 @@ describe('Breakdown', () => {
       );
 
       const dateCouverte = new Date('2023-07-02');
-      expect(panne.isCoveredByWarranty(dateCouverte)).toBe(false);
+      expect(() => {
+        panne.isCoveredByWarranty(dateCouverte);
+      }).toThrow(InvalidWarrantyError);
+    });
+  });
+
+  describe('Constructor', () => {
+    it("should throw an error if motorcycle is missing", () => {
+      expect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        new Breakdown('breakdown3', null as any, 'Brake issue', new Date('2023-07-01'), garantie);
+      }).toThrow(MissingMotorcycleError);
     });
   });
 });

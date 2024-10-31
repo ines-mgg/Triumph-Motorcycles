@@ -2,6 +2,7 @@ import { Motorcycle } from '../drives/motorcycle';
 import { BreakdownRepairHistory } from './breakdownRepairHistory';
 import { Repair } from './repair';
 import { Warranty } from './warranty';
+import { MissingMotorcycleError, IncompleteRepairError, InvalidWarrantyError } from '../../errors/maintenances';
 
 export class Breakdown {
   private readonly repairHistory: BreakdownRepairHistory;
@@ -13,11 +14,17 @@ export class Breakdown {
     public reportedDate: Date,
     public warranty: Warranty | null,
   ) {
+    if (!motorcycle) {
+      throw new MissingMotorcycleError("La moto doit être fournie lors de la création d'un breakdown.");
+    }
     this.repairHistory = new BreakdownRepairHistory();
     this.motorcycle.status = 'InMaintenance';
   }
 
   addRepair(actions: string, repairDate: Date, cost: number): void {
+    if (!actions || cost <= 0) {
+      throw new IncompleteRepairError("Les actions de réparation et le coût doivent être valides.");
+    }
     const repair = new Repair("123456", this.id, repairDate, actions, cost);
     this.repairHistory.addRepairRecord(repair);
     this.motorcycle.status = 'Available';
@@ -28,6 +35,9 @@ export class Breakdown {
   }
 
   isCoveredByWarranty(checkDate: Date): boolean {
-    return this.warranty ? this.warranty.isWarrantyValid(checkDate) : false;
+    if (!this.warranty) {
+      throw new InvalidWarrantyError("Aucune garantie disponible pour cette moto.");
+    }
+    return this.warranty.isWarrantyValid(checkDate);
   }
 }

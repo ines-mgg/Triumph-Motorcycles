@@ -1,8 +1,7 @@
 /// <reference types="jest" />
-
 import { SparePart } from "../../entities/parts/sparePart";
 import { SparePartNotification } from "../../entities/parts/sparePartNotification";
-
+import { InvalidSparePartError } from "../../errors/parts";
 
 describe('SparePartNotification', () => {
   let sparePart1: SparePart;
@@ -44,5 +43,19 @@ describe('SparePartNotification', () => {
     sparePartNotification.checkStockLevels();
     const notifications = sparePartNotification.getNotifications();
     expect(notifications.length).toBe(1);
+  });
+
+  test('constructor doit lancer une erreur si la liste des pièces est invalide', () => {
+    expect(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      new SparePartNotification([null as any]); 
+    }).toThrow(InvalidSparePartError);
+  });
+
+  test('constructor doit lancer une erreur si un élément de la liste n\'est pas une instance de SparePart', () => {
+    expect(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      new SparePartNotification([sparePart1, {} as any]);
+    }).toThrow(InvalidSparePartError);
   });
 });

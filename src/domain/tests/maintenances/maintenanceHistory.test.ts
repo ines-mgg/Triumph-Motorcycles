@@ -2,7 +2,7 @@
 
 import { MaintenanceHistory, MaintenanceRecord } from "../../entities/maintenances/maintenanceHistory";
 import { SparePart } from "../../entities/parts/sparePart";
-
+import { InvalidMaintenanceRecordError } from '../../errors/maintenances';
 
 describe('Historique de maintenance', () => {
   let historique: MaintenanceHistory;
@@ -32,6 +32,55 @@ describe('Historique de maintenance', () => {
       historique.addMaintenanceRecord(record);
       expect(historique.getFullHistory().length).toBe(1);
       expect(historique.getFullHistory()[0]).toEqual(record);
+    });
+
+    it("devrait lancer une erreur pour un enregistrement de maintenance invalide sans maintenanceId", () => {
+      const invalidRecord = new MaintenanceRecord(
+        '',
+        'moto1',
+        'Preventive',
+        new Date('2023-07-01'),
+        3000,
+        150,
+        [sparePart1],
+        'Check all systems',
+        'manager123'
+      );
+
+      expect(() => historique.addMaintenanceRecord(invalidRecord)).toThrow(InvalidMaintenanceRecordError);
+    });
+
+    it("devrait lancer une erreur pour un coût négatif", () => {
+      const invalidRecord = new MaintenanceRecord(
+        '3',
+        'moto1',
+        'Preventive',
+        new Date('2023-07-01'),
+        3000,
+        -50,
+        [sparePart1],
+        'Check all systems',
+        'manager123'
+      );
+
+      expect(() => historique.addMaintenanceRecord(invalidRecord)).toThrow(InvalidMaintenanceRecordError);
+    });
+
+    it("devrait lancer une erreur si partsUsed n'est pas un tableau", () => {
+      const invalidRecord = new MaintenanceRecord(
+        '4',
+        'moto1',
+        'Preventive',
+        new Date('2023-07-01'),
+        3000,
+        150,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        {} as any,
+        'Check all systems',
+        'manager123'
+      );
+
+      expect(() => historique.addMaintenanceRecord(invalidRecord)).toThrow(InvalidMaintenanceRecordError);
     });
   });
 

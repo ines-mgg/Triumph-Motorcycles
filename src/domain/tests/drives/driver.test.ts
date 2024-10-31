@@ -1,7 +1,7 @@
 /// <reference types="jest" />
 
 import { Driver, DrivingRecord } from "../../entities/drives/driver";
-
+import { InvalidLicenseError, ExperienceError, ContactInfoError, DrivingRecordError } from "../../errors/drivers"; 
 
 describe('Conducteur', () => {
   let conducteur: Driver;
@@ -24,6 +24,12 @@ describe('Conducteur', () => {
 
       expect(conducteur.getDrivingHistory()).toContain(record);
     });
+
+    it("devrait lever une erreur si l'enregistrement de conduite n'est pas valide", () => {
+      expect(() => {
+        conducteur.addDrivingRecord({} as DrivingRecord); 
+      }).toThrow(DrivingRecordError);
+    });
   });
 
   describe('getHistoriqueConduite', () => {
@@ -40,10 +46,17 @@ describe('Conducteur', () => {
       conducteur.updateExperience(10);
       expect(conducteur.yearsOfExperience).toBe(10);
     });
-
-    it("ne devrait pas mettre à jour l'expérience si le nouveau nombre d'années est inférieur ou égal à l'actuel", () => {
-      conducteur.updateExperience(3);
-      expect(conducteur.yearsOfExperience).toBe(5); 
+  
+    it("ne devrait pas mettre à jour l'expérience et lever une erreur si le nouveau nombre d'années est inférieur à l'actuel", () => {
+      expect(() => {
+        conducteur.updateExperience(4);
+      }).toThrow(ExperienceError);
+    });
+  
+    it("ne devrait pas lever une erreur si le nouveau nombre d'années est égal à l'actuel", () => {
+      expect(() => {
+        conducteur.updateExperience(5);
+      }).not.toThrow();
     });
   });
 
@@ -53,6 +66,13 @@ describe('Conducteur', () => {
       conducteur.updateContactInfo(nouveauContact);
 
       expect(conducteur.contactInfo).toEqual(nouveauContact);
+    });
+
+    it("devrait lever une erreur si l'email est invalide", () => {
+      const mauvaisContact = { email: 'mauvais.email.com', phone: '987-654-3210' };
+      expect(() => {
+        conducteur.updateContactInfo(mauvaisContact);
+      }).toThrow(ContactInfoError);
     });
   });
 
@@ -69,6 +89,20 @@ describe('Conducteur', () => {
       conducteur.addDrivingRecord(essai);
 
       expect(conducteur.hasIncidentHistory()).toBe(false);
+    });
+  });
+
+  describe('Validation des erreurs de conducteur', () => {
+    it("devrait lever une erreur pour un numéro de permis invalide", () => {
+      expect(() => {
+        new Driver('conducteur2', 'Alice', 'INVALID_LICENSE', 'A', 5, { email: 'alice@example.com', phone: '123-456-7890' });
+      }).toThrow(InvalidLicenseError);
+    });
+
+    it("devrait lever une erreur pour des années d'expérience négatives", () => {
+      expect(() => {
+        new Driver('conducteur3', 'Bob', 'LICENSE123', 'A', -1, { email: 'bob@example.com', phone: '123-456-7890' });
+      }).toThrow(ExperienceError);
     });
   });
 });

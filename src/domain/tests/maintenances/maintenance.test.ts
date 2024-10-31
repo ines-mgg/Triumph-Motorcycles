@@ -2,6 +2,10 @@
 
 import { Motorcycle } from "../../entities/drives/motorcycle";
 import { Maintenance } from "../../entities/maintenances/maintenance";
+import {
+  MissingMotorcycleError,
+  InvalidMaintenanceIntervalError,
+} from '../../errors/maintenances';
 
 describe('Maintenance', () => {
   let motorcycle: Motorcycle;
@@ -20,6 +24,27 @@ describe('Maintenance', () => {
     );
 
     maintenance = new Maintenance('1', motorcycle, 5000, 180);
+  });
+
+  describe('Constructor', () => {
+    test('doit lever une erreur si la moto est manquante', () => {
+      expect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        new Maintenance('1', null as any, 5000, 180);
+      }).toThrow(MissingMotorcycleError);
+    });
+
+    test('doit lever une erreur si l\'intervalle de maintenance en kilométrage est négatif', () => {
+      expect(() => {
+        new Maintenance('1', motorcycle, -5000, 180);
+      }).toThrow(InvalidMaintenanceIntervalError);
+    });
+
+    test('doit lever une erreur si l\'intervalle de maintenance en temps est négatif', () => {
+      expect(() => {
+        new Maintenance('1', motorcycle, 5000, -180);
+      }).toThrow(InvalidMaintenanceIntervalError);
+    });
   });
 
   test("scheduleNextMaintenance doit calculer correctement le prochain kilométrage et la date de maintenance", () => {

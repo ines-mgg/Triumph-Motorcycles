@@ -1,56 +1,48 @@
 /// <reference types="jest" />
 
 import { Motorcycle } from "../../entities/drives/motorcycle";
+import { MileageError, ServiceDetailsError } from "../../errors/drivers";
 
-describe('Moto', () => {
-  let moto: Motorcycle;
+describe('Motorcycle', () => {
+    let motorcycle: Motorcycle;
 
-  beforeEach(() => {
-    moto = new Motorcycle(
-      '1',
-      'Ducati Monster',
-      1000,
-      'Available',
-      new Date('2023-01-01'),
-      new Date('2023-06-01'),
-      5000,
-      'manager123'
-    );
-  });
-
-  describe('mettreAJourKilometrage', () => {
-    it("devrait mettre à jour le kilométrage si le nouveau kilométrage est supérieur au kilométrage actuel", () => {
-      moto.updateMileage(1500);
-      expect(moto.mileage).toBe(1500);
+    beforeEach(() => {
+        motorcycle = new Motorcycle(
+            'moto1',
+            'Yamaha',
+            5000,
+            'Available',
+            new Date('2022-01-01'),
+            null,
+            6000,
+            'manager1'
+        );
     });
 
-    it("ne devrait pas mettre à jour le kilométrage si le nouveau kilométrage est inférieur au kilométrage actuel", () => {
-      moto.updateMileage(500);
-      expect(moto.mileage).toBe(1000); 
+    describe('updateMileage', () => {
+        it('devrait mettre à jour le kilométrage si le nouveau kilométrage est supérieur', () => {
+            motorcycle.updateMileage(6000);
+            expect(motorcycle.mileage).toBe(6000);
+        });
+
+        it('devrait lever une erreur si le nouveau kilométrage est inférieur', () => {
+            expect(() => {
+                motorcycle.updateMileage(4000); 
+            }).toThrow(MileageError);
+        });
     });
-  });
 
-  describe('besoinEntretien', () => {
-    it("devrait retourner vrai si le kilométrage est supérieur ou égal au prochain kilométrage d'entretien", () => {
-      moto.updateMileage(5000);
-      expect(moto.needsService()).toBe(true);
+    describe('updateServiceDetails', () => {
+        it('devrait mettre à jour les détails de service si le nouveau kilométrage de service est supérieur au kilométrage actuel', () => {
+            motorcycle.updateServiceDetails(7000, new Date('2022-06-01'));
+            expect(motorcycle.nextServiceMileage).toBe(7000);
+            expect(motorcycle.lastServiceDate).toEqual(new Date('2022-06-01'));
+        });
+
+        it('devrait lever une erreur si le nouveau kilométrage de service est inférieur au kilométrage actuel', () => {
+            expect(() => {
+                motorcycle.updateServiceDetails(4000, new Date('2022-06-01')); 
+            }).toThrow(ServiceDetailsError);
+        });
     });
-
-    it("devrait retourner faux si le kilométrage est inférieur au prochain kilométrage d'entretien", () => {
-      moto.updateMileage(3000);
-      expect(moto.needsService()).toBe(false);
-    });
-  });
-
-  describe('mettreAJourDetailsEntretien', () => {
-    it("devrait mettre à jour le prochain kilométrage d'entretien et la date du dernier entretien", () => {
-      const nouveauKilometrageEntretien = 6000;
-      const nouvelleDateEntretien = new Date('2023-12-01');
-
-      moto.updateServiceDetails(nouveauKilometrageEntretien, nouvelleDateEntretien);
-
-      expect(moto.nextServiceMileage).toBe(nouveauKilometrageEntretien);
-      expect(moto.lastServiceDate).toEqual(nouvelleDateEntretien);
-    });
-  });
 });
