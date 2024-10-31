@@ -26,4 +26,8 @@ export class OrderItem {
   getRemainingQuantity(): number {
     return this.quantityOrdered - this.deliveredQuantity;
   }
+
+  getDeliveredQty(): number {
+    return this.deliveredQuantity;
+  }
 }
