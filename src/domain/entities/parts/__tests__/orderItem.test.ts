@@ -1,8 +1,8 @@
 /// <reference types="jest" />
 
-import { OrderItem } from "../../entities/parts/orderItem";
-import { SparePart } from "../../entities/parts/sparePart";
-import { InvalidOrderError } from "../../errors/parts";
+import { OrderItem } from "../orderItem";
+import { SparePart } from "../sparePart";
+import { InvalidOrderError } from "../../../errors/parts";
 
 
 describe('OrderItem', () => {
@@ -47,11 +47,11 @@ describe('OrderItem', () => {
 
   test('doit lancer InvalidOrderError si la pièce de rechange est nulle', () => {
     expect(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       new OrderItem(null as any, 5, 20);
     }).toThrow(InvalidOrderError);
     expect(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       new OrderItem(null as any, 5, 20);
     }).toThrow("La pièce de rechange ne peut pas être nulle.");
   });

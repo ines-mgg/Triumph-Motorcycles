@@ -1,7 +1,7 @@
-import { DeliveryError, InvalidOrderError, InvalidQuantityError } from '../../errors/parts';
 import { SparePart } from './sparePart';
+import { Parts } from '@triumph-motorcycles/domain/errors';
 
-
+const { DeliveryError, InvalidOrderError, InvalidQuantityError } = Parts;
 export class SparePartOrderRecord {
   constructor(
     public orderId: string,
@@ -20,35 +20,45 @@ export class SparePartOrderRecord {
 
   private validateInputs(): void {
     if (!this.orderId || !this.sparePartId) {
-      throw new InvalidOrderError("L'ID de la commande et l'ID de la pièce sont obligatoires.");
+      throw new InvalidOrderError(
+        "L'ID de la commande et l'ID de la pièce sont obligatoires.",
+      );
     }
     if (this.quantityOrdered < 0) {
-      throw new InvalidQuantityError("La quantité commandée ne peut pas être négative.");
+      throw new InvalidQuantityError(
+        'La quantité commandée ne peut pas être négative.',
+      );
     }
     if (this.costPerUnit < 0) {
-      throw new InvalidQuantityError("Le coût unitaire ne peut pas être négatif.");
+      throw new InvalidQuantityError(
+        'Le coût unitaire ne peut pas être négatif.',
+      );
     }
   }
 
   updateDelivery(deliveredQty: number): void {
     if (deliveredQty < 0) {
-        throw new InvalidQuantityError("La quantité livrée ne peut pas être négative.");
+      throw new InvalidQuantityError(
+        'La quantité livrée ne peut pas être négative.',
+      );
     }
 
     if (this.deliveredQuantity + deliveredQty > this.quantityOrdered) {
-        throw new DeliveryError("La quantité livrée dépasse la quantité commandée.");
+      throw new DeliveryError(
+        'La quantité livrée dépasse la quantité commandée.',
+      );
     }
 
     this.deliveredQuantity += deliveredQty;
     this.remainingQuantity = Math.max(
-        0,
-        this.quantityOrdered - this.deliveredQuantity,
+      0,
+      this.quantityOrdered - this.deliveredQuantity,
     );
   }
 }
 
 export class SparePartHistory {
-  private readonly orderRecords: SparePartOrderRecord[] = []; 
+  private readonly orderRecords: SparePartOrderRecord[] = [];
 
   addOrderRecord(
     orderId: string,
@@ -68,7 +78,7 @@ export class SparePartHistory {
       totalCost,
       estimatedDeliveryDate,
       0,
-      quantityOrdered, 
+      quantityOrdered,
     );
     this.orderRecords.push(record);
   }
@@ -78,7 +88,9 @@ export class SparePartHistory {
       (record) => record.orderId === orderId,
     );
     if (!orderRecord) {
-      throw new InvalidOrderError("L'enregistrement de commande spécifié n'existe pas.");
+      throw new InvalidOrderError(
+        "L'enregistrement de commande spécifié n'existe pas.",
+      );
     }
     orderRecord.updateDelivery(deliveredQty);
   }

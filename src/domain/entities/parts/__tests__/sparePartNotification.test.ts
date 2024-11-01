@@ -1,7 +1,7 @@
 /// <reference types="jest" />
-import { SparePart } from "../../entities/parts/sparePart";
-import { SparePartNotification } from "../../entities/parts/sparePartNotification";
-import { InvalidSparePartError } from "../../errors/parts";
+import { SparePart } from '../sparePart';
+import { SparePartNotification } from '../sparePartNotification';
+import { InvalidSparePartError } from '../../../errors/parts';
 
 describe('SparePartNotification', () => {
   let sparePart1: SparePart;
@@ -10,7 +10,7 @@ describe('SparePartNotification', () => {
 
   beforeEach(() => {
     sparePart1 = new SparePart('sp-001', 'Plaquette de frein', 5, 10, 50);
-    sparePart2 = new SparePart('sp-002', 'Huile moteur', 20, 5, 30); 
+    sparePart2 = new SparePart('sp-002', 'Huile moteur', 20, 5, 30);
     sparePartNotification = new SparePartNotification([sparePart1, sparePart2]);
   });
 
@@ -19,7 +19,7 @@ describe('SparePartNotification', () => {
     const notifications = sparePartNotification.getNotifications();
     expect(notifications.length).toBe(1);
     expect(notifications[0]).toBe(
-      `Low stock alert: The spare part "${sparePart1.name}" (ID: ${sparePart1.id}) is below the critical level. Current stock: ${sparePart1.quantityInStock}.`
+      `Low stock alert: The spare part "${sparePart1.name}" (ID: ${sparePart1.id}) is below the critical level. Current stock: ${sparePart1.quantityInStock}.`,
     );
   });
 
@@ -27,7 +27,7 @@ describe('SparePartNotification', () => {
     sparePartNotification.checkStockLevels();
     const notifications = sparePartNotification.getNotifications();
     expect(notifications).not.toContain(
-      `Low stock alert: The spare part "${sparePart2.name}" (ID: ${sparePart2.id}) is below the critical level. Current stock: ${sparePart2.quantityInStock}.`
+      `Low stock alert: The spare part "${sparePart2.name}" (ID: ${sparePart2.id}) is below the critical level. Current stock: ${sparePart2.quantityInStock}.`,
     );
   });
 
@@ -47,14 +47,14 @@ describe('SparePartNotification', () => {
 
   test('constructor doit lancer une erreur si la liste des pièces est invalide', () => {
     expect(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      new SparePartNotification([null as any]); 
+       
+      new SparePartNotification([null as any]);
     }).toThrow(InvalidSparePartError);
   });
 
-  test('constructor doit lancer une erreur si un élément de la liste n\'est pas une instance de SparePart', () => {
+  test("constructor doit lancer une erreur si un élément de la liste n'est pas une instance de SparePart", () => {
     expect(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       new SparePartNotification([sparePart1, {} as any]);
     }).toThrow(InvalidSparePartError);
   });

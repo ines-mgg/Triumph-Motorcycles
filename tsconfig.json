@@ -25,7 +25,18 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@triumph-motorcycles/application": ["./src/app"],
-      "@triumph-motorcycles/domain": ["./src/domain"]
+      "@triumph-motorcycles/domain/entities/drives": [
+        "./src/domain/entities/drives/index.ts"
+      ],
+      "@triumph-motorcycles/domain/entities/maintenances": [
+        "./src/domain/entities/maintenances/index.ts"
+      ],
+      "@triumph-motorcycles/domain/entities/parts": [
+        "./src/domain/entities/parts/index.ts"
+      ],
+      "@triumph-motorcycles/domain/errors": [
+        "./src/domain/errors/index.ts"
+      ]
     }
   },
   "include": ["src"],

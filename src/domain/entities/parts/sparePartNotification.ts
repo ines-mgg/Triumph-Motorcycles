@@ -1,5 +1,7 @@
-import { SparePart } from "../../entities/parts/sparePart";
-import { InvalidSparePartError } from "../../errors/parts";
+import { SparePart } from "./sparePart";
+import { Parts } from "@triumph-motorcycles/domain/errors";
+
+const { InvalidSparePartError } = Parts;
 
 export class SparePartNotification {
   private notifications: string[] = [];

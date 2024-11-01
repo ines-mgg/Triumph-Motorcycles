@@ -1,8 +1,8 @@
 /// <reference types="jest" />
 
-import { MaintenanceHistory, MaintenanceRecord } from "../../entities/maintenances/maintenanceHistory";
-import { SparePart } from "../../entities/parts/sparePart";
-import { InvalidMaintenanceRecordError } from '../../errors/maintenances';
+import { MaintenanceHistory, MaintenanceRecord } from '../maintenanceHistory';
+import { SparePart } from '../../parts/sparePart';
+import { InvalidMaintenanceRecordError } from '../../../errors/maintenances';
 
 describe('Historique de maintenance', () => {
   let historique: MaintenanceHistory;
@@ -26,7 +26,7 @@ describe('Historique de maintenance', () => {
         150,
         [sparePart1],
         'Check all systems',
-        'manager123'
+        'manager123',
       );
 
       historique.addMaintenanceRecord(record);
@@ -34,7 +34,7 @@ describe('Historique de maintenance', () => {
       expect(historique.getFullHistory()[0]).toEqual(record);
     });
 
-    it("devrait lancer une erreur pour un enregistrement de maintenance invalide sans maintenanceId", () => {
+    it('devrait lancer une erreur pour un enregistrement de maintenance invalide sans maintenanceId', () => {
       const invalidRecord = new MaintenanceRecord(
         '',
         'moto1',
@@ -44,13 +44,15 @@ describe('Historique de maintenance', () => {
         150,
         [sparePart1],
         'Check all systems',
-        'manager123'
+        'manager123',
       );
 
-      expect(() => historique.addMaintenanceRecord(invalidRecord)).toThrow(InvalidMaintenanceRecordError);
+      expect(() => historique.addMaintenanceRecord(invalidRecord)).toThrow(
+        InvalidMaintenanceRecordError,
+      );
     });
 
-    it("devrait lancer une erreur pour un coût négatif", () => {
+    it('devrait lancer une erreur pour un coût négatif', () => {
       const invalidRecord = new MaintenanceRecord(
         '3',
         'moto1',
@@ -60,10 +62,12 @@ describe('Historique de maintenance', () => {
         -50,
         [sparePart1],
         'Check all systems',
-        'manager123'
+        'manager123',
       );
 
-      expect(() => historique.addMaintenanceRecord(invalidRecord)).toThrow(InvalidMaintenanceRecordError);
+      expect(() => historique.addMaintenanceRecord(invalidRecord)).toThrow(
+        InvalidMaintenanceRecordError,
+      );
     });
 
     it("devrait lancer une erreur si partsUsed n'est pas un tableau", () => {
@@ -74,18 +78,20 @@ describe('Historique de maintenance', () => {
         new Date('2023-07-01'),
         3000,
         150,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+         
         {} as any,
         'Check all systems',
-        'manager123'
+        'manager123',
       );
 
-      expect(() => historique.addMaintenanceRecord(invalidRecord)).toThrow(InvalidMaintenanceRecordError);
+      expect(() => historique.addMaintenanceRecord(invalidRecord)).toThrow(
+        InvalidMaintenanceRecordError,
+      );
     });
   });
 
   describe('getFullHistory', () => {
-    it("devrait retourner tous les enregistrements de maintenance", () => {
+    it('devrait retourner tous les enregistrements de maintenance', () => {
       const record1 = new MaintenanceRecord(
         '1',
         'moto1',
@@ -95,7 +101,7 @@ describe('Historique de maintenance', () => {
         150,
         [sparePart1],
         'Check all systems',
-        'manager123'
+        'manager123',
       );
       const record2 = new MaintenanceRecord(
         '2',
@@ -106,7 +112,7 @@ describe('Historique de maintenance', () => {
         200,
         [sparePart2],
         'Replace parts',
-        'manager456'
+        'manager456',
       );
 
       historique.addMaintenanceRecord(record1);
@@ -119,7 +125,7 @@ describe('Historique de maintenance', () => {
   });
 
   describe('getHistoryByMotorcycle', () => {
-    it("devrait retourner les enregistrements de maintenance pour une moto spécifique", () => {
+    it('devrait retourner les enregistrements de maintenance pour une moto spécifique', () => {
       const record1 = new MaintenanceRecord(
         '1',
         'moto1',
@@ -129,7 +135,7 @@ describe('Historique de maintenance', () => {
         150,
         [sparePart1],
         'Check all systems',
-        'manager123'
+        'manager123',
       );
       const record2 = new MaintenanceRecord(
         '2',
@@ -140,7 +146,7 @@ describe('Historique de maintenance', () => {
         200,
         [sparePart2],
         'Replace parts',
-        'manager456'
+        'manager456',
       );
 
       historique.addMaintenanceRecord(record1);
@@ -148,7 +154,9 @@ describe('Historique de maintenance', () => {
       const motorcycleHistory = historique.getHistoryByMotorcycle('moto1');
 
       expect(motorcycleHistory.length).toBe(2);
-      expect(motorcycleHistory).toEqual(expect.arrayContaining([record1, record2]));
+      expect(motorcycleHistory).toEqual(
+        expect.arrayContaining([record1, record2]),
+      );
     });
 
     it("devrait retourner un tableau vide si aucune maintenance n'est trouvée pour la moto", () => {
@@ -158,7 +166,7 @@ describe('Historique de maintenance', () => {
   });
 
   describe('getHistoryByDateRange', () => {
-    it("devrait retourner les enregistrements de maintenance dans une plage de dates donnée", () => {
+    it('devrait retourner les enregistrements de maintenance dans une plage de dates donnée', () => {
       const record1 = new MaintenanceRecord(
         '1',
         'moto1',
@@ -168,7 +176,7 @@ describe('Historique de maintenance', () => {
         150,
         [sparePart1],
         'Check all systems',
-        'manager123'
+        'manager123',
       );
       const record2 = new MaintenanceRecord(
         '2',
@@ -179,14 +187,14 @@ describe('Historique de maintenance', () => {
         200,
         [sparePart2],
         'Replace parts',
-        'manager456'
+        'manager456',
       );
 
       historique.addMaintenanceRecord(record1);
       historique.addMaintenanceRecord(record2);
       const dateRangeHistory = historique.getHistoryByDateRange(
         new Date('2023-06-01'),
-        new Date('2023-07-31')
+        new Date('2023-07-31'),
       );
 
       expect(dateRangeHistory.length).toBe(1);
@@ -195,7 +203,7 @@ describe('Historique de maintenance', () => {
   });
 
   describe('getHistoryByType', () => {
-    it("devrait retourner les enregistrements de maintenance par type", () => {
+    it('devrait retourner les enregistrements de maintenance par type', () => {
       const record1 = new MaintenanceRecord(
         '1',
         'moto1',
@@ -205,7 +213,7 @@ describe('Historique de maintenance', () => {
         150,
         [sparePart1],
         'Check all systems',
-        'manager123'
+        'manager123',
       );
       const record2 = new MaintenanceRecord(
         '2',
@@ -216,7 +224,7 @@ describe('Historique de maintenance', () => {
         200,
         [sparePart2],
         'Replace parts',
-        'manager456'
+        'manager456',
       );
 
       historique.addMaintenanceRecord(record1);
@@ -229,7 +237,7 @@ describe('Historique de maintenance', () => {
   });
 
   describe('getHistoryByCostRange', () => {
-    it("devrait retourner les enregistrements de maintenance dans une plage de coûts donnée", () => {
+    it('devrait retourner les enregistrements de maintenance dans une plage de coûts donnée', () => {
       const record1 = new MaintenanceRecord(
         '1',
         'moto1',
@@ -239,7 +247,7 @@ describe('Historique de maintenance', () => {
         150,
         [sparePart1],
         'Check all systems',
-        'manager123'
+        'manager123',
       );
       const record2 = new MaintenanceRecord(
         '2',
@@ -250,7 +258,7 @@ describe('Historique de maintenance', () => {
         200,
         [sparePart2],
         'Replace parts',
-        'manager456'
+        'manager456',
       );
 
       historique.addMaintenanceRecord(record1);
@@ -263,7 +271,7 @@ describe('Historique de maintenance', () => {
   });
 
   describe('getRecentHistory', () => {
-    it("devrait retourner les derniers enregistrements de maintenance", () => {
+    it('devrait retourner les derniers enregistrements de maintenance', () => {
       const record1 = new MaintenanceRecord(
         '1',
         'moto1',
@@ -273,7 +281,7 @@ describe('Historique de maintenance', () => {
         150,
         [sparePart1],
         'Check all systems',
-        'manager123'
+        'manager123',
       );
       const record2 = new MaintenanceRecord(
         '2',
@@ -284,7 +292,7 @@ describe('Historique de maintenance', () => {
         200,
         [sparePart2],
         'Replace parts',
-        'manager456'
+        'manager456',
       );
 
       historique.addMaintenanceRecord(record1);
@@ -297,7 +305,7 @@ describe('Historique de maintenance', () => {
   });
 
   describe('getTotalMaintenanceCost', () => {
-    it("devrait retourner le coût total des enregistrements de maintenance", () => {
+    it('devrait retourner le coût total des enregistrements de maintenance', () => {
       const record1 = new MaintenanceRecord(
         '1',
         'moto1',
@@ -307,7 +315,7 @@ describe('Historique de maintenance', () => {
         150,
         [sparePart1],
         'Check all systems',
-        'manager123'
+        'manager123',
       );
       const record2 = new MaintenanceRecord(
         '2',
@@ -318,7 +326,7 @@ describe('Historique de maintenance', () => {
         200,
         [sparePart2],
         'Replace parts',
-        'manager456'
+        'manager456',
       );
 
       historique.addMaintenanceRecord(record1);
@@ -328,7 +336,7 @@ describe('Historique de maintenance', () => {
       expect(totalCost).toBe(350);
     });
 
-    it("devrait retourner le coût total des enregistrements de maintenance pour une moto spécifique", () => {
+    it('devrait retourner le coût total des enregistrements de maintenance pour une moto spécifique', () => {
       const record1 = new MaintenanceRecord(
         '1',
         'moto1',
@@ -338,7 +346,7 @@ describe('Historique de maintenance', () => {
         150,
         [sparePart1],
         'Check all systems',
-        'manager123'
+        'manager123',
       );
       const record2 = new MaintenanceRecord(
         '2',
@@ -349,12 +357,13 @@ describe('Historique de maintenance', () => {
         200,
         [sparePart2],
         'Replace parts',
-        'manager456'
+        'manager456',
       );
 
       historique.addMaintenanceRecord(record1);
       historique.addMaintenanceRecord(record2);
-      const totalCostForMotorcycle = historique.getTotalMaintenanceCost('moto1');
+      const totalCostForMotorcycle =
+        historique.getTotalMaintenanceCost('moto1');
 
       expect(totalCostForMotorcycle).toBe(350);
     });
@@ -371,7 +380,7 @@ describe('Historique de maintenance', () => {
         150,
         [sparePart1, sparePart2],
         'Check all systems',
-        'manager123'
+        'manager123',
       );
       const record2 = new MaintenanceRecord(
         '2',
@@ -382,7 +391,7 @@ describe('Historique de maintenance', () => {
         200,
         [sparePart1],
         'Replace parts',
-        'manager456'
+        'manager456',
       );
 
       historique.addMaintenanceRecord(record1);
@@ -393,7 +402,7 @@ describe('Historique de maintenance', () => {
         expect.arrayContaining([
           { part: sparePart1, quantityUsed: 2 },
           { part: sparePart2, quantityUsed: 1 },
-        ])
+        ]),
       );
     });
   });

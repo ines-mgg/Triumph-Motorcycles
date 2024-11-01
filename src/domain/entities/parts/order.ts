@@ -1,6 +1,8 @@
-import { InvalidOrderError } from "../../errors/parts";
-import { OrderItem } from "./orderItem";
-import { SparePart } from "./sparePart";
+import { OrderItem } from './orderItem';
+import { SparePart } from './sparePart';
+import { Parts } from '@triumph-motorcycles/domain/errors';
+
+const { InvalidOrderError } = Parts;
 
 export class Order {
   private readonly items: OrderItem[] = [];
@@ -14,16 +16,27 @@ export class Order {
     estimatedDeliveryDate: Date,
   ) {
     if (!orderId) {
-      throw new InvalidOrderError("L'identifiant de la commande ne peut pas être vide.");
+      throw new InvalidOrderError(
+        "L'identifiant de la commande ne peut pas être vide.",
+      );
     }
     if (!(orderDate instanceof Date) || isNaN(orderDate.getTime())) {
-      throw new InvalidOrderError("La date de commande doit être une date valide.");
+      throw new InvalidOrderError(
+        'La date de commande doit être une date valide.',
+      );
     }
-    if (!(estimatedDeliveryDate instanceof Date) || isNaN(estimatedDeliveryDate.getTime())) {
-      throw new InvalidOrderError("La date de livraison estimée doit être une date valide.");
+    if (
+      !(estimatedDeliveryDate instanceof Date) ||
+      isNaN(estimatedDeliveryDate.getTime())
+    ) {
+      throw new InvalidOrderError(
+        'La date de livraison estimée doit être une date valide.',
+      );
     }
     if (estimatedDeliveryDate < orderDate) {
-      throw new InvalidOrderError("La date de livraison estimée ne peut pas être antérieure à la date de commande.");
+      throw new InvalidOrderError(
+        'La date de livraison estimée ne peut pas être antérieure à la date de commande.',
+      );
     }
 
     this.orderDate = orderDate;
@@ -32,13 +45,19 @@ export class Order {
 
   addItem(sparePart: SparePart, quantity: number, costPerUnit: number): void {
     if (!sparePart) {
-      throw new InvalidOrderError("La pièce de rechange ne peut pas être nulle.");
+      throw new InvalidOrderError(
+        'La pièce de rechange ne peut pas être nulle.',
+      );
     }
     if (quantity <= 0 || typeof quantity !== 'number') {
-      throw new InvalidOrderError("La quantité doit être un nombre positif supérieur à zéro.");
+      throw new InvalidOrderError(
+        'La quantité doit être un nombre positif supérieur à zéro.',
+      );
     }
     if (costPerUnit <= 0 || typeof costPerUnit !== 'number') {
-      throw new InvalidOrderError("Le coût par unité doit être un nombre positif supérieur à zéro.");
+      throw new InvalidOrderError(
+        'Le coût par unité doit être un nombre positif supérieur à zéro.',
+      );
     }
 
     const item = new OrderItem(sparePart, quantity, costPerUnit);
@@ -48,18 +67,26 @@ export class Order {
 
   updateItemDelivery(sparePartId: string, deliveredQty: number): void {
     if (!sparePartId) {
-      throw new InvalidOrderError("L'identifiant de la pièce de rechange ne peut pas être vide.");
+      throw new InvalidOrderError(
+        "L'identifiant de la pièce de rechange ne peut pas être vide.",
+      );
     }
     if (deliveredQty < 0 || typeof deliveredQty !== 'number') {
-      throw new InvalidOrderError("La quantité livrée doit être un nombre positif.");
+      throw new InvalidOrderError(
+        'La quantité livrée doit être un nombre positif.',
+      );
     }
 
     const item = this.items.find((item) => item.sparePart.id === sparePartId);
     if (!item) {
-      throw new InvalidOrderError("L'article de commande spécifié n'existe pas.");
+      throw new InvalidOrderError(
+        "L'article de commande spécifié n'existe pas.",
+      );
     }
     if (deliveredQty > item.quantityOrdered - item.deliveredQuantity) {
-      throw new InvalidOrderError("La quantité livrée ne peut pas dépasser la quantité commandée non livrée.");
+      throw new InvalidOrderError(
+        'La quantité livrée ne peut pas dépasser la quantité commandée non livrée.',
+      );
     }
 
     item.updateDelivery(deliveredQty);

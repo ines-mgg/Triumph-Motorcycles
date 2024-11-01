@@ -1,5 +1,7 @@
 import { SparePart } from './sparePart';
-import { InvalidOrderError } from '../../errors/parts';
+import { Parts } from '@triumph-motorcycles/domain/errors';
+
+const { InvalidOrderError } = Parts;
 
 export class OrderItem {
   constructor(
@@ -13,13 +15,19 @@ export class OrderItem {
 
   private validateInputs(): void {
     if (!this.sparePart) {
-      throw new InvalidOrderError("La pièce de rechange ne peut pas être nulle.");
+      throw new InvalidOrderError(
+        'La pièce de rechange ne peut pas être nulle.',
+      );
     }
     if (this.quantityOrdered <= 0) {
-      throw new InvalidOrderError("La quantité commandée doit être un nombre positif.");
+      throw new InvalidOrderError(
+        'La quantité commandée doit être un nombre positif.',
+      );
     }
     if (this.costPerUnit <= 0) {
-      throw new InvalidOrderError("Le coût par unité doit être un nombre positif.");
+      throw new InvalidOrderError(
+        'Le coût par unité doit être un nombre positif.',
+      );
     }
   }
 
@@ -29,7 +37,9 @@ export class OrderItem {
 
   updateDelivery(deliveredQty: number): void {
     if (deliveredQty < 0) {
-      throw new InvalidOrderError("La quantité livrée ne peut pas être négative.");
+      throw new InvalidOrderError(
+        'La quantité livrée ne peut pas être négative.',
+      );
     }
 
     this.deliveredQuantity = Math.min(

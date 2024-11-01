@@ -1,10 +1,6 @@
-import { 
-  InvalidLicenseError, 
-  ExperienceError, 
-  ContactInfoError, 
-  DrivingRecordError 
-} from '../../errors/drivers';
+import { Drivers } from '@triumph-motorcycles/domain/errors';
 
+const { InvalidLicenseError, ExperienceError, ContactInfoError, DrivingRecordError } = Drivers;
 export class Driver {
   constructor(
     public driverId: string,
@@ -27,17 +23,17 @@ export class Driver {
     }
 
     if (this.yearsOfExperience < 0) {
-      throw new ExperienceError("Years of experience cannot be negative.");
+      throw new ExperienceError('Years of experience cannot be negative.');
     }
   }
 
   private isValidLicense(license: string): boolean {
-    return /^[A-Z0-9]+$/.test(license); 
+    return /^[A-Z0-9]+$/.test(license);
   }
 
   addDrivingRecord(record: DrivingRecord): void {
     if (!(record instanceof DrivingRecord)) {
-      throw new DrivingRecordError("Invalid driving record.");
+      throw new DrivingRecordError('Invalid driving record.');
     }
     this.drivingHistory.push(record);
   }
@@ -48,14 +44,16 @@ export class Driver {
 
   updateExperience(newYearsOfExperience: number): void {
     if (newYearsOfExperience < this.yearsOfExperience) {
-        throw new ExperienceError("New experience must be greater than current experience.");
+      throw new ExperienceError(
+        'New experience must be greater than current experience.',
+      );
     }
     this.yearsOfExperience = newYearsOfExperience;
   }
 
   updateContactInfo(newContactInfo: { email: string; phone: string }): void {
     if (!this.isValidEmail(newContactInfo.email)) {
-      throw new ContactInfoError("Invalid email format.");
+      throw new ContactInfoError('Invalid email format.');
     }
     this.contactInfo = newContactInfo;
   }
@@ -74,6 +72,6 @@ export class DrivingRecord {
     public date: Date,
     public motorcycleId: string,
     public type: 'Test Drive' | 'Incident',
-    public details: string, 
+    public details: string,
   ) {}
 }

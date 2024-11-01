@@ -1,7 +1,7 @@
 /// <reference types="jest" />
-import { SparePart } from "../../entities/parts/sparePart";
-import { SparePartHistory, SparePartOrderRecord } from "../../entities/parts/sparePartHistory";
-import { DeliveryError, InvalidOrderError } from "../../errors/parts";
+import { SparePart } from '../sparePart';
+import { SparePartHistory, SparePartOrderRecord } from '../sparePartHistory';
+import { DeliveryError, InvalidOrderError } from '../../../errors/parts';
 
 describe('SparePartOrderRecord', () => {
   let orderRecord: SparePartOrderRecord;
@@ -34,9 +34,9 @@ describe('SparePartOrderRecord', () => {
   });
 
   test('updateDelivery doit lancer une erreur si la quantité livrée dépasse la quantité commandée', () => {
-    orderRecord.updateDelivery(50); 
+    orderRecord.updateDelivery(50);
     expect(() => {
-        orderRecord.updateDelivery(60); 
+      orderRecord.updateDelivery(60);
     }).toThrow(DeliveryError);
   });
 
@@ -63,20 +63,20 @@ describe('SparePartHistory', () => {
       sparePart,
       100,
       50,
-      new Date('2023-12-31')
+      new Date('2023-12-31'),
     );
     const records = sparePartHistory.getFullHistory();
     expect(records.length).toBe(1);
     expect(records[0].orderId).toBe('order-001');
   });
 
-  test('updateOrderDelivery doit mettre à jour la livraison d\'une commande', () => {
+  test("updateOrderDelivery doit mettre à jour la livraison d'une commande", () => {
     sparePartHistory.addOrderRecord(
       'order-001',
       sparePart,
       100,
       50,
-      new Date('2023-12-31')
+      new Date('2023-12-31'),
     );
     sparePartHistory.updateOrderDelivery('order-001', 30);
     const record = sparePartHistory.getFullHistory()[0];
@@ -84,29 +84,56 @@ describe('SparePartHistory', () => {
     expect(record.remainingQuantity).toBe(70);
   });
 
-  test('updateOrderDelivery doit lancer une erreur si l\'enregistrement de commande n\'existe pas', () => {
+  test("updateOrderDelivery doit lancer une erreur si l'enregistrement de commande n'existe pas", () => {
     expect(() => {
       sparePartHistory.updateOrderDelivery('nonexistent-order', 30);
     }).toThrow(InvalidOrderError);
   });
 
-  test('getHistoryBySparePartId doit retourner les enregistrements d\'une pièce spécifique', () => {
-    sparePartHistory.addOrderRecord('order-001', sparePart, 100, 50, new Date('2023-12-31'));
+  test("getHistoryBySparePartId doit retourner les enregistrements d'une pièce spécifique", () => {
+    sparePartHistory.addOrderRecord(
+      'order-001',
+      sparePart,
+      100,
+      50,
+      new Date('2023-12-31'),
+    );
     const records = sparePartHistory.getHistoryBySparePartId('sp-001');
     expect(records.length).toBe(1);
   });
 
   test('getHistoryByDateRange doit retourner les enregistrements dans la plage de dates spécifiée', () => {
     const dateInFuture = new Date(Date.now() + 86400000);
-    sparePartHistory.addOrderRecord('order-001', sparePart, 100, 50, dateInFuture);
-    const records = sparePartHistory.getHistoryByDateRange(new Date(), dateInFuture);
+    sparePartHistory.addOrderRecord(
+      'order-001',
+      sparePart,
+      100,
+      50,
+      dateInFuture,
+    );
+    const records = sparePartHistory.getHistoryByDateRange(
+      new Date(),
+      dateInFuture,
+    );
     expect(records.length).toBe(1);
   });
 
   test('calculateTotalExpenditure doit calculer le coût total des commandes', () => {
-    sparePartHistory.addOrderRecord('order-001', sparePart, 100, 50, new Date());
-    sparePartHistory.addOrderRecord('order-002', sparePart, 50, 100, new Date());
+    sparePartHistory.addOrderRecord(
+      'order-001',
+      sparePart,
+      100,
+      50,
+      new Date(),
+    );
+    sparePartHistory.addOrderRecord(
+      'order-002',
+      sparePart,
+      50,
+      100,
+      new Date(),
+    );
     const totalExpenditure = sparePartHistory.calculateTotalExpenditure();
-    expect(totalExpenditure).toBe(10000); 
+    expect(totalExpenditure).toBe(10000);
   });
 });

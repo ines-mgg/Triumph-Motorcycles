@@ -1,11 +1,15 @@
 import { Breakdown } from './breakdown';
-import { InvalidBreakdownError } from '../../errors/maintenances'; 
+import { Maintenances } from '@triumph-motorcycles/domain/errors';
+
+const { InvalidBreakdownError } = Maintenances;
 export class RepairHistory {
   private readonly breakdownRecords: Breakdown[] = [];
 
   addBreakdown(breakdown: Breakdown): void {
     if (!breakdown || !breakdown.motorcycle || !breakdown.motorcycle.id) {
-      throw new InvalidBreakdownError('Le breakdown doit être valide avec une moto associée.');
+      throw new InvalidBreakdownError(
+        'Le breakdown doit être valide avec une moto associée.',
+      );
     }
     this.breakdownRecords.push(breakdown);
   }
@@ -16,7 +20,7 @@ export class RepairHistory {
 
   getBreakdownsByMotorcycle(motorcycleId: string): Breakdown[] {
     if (!motorcycleId) {
-      throw new Error('L\'ID de la moto ne peut pas être vide.');
+      throw new Error("L'ID de la moto ne peut pas être vide.");
     }
     return this.breakdownRecords.filter(
       (breakdown) => breakdown.motorcycle.id === motorcycleId,

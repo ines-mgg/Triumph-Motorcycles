@@ -1,6 +1,6 @@
 /// <reference types="jest" />
-import { SparePart } from "../../entities/parts/sparePart";
-import { InsufficientStockError, InvalidQuantityError } from "../../errors/parts";
+import { SparePart } from "../sparePart";
+import { InsufficientStockError, InvalidQuantityError } from "../../../errors/parts";
 
 describe('SparePart', () => {
   let sparePart: SparePart;

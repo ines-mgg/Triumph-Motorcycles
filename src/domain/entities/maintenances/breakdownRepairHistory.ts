@@ -1,12 +1,16 @@
 import { Repair } from './repair';
-import { IncompleteRepairError } from '../../errors/maintenances';
+import { Maintenances } from '@triumph-motorcycles/domain/errors';
+
+const { IncompleteRepairError } = Maintenances;
 
 export class BreakdownRepairHistory {
-  private readonly repairRecords: Repair[] = []; 
+  private readonly repairRecords: Repair[] = [];
 
   addRepairRecord(repair: Repair): void {
     if (!repair || !repair.breakdownId || repair.cost <= 0 || !repair.actions) {
-      throw new IncompleteRepairError("Repair record is incomplete or invalid.");
+      throw new IncompleteRepairError(
+        'Repair record is incomplete or invalid.',
+      );
     }
     this.repairRecords.push(repair);
   }

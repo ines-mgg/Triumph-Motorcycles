@@ -1,7 +1,7 @@
 /// <reference types="jest" />
 
-import { Warranty } from "../../entities/maintenances/warranty";
-import { InvalidWarrantyError } from "../../errors/maintenances";
+import { Warranty } from "../warranty";
+import { InvalidWarrantyError } from "../../../errors/maintenances";
 
 describe('Garantie', () => {
   let garantie: Warranty;
@@ -47,14 +47,14 @@ describe('Garantie', () => {
 
     it('devrait lancer une erreur si la date de début est invalide', () => {
       expect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+         
         new Warranty('warranty1', 'moto1', <any>'invalid date', new Date('2024-01-01'), 'Couverture', true);
       }).toThrow(InvalidWarrantyError);
     });
 
     it('devrait lancer une erreur si la date de fin est invalide', () => {
       expect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+         
         new Warranty('warranty1', 'moto1', new Date('2023-01-01'), <any>'invalid date', 'Couverture', true);
       }).toThrow(InvalidWarrantyError);
     });

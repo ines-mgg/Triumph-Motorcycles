@@ -1,7 +1,7 @@
 /// <reference types="jest" />
 
-import { MaintenanceNotification } from '../../entities/maintenances/maintenanceNotification';
-import { InvalidNotificationError } from '../../errors/maintenances';
+import { MaintenanceNotification } from '../maintenanceNotification';
+import { InvalidNotificationError } from '../../../errors/maintenances';
 
 describe('MaintenanceNotification', () => {
   let notification: MaintenanceNotification;
@@ -11,7 +11,7 @@ describe('MaintenanceNotification', () => {
       'recipient1',
       'Ceci est une notification de test',
       new Date('2024-01-01'),
-      'ServiceReminder'
+      'ServiceReminder',
     );
   });
 
@@ -24,29 +24,49 @@ describe('MaintenanceNotification', () => {
       expect(notification.isRead).toBe(false);
     });
 
-    it("devrait lancer une erreur pour un recipientId vide", () => {
+    it('devrait lancer une erreur pour un recipientId vide', () => {
       expect(() => {
-        new MaintenanceNotification('', 'Un message', new Date(), 'ServiceReminder');
+        new MaintenanceNotification(
+          '',
+          'Un message',
+          new Date(),
+          'ServiceReminder',
+        );
       }).toThrow(InvalidNotificationError);
     });
 
-    it("devrait lancer une erreur pour un message vide", () => {
+    it('devrait lancer une erreur pour un message vide', () => {
       expect(() => {
-        new MaintenanceNotification('recipient1', '', new Date(), 'ServiceReminder');
+        new MaintenanceNotification(
+          'recipient1',
+          '',
+          new Date(),
+          'ServiceReminder',
+        );
       }).toThrow(InvalidNotificationError);
     });
 
-    it("devrait lancer une erreur pour une date invalide", () => {
+    it('devrait lancer une erreur pour une date invalide', () => {
       expect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        new MaintenanceNotification('recipient1', 'Un message', <any>'date invalide', 'ServiceReminder');
+         
+        new MaintenanceNotification(
+          'recipient1',
+          'Un message',
+          <any>'date invalide',
+          'ServiceReminder',
+        );
       }).toThrow(InvalidNotificationError);
     });
 
-    it("devrait lancer une erreur pour un type de notification invalide", () => {
+    it('devrait lancer une erreur pour un type de notification invalide', () => {
       expect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        new MaintenanceNotification('recipient1', 'Un message', new Date(), 'TypeInvalide' as any);
+         
+        new MaintenanceNotification(
+          'recipient1',
+          'Un message',
+          new Date(),
+          'TypeInvalide' as any,
+        );
       }).toThrow(InvalidNotificationError);
     });
   });
@@ -64,9 +84,9 @@ describe('MaintenanceNotification', () => {
       expect(notification.type).toBe('StockAlert');
     });
 
-    it("devrait lancer une erreur pour un type de notification invalide", () => {
+    it('devrait lancer une erreur pour un type de notification invalide', () => {
       expect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+         
         notification.changeType('TypeInvalide' as any);
       }).toThrow(InvalidNotificationError);
     });

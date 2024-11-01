@@ -1,4 +1,6 @@
-import { InvalidNotificationError } from '../../errors/maintenances';
+import { Maintenances } from '@triumph-motorcycles/domain/errors';
+
+const { InvalidNotificationError } = Maintenances;
 
 export class MaintenanceNotification {
   constructor(
@@ -23,7 +25,9 @@ export class MaintenanceNotification {
     }
     const validTypes = ['StockAlert', 'ServiceReminder', 'IncidentReport'];
     if (!validTypes.includes(this.type)) {
-      throw new InvalidNotificationError('Type must be either StockAlert, ServiceReminder, or IncidentReport');
+      throw new InvalidNotificationError(
+        'Type must be either StockAlert, ServiceReminder, or IncidentReport',
+      );
     }
   }
 
@@ -31,7 +35,9 @@ export class MaintenanceNotification {
     this.isRead = true;
   }
 
-  changeType(newType: 'StockAlert' | 'ServiceReminder' | 'IncidentReport'): void {
+  changeType(
+    newType: 'StockAlert' | 'ServiceReminder' | 'IncidentReport',
+  ): void {
     const validTypes = ['StockAlert', 'ServiceReminder', 'IncidentReport'];
     if (!validTypes.includes(newType)) {
       throw new InvalidNotificationError('Invalid notification type');

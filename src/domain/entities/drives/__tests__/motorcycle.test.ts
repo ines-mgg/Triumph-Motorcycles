@@ -1,7 +1,7 @@
 /// <reference types="jest" />
 
-import { Motorcycle } from "../../entities/drives/motorcycle";
-import { MileageError, ServiceDetailsError } from "../../errors/drivers";
+import { Motorcycle } from "../motorcycle";
+import { MileageError, ServiceDetailsError } from "../../../errors/drivers";
 
 describe('Motorcycle', () => {
     let motorcycle: Motorcycle;

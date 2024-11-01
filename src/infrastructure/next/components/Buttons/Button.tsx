@@ -1,4 +1,4 @@
-import { ButtonProps } from './ButtonProps';
+import { ButtonProps } from '@triumph-motorcycles/interfaces'
 import './Button.css';
 
 export const Button = ({ label, ariaLabel }: ButtonProps) => {
