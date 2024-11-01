@@ -34,9 +34,7 @@
       "@triumph-motorcycles/domain/entities/parts": [
         "./src/domain/entities/parts/index.ts"
       ],
-      "@triumph-motorcycles/domain/errors": [
-        "./src/domain/errors/index.ts"
-      ]
+      "@triumph-motorcycles/domain/errors": ["./src/domain/errors/index.ts"]
     }
   },
   "include": ["src"],
@@ -50,6 +48,7 @@
     "cypress.config.ts",
     "cypress/*",
     "dist",
-    "**/*spec.ts"
+    "**/*spec.ts",
+    "./src/infrastructure/next"
   ]
 }
