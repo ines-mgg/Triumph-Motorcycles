@@ -1,3 +1,12 @@
 .button {
-  background-color: brown;
+  width: 5.688rem;
+  height: 2.5rem;
+  color: var(--white);
+  background-color: var(--blue-20);
+  border-radius: 0.25rem;
+
+  &.disabled {
+    color: var(--gray-60);
+    background-color: var(--gray-75);
+  }
 }

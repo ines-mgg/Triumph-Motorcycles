@@ -1,9 +1,20 @@
-import { ButtonProps } from './ButtonProps';
 import './Button.css';
 
-export const Button = ({ label, ariaLabel }: ButtonProps) => {
+interface ButtonProps {
+  label: string;
+  ariaLabel: string;
+  isDisabled?: boolean;
+}
+
+export const Button = ({ label, ariaLabel, isDisabled }: ButtonProps) => {
   return (
-    <button className="button" aria-label={ariaLabel} data-cy="button">
+    <button 
+      className={`button cta-medium ${isDisabled ? 'disabled' : ''}`} 
+      aria-label={ariaLabel} 
+      aria-disabled={isDisabled} 
+      data-cy="button"
+      disabled={isDisabled}
+    >
       {label}
     </button>
   );

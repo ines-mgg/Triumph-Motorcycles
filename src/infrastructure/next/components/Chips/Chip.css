@@ -1,0 +1,19 @@
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 6px;
+  color: var(--gray-10);
+  background-color: var(--gray-85);
+  border-radius: 6.25rem;
+
+  &.large {
+    width: 6.5rem;
+    height: 2rem;
+  }
+
+  &.small {
+    width: 5.75rem;
+    height: 1.5rem;
+  }
+}

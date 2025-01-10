@@ -1,0 +1,26 @@
+.itemCard {
+  display: flex;
+  flex-direction: column;
+  width: 18.75rem;
+  height: 23.563rem;
+  color: var(--black);
+  background-color: var(--white);
+  border-radius: 0.063rem;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 5%);
+
+  .itemCardHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 6.375rem;
+    color: var(--white);
+    background-color: var(--aqua-20);
+  }
+
+  .tagsList {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 5px 0;
+  }
+}
