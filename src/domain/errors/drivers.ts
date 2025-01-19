@@ -6,6 +6,13 @@ export class DriverError extends Error {
     }
 }
 
+export class DriverPhoneError extends Error {
+    public override readonly name = "DriverPhoneError";
+}
+export class DriverEmailError extends Error {
+    public override readonly name = "DriverEmailError";
+}
+
 export class InvalidLicenseError extends DriverError {
     constructor(licenseNumber: string) {
     super(`Invalid license number: ${licenseNumber}`);
@@ -13,11 +20,8 @@ export class InvalidLicenseError extends DriverError {
     }
 }
 
-export class ExperienceError extends DriverError {
-    constructor(message: string) {
-    super(message);
-    this.name = "ExperienceError";
-    }
+export class ExperienceError extends Error {
+    public override readonly name = "ExperienceError. Experience must be a number and at least 3";
 }
 
 export class ContactInfoError extends DriverError {
@@ -91,3 +95,4 @@ export class NegativeNextServiceMileageError extends Error {
         this.name = "NegativeNextServiceMileageError";
     }
 }
+

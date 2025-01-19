@@ -1,3 +1,3 @@
-export * from './driver';
-export * from './motoTest';
-export * from './motorcycle';
+export * from './DriverEntity';
+export * from './MotorcycleTryEntity';
+export * from './MotorcycleEntity';
