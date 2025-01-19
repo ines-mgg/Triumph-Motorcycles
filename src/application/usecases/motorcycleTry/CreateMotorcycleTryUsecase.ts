@@ -5,12 +5,12 @@ export class CreateMotorcycleTryUsecase {
   constructor(private readonly motorcycleTryRepository: MotorcycleTryRepository) {}
 
   public async execute(
-    id: string,
     motorcycle: MotorcycleEntity,
     driver: DriverEntity,
     startDate: Date,
+    endDateDate: Date,
   ): Promise<void | Error> {
-    const motorcycleTry = MotorcycleTryEntity.create(id, motorcycle, driver, startDate);
+    const motorcycleTry = MotorcycleTryEntity.create(motorcycle, driver, startDate, endDateDate);
 
     if (motorcycleTry instanceof Error) {
       return motorcycleTry;
