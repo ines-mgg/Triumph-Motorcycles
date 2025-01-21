@@ -26,10 +26,11 @@ describe('RepairHistory', () => {
     }
 
     const reportedDate1 = BreakdownReportedDate.from(new Date("2025-01-10"));
-    breakdown1 = BreakdownEntity.create(motorcycle1, description1, reportedDate1.value, null) as BreakdownEntity;
+
+    if(reportedDate1 instanceof BreakdownReportedDate) breakdown1 = BreakdownEntity.create(motorcycle1, description1.value, reportedDate1.value, null) as BreakdownEntity;
 
     const reportedDate2 = BreakdownReportedDate.from(new Date("2025-01-15"));
-    breakdown2 = BreakdownEntity.create(motorcycle2, description2, reportedDate2.value, null) as BreakdownEntity;
+    if(reportedDate2 instanceof BreakdownReportedDate) breakdown2 = BreakdownEntity.create(motorcycle2, description2.value, reportedDate2.value, null) as BreakdownEntity;
 
     repairHistory = new RepairHistory();
   });

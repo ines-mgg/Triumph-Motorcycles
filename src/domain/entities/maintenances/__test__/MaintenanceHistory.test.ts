@@ -11,8 +11,8 @@ describe('MaintenanceHistoryEntity', () => {
   beforeEach(() => {
     maintenanceHistory = new MaintenanceHistoryEntity();
 
-    sparePart1 = SparePartEntity.create('part1', 'Brake Pad', 50, 10, 30) as SparePartEntity;
-    sparePart2 = SparePartEntity.create('part2', 'Oil Filter', 30, 5, 15) as SparePartEntity; 
+    sparePart1 = SparePartEntity.create('Brake Pad', 50, 10, 30) as SparePartEntity;
+    sparePart2 = SparePartEntity.create('Oil Filter', 30, 5, 15) as SparePartEntity; 
   });
 
   describe('addMaintenanceRecord', () => {

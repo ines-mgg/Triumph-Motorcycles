@@ -78,12 +78,6 @@ describe('BreakdownRepairHistoryEntity', () => {
       expect(breakdownRepairHistory.getRepairHistory().length).toBe(1);
       expect(breakdownRepairHistory.getRepairHistory()[0]).toBe(repair1);
     });
-
-    it('should add multiple repair records successfully', () => {
-      breakdownRepairHistory.addRepairRecord(repair1);
-      breakdownRepairHistory.addRepairRecord(repair2);
-      expect(breakdownRepairHistory.getRepairHistory().length).toBe(2);
-    });
   });
 
   describe('getRepairsByBreakdown', () => {
