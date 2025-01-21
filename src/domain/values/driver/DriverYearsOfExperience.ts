@@ -5,7 +5,7 @@ export class DriveYearsOfExperience implements Value<number> {
   private constructor(public readonly value: number) {}
 
   public static from(value: number): DriveYearsOfExperience | ExperienceError {
-    if (typeof value !== 'number' || value < 3) {
+    if ( value < 3) {
       return new ExperienceError();
     }
     return new DriveYearsOfExperience(value);

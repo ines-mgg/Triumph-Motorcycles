@@ -4,6 +4,7 @@ import { DriverNotFoundError } from "src/domain/errors/driver/DriverNotFoundErro
 export interface DriverRepository {
   save(driver: DriverEntity): Promise<void>;
   findOneById(driverId: string): Promise<DriverEntity | DriverNotFoundError>;
+  findAllByUser(userId: string): Promise<DriverEntity[] | DriverNotFoundError >;
   delete(driverId: string): Promise<void>;
   all(): Promise<DriverEntity[]>;
 }

@@ -45,14 +45,15 @@ describe('BreakdownRepairHistoryEntity', () => {
     breakdown1 = breakdown1Result;
     breakdown2 = breakdown2Result;
 
+    const repairDate = new Date();
+    repairDate.setDate(repairDate.getDate() + 14);
+
     const repair1Result = RepairEntity.create(
       breakdown1,
-      new Date(),
+      repairDate,
       ['Brake Replacement', 'Tire Replacement'],
       500
     );
-    const repairDate = new Date();
-    repairDate.setDate(repairDate.getDate() + 14);
 
     const repair2Result = RepairEntity.create(
       breakdown2,
