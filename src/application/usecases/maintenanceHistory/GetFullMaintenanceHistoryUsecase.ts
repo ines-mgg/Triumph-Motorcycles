@@ -6,7 +6,7 @@ export class GetFullMaintenanceHistoryUsecase {
     private readonly maintenanceHistoryRepository: MaintenanceHistoryRepository,
   ) {}
 
-  public async execute(): Promise<MaintenanceRecord[]> {
+  public async execute(): Promise<MaintenanceRecord[] | Error> {
     return await this.maintenanceHistoryRepository.findAll();
   }
 }

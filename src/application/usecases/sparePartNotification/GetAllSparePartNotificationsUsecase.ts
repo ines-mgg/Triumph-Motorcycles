@@ -6,7 +6,7 @@ export class GetAllSparePartNotificationsUsecase {
     private readonly sparePartNotificationRepository: SparePartNotificationRepository,
   ) {}
 
-  public async execute(): Promise<SparePartNotificationEntity[]> {
+  public async execute(): Promise<SparePartNotificationEntity[] | Error> {
     return await this.sparePartNotificationRepository.findAll();
   }
 }

@@ -1,7 +1,7 @@
-import { InvalidNotificationError } from '../../errors/maintenances';
 import { MaintenanceNotificationType } from '../../types/motorcycle';
 import { MaintenanceNotificationDate } from '../../values/maintenanceNotification/MaintenanceNotificationDate';
 import { MaintenanceNotificationMessage } from '../../values/maintenanceNotification/MaintenanceNotificationMessage';
+import crypto from 'crypto';
 
 export class MaintenanceNotificationEntity {
   private constructor(
@@ -13,25 +13,19 @@ export class MaintenanceNotificationEntity {
   ) {}
 
   public static create(
-    recipientId: string,
     message: string,
     date: Date,
     type: MaintenanceNotificationType,
     isRead: boolean = false,
-  ): MaintenanceNotificationEntity {
-    if (!recipientId) {
-      throw new InvalidNotificationError('Recipient ID cannot be empty');
-    }
-
+  ): Error | MaintenanceNotificationEntity {
+    
+    const recipientId = crypto.randomUUID();
+   
     const messageValue = MaintenanceNotificationMessage.from(message);
-    if (messageValue instanceof Error) {
-      throw messageValue;
-    }
-
+    if (messageValue instanceof Error) return messageValue;
+    
     const dateValue = MaintenanceNotificationDate.from(date);
-    if (dateValue instanceof Error) {
-      throw dateValue;
-    }
+    if (dateValue instanceof Error) return dateValue;
 
     return new MaintenanceNotificationEntity(
       recipientId,

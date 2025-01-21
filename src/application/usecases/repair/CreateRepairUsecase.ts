@@ -8,23 +8,19 @@ export class CreateRepairUsecase {
   ) {}
 
   public async execute(
-    id: string,
     breakdown: BreakdownEntity,
     repairDateValue: Date,
     actions: CommonRepairAction[],
     costValue: number,
   ): Promise<void | Error> {
     const repair = RepairEntity.create(
-      id,
       breakdown,
       repairDateValue,
       actions,
       costValue
     );
 
-    if (repair instanceof Error) {
-      return repair;
-    }
+    if(repair instanceof Error) return repair
 
     await this.repairRepository.save(repair);
   }

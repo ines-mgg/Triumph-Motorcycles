@@ -2,9 +2,9 @@ import { CommonRepairAction } from '../../types/motorcycle';
 import { RepairDate } from '../../values/repair/RepairDate'; 
 import { RepairCost } from '../../values/repair/RepairCost';
 import { BreakdownEntity } from './BreakdownEntity';
+import crypto from 'crypto';
 
 export class RepairEntity {
-  [x: string]: any;
   private constructor(
     public readonly id: string,
     public readonly breakdown: BreakdownEntity,
@@ -14,25 +14,19 @@ export class RepairEntity {
   ) {}
 
   public static create(
-    id: string,
     breakdown: BreakdownEntity,
     repairDateValue: Date,
     actions: CommonRepairAction[],
     costValue: number,
   ): RepairEntity | Error {
-    if (!actions || actions.length === 0) {
-      return new Error('Repair actions must be provided.');
-    }
-
+    
+    const id = crypto.randomUUID();
+   
     const repairDate = RepairDate.from(repairDateValue);
-    if (repairDate instanceof Error) {
-      return repairDate;
-    }
+    if (repairDate instanceof Error) return repairDate;
 
     const cost = RepairCost.from(costValue);
-    if (cost instanceof Error) {
-      return cost;
-    }
+    if (cost instanceof Error) return cost;
 
     return new RepairEntity(id, breakdown, repairDate, actions, cost);
   }

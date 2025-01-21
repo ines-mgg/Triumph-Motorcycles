@@ -1,4 +1,3 @@
-import { SparePartOrderHistoryNotFoundError } from "../../../domain/errors/sparePart/SparePartOrderHistoryNotFoundError";
 import { SparePartHistoryRecordRepository } from "../../repositories/SparePartHistoryRecordRepository";
 
 export class UpdateSparePartHistoryRecordDeliveryUsecase {
@@ -8,14 +7,11 @@ export class UpdateSparePartHistoryRecordDeliveryUsecase {
 
   public async execute(
     orderId: string,
-    deliveredQty: number,
   ): Promise<void | Error> {
     const orderRecord = await this.sparePartHistoryRecordRepository.findByOrderId(orderId);
-    if (!orderRecord) {
-      return new SparePartOrderHistoryNotFoundError();
-    }
+   
+    if(orderRecord instanceof Error) return orderRecord
 
-    orderRecord.updateDelivery(deliveredQty);
     await this.sparePartHistoryRecordRepository.save(orderRecord);
   }
 }

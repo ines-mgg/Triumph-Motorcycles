@@ -1,25 +1,19 @@
+import crypto from 'crypto';
 import { SparePartEntity } from "./SparePartEntity";
-import { Parts } from "@triumph-motorcycles/domain/errors";
-
-const { InvalidSparePartError } = Parts;
 
 export class SparePartNotificationEntity {
   private notifications: string[] = [];
 
-  constructor(private readonly spareParts: SparePartEntity[]) {
-    this.validateSpareParts();
-  }
+  private constructor(
+    public readonly id: string,  
+    private readonly spareParts: SparePartEntity[]
+  ) {}
 
-  private validateSpareParts(): void {
-    if (!Array.isArray(this.spareParts)) {
-      throw new InvalidSparePartError("La liste des pièces de rechange doit être un tableau.");
-    }
-    
-    this.spareParts.forEach((part, index) => {
-      if (!(part instanceof SparePartEntity)) {
-        throw new InvalidSparePartError(`Élément à l'index ${index} n'est pas une instance de SparePartEntity.`);
-      }
-    });
+  public static create(
+    spareParts: SparePartEntity[]
+  ): SparePartNotificationEntity | Error {
+    const id = crypto.randomUUID();
+    return new SparePartNotificationEntity(id, spareParts);
   }
 
   checkStockLevels(): void {
@@ -31,7 +25,7 @@ export class SparePartNotificationEntity {
   }
 
   private addNotification(part: SparePartEntity): void {
-    const notificationMessage = `Low stock alert: The spare part "${part.name}" (ID: ${part.id}) is below the critical level. Current stock: ${part.quantityInStock}.`;
+    const notificationMessage = `Low stock alert: The spare part "${part.name}" (ID: ${part.id}) is below the critical level. Current stock: ${part.quantityInStock.value}.`;
     if (!this.notifications.includes(notificationMessage)) {
       this.notifications.push(notificationMessage);
     }

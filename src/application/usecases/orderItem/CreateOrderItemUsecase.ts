@@ -19,9 +19,7 @@ export class CreateOrderItemUsecase {
       deliveredQuantityValue
     );
 
-    if (orderItem instanceof Error) {
-      return orderItem;
-    }
+    if(orderItem instanceof Error) return orderItem
 
     await this.orderItemRepository.save(orderItem);
   }

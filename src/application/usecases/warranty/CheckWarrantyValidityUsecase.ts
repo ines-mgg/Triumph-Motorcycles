@@ -1,4 +1,3 @@
-import { WarrantyNotFoundError } from "../../../domain/errors/warranty/WarrantyNotFoundError";
 import { WarrantyRepository } from "../../repositories/WarrantyRepository";
 
 export class CheckWarrantyValidityUsecase {
@@ -8,9 +7,9 @@ export class CheckWarrantyValidityUsecase {
 
   public async execute(warrantyId: string, checkDate: Date): Promise<boolean | Error> {
     const warranty = await this.warrantyRepository.findById(warrantyId);
-    if (!warranty) {
-      return new WarrantyNotFoundError();
-    }
+   
+    if(warranty instanceof Error) return warranty
+
     return warranty.isWarrantyValid(checkDate);
   }
 }

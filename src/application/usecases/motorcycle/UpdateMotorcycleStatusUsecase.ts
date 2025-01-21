@@ -7,9 +7,7 @@ export class UpdateMotorcycleStatusUsecase {
   public async execute(id: string, newStatus: MotorStatus): Promise<void | Error> {
     const motorcycle = await this.motorcycleRepository.findOneById(id);
 
-    if (!motorcycle) {
-      throw new Error("Motorcycle not found.");
-    }
+    if(motorcycle instanceof Error) return motorcycle
 
     motorcycle.updateStatus(newStatus);
     await this.motorcycleRepository.save(motorcycle);

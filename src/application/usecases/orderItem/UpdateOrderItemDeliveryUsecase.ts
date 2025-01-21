@@ -1,4 +1,3 @@
-import { OrderItemNotFoundError } from "../../../domain/errors/orderItem/OrderItemNotFoundError";
 import { OrderItemRepository } from "../../repositories/OrderItemRepository";
 
 export class UpdateOrderItemDeliveryUsecase {
@@ -11,9 +10,8 @@ export class UpdateOrderItemDeliveryUsecase {
     deliveredQty: number,
   ): Promise<void | Error> {
     const orderItem = await this.orderItemRepository.findById(orderItemId);
-    if (!orderItem) {
-      return new OrderItemNotFoundError();
-    }
+
+    if(orderItem instanceof Error) return orderItem
 
     orderItem.updateDelivery(deliveredQty);
     await this.orderItemRepository.save(orderItem);

@@ -8,7 +8,6 @@ export class AddWarrantyUsecase {
   ) {}
 
   public async execute(
-    id: string,
     motorcycle: MotorcycleEntity,
     startDateValue: Date,
     endDateValue: Date,
@@ -16,7 +15,6 @@ export class AddWarrantyUsecase {
     isActive: boolean,
   ): Promise<void | Error> {
     const warranty = WarrantyEntity.create(
-      id,
       motorcycle,
       startDateValue,
       endDateValue,
@@ -24,9 +22,7 @@ export class AddWarrantyUsecase {
       isActive
     );
 
-    if (warranty instanceof Error) {
-      return warranty;
-    }
+    if(warranty instanceof Error) return warranty
 
     await this.warrantyRepository.save(warranty);
   }

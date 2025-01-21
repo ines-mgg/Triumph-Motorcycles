@@ -7,7 +7,10 @@ export class CreateSparePartNotificationsUsecase {
   ) {}
 
   public async execute(spareParts: SparePartEntity[]): Promise<void | Error> {
-    const notification = new SparePartNotificationEntity(spareParts);
+    const notification = SparePartNotificationEntity.create(spareParts);
+    
+    if(notification instanceof Error) return notification
+
     notification.checkStockLevels();
     
     if (notification.getNotifications().length > 0) {

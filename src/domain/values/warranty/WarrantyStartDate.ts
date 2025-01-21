@@ -9,7 +9,7 @@ export class WarrantyStartDate implements Value<Date> {
   }
 
   public static from(value: Date): WarrantyStartDate | Error {
-    if (value < new Date()) {
+    if (value > new Date()) { 
       return new WarrantyStartDateError();
     }
     return new WarrantyStartDate(value);

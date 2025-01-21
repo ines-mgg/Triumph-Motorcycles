@@ -9,7 +9,7 @@ export class GetMaintenanceByDateRangeUsecase {
   public async execute(
     startDate: Date,
     endDate: Date,
-  ): Promise<MaintenanceRecord[]> {
+  ): Promise<MaintenanceRecord[] | Error> {
     return await this.maintenanceHistoryRepository.findByDateRange(
       startDate,
       endDate,

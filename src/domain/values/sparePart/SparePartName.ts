@@ -9,7 +9,7 @@ export class SparePartName implements Value<string> {
   }
 
   public static from(value: string): SparePartName | Error {
-    if (!/^[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/.test(value)) {
+    if (!/^[a-zA-Z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/.test(value)) {
       return new SparePartNameError();
     }
     if (value.length > 50) {

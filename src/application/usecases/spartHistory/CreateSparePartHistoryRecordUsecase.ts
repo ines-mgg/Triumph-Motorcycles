@@ -7,14 +7,12 @@ export class CreateSparePartOrderRecordUsecase {
   ) {}
 
   public async execute(
-    orderId: string,
     sparePart: SparePartEntity,
     quantityOrdered: number,
     costPerUnit: number,
     estimatedDeliveryDate: Date,
   ): Promise<void | Error> {
     const orderRecord = SparePartHistoryEntity.create(
-      orderId,
       sparePart,
       quantityOrdered,
       costPerUnit,

@@ -7,7 +7,7 @@ export class GetPartsUsageSummaryUsecase {
   ) {}
 
   public async execute(): Promise<
-    { part: SparePartEntity; quantityUsed: number }[]
+    { part: SparePartEntity; quantityUsed: number }[] | Error
   > {
     const records = await this.maintenanceHistoryRepository.findAll();
 
@@ -15,6 +15,8 @@ export class GetPartsUsageSummaryUsecase {
       string,
       { part: SparePartEntity; quantityUsed: number }
     >();
+
+    if(records instanceof Error) return records
 
     for (const record of records) {
       for (const part of record.partsUsed) {

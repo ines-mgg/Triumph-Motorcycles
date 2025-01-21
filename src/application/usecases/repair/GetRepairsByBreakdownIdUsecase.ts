@@ -6,7 +6,7 @@ export class GetRepairsByBreakdownIdUsecase {
     private readonly repairRepository: RepairRepository,
   ) {}
 
-  public async execute(breakdownId: string): Promise<RepairEntity[]> {
+  public async execute(breakdownId: string): Promise<RepairEntity[] | Error> {
     return await this.repairRepository.findByBreakdownId(breakdownId);
   }
 }

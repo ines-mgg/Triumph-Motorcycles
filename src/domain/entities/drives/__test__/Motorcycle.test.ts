@@ -1,4 +1,4 @@
-import { MotorStatus } from "src/domain/types/motorcycle";
+import { MotorStatus } from "../../../types/motorcycle";
 import { MotorcycleEntity } from "../MotorcycleEntity";
 import { MotorcycleMileageError } from "../../../errors/motorcycle/MotorcycleMileageError";
 import { MotorcycleUpdateServiceDetailsError } from '../../../errors/motorcycle/MotorcycleUpdateServiceDetailsError'

@@ -6,7 +6,7 @@ export class GetSparePartByIdUsecase {
     private readonly sparePartRepository: SparePartRepository,
   ) {}
 
-  public async execute(id: string): Promise<SparePartEntity | null> {
+  public async execute(id: string): Promise<SparePartEntity | Error> {
     return await this.sparePartRepository.findById(id);
   }
 }

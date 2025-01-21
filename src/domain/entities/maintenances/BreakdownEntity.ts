@@ -1,14 +1,11 @@
-import { CommonRepairAction } from "../../types/motorcycle";
-import { BreakdownDescriptionError } from '../../errors/breakdown/BreakdownDescriptionError';
-import { BreakdownReportedDateError } from '../../errors/breakdown/BreakdownReportedDateError';
-import { MissingMotorcycleError } from '../../errors/drivers';
-import { IncompleteRepairError, InvalidWarrantyError } from '../../errors/maintenances';
 import { BreakdownDescription } from '../../values/brealdown/BreakdownDescription';
 import { BreakdownReportedDate } from '../../values/brealdown/BreakdownReportedDate';
 import { MotorcycleEntity } from '../drives';
 import { BreakdownRepairHistoryEntity } from './BreakdownRepairHistoryEntity';
 import { RepairEntity } from './RepairEntity';
 import { WarrantyEntity } from './WarrantyEntity';
+import crypto from 'crypto';
+import { BreakdownInvalidWarrantyError } from '../../errors/breakdown/BreakdownInvalidWarrantyError';
 
 export class BreakdownEntity {
   private readonly repairHistory: BreakdownRepairHistoryEntity;
@@ -25,45 +22,29 @@ export class BreakdownEntity {
   }
 
   public static create(
-    id: string,
     motorcycle: MotorcycleEntity,
     descriptionValue: string,
     reportedDateValue: Date,
     warranty: WarrantyEntity | null,
   ): BreakdownEntity | Error {
-    if (!motorcycle) {
-      throw new MissingMotorcycleError(
-        "La moto doit être fournie lors de la création d'un breakdown."
-      );
-    }
-
+    
+    const id = crypto.randomUUID();
+    
     const description = BreakdownDescription.from(descriptionValue);
-    if (description instanceof Error) {
-      throw new BreakdownDescriptionError(description.message);
-    }
+    if (description instanceof Error) return description
+  
 
     const reportedDate = BreakdownReportedDate.from(reportedDateValue);
-    if (reportedDate instanceof Error) {
-      throw new BreakdownReportedDateError(reportedDate.message);
-    }
+    if (reportedDate instanceof Error) return reportedDate
 
     return new BreakdownEntity(id, motorcycle, description, reportedDate, warranty);
   }
 
-  public addRepair(actions: CommonRepairAction[], repairDate: Date, cost: number, repair: RepairEntity): void {
-    if (!actions || actions.length === 0) {
-      throw new IncompleteRepairError('Repair actions must be provided.');
-    }
-    if (cost <= 0) {
-      throw new IncompleteRepairError('Repair cost must be greater than zero.');
-    }
-    if (!(repairDate instanceof Date) || isNaN(repairDate.getTime())) {
-      throw new IncompleteRepairError('Invalid repair date provided.');
-    }
+  public addRepair(repair: RepairEntity): void {
 
     this.repairHistory.addRepairRecord(repair);
 
-    this.motorcycle.status = 'Available';
+    this.motorcycle.status = 'InMaintenance';
   }
 
   public getRepairHistory(): RepairEntity[] {
@@ -72,7 +53,7 @@ export class BreakdownEntity {
 
   public isCoveredByWarranty(checkDate: Date): boolean {
     if (!this.warranty) {
-      throw new InvalidWarrantyError('Aucune garantie disponible pour cette moto.');
+      throw new BreakdownInvalidWarrantyError();
     }
     return this.warranty.isWarrantyValid(checkDate);
   }

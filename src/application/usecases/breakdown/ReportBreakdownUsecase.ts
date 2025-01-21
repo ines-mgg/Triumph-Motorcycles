@@ -6,23 +6,19 @@ export class ReportBreakdownUsecase {
   constructor(private readonly breakdownRepository: BreakdownRepository) {}
 
   public async execute(
-    id: string,
     motorcycle: MotorcycleEntity,
     descriptionValue: string,
     reportedDateValue: Date,
     warranty: WarrantyEntity | null,
   ): Promise<void | Error> {
     const breakdown = BreakdownEntity.create(
-      id,
       motorcycle,
       descriptionValue,
       reportedDateValue,
       warranty,
     );
 
-    if (breakdown instanceof Error) {
-      return breakdown;
-    }
+    if (breakdown instanceof Error) return breakdown;
 
     await this.breakdownRepository.save(breakdown);
   }

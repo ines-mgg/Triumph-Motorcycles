@@ -1,4 +1,3 @@
-import { MotorcycleNotFoundError } from "../../../domain/errors/motorcycle/MotorcycleNotFoundError";
 import { MotorcycleRepository } from "../../repositories/MotorcycleRepository";
 
 export class UpdateMileageUsecase {
@@ -7,9 +6,7 @@ export class UpdateMileageUsecase {
   public async execute(id: string, newMileage: number): Promise<void | Error> {
     const motorcycle = await this.motorcycleRepository.findOneById(id);
 
-    if (!motorcycle) {
-      throw new MotorcycleNotFoundError();
-    }
+    if(motorcycle instanceof Error) return motorcycle
 
     motorcycle.updateMileage(newMileage);
     await this.motorcycleRepository.save(motorcycle);

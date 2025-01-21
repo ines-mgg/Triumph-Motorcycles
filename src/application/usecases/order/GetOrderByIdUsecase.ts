@@ -6,7 +6,7 @@ export class GetOrderByIdUsecase {
     private readonly orderRepository: OrderRepository,
   ) {}
 
-  public async execute(orderId: string): Promise<OrderEntity | null> {
+  public async execute(orderId: string): Promise<OrderEntity | Error> {
     return await this.orderRepository.findById(orderId);
   }
 }

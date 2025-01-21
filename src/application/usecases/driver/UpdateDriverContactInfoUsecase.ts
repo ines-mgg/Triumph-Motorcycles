@@ -1,4 +1,3 @@
-import { DriverNotFoundError } from "../../../domain/errors/driver/DriverNotFoundError";
 import { DriverRepository } from "../../repositories/DriverRepository";
 
 export class UpdateDriverContactInfoUsecase {
@@ -11,9 +10,7 @@ export class UpdateDriverContactInfoUsecase {
   ): Promise<void | Error> {
     const driver = await this.driverRepository.findOneById(driverId);
 
-    if (!driver) {
-      throw new DriverNotFoundError();
-    }
+    if(driver instanceof Error) return driver
 
     driver.updateContactInfo({ email: newEmail, phone: newPhone });
     await this.driverRepository.save(driver);

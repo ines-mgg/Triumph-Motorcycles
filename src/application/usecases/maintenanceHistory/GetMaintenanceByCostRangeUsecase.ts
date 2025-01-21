@@ -9,7 +9,7 @@ export class GetMaintenanceByCostRangeUsecase {
   public async execute(
     minCost: number,
     maxCost: number,
-  ): Promise<MaintenanceRecord[]> {
+  ): Promise<MaintenanceRecord[] | Error> {
     return await this.maintenanceHistoryRepository.findByCostRange(
       minCost,
       maxCost,

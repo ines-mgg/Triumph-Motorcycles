@@ -1,6 +1,4 @@
-import { OrderNotFoundError } from "../../../domain/errors/order/OrderNotFoundError";
 import { OrderRepository } from "../../repositories/OrderRepository";
-
 export class UpdateItemDeliveryUsecase {
   constructor(
     private readonly orderRepository: OrderRepository,
@@ -12,9 +10,8 @@ export class UpdateItemDeliveryUsecase {
     deliveredQty: number,
   ): Promise<void | Error> {
     const order = await this.orderRepository.findById(orderId);
-    if (!order) {
-      return new OrderNotFoundError();
-    }
+  
+    if(order instanceof Error) return order
 
     order.updateItemDelivery(sparePartId, deliveredQty);
     await this.orderRepository.save(order);

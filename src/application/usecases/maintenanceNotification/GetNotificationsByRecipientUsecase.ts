@@ -6,7 +6,7 @@ export class GetNotificationsByRecipientUsecase {
     private readonly notificationRepository: MaintenanceNotificationRepository,
   ) {}
 
-  public async execute(recipientId: string): Promise<MaintenanceNotificationEntity[]> {
+  public async execute(recipientId: string): Promise<MaintenanceNotificationEntity[] | Error> {
     return await this.notificationRepository.findByRecipientId(recipientId);
   }
 }

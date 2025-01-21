@@ -6,7 +6,7 @@ export class GetMaintenanceByMotorcycleUsecase {
     private readonly maintenanceHistoryRepository: MaintenanceHistoryRepository,
   ) {}
 
-  public async execute(motorcycleId: string): Promise<MaintenanceRecord[]> {
+  public async execute(motorcycleId: string): Promise<MaintenanceRecord[] | Error> {
     return await this.maintenanceHistoryRepository.findByMotorcycleId(
       motorcycleId,
     );

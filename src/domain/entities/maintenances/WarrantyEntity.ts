@@ -1,10 +1,8 @@
 import { WarrantyStartDate } from '../../values/warranty/WarrantyStartDate';
 import { WarrantyEndDate } from '../../values/warranty/WarrantyEndDate';
 import { WarrantyCoverageDetails } from '../../values/warranty/WarrantyCoverageDetails';
-import { Maintenances } from '@triumph-motorcycles/domain/errors';
 import { MotorcycleEntity } from '../drives';
-
-const { InvalidWarrantyError } = Maintenances;
+import crypto from 'crypto';
 
 export class WarrantyEntity {
   private constructor(
@@ -17,7 +15,6 @@ export class WarrantyEntity {
   ) {}
 
   public static create(
-    id: string,
     motorcycle: MotorcycleEntity,
     startDateValue: Date,
     endDateValue: Date,
@@ -25,20 +22,16 @@ export class WarrantyEntity {
     isActive: boolean,
   ): WarrantyEntity | Error {
 
+    const id = crypto.randomUUID();
+    
     const startDate = WarrantyStartDate.from(startDateValue);
-    if (startDate instanceof Error) {
-      throw new InvalidWarrantyError(startDate.message);
-    }
+    if (startDate instanceof Error) return startDate;
 
     const endDate = WarrantyEndDate.from(endDateValue, startDate.value);
-    if (endDate instanceof Error) {
-      throw new InvalidWarrantyError(endDate.message);
-    }
+    if (endDate instanceof Error) return endDate;
 
     const coverageDetails = WarrantyCoverageDetails.from(coverageDetailsValue);
-    if (coverageDetails instanceof Error) {
-      throw new InvalidWarrantyError(coverageDetails.message);
-    }
+    if (coverageDetails instanceof Error) return coverageDetails;
 
     return new WarrantyEntity(
       id,
@@ -50,10 +43,16 @@ export class WarrantyEntity {
     );
   }
 
+  private normalizeDate(date: Date): Date {
+    return new Date(date.setHours(0, 0, 0, 0)); 
+  }
+
   public isWarrantyValid(checkDate: Date): boolean {
-    return (
-      checkDate >= this.startDate.value && checkDate <= this.endDate.value && this.isActive
-    );
+    const normalizedCheckDate = this.normalizeDate(checkDate);
+    const normalizedStartDate = this.normalizeDate(this.startDate.value);
+    const normalizedEndDate = this.normalizeDate(this.endDate.value);
+
+    return normalizedCheckDate >= normalizedStartDate && normalizedCheckDate <= normalizedEndDate && this.isActive;
   }
 
   public isRepairCovered(repairDate: Date): boolean {

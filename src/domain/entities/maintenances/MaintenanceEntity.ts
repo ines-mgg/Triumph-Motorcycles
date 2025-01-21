@@ -1,7 +1,7 @@
-import { MissingMotorcycleError } from '../../errors/drivers';
 import { MaintenanceIntervalMileage } from '../../values/maintenance/MaintenanceIntervalMileage';
 import { MaintenanceIntervalTime } from '../../values/maintenance/MaintenanceIntervalTime';
 import { MotorcycleEntity } from '../drives';
+import crypto from 'crypto';
 
 
 export class MaintenanceEntity {
@@ -13,35 +13,29 @@ export class MaintenanceEntity {
   ) {}
 
   public static create(
-    id: string,
     motorcycle: MotorcycleEntity,
     maintenanceIntervalMileage: number,
     maintenanceIntervalTime: number,
   ): MaintenanceEntity | Error {
-    if (!motorcycle) {
-      throw new MissingMotorcycleError('Motorcycle cannot be null or undefined.');
-    }
+    const id = crypto.randomUUID();
+   
 
     const mileage = MaintenanceIntervalMileage.from(maintenanceIntervalMileage);
-    if (mileage instanceof Error) {
-      throw mileage;
-    }
+    if (mileage instanceof Error) return mileage
 
     const time = MaintenanceIntervalTime.from(maintenanceIntervalTime);
-    if (time instanceof Error) {
-      throw time;
-    }
+    if (time instanceof Error) return time
 
     return new MaintenanceEntity(id, motorcycle, mileage, time);
   }
 
   public scheduleNextMaintenance(): void {
-    const nextMileage = this.motorcycle.mileage + this.maintenanceIntervalMileage.value;
-
+    const nextMileage = this.motorcycle.nextServiceMileage + this.maintenanceIntervalMileage.value;
+  
     const lastServiceDate = this.motorcycle.lastServiceDate || new Date();
     const nextServiceDate = new Date(lastServiceDate);
     nextServiceDate.setDate(nextServiceDate.getDate() + this.maintenanceIntervalTime.value);
-
+  
     this.motorcycle.updateServiceDetails(nextMileage, nextServiceDate);
   }
 

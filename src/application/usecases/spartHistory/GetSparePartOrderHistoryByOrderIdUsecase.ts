@@ -6,7 +6,7 @@ export class GetSparePartOrderHistoryByOrderIdUsecase {
     private readonly sparePartHistoryRecordRepository: SparePartHistoryRecordRepository,
   ) {}
 
-  public async execute(orderId: string): Promise<SparePartHistoryEntity | null> {
+  public async execute(orderId: string): Promise<SparePartHistoryEntity | Error> {
     return await this.sparePartHistoryRecordRepository.findByOrderId(orderId);
   }
 }

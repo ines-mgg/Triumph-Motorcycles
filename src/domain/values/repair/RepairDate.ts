@@ -9,7 +9,8 @@ export class RepairDate implements Value<Date> {
   }
 
   public static from(value: Date): RepairDate | Error {
-    if (value <= new Date()) {
+    const now = new Date();
+    if (value < now) { 
       return new RepairDateError();
     }
     return new RepairDate(value);

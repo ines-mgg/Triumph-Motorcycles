@@ -1,4 +1,3 @@
-import { BreakdownNotFoundError } from "../../../domain/errors/breakdown/BreakdownNotFoundError";
 import { BreakdownRepository } from "../../repositories/BreakdownRepository";
 
 export class CheckWarrantyCoverageUsecase {
@@ -7,10 +6,8 @@ export class CheckWarrantyCoverageUsecase {
   public async execute(breakdownId: string, checkDate: Date): Promise<boolean | Error> {
     const breakdown = await this.breakdownRepository.findOneById(breakdownId);
 
-    if (!breakdown) {
-      throw new BreakdownNotFoundError();
-    }
-
+    if(breakdown instanceof Error) return breakdown
+    
     return breakdown.isCoveredByWarranty(checkDate);
   }
 }

@@ -22,9 +22,7 @@ export class CreateDriverUsecase {
       phone,
     );
 
-    if (driver instanceof Error) {
-      return driver;
-    }
+    if(driver instanceof Error) return driver
 
     await this.driverRepository.save(driver);
   }

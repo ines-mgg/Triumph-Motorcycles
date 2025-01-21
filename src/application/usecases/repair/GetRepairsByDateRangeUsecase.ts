@@ -6,7 +6,7 @@ export class GetRepairsByDateRangeUsecase {
     private readonly repairRepository: RepairRepository,
   ) {}
 
-  public async execute(startDate: Date, endDate: Date): Promise<RepairEntity[]> {
+  public async execute(startDate: Date, endDate: Date): Promise<RepairEntity[] | Error> {
     return await this.repairRepository.findByRepairDateRange(startDate, endDate);
   }
 }

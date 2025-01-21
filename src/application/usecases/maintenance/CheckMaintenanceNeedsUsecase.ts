@@ -1,4 +1,3 @@
-import { MaintenanceNotFoundError } from "../../../domain/errors/maintenance/MaintenanceNotFoundError";
 import { MaintenanceRepository } from "../../repositories/MaintenanceRepository";
 
 export class CheckMaintenanceNeedsUsecase {
@@ -7,9 +6,7 @@ export class CheckMaintenanceNeedsUsecase {
   public async execute(maintenanceId: string): Promise<boolean | Error> {
     const maintenance = await this.maintenanceRepository.findById(maintenanceId);
 
-    if (!maintenance) {
-      throw new MaintenanceNotFoundError();
-    }
+    if(maintenance instanceof Error) return maintenance
 
     return maintenance.needsMaintenance();
   }

@@ -12,9 +12,7 @@ export class CreateMotorcycleTryUsecase {
   ): Promise<void | Error> {
     const motorcycleTry = MotorcycleTryEntity.create(motorcycle, driver, startDate, endDateDate);
 
-    if (motorcycleTry instanceof Error) {
-      return motorcycleTry;
-    }
+    if(motorcycleTry instanceof Error) return motorcycleTry
 
     await this.motorcycleTryRepository.save(motorcycleTry);
   }

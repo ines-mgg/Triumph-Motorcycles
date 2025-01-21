@@ -8,7 +8,7 @@ export class GetMaintenanceByTypeUsecase {
 
   public async execute(
     maintenanceType: 'Preventive' | 'Corrective',
-  ): Promise<MaintenanceRecord[]> {
+  ): Promise<MaintenanceRecord[] |Error> {
     return await this.maintenanceHistoryRepository.findByType(maintenanceType);
   }
 }

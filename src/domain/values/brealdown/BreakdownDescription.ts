@@ -6,10 +6,10 @@ export class BreakdownDescription implements Value<string> {
 
   public static from(value: string): BreakdownDescription | BreakdownDescriptionError {
     if (value.length < 5) {
-      return new BreakdownDescriptionError('Description must be at least 5 characters long.');
+      return new BreakdownDescriptionError();
     }
     if (value.length > 300) {
-      return new BreakdownDescriptionError('Description cannot exceed 300 characters.');
+      return new BreakdownDescriptionError();
     }
     return new BreakdownDescription(value);
   }

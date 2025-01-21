@@ -2,9 +2,9 @@ import { SparePartName } from '../../values/sparePart/SparePartName';
 import { SparePartQuantityInStock } from '../../values/sparePart/SparePartQuantityInStock';
 import { SparePartCriticalLevel } from '../../values/sparePart/SparePartCriticalLevel';
 import { SparePartCost } from '../../values/sparePart/SparePartCost';
-import { Parts } from '@triumph-motorcycles/domain/errors';
-
-const { InsufficientStockError, InvalidQuantityError } = Parts;
+import crypto from 'crypto';
+import { OrderItemQuantityOrderedError } from '../../errors/orderItem/OrderItemQuantityOrderedError';
+import { SparePartQuantityInStockError } from '../../errors/sparePart/SparePartQuantityInStockError';
 
 export class SparePartEntity {
   private totalUsage: number = 0;
@@ -19,77 +19,76 @@ export class SparePartEntity {
   ) {}
 
   public static create(
-    id: string,
     nameValue: string,
     quantityInStockValue: number,
     criticalLevelValue: number,
     costValue: number
   ): SparePartEntity | Error {
+
+    const id = crypto.randomUUID();
+
     const name = SparePartName.from(nameValue);
-    if (name instanceof Error) {
-      throw new InvalidQuantityError(name.message);
-    }
+    if (name instanceof Error) return name;
 
     const quantityInStock = SparePartQuantityInStock.from(quantityInStockValue);
-    if (quantityInStock instanceof Error) {
-      throw new InvalidQuantityError(quantityInStock.message);
-    }
+    if (quantityInStock instanceof Error) return quantityInStock;
 
     const criticalLevel = SparePartCriticalLevel.from(criticalLevelValue);
-    if (criticalLevel instanceof Error) {
-      throw new InvalidQuantityError(criticalLevel.message);
-    }
+    if (criticalLevel instanceof Error) return criticalLevel;
 
     const cost = SparePartCost.from(costValue);
-    if (cost instanceof Error) {
-      throw new InvalidQuantityError(cost.message);
-    }
+    if (cost instanceof Error) return cost;
 
     return new SparePartEntity(id, name, quantityInStock, criticalLevel, cost);
   }
 
-  restock(quantity: number): void {
-    const quantityInStock = SparePartQuantityInStock.from(this.quantityInStock.value + quantity);
-    if (quantityInStock instanceof Error) {
-      throw new InvalidQuantityError(quantityInStock.message);
-    }
-    this.quantityInStock = quantityInStock;
+  restock(quantity: number): void | Error {
+    if (quantity < 0) return new SparePartQuantityInStockError();
+
+    const currentQuantity = this.quantityInStock.value;
+    const newQuantity = currentQuantity + quantity;
+
+    const newQuantityInStock = SparePartQuantityInStock.from(newQuantity);
+    if (newQuantityInStock instanceof Error) return newQuantityInStock;
+
+    this.quantityInStock = newQuantityInStock;
   }
 
-  reserve(quantity: number): boolean {
-    if (quantity < 0) {
-      throw new InvalidQuantityError('Reserved quantity cannot be negative.');
+  reserve(quantity: number): boolean | Error {
+    if (quantity > this.quantityInStock.value - this.reservedStock) {
+      return new OrderItemQuantityOrderedError();
     }
-    if (quantity <= this.quantityInStock.value - this.reservedStock) {
-      this.reservedStock += quantity;
-      return true;
-    }
-    throw new InsufficientStockError('Insufficient stock for reservation.');
+
+    this.reservedStock += quantity;
+    return true;
   }
 
-  releaseReserved(quantity: number): void {
-    if (quantity < 0) {
-      throw new InvalidQuantityError('Released quantity cannot be negative.');
-    }
-    this.reservedStock = Math.max(0, this.reservedStock - quantity);
+  releaseReserved(quantity: number): void | Error {
+    const quantityValue = SparePartQuantityInStock.from(quantity);
+    if (quantityValue instanceof Error) return quantityValue;
+
+    const quantityNumber: number = quantityValue.value;
+
+    this.reservedStock = Math.max(0, this.reservedStock - quantityNumber);
   }
 
   isStockLow(): boolean {
-    return this.quantityInStock.value - this.reservedStock <= this.criticalLevel.value;
+    return this.quantityInStock.value <= this.criticalLevel.value;
   }
 
-  use(quantity: number): boolean {
-    if (quantity < 0) {
-      throw new InvalidQuantityError('Used quantity cannot be negative.');
+  use(quantity: number): boolean | Error {
+    if (quantity > this.quantityInStock.value - this.reservedStock) {
+      return new OrderItemQuantityOrderedError();
     }
-    if (quantity <= this.quantityInStock.value - this.reservedStock) {
-      const newQuantity = this.quantityInStock.value - quantity;
-      this.quantityInStock = SparePartQuantityInStock.from(newQuantity) as SparePartQuantityInStock;
-      this.totalUsage += quantity;
-      this.reservedStock = Math.max(0, this.reservedStock - quantity);
-      return true;
-    }
-    throw new InsufficientStockError('Insufficient stock for usage.');
+
+    const newQuantity = this.quantityInStock.value - quantity;
+    const newQuantityInStock = SparePartQuantityInStock.from(newQuantity);
+    if (newQuantityInStock instanceof Error) return newQuantityInStock;
+
+    this.quantityInStock = newQuantityInStock;
+    this.totalUsage += quantity;
+    this.reservedStock = Math.max(0, this.reservedStock - quantity);
+    return true;
   }
 
   getTotalUsage(): number {

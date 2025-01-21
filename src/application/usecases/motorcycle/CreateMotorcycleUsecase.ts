@@ -21,9 +21,7 @@ export class CreateMotorcycleUsecase {
       status,
     );
 
-    if (motorcycle instanceof Error) {
-      return motorcycle;
-    }
+    if(motorcycle instanceof Error) return motorcycle
 
     await this.motorcycleRepository.save(motorcycle);
   }

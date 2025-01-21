@@ -6,7 +6,7 @@ export class GetWarrantyByMotorcycleIdUsecase {
     private readonly warrantyRepository: WarrantyRepository,
   ) {}
 
-  public async execute(motorcycleId: string): Promise<WarrantyEntity[]> {
+  public async execute(motorcycleId: string): Promise<WarrantyEntity[] | Error> {
     return await this.warrantyRepository.findByMotorcycleId(motorcycleId);
   }
 }

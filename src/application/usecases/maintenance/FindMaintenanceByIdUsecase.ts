@@ -4,7 +4,7 @@ import { MaintenanceRepository } from "../../repositories/MaintenanceRepository"
 export class FindMaintenanceByIdUsecase {
   constructor(private readonly maintenanceRepository: MaintenanceRepository) {}
 
-  public async execute(maintenanceId: string): Promise<MaintenanceEntity | null> {
+  public async execute(maintenanceId: string): Promise<MaintenanceEntity | Error> {
     return await this.maintenanceRepository.findById(maintenanceId);
   }
 }

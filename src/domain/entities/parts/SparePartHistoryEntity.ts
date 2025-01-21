@@ -1,4 +1,3 @@
-import { DeliveryError } from "../../errors/parts";
 import { SparePartOrderRecordCostPerUnit } from "../../values/SparePartOrderRecord/SparePartOrderRecordCostPerUnit";
 import { SparePartOrderRecordDeliveredQuantity } from "../../values/SparePartOrderRecord/SparePartOrderRecordDeliveredQuantity";
 import { SparePartOrderRecordPartName } from "../../values/SparePartOrderRecord/SparePartOrderRecordPartName";
@@ -6,10 +5,11 @@ import { SparePartOrderRecordQuantityOrdered } from "../../values/SparePartOrder
 import { SparePartOrderRecordRemainingQuantity } from "../../values/SparePartOrderRecord/SparePartOrderRecordRemainingQuantity";
 import { SparePartOrderRecordTotalCost } from "../../values/SparePartOrderRecord/SparePartOrderRecordTotalCost";
 import { SparePartEntity } from "./SparePartEntity";
+import crypto from 'crypto';
 
 export class SparePartHistoryEntity {
   private constructor(
-    public readonly orderId: string,
+    public readonly id: string,
     public readonly sparePart: SparePartEntity,
     public readonly partName: SparePartOrderRecordPartName,
     public readonly orderDate: Date,
@@ -22,16 +22,18 @@ export class SparePartHistoryEntity {
   ) {}
 
   public static create(
-    orderId: string,
     sparePart: SparePartEntity,
     quantityOrdered: number,
     costPerUnit: number,
     estimatedDeliveryDate: Date,
   ): SparePartHistoryEntity {
+    
+    const id = crypto.randomUUID();
+    
     const totalCostValue = quantityOrdered * costPerUnit;
 
     const instance = new SparePartHistoryEntity(
-      orderId,
+      id,
       sparePart,
       new SparePartOrderRecordPartName(sparePart.name.value),
       new Date(),
@@ -45,20 +47,4 @@ export class SparePartHistoryEntity {
     return instance;
   }
 
-  updateDelivery(deliveredQty: number): void {
-    const newDeliveredQty = new SparePartOrderRecordDeliveredQuantity(
-      this.deliveredQuantity.value + deliveredQty,
-    );
-
-    if (newDeliveredQty.value > this.quantityOrdered.value) {
-      throw new DeliveryError(
-        'La quantité livrée dépasse la quantité commandée.',
-      );
-    }
-
-    this.deliveredQuantity = newDeliveredQty;
-    this.remainingQuantity = new SparePartOrderRecordRemainingQuantity(
-      this.quantityOrdered.value - this.deliveredQuantity.value,
-    );
-  }
 }

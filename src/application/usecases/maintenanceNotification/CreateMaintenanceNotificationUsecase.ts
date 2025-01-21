@@ -8,7 +8,6 @@ export class CreateMaintenanceNotificationUsecase {
   ) {}
 
   public async execute(
-    recipientId: string,
     message: string,
     date: Date,
     type: MaintenanceNotificationType,
@@ -16,12 +15,13 @@ export class CreateMaintenanceNotificationUsecase {
   ): Promise<void | Error> {
     
       const notification = MaintenanceNotificationEntity.create(
-        recipientId,
         message,
         date,
         type,
         isRead
       );
+      
+      if(notification instanceof Error) return notification
 
       await this.notificationRepository.save(notification);
    

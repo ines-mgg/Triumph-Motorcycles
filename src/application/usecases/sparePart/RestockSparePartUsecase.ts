@@ -1,4 +1,3 @@
-import { SparePartNotFoundError } from "../../../domain/errors/sparePart/SparePartNotFoundError";
 import { SparePartRepository } from "../../repositories/SparePartRepository";
 
 export class RestockSparePartUsecase {
@@ -8,9 +7,8 @@ export class RestockSparePartUsecase {
 
   public async execute(id: string, quantity: number): Promise<void | Error> {
     const sparePart = await this.sparePartRepository.findById(id);
-    if (!sparePart) {
-      return new SparePartNotFoundError();
-    }
+   
+    if(sparePart instanceof Error) return sparePart
 
     sparePart.restock(quantity);
     await this.sparePartRepository.save(sparePart);

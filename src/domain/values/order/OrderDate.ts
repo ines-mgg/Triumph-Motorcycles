@@ -9,10 +9,13 @@ export class OrderDate implements Value<Date> {
   }
 
   public static from(value: Date): OrderDate | Error {
-    if (value < new Date()) {
-      return new OrderDateError();
+    const now = new Date();
+    now.setMilliseconds(0); 
+    now.setSeconds(0);     
+    if (value < now) {
+      return new OrderDateError(); 
     }
-    return new OrderDate(value);
+    return new OrderDate(value); 
   }
 
   public is(item: Value<Date>): boolean {

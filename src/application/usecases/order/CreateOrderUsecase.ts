@@ -7,15 +7,12 @@ export class CreateOrderUsecase {
   ) {}
 
   public async execute(
-    orderId: string,
     orderDateValue: Date,
     estimatedDeliveryDateValue: Date,
   ): Promise<void | Error> {
-    const order = OrderEntity.create(orderId, orderDateValue, estimatedDeliveryDateValue);
+    const order = OrderEntity.create(orderDateValue, estimatedDeliveryDateValue);
 
-    if (order instanceof Error) {
-      return order;
-    }
+    if(order instanceof Error) return order
 
     await this.orderRepository.save(order);
   }

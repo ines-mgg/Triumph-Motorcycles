@@ -7,7 +7,7 @@ export class BreakdownReportedDate implements Value<Date> {
   public static from(value: Date): BreakdownReportedDate | BreakdownReportedDateError {
     const currentDate = new Date();
     if (value > currentDate) {
-      return new BreakdownReportedDateError('Reported date cannot be in the future.');
+      return new BreakdownReportedDateError();
     }
     return new BreakdownReportedDate(value);
   }
