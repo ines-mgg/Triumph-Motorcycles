@@ -1,7 +1,7 @@
-import { PasswordTooShortError } from "../errors/user/PasswordTooShortError";
-import { UsernameTooShortError } from "../errors/user/UsernameTooShortError";
+import { UsernameTooShortError } from "../../errors/user/UsernameTooShortError";
+import { DriverEntity } from "../drives";
 import { UserEntity } from "./UserEntity";
-import { DriverEntity } from "./drives";
+import { PasswordTooShortError } from "../../errors/user/PasswordTooShortError";
 
 describe("UserEntity", () => {
   const now = new Date();

@@ -1,4 +1,4 @@
-import { UserEntity } from "src/domain/entities/UserEntity";
+import { UserEntity } from "src/domain/entities/user/UserEntity";
 import { UserNotFoundError } from "src/domain/errors/user/UserNotFoundError";
 
 export interface UserRepository {

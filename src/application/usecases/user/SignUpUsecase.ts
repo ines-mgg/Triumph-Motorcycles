@@ -1,5 +1,5 @@
 import { UnexpectedError } from "src/domain/errors/user/UnexpectedError";
-import { UserEntity } from "src/domain/entities/UserEntity"; 
+import { UserEntity } from "src/domain/entities/user/UserEntity"; 
 import { Username } from "src/domain/values/user/Username";
 import { Password } from "src/domain/values/user/Password";
 import { UserRepository } from "src/application/repositories/UserRepository";

@@ -1,6 +1,6 @@
-import { Password } from "../values/user/Password";
-import { Username } from "../values/user/Username";
-import { DriverEntity } from "./drives";
+import { Password } from "../../values/user/Password";
+import { Username } from "../../values/user/Username";
+import { DriverEntity } from "../drives";
 import crypto from 'crypto';
 
 
