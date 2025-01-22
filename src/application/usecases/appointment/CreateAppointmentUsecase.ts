@@ -2,6 +2,7 @@ import { AppointmentRepository } from "src/application/repositories/AppointmentR
 import { AppointmentEntity } from "src/domain/entities/appointment/AppointmentEntity";
 import { UserEntity } from "src/domain/entities/user/UserEntity";
 import { UnexpectedError } from "src/domain/errors/user/UnexpectedError";
+import { AppointmentReason } from "src/domain/types/AppointmentReason";
 
 export class CreateAppointmentUsecase {
   public constructor(
@@ -12,10 +13,11 @@ export class CreateAppointmentUsecase {
     user: UserEntity,
     startTime: Date,
     endTime: Date,
-    notes: string | null
+    notes: string | null,
+    reason: AppointmentReason,
   ): Promise<AppointmentEntity | Error> {
     try {
-      const newAppointment = AppointmentEntity.create(user, startTime, endTime, notes);
+      const newAppointment = AppointmentEntity.create(user, startTime, endTime, reason, notes);
       if (newAppointment instanceof Error) return newAppointment;
 
       await this.appointmentRepository.save(newAppointment);

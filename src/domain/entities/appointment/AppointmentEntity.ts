@@ -2,7 +2,9 @@ import { UserEntity } from "../user/UserEntity";
 import { AppointmentStatus } from "../../types/AppointmentStatus";
 import { Notes } from "../../values/appointment/Notes";
 import { TimeRange } from "../../values/appointment/TimeRange";
-import crypto from 'crypto';
+import crypto from "crypto";
+import { AppointmentReason } from "src/domain/types/AppointmentReason";
+
 
 export class AppointmentEntity {
   private constructor(
@@ -12,18 +14,19 @@ export class AppointmentEntity {
     private appointmentNotes: Notes | null,
     private appointmentStatus: AppointmentStatus,
     public readonly createdAt: Date,
-    private updatedAt: Date
+    private updatedAt: Date,
+    public appointmentReason: AppointmentReason
   ) {}
 
   public static create(
     user: UserEntity,
     startTime: Date,
     endTime: Date,
+    reason: AppointmentReason,
     notes: string | null
   ): AppointmentEntity | Error {
-
     const appointmentId = crypto.randomUUID();
-    
+
     const timeRange = TimeRange.from(startTime, endTime);
     if (timeRange instanceof Error) return timeRange;
 
@@ -41,7 +44,8 @@ export class AppointmentEntity {
       notesValue,
       "Pending",
       new Date(),
-      new Date()
+      new Date(),
+      reason
     );
   }
 
@@ -66,8 +70,13 @@ export class AppointmentEntity {
     this.updatedAt = new Date();
   }
 
-  public updateStatus(newStatus: AppointmentStatus): void | Error {
+  public updateStatus(newStatus: AppointmentStatus): void {
     this.appointmentStatus = newStatus;
+    this.updatedAt = new Date();
+  }
+
+  public updateReason(newReason: AppointmentReason): void {
+    this.appointmentReason = newReason;
     this.updatedAt = new Date();
   }
 
@@ -76,6 +85,7 @@ export class AppointmentEntity {
     timeRange: { startTime: Date; endTime: Date };
     notes: string | null;
     status: AppointmentStatus;
+    reason: AppointmentReason;
     updatedAt: Date;
   } {
     return {
@@ -83,7 +93,30 @@ export class AppointmentEntity {
       timeRange: this.timeRange.value,
       notes: this.appointmentNotes ? this.appointmentNotes.value : null,
       status: this.appointmentStatus,
-      updatedAt: this.updatedAt,  
+      reason: this.appointmentReason,
+      updatedAt: this.updatedAt,
     };
+  }
+
+  public getReasonDetails(): object {
+    switch (this.appointmentReason.type) {
+      case "Location":
+        return this.appointmentReason.entity.getDetails();
+      case "Maintenance":
+        return {
+          needsMaintenance: this.appointmentReason.entity.needsMaintenance(),
+        };
+      case "Repair":
+        return {
+          repairActions: this.appointmentReason.entity.actions,
+          cost: this.appointmentReason.entity.cost.value,
+        };
+      case "MotorcycleTry":
+        return {
+          summary: this.appointmentReason.entity.getTestSummary(),
+        };
+      default:
+        return {};
+    }
   }
 }

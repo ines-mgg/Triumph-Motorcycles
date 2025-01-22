@@ -6,4 +6,5 @@ export interface MotorcycleRepository {
   all(): Promise<MotorcycleEntity[] | MotorcycleNotFoundError>;
   findOneById(id: string): Promise<MotorcycleEntity | MotorcycleNotFoundError>;
   delete(id: string): Promise<void>;
+  update(appointment: MotorcycleEntity): Promise<void>;
 }

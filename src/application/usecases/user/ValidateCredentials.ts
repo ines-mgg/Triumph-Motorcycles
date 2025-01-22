@@ -1,4 +1,4 @@
-import { UserRepository } from "src/application/repositories/UserRepository";
+import { UserRepository } from "../../repositories/UserRepository";
 
 export class ValidateUserCredentialsUsecase {
   constructor(private readonly userRepository: UserRepository) {}

@@ -1,3 +1,4 @@
+import { BreakdownInvalidWarrantyError } from '../../errors/breakdown/BreakdownInvalidWarrantyError';
 import { BreakdownDescription } from '../../values/brealdown/BreakdownDescription';
 import { BreakdownReportedDate } from '../../values/brealdown/BreakdownReportedDate';
 import { MotorcycleEntity } from '../drives';
@@ -5,7 +6,6 @@ import { BreakdownRepairHistoryEntity } from './BreakdownRepairHistoryEntity';
 import { RepairEntity } from './RepairEntity';
 import { WarrantyEntity } from './WarrantyEntity';
 import crypto from 'crypto';
-import { BreakdownInvalidWarrantyError } from '../../errors/breakdown/BreakdownInvalidWarrantyError';
 
 export class BreakdownEntity {
   private readonly repairHistory: BreakdownRepairHistoryEntity;

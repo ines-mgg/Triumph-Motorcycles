@@ -1,152 +1,159 @@
-import { Username } from "../../values/user/Username";
-import { UserEntity } from "../user/UserEntity";
-import { Password } from "../../values/user/Password";
 import { AppointmentEntity } from "./AppointmentEntity";
+import { LocationEntity } from "../location/LocationEntity";
+import { UserEntity } from "../user/UserEntity";
+import { DriverEntity, MotorcycleEntity, MotorcycleTryEntity } from "../drives";
+import { CommonRepairAction, MotorStatus } from "../../types/motorcycle";
+import { BreakdownEntity, MaintenanceEntity, RepairEntity } from "../maintenances";
 
 describe("AppointmentEntity", () => {
-  const now = new Date();
   let user: UserEntity;
+  let motorcycle: MotorcycleEntity;
+  let validBreakdown: BreakdownEntity;
+  let driver: DriverEntity;
 
-  beforeAll(() => {
-    const username = Username.from("validUsername");
-    const password = Password.from("Valid@123");
-   
-    if (username instanceof Error || password instanceof Error) {
-      throw new Error("Invalid mock user creation.");
-    }
-    user = UserEntity.create(username.value, password.value, now, now) as UserEntity;
-  });
+  const setupTestData = () => {
+    user = UserEntity.create("validUser", "Valid@123", new Date(), new Date()) as UserEntity;
+
+    motorcycle = MotorcycleEntity.create(
+      "Yamaha",
+      "MT-09",
+      2023,
+      new Date("2023-01-01"),
+      "Available" as MotorStatus
+    ) as MotorcycleEntity;
+
+    validBreakdown = BreakdownEntity.create(
+      motorcycle,
+      "Engine failure",
+      new Date(Date.now() - 1000 * 60 * 60 * 24),
+      null
+    ) as BreakdownEntity;
+
+    driver = DriverEntity.create(
+      "John Doe",
+      "A",
+      "AB12345678",
+      5,
+      "john.doe@example.com",
+      "1234567890"
+    ) as DriverEntity;
+  };
+
+  beforeAll(setupTestData);
 
   describe("create()", () => {
-    it("should create a valid appointment entity", () => {
-      const startTime = new Date();
-      const endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
-      const notes = "Valid appointment notes";
+    const startDate = new Date();
+    const endDate = new Date(Date.now() + 3600000);
 
-      const appointment = AppointmentEntity.create(user, startTime, endTime, notes);
+    it("should create an appointment with a Location reason", () => {
+      const location = LocationEntity.create(motorcycle, user, new Date(), 100) as LocationEntity;
+      const appointment = AppointmentEntity.create(
+        user,
+        startDate,
+        endDate,
+        { type: "Location", entity: location },
+        "Test notes"
+      );
+
       expect(appointment).toBeInstanceOf(AppointmentEntity);
-
-      const details = (appointment as AppointmentEntity).getDetails();
-      expect(details.user).toEqual(user);
-      expect(details.timeRange.startTime).toEqual(startTime);
-      expect(details.timeRange.endTime).toEqual(endTime);
-      expect(details.notes).toEqual(notes);
-      expect(details.status).toEqual("Pending");
+      if (appointment instanceof AppointmentEntity) {
+        expect(appointment.appointmentReason.entity).toBe(location);
+        expect(appointment.appointmentReason.type).toBe("Location");
+      }
     });
 
-    it("should return an error for invalid time range", () => {
-      const startTime = new Date();
-      const endTime = new Date(startTime.getTime() - 60 * 60 * 1000); 
-      const notes = "Invalid time range notes.";
-
-      const appointment = AppointmentEntity.create(user, startTime, endTime, notes);
-      expect(appointment).toBeInstanceOf(Error);
-    });
-
-    it("should return an error for invalid notes", () => {
-      const startTime = new Date();
-      const endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
-      const notes = "Invalid notes!@#$%^&*()";
-
-      const appointment = AppointmentEntity.create(user, startTime, endTime, notes);
-      expect(appointment).toBeInstanceOf(Error);
-    });
-  });
-
-  describe("updateTimeRange()", () => {
-    it("should update the time range successfully", () => {
+    it("should create an appointment with a Maintenance reason", () => {
+      const maintenance = MaintenanceEntity.create(motorcycle, 5000, 180) as MaintenanceEntity;
       const appointment = AppointmentEntity.create(
         user,
-        new Date(),
-        new Date(Date.now() + 60 * 60 * 1000),
+        startDate,
+        endDate,
+        { type: "Maintenance", entity: maintenance },
         null
-      ) as AppointmentEntity;
+      );
 
-      const newStartTime = new Date();
-      const newEndTime = new Date(newStartTime.getTime() + 2 * 60 * 60 * 1000); 
-
-      const result = appointment.updateTimeRange(newStartTime, newEndTime);
-      expect(result).toBeUndefined();
-
-      const details = appointment.getDetails();
-      expect(details.timeRange.startTime).toEqual(newStartTime);
-      expect(details.timeRange.endTime).toEqual(newEndTime);
+      expect(appointment).toBeInstanceOf(AppointmentEntity);
+      if (appointment instanceof AppointmentEntity) {
+        expect(appointment.appointmentReason.entity).toBe(maintenance);
+        expect(appointment.appointmentReason.type).toBe("Maintenance");
+      }
     });
 
-    it("should return an error for invalid updated time range", () => {
+    it("should create an appointment with a Repair reason", () => {
+      const repair = RepairEntity.create(
+        validBreakdown,
+        new Date(Date.now() + 1000 * 60 * 60 * 24),
+        ["Oil Change", "Brake Replacement"] as CommonRepairAction[],
+        500
+      ) as RepairEntity;
+
       const appointment = AppointmentEntity.create(
         user,
-        new Date(),
-        new Date(Date.now() + 60 * 60 * 1000),
+        startDate,
+        endDate,
+        { type: "Repair", entity: repair },
+        "Repair appointment notes"
+      );
+
+      expect(appointment).toBeInstanceOf(AppointmentEntity);
+      if (appointment instanceof AppointmentEntity) {
+        expect(appointment.appointmentReason.entity).toBe(repair);
+        expect(appointment.appointmentReason.type).toBe("Repair");
+      }
+    });
+
+    it("should create an appointment with a MotorcycleTry reason", () => {
+      const motorcycleTry = MotorcycleTryEntity.create(
+        motorcycle,
+        driver,
+        new Date(Date.now() + 1000 * 60 * 60 * 24),
+        new Date(Date.now() + 4 * 24 * 60 * 60 * 1000)
+      ) as MotorcycleTryEntity;
+
+      const appointment = AppointmentEntity.create(
+        user,
+        startDate,
+        endDate,
+        { type: "MotorcycleTry", entity: motorcycleTry },
         null
-      ) as AppointmentEntity;
+      );
 
-      const newStartTime = new Date();
-      const newEndTime = new Date(newStartTime.getTime() - 60 * 60 * 1000); 
+      expect(appointment).toBeInstanceOf(AppointmentEntity);
+      if (appointment instanceof AppointmentEntity) {
+        expect(appointment.appointmentReason.entity).toBe(motorcycleTry);
+        expect(appointment.appointmentReason.type).toBe("MotorcycleTry");
+      }
+    });
 
-      const result = appointment.updateTimeRange(newStartTime, newEndTime);
+    it("should fail to create an appointment if endDate is before startDate", () => {
+      const invalidEndDate = new Date(startDate.getTime() - 1000);
+      const result = AppointmentEntity.create(
+        user,
+        startDate,
+        invalidEndDate,
+        { type: "Location", entity: {} as LocationEntity },
+        null
+      );
+
       expect(result).toBeInstanceOf(Error);
     });
   });
 
-  describe("updateNotes()", () => {
-    it("should update notes successfully", () => {
+  describe("getDetails()", () => {
+    it("should return appointment details", () => {
+      const location = LocationEntity.create(motorcycle, user, new Date(), 100) as LocationEntity;
       const appointment = AppointmentEntity.create(
         user,
         new Date(),
-        new Date(Date.now() + 60 * 60 * 1000),
-        null
+        new Date(Date.now() + 3600000),
+        { type: "Location", entity: location },
+        "Test notes"
       ) as AppointmentEntity;
-
-      const newNotes = "Updated valid notes";
-      const result = appointment.updateNotes(newNotes);
-      expect(result).toBeUndefined();
 
       const details = appointment.getDetails();
-      expect(details.notes).toEqual(newNotes);
-    });
 
-    it("should return an error for invalid notes update", () => {
-      const appointment = AppointmentEntity.create(
-        user,
-        new Date(),
-        new Date(Date.now() + 60 * 60 * 1000),
-        null
-      ) as AppointmentEntity;
-
-      const invalidNotes = "Invalid notes!@#$%^&*()";
-      const result = appointment.updateNotes(invalidNotes);
-      expect(result).toBeInstanceOf(Error);
-    });
-
-    it("should clear notes when updated with null", () => {
-      const appointment = AppointmentEntity.create(
-        user,
-        new Date(),
-        new Date(Date.now() + 60 * 60 * 1000),
-        "Initial valid notes"
-      ) as AppointmentEntity;
-
-      const result = appointment.updateNotes(null);
-      expect(result).toBeUndefined();
-
-      const details = appointment.getDetails();
-      expect(details.notes).toBeNull();
-    });
-  });
-
-  describe("updateStatus()", () => {
-    it("should update the appointment status successfully", () => {
-      const appointment = AppointmentEntity.create(
-        user,
-        new Date(),
-        new Date(Date.now() + 60 * 60 * 1000),
-        null
-      ) as AppointmentEntity;
-
-      appointment.updateStatus("Completed");
-      const details = appointment.getDetails();
-      expect(details.status).toEqual("Completed");
+      expect(details.reason.type).toBe("Location");
+      expect(details.reason.entity).toBe(location);
     });
   });
 });

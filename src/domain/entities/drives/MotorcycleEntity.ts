@@ -4,8 +4,11 @@ import { MotorcycleBrand } from "../../values/motorcycle/MotorcycleBrand";
 import { MotorcycleModel } from "../../values/motorcycle/MotorcycleModel";
 import { MotorcycleYear } from "../../values/motorcycle/MotorcycleYear";
 import { BaseEntity } from "../BaseEntity";
-import crypto from 'crypto';
+import { CompanyEntity } from "../company/CompanyEntity";
+import { ConcessionEntity } from "../concession/ConcessionEntity";
+import crypto from "crypto";
 import { MotorcycleMileageError } from "../../errors/motorcycle/MotorcycleMileageError";
+
 export class MotorcycleEntity {
   private constructor(
     public readonly id: string,
@@ -18,6 +21,8 @@ export class MotorcycleEntity {
     private readonly _purchaseDate: Date,
     private _lastServiceDate: Date | null,
     private _nextServiceMileage: number,
+    private company: CompanyEntity | null = null,
+    private concession: ConcessionEntity | null = null
   ) {}
 
   public static create(
@@ -25,7 +30,7 @@ export class MotorcycleEntity {
     modelValue: string,
     yearValue: number,
     purchaseDate: Date,
-    status,
+    status: MotorStatus
   ): MotorcycleEntity | Error {
     const brand = MotorcycleBrand.from(brandValue);
     if (brand instanceof Error) return brand;
@@ -52,7 +57,7 @@ export class MotorcycleEntity {
       status,
       purchaseDate,
       lastServiceDate,
-      nextServiceMileage,
+      nextServiceMileage
     );
   }
 
@@ -70,7 +75,7 @@ export class MotorcycleEntity {
 
   public updateServiceDetails(newServiceMileage: number, serviceDate: Date): void {
     if (newServiceMileage < this._mileage) {
-      throw new  MotorcycleUpdateServiceDetailsError();
+      throw new MotorcycleUpdateServiceDetailsError();
     }
     this._nextServiceMileage = newServiceMileage;
     this._lastServiceDate = serviceDate;
@@ -80,6 +85,48 @@ export class MotorcycleEntity {
   public updateStatus(newStatus: MotorStatus): void {
     this.status = newStatus;
     this.base.updatedAt = new Date();
+  }
+
+  public assignToCompany(company: CompanyEntity): void {
+    this.company = company;
+    this.base.updatedAt = new Date();
+  }
+
+  public removeFromCompany(): void {
+    this.company = null;
+    this.base.updatedAt = new Date();
+  }
+
+  public getCompanyDetails(): object | null {
+    if (!this.company) {
+      return null;
+    }
+    return {
+      identifier: this.company.identifier,
+      name: this.company.name.value,
+      user: this.company.user,
+    };
+  }
+
+  public assignToConcession(concession: ConcessionEntity): void {
+    this.concession = concession;
+    this.base.updatedAt = new Date();
+  }
+
+  public removeFromConcession(): void {
+    this.concession = null;
+    this.base.updatedAt = new Date();
+  }
+
+  public getConcessionDetails(): object | null {
+    if (!this.concession) {
+      return null;
+    }
+    return {
+      identifier: this.concession.identifier,
+      name: this.concession.name.value,
+      user: this.concession.user,
+    };
   }
 
   public get mileage(): number {

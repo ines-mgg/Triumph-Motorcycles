@@ -11,7 +11,7 @@ describe('MaintenanceEntity', () => {
       'R1',
       2021,
       new Date(),
-      "InService", 
+      "Available", 
     ) as MotorcycleEntity;
   });
 
@@ -88,7 +88,7 @@ describe('MaintenanceEntity', () => {
       'Iron 883',
       2023,
       new Date(),
-      'active'
+      'Available'
     ) as MotorcycleEntity;
   
     const maintenance = MaintenanceEntity.create(

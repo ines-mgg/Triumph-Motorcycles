@@ -7,6 +7,7 @@ import { DriveLicense } from '../../values/driver/DriverLicense';
 import { DriveYearsOfExperience } from '../../values/driver/DriverYearsOfExperience';
 import { DriverEmailError, DriverPhoneError } from '../../errors/drivers';
 import crypto from 'crypto';
+import { CompanyEntity } from '../company/CompanyEntity';
 
 const { ExperienceError } = Drivers;
 
@@ -20,6 +21,7 @@ export class DriverEntity {
     public email: DriverEmail,
     public phone: DriverPhone,
     private readonly drivingHistory: DrivingRecord[] = [],
+    public company: CompanyEntity | null = null 
   ) {}
 
   public static create(
@@ -29,9 +31,10 @@ export class DriverEntity {
     yearsOfExperienceValue: number,
     emailValue: string,
     phoneValue: string,
+    company: CompanyEntity | null = null
   ): DriverEntity | Error {
     const driverId = crypto.randomUUID();
-    
+
     const name = DriveName.from(nameValue);
     if (name instanceof Error) return name;
 
@@ -55,7 +58,29 @@ export class DriverEntity {
       yearsOfExperience,
       email,
       phone,
+      [],
+      company
     );
+  }
+
+  public assignToCompany(company: CompanyEntity): void {
+    this.company = company;
+  }
+
+  public removeFromCompany(): void {
+    this.company = null;
+  }
+
+  public getCompanyDetails(): object | null {
+    if (!this.company) {
+      return null;
+    }
+
+    return {
+      identifier: this.company.identifier,
+      name: this.company.name.value,
+      user: this.company.user,
+    };
   }
 
   public addDrivingRecord(record: DrivingRecord): void {
