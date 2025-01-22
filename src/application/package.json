@@ -1,8 +1,0 @@
-{
-  "private": true,
-  "name": "@triumph-motorcycles/application",
-  "description": "Application for Triumph Motorcycles",
-  "dependencies": {
-    "@triumph-motorcycles/application": "file:"
-  }
-}

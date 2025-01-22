@@ -1,5 +1,6 @@
 {
   "extends": ["stylelint-config-recess-order", "stylelint-config-standard"],
+  "plugins": ["stylelint-no-unsupported-browser-features"],
   "rules": {
     "selector-pseudo-class-no-unknown": [
       true,
@@ -23,15 +24,34 @@
     "value-keyword-case": null,
     "selector-class-pattern": null,
     "keyframes-name-pattern": null,
+    "plugin/no-unsupported-browser-features": [
+      true,
+      {
+        "browsers": [
+          "> 1%",
+          "not ie > 0",
+          "not op_mini all",
+          "chrome >= 53",
+          "last 2 safari versions"
+        ],
+        "ignore": [
+          "user-select-none",
+          "css3-cursors",
+          "intrinsic-width",
+          "css-gradients",
+          "css-appearance"
+        ]
+      }
+    ],
     "font-family-no-missing-generic-family-keyword": null,
     "declaration-block-no-redundant-longhand-properties": null
   },
   "ignoreFiles": [
-    "**/*.jsx",
-    "**/*.tsx",
-    "**/*.ts",
-    "**/*.js",
-    "**/dist/**",
+    "**/*.jsx", 
+    "**/*.tsx", 
+    "**/*.ts", 
+    "**/*.js", 
+    "**/dist/**", 
     "**/node_modules/**"
   ]
 }

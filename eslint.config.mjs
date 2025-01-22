@@ -12,8 +12,8 @@ export default tseslint.config(
       'node_modules/*',
       'coverage',
       '.husky/*',
-      '**/cypress/support',
-      '**/cypress/downloads',
+      'cypress/support',
+      'cypress/downloads',
       '.stylelintrc.json',
       'package-lock.json',
       'package.json',
@@ -21,8 +21,6 @@ export default tseslint.config(
       'tsconfig.build.json',
       'tsconfig.json',
       'tsconfig.node.json',
-      '**/.next/*',
-      '**/cypress.config.ts',
     ],
   },
   {
@@ -37,7 +35,6 @@ export default tseslint.config(
       'react-refresh': reactRefresh,
     },
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',

@@ -28,8 +28,8 @@ _If your PR includes UI changes, please utilize this checklist:_
 ## Added/updated tests?
 
 - [ ] :+1: Yes
-- [ ] :no_good: No, and this is why: \_please replace this line with details on why tests
-      have not been included\*
+- [ ] :no*good: No, and this is why: \_please replace this line with details on why tests
+      have not been included*
 - [ ] :raising_hand: I need help with writing tests
 
 ## [optional] Are there any post deployment tasks we need to perform?
