@@ -18,7 +18,9 @@
       }
     ],
     "paths": {
-      "@triumph-motorcycles/css": ["./assets/css"]
+      "@triumph-motorcycles/components": ["./components/index.ts"],
+      "@triumph-motorcycles/css": ["./assets/css/globals.css"],
+      "@triumph-motorcycles/interfaces": ["./interfaces/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

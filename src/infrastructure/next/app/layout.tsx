@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 // import localFont from "next/font/local";
-import '../assets/css/globals.css';
-import { Header, Footer } from '../components';
+import '@triumph-motorcycles/css';
+import { Header, Footer } from '@triumph-motorcycles/components'
 
 // const geistSans = localFont({
 //   src: "../assets/fonts/GeistVF.woff",
