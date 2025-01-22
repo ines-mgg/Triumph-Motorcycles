@@ -5,8 +5,8 @@ import { EndDate } from "../../values/location/EndDate";
 import { LocationStatus } from "../../types/LocationStatus";
 import crypto from 'crypto';
 import { EndLocationError } from "../../errors/location/EndLocationError";
-import { CancelLocationError } from "../../errors/location/cancelLocationError";
 import { EndDateError } from "../../errors/location/EndDateError";
+import { CancelLocationError } from "../../errors/location/CancelLocationError";
 
 export class LocationEntity {
 

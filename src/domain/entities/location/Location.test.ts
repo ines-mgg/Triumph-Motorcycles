@@ -1,9 +1,8 @@
 import { MotorcycleEntity } from "../drives";
 import { UserEntity } from "../user/UserEntity";
 import { EndLocationError } from "../../errors/location/EndLocationError";
-import { CancelLocationError } from "../../errors/location/cancelLocationError";
+import { CancelLocationError } from "../../errors/location/CancelLocationError";
 import { EndDateError } from "../../errors/location/EndDateError";
-import { LocationStatus } from "../../types/LocationStatus";
 import { Username } from "../../values/user/Username";
 import { Password } from "../../values/user/Password";
 import { LocationEntity } from "./LocationEntity";
@@ -29,9 +28,8 @@ describe("LocationEntity", () => {
     const model = 'MT-09';
     const year = 2023;
     const purchaseDate = new Date('2023-01-01');
-    const status: LocationStatus = 'in-progress';
     
-    motorcycle = MotorcycleEntity.create(brand, model, year, purchaseDate, status) as MotorcycleEntity;
+    motorcycle = MotorcycleEntity.create(brand, model, year, purchaseDate, "Available") as MotorcycleEntity;
   });
 
   it("should create a location entity with valid properties", () => {
