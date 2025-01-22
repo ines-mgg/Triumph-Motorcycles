@@ -16,7 +16,7 @@ describe('BreakdownRepairHistoryEntity', () => {
   beforeEach(() => {
     breakdownRepairHistory = new BreakdownRepairHistoryEntity();
 
-    const motorcycleResult = MotorcycleEntity.create("moto1", "BrandX", 2020, new Date(), "Active");
+    const motorcycleResult = MotorcycleEntity.create("moto1", "BrandX", 2020, new Date(), "Available");
     if (motorcycleResult instanceof Error) {
       throw new Error(`Error creating motorcycle: ${motorcycleResult.message}`);
     }

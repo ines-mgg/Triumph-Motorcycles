@@ -12,8 +12,8 @@ describe('RepairHistory', () => {
   let repairHistory: RepairHistory;
 
   beforeEach(() => {
-    motorcycle1 = MotorcycleEntity.create("Harley", "Sportster", 2022, new Date(), "Active") as MotorcycleEntity;
-    motorcycle2 = MotorcycleEntity.create("Kawasaki", "Ninja", 2023, new Date(), "Active") as MotorcycleEntity;
+    motorcycle1 = MotorcycleEntity.create("Harley", "Sportster", 2022, new Date(), "Available") as MotorcycleEntity;
+    motorcycle2 = MotorcycleEntity.create("Kawasaki", "Ninja", 2023, new Date(), "Available") as MotorcycleEntity;
 
     const description1 = BreakdownDescription.from("Engine failure");
     if (description1 instanceof Error) {

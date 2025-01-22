@@ -14,7 +14,7 @@ describe('RepairEntity', () => {
   const warranty = null;
 
   beforeEach(() => {
-    motorcycle = MotorcycleEntity.create("Triumph", "Bonneville", 2023, new Date(), "Active") as MotorcycleEntity;
+    motorcycle = MotorcycleEntity.create("Triumph", "Bonneville", 2023, new Date(), "Available") as MotorcycleEntity;
     const breakdownResult = BreakdownEntity.create(motorcycle, description, reportedDate, warranty);
     
     if (breakdownResult instanceof Error) {

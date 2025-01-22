@@ -11,7 +11,7 @@ describe("BreakdownEntity", () => {
   let motorcycle: MotorcycleEntity;
 
   beforeEach(() => {
-    motorcycle = MotorcycleEntity.create("Triumph", "Bonneville", 2023, new Date(), "Active") as MotorcycleEntity;
+    motorcycle = MotorcycleEntity.create("Triumph", "Bonneville", 2023, new Date(), "Available") as MotorcycleEntity;
   });
 
   describe("create", () => {
