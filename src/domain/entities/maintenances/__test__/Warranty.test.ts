@@ -11,7 +11,7 @@ describe('WarrantyEntity', () => {
   let coverageDetails: string;
 
   beforeEach(() => {
-    motorcycle = MotorcycleEntity.create("Yamaha", "R1", 2023, new Date(), "Active") as MotorcycleEntity;
+    motorcycle = MotorcycleEntity.create("Yamaha", "R1", 2023, new Date(), "Available") as MotorcycleEntity;
     startDate = new Date();
     endDate = new Date("2025-02-01");
     coverageDetails = "Engine and transmission coverage";
