@@ -1,7 +1,55 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+  "compilerOptions": {
+    "baseUrl": "./",
+    "allowJs": true,
+    "composite": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@triumph-motorcycles/application": ["./src/app"],
+      "@triumph-motorcycles/domain/entities/drives": [
+        "src/domain/entities/drives/index.ts"
+      ],
+      "@triumph-motorcycles/domain/entities/maintenances": [
+        "./src/domain/entities/maintenances/index.ts"
+      ],
+      "@triumph-motorcycles/domain/entities/parts": [
+        "./src/domain/entities/parts/index.ts"
+      ],
+      "@triumph-motorcycles/domain/errors": ["./src/domain/errors/index.ts"]
+    }
+  },
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "./node_modules",
+    "./node_modules/*",
+    "./build",
+    "**/build",
+    "build/",
+    "cypress.config.ts",
+    "cypress/*",
+    "dist",
+    "**/*spec.ts",
+    "./src/infrastructure/next"
   ]
 }
