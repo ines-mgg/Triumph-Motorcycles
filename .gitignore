@@ -3,7 +3,6 @@
 .env
 *.tsbuildinfo
 cypress/downloads
-**/platforms
 
 # Logs
 logs
