@@ -18,7 +18,7 @@
       }
     ],
     "paths": {
-      "@triumph-motorcycles/components": ["./components/index.ts"],
+      "@triumph-motorcycles/components": ["./"],
       "@triumph-motorcycles/css": ["./assets/css/globals.css"],
       "@triumph-motorcycles/interfaces": ["./interfaces/index.ts"]
     }

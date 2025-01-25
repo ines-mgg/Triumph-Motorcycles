@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "assets/css/globals.css",
+    "baseColor": "zinc",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@triumph-motorcycles/components/components",
+    "utils": "@triumph-motorcycles/components/lib/utils",
+    "ui": "@triumph-motorcycles/components/components/ui",
+    "lib": "@triumph-motorcycles/components/lib",
+    "hooks": "@triumph-motorcycles/components/hooks"
+  },
+  "iconLibrary": "lucide"
+}

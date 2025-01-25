@@ -1,6 +1,9 @@
-// import Image from "next/image";
-import { Button } from "@triumph-motorcycles/components";
+import { Button } from '../@triumph-motorcycles/components/components/ui/button';
 
 export default function Home() {
-  return <Button label="label" ariaLabel="label" />;
+  return (
+    <div>
+      <Button variant="outline">Click me</Button>
+    </div>
+  );
 }
