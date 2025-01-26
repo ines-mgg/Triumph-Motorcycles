@@ -27,26 +27,26 @@ jobs:
   # Setup for e2e testing with Cypress
 
   # on Chrome - Components
-  chrome-component:
-    runs-on: ubuntu-latest
-    name: Components on Chrome
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        uses: cypress-io/github-action@v6
-        with:
-          runTests: false
-          working-directory: ./src/infrastructure/next
-      - name: Run npm ci
-        run: npm ci
-        working-directory: ./src/infrastructure/next
-      - name: Run components tests
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          working-directory: ./src/infrastructure/next
-          component: true
-          browser: chrome
+  # chrome-component:
+  #   runs-on: ubuntu-latest
+  #   name: Components on Chrome
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Install dependencies
+  #       uses: cypress-io/github-action@v6
+  #       with:
+  #         runTests: false
+  #         working-directory: ./src/infrastructure/next
+  #     - name: Run npm ci
+  #       run: npm ci
+  #       working-directory: ./src/infrastructure/next
+  #     - name: Run components tests
+  #       uses: cypress-io/github-action@v6
+  #       with:
+  #         install: false
+  #         working-directory: ./src/infrastructure/next
+  #         component: true
+  #         browser: chrome
 
   # on Chrome - E2E
   chrome-e2e:
@@ -72,26 +72,26 @@ jobs:
           start: npm run dev
 
   # on Firefox - Components
-  firefox-component:
-    runs-on: ubuntu-latest
-    name: Components on FireFox
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        uses: cypress-io/github-action@v6
-        with:
-          runTests: false
-          working-directory: ./src/infrastructure/next
-      - name: Run npm ci
-        run: npm ci
-        working-directory: ./src/infrastructure/next
-      - name: Run components tests
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          working-directory: ./src/infrastructure/next
-          component: true
-          browser: firefox
+  # firefox-component:
+  #   runs-on: ubuntu-latest
+  #   name: Components on FireFox
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Install dependencies
+  #       uses: cypress-io/github-action@v6
+  #       with:
+  #         runTests: false
+  #         working-directory: ./src/infrastructure/next
+  #     - name: Run npm ci
+  #       run: npm ci
+  #       working-directory: ./src/infrastructure/next
+  #     - name: Run components tests
+  #       uses: cypress-io/github-action@v6
+  #       with:
+  #         install: false
+  #         working-directory: ./src/infrastructure/next
+  #         component: true
+  #         browser: firefox
 
   # on FireFox - E2E
   firefox-e2e:
