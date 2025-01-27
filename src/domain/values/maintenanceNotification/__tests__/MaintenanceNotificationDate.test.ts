@@ -13,7 +13,7 @@ describe('MaintenanceNotificationDate', () => {
     }
   });
   it('should return an error for invalid maintenanceNotificationDate', () => {
-    const value = 0;
+    const value = new Date('2001-07-07');
     const maintenanceNotificationDate = MaintenanceNotificationDate.from(value);
     expect(maintenanceNotificationDate).toBeInstanceOf(
       MaintenanceNotificationDateError,
