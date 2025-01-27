@@ -1,16 +1,16 @@
 import { ExperienceError } from '@triumph-motorcycles/domain/errors';
 import { Value } from '../Value';
 
-export class DriveLicense implements Value<string> {
+export class DriverLicense implements Value<string> {
   private constructor(public readonly value: string) {}
 
-  public static from(value: string): DriveLicense | Error {
+  public static from(value: string): DriverLicense | Error {
     if (!/^[A-Z0-9]{10}$/.test(value)) {
       return new ExperienceError(
         'Invalid license format. Must be exactly 10 alphanumeric characters and contain no symbols.',
       );
     }
-    return new DriveLicense(value);
+    return new DriverLicense(value);
   }
 
   public is(item: Value<string>): boolean {

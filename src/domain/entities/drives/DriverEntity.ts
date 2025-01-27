@@ -7,21 +7,21 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { CompanyEntity } from '../company/CompanyEntity';
 import {
-  DriveLicense,
-  DriveName,
+  DriverLicense,
+  DriverName,
   DriverEmail,
   DriverPhone,
-  DriveYearsOfExperience,
+  DriverYearsOfExperience,
 } from '@triumph-motorcycles/domain/values';
 import { DrivingRecord, LicenseType } from '@triumph-motorcycles/domain/types';
 
 export class DriverEntity {
   private constructor(
     public readonly driverId: string,
-    public name: DriveName,
-    public license: DriveLicense,
+    public name: DriverName,
+    public license: DriverLicense,
     public licenseType: LicenseType,
-    public yearsOfExperience: DriveYearsOfExperience,
+    public yearsOfExperience: DriverYearsOfExperience,
     public email: DriverEmail,
     public phone: DriverPhone,
     private readonly drivingHistory: DrivingRecord[] = [],
@@ -39,13 +39,13 @@ export class DriverEntity {
   ): DriverEntity | Error {
     const driverId = uuidv4();
 
-    const name = DriveName.from(nameValue);
+    const name = DriverName.from(nameValue);
     if (name instanceof Error) return name;
 
-    const license = DriveLicense.from(licenseValue);
+    const license = DriverLicense.from(licenseValue);
     if (license instanceof Error) return license;
 
-    const yearsOfExperience = DriveYearsOfExperience.from(
+    const yearsOfExperience = DriverYearsOfExperience.from(
       yearsOfExperienceValue,
     );
     if (yearsOfExperience instanceof Error) return yearsOfExperience;
@@ -98,7 +98,8 @@ export class DriverEntity {
   }
 
   public updateExperience(newYearsOfExperience: number): void {
-    const updatedExperience = DriveYearsOfExperience.from(newYearsOfExperience);
+    const updatedExperience =
+      DriverYearsOfExperience.from(newYearsOfExperience);
     if (updatedExperience instanceof Error) {
       throw updatedExperience;
     }

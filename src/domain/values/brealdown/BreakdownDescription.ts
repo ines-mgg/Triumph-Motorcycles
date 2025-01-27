@@ -1,4 +1,4 @@
-import { BreakdownDescriptionError } from '../../errors/breakdown/BreakdownDescriptionError';
+import { BreakdownDescriptionError } from '@triumph-motorcycles/domain/errors';
 import { Value } from '../Value';
 
 export class BreakdownDescription implements Value<string> {

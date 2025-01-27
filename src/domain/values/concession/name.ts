@@ -10,11 +10,11 @@ export class Name {
     const regex = /^[a-zA-Z0-9.]+$/;
 
     if (value.length < 3 || value.length > 50) {
-      return new ConcessionNameAlphanumericError();
+      return new ConcessionNameLengthError();
     }
 
     if (!regex.test(value)) {
-      return new ConcessionNameLengthError();
+      return new ConcessionNameAlphanumericError();
     }
 
     return new Name(value);

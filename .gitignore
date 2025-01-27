@@ -4,6 +4,7 @@
 *.tsbuildinfo
 cypress/downloads
 **/platforms
+/coverage
 
 # Logs
 logs

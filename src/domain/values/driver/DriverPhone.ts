@@ -1,5 +1,5 @@
+import { DriverPhoneError } from '@triumph-motorcycles/domain/errors';
 import { Value } from '../Value';
-import { DriverPhoneError } from '../../errors/drivers';
 
 export class DriverPhone implements Value<string> {
   private constructor(public readonly value: string) {}

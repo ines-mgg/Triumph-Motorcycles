@@ -20,7 +20,7 @@
   "scripts": {
     "build": "tsc -b",
     "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && find . -name 'dist' -type d -prune -exec rm -rf '{}' +",
-    "cm": "git cz",
+    "cm": "npm run prettier && git add . && git cz",
     "cm:retry": "git cz --retry",
     "lint:css": "stylelint \"src/**/*.css\"",
     "lint:js": "eslint .",
@@ -36,7 +36,8 @@
     "postrewrite": "npm install",
     "test:unit": "npm run lint:types && npm run lint && npm run test",
     "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@testing-library/react": "^16.0.1",
