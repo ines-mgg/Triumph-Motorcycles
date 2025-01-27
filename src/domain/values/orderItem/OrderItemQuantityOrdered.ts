@@ -1,5 +1,5 @@
 import { OrderItemQuantityOrderedError } from '@triumph-motorcycles/domain/errors';
-import { Value } from "../Value";
+import { Value } from '../Value';
 
 export class OrderItemQuantityOrdered implements Value<number> {
   public readonly value: number;

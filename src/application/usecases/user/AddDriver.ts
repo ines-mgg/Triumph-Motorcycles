@@ -1,5 +1,8 @@
 import { DriverEntity } from '@triumph-motorcycles/domain/entities';
-import { DriverRepository, UserRepository } from '@triumph-motorcycles/application/repositories';
+import {
+  DriverRepository,
+  UserRepository,
+} from '@triumph-motorcycles/application/repositories';
 
 export class AddDriverToUserUsecase {
   constructor(

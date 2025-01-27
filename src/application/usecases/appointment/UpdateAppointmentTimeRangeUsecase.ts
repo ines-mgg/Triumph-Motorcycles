@@ -13,9 +13,8 @@ export class UpdateAppointmentTimeRangeUsecase {
     endTime: Date,
   ): Promise<AppointmentEntity | Error> {
     try {
-      const appointment = await this.appointmentRepository.findById(
-        appointmentId,
-      );
+      const appointment =
+        await this.appointmentRepository.findById(appointmentId);
       if (appointment instanceof Error) return appointment;
 
       const updateResult = appointment.updateTimeRange(startTime, endTime);

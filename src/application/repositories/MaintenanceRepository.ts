@@ -1,6 +1,5 @@
-import { MaintenanceEntity } from "@triumph-motorcycles/domain/entities";
-import { MaintenanceNotFoundError } from "@triumph-motorcycles/domain/errors";
-
+import { MaintenanceEntity } from '@triumph-motorcycles/domain/entities';
+import { MaintenanceNotFoundError } from '@triumph-motorcycles/domain/errors';
 
 export interface MaintenanceRepository {
   save(maintenance: MaintenanceEntity): Promise<void>;

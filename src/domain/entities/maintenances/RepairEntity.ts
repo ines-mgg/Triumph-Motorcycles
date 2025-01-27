@@ -1,8 +1,7 @@
+import { RepairCost, RepairDate } from '@triumph-motorcycles/domain/values';
 import { CommonRepairAction } from '../../types/motorcycle';
-import { RepairDate } from '../../values/repair/RepairDate'; 
-import { RepairCost } from '../../values/repair/RepairCost';
 import { BreakdownEntity } from './BreakdownEntity';
-import crypto from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
 
 export class RepairEntity {
   private constructor(
@@ -19,9 +18,8 @@ export class RepairEntity {
     actions: CommonRepairAction[],
     costValue: number,
   ): RepairEntity | Error {
-    
-    const id = crypto.randomUUID();
-   
+    const id = uuidv4();
+
     const repairDate = RepairDate.from(repairDateValue);
     if (repairDate instanceof Error) return repairDate;
 
@@ -30,5 +28,4 @@ export class RepairEntity {
 
     return new RepairEntity(id, breakdown, repairDate, actions, cost);
   }
-
 }

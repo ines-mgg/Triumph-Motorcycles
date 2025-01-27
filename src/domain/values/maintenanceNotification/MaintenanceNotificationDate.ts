@@ -1,5 +1,5 @@
 import { MaintenanceNotificationDateError } from '@triumph-motorcycles/domain/errors';
-import { Value } from "../Value";
+import { Value } from '../Value';
 
 export class MaintenanceNotificationDate implements Value<Date> {
   private constructor(public readonly value: Date) {}

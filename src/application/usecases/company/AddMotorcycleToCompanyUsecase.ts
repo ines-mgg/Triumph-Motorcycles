@@ -1,4 +1,7 @@
-import { CompanyEntity, MotorcycleEntity } from '@triumph-motorcycles/domain/entities';
+import {
+  CompanyEntity,
+  MotorcycleEntity,
+} from '@triumph-motorcycles/domain/entities';
 import { CompanyRepository } from '@triumph-motorcycles/application/repositories';
 import { UnexpectedError } from '@triumph-motorcycles/domain/errors';
 

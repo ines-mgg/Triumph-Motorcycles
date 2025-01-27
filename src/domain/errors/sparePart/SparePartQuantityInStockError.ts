@@ -1,3 +1,3 @@
 export class SparePartQuantityInStockError extends Error {
-    public override readonly name = "SparePartQuantityInStockError";
+  public override readonly name = 'SparePartQuantityInStockError';
 }

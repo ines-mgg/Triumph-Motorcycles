@@ -1,3 +1,3 @@
 export class MotorcycleTryStartDateError extends Error {
-    public override readonly name = "MotorcycleTryStartDateError";
+  public override readonly name = 'MotorcycleTryStartDateError';
 }

@@ -1,4 +1,7 @@
-import { MotorcycleRepository, ConcessionRepository } from '@triumph-motorcycles/application/repositories';
+import {
+  MotorcycleRepository,
+  ConcessionRepository,
+} from '@triumph-motorcycles/application/repositories';
 
 export class AssignMotorcycleToConcessionUsecase {
   constructor(
@@ -10,9 +13,8 @@ export class AssignMotorcycleToConcessionUsecase {
     motorcycleId: string,
     concessionId: string,
   ): Promise<void | Error> {
-    const motorcycle = await this.motorcycleRepository.findOneById(
-      motorcycleId,
-    );
+    const motorcycle =
+      await this.motorcycleRepository.findOneById(motorcycleId);
     if (motorcycle instanceof Error) return motorcycle;
 
     const concession = await this.concessionRepository.findById(concessionId);

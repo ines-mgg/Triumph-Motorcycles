@@ -1,5 +1,5 @@
 import { SparePartCriticalLevelError } from '@triumph-motorcycles/domain/errors';
-import { Value } from "../Value";
+import { Value } from '../Value';
 
 export class SparePartCriticalLevel implements Value<number> {
   public readonly value: number;

@@ -1,8 +1,6 @@
-import { SparePartEntity } from '@triumph-motorcycles/domain/entities/parts';
-import { Maintenances } from '@triumph-motorcycles/domain/errors';
-import { MaintenanceRecord } from '../../types/motorcycle';
-
-const { InvalidMaintenanceRecordError } = Maintenances;
+import { InvalidMaintenanceRecordError } from '@triumph-motorcycles/domain/errors';
+import { MaintenanceRecord } from '@triumph-motorcycles/domain/types';
+import { SparePartEntity } from '../parts/SparePartEntity';
 
 export class MaintenanceHistoryEntity {
   private readonly maintenanceRecords: MaintenanceRecord[] = [];
@@ -83,5 +81,3 @@ export class MaintenanceHistoryEntity {
     return Array.from(partsUsageMap.values());
   }
 }
-
-

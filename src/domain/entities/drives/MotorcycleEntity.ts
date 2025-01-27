@@ -1,13 +1,17 @@
-import { MotorcycleUpdateServiceDetailsError } from "../../errors/motorcycle/MotorcycleUpdateServiceDetailsError";
-import { MotorStatus } from "../../types/motorcycle";
-import { MotorcycleBrand } from "../../values/motorcycle/MotorcycleBrand";
-import { MotorcycleModel } from "../../values/motorcycle/MotorcycleModel";
-import { MotorcycleYear } from "../../values/motorcycle/MotorcycleYear";
-import { BaseEntity } from "../BaseEntity";
-import { CompanyEntity } from "../company/CompanyEntity";
-import { ConcessionEntity } from "../concession/ConcessionEntity";
-import crypto from "crypto";
-import { MotorcycleMileageError } from "../../errors/motorcycle/MotorcycleMileageError";
+import { v4 as uuidv4 } from 'uuid';
+import { BaseEntity } from '../BaseEntity';
+import {
+  MotorcycleBrand,
+  MotorcycleModel,
+  MotorcycleYear,
+} from '@triumph-motorcycles/domain/values';
+import { MotorStatus } from '@triumph-motorcycles/domain/types';
+import { CompanyEntity } from '../company/CompanyEntity';
+import { ConcessionEntity } from '../concession/ConcessionEntity';
+import {
+  MotorcycleMileageError,
+  MotorcycleUpdateServiceDetailsError,
+} from '@triumph-motorcycles/domain/errors';
 
 export class MotorcycleEntity {
   private constructor(
@@ -22,7 +26,7 @@ export class MotorcycleEntity {
     private _lastServiceDate: Date | null,
     private _nextServiceMileage: number,
     private company: CompanyEntity | null = null,
-    private concession: ConcessionEntity | null = null
+    private concession: ConcessionEntity | null = null,
   ) {}
 
   public static create(
@@ -30,7 +34,7 @@ export class MotorcycleEntity {
     modelValue: string,
     yearValue: number,
     purchaseDate: Date,
-    status: MotorStatus
+    status: MotorStatus,
   ): MotorcycleEntity | Error {
     const brand = MotorcycleBrand.from(brandValue);
     if (brand instanceof Error) return brand;
@@ -45,7 +49,7 @@ export class MotorcycleEntity {
     const lastServiceDate = null;
     const nextServiceMileage = 5000;
 
-    const id = crypto.randomUUID();
+    const id = uuidv4();
 
     return new MotorcycleEntity(
       id,
@@ -57,7 +61,7 @@ export class MotorcycleEntity {
       status,
       purchaseDate,
       lastServiceDate,
-      nextServiceMileage
+      nextServiceMileage,
     );
   }
 
@@ -73,7 +77,10 @@ export class MotorcycleEntity {
     return this._mileage >= this._nextServiceMileage;
   }
 
-  public updateServiceDetails(newServiceMileage: number, serviceDate: Date): void {
+  public updateServiceDetails(
+    newServiceMileage: number,
+    serviceDate: Date,
+  ): void {
     if (newServiceMileage < this._mileage) {
       throw new MotorcycleUpdateServiceDetailsError();
     }

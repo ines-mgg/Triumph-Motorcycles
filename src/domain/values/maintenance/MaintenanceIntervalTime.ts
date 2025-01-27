@@ -1,12 +1,14 @@
 import { MaintenanceIntervalTimeError } from '@triumph-motorcycles/domain/errors';
-import { Value } from "../Value";
+import { Value } from '../Value';
 
 const MAX_TIME_DAYS = 365;
 
 export class MaintenanceIntervalTime implements Value<number> {
   private constructor(public readonly value: number) {}
 
-  public static from(value: number): MaintenanceIntervalTime | MaintenanceIntervalTimeError {
+  public static from(
+    value: number,
+  ): MaintenanceIntervalTime | MaintenanceIntervalTimeError {
     if (value <= 0) {
       return new MaintenanceIntervalTimeError();
     }

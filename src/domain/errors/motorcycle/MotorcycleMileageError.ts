@@ -1,3 +1,3 @@
 export class MotorcycleMileageError extends Error {
-    public override readonly name = "MotorcycleMileageError";
+  public override readonly name = 'MotorcycleMileageError';
 }

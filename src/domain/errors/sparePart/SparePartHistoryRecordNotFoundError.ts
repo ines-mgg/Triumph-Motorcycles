@@ -1,3 +1,3 @@
 export class SparePartHistoryRecordNotFoundError extends Error {
-    public override readonly name = "SparePartHistoryRecordNotFoundError";
+  public override readonly name = 'SparePartHistoryRecordNotFoundError';
 }

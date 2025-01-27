@@ -1,5 +1,5 @@
 import { OrderItemCostPerUnitError } from '@triumph-motorcycles/domain/errors';
-import { Value } from "../Value";
+import { Value } from '../Value';
 
 export class OrderItemCostPerUnit implements Value<number> {
   public readonly value: number;

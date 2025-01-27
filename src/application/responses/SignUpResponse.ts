@@ -1,5 +1,5 @@
-export interface SignUpResponse {     
-    username: string;      
-    administrator: boolean; 
-    authenticationToken: string;
-  }
+export interface SignUpResponse {
+  username: string;
+  administrator: boolean;
+  authenticationToken: string;
+}

@@ -1,19 +1,21 @@
-import { MaintenanceNotificationType } from "../../../types/motorcycle";
-import { MaintenanceNotificationEntity } from "../MaintenanceNotificationEntity";
-import { MaintenanceNotificationMessage } from "../../../values/maintenanceNotification/MaintenanceNotificationMessage";
-import { MaintenanceNotificationDate } from "../../..//values/maintenanceNotification/MaintenanceNotificationDate";
+import { MaintenanceNotificationType } from '@triumph-motorcycles/domain/types';
+import { MaintenanceNotificationEntity } from '../MaintenanceNotificationEntity';
+import {
+  MaintenanceNotificationDate,
+  MaintenanceNotificationMessage,
+} from '@triumph-motorcycles/domain/values';
 
 describe('MaintenanceNotificationEntity', () => {
   describe('create', () => {
     it('should successfully create a MaintenanceNotificationEntity with valid inputs', () => {
       const validMessage = 'Service Reminder';
-      const validDate = new Date(Date.now() + 1000 * 60 * 60 * 24); 
+      const validDate = new Date(Date.now() + 1000 * 60 * 60 * 24);
       const validType: MaintenanceNotificationType = 'ServiceReminder';
 
       const notification = MaintenanceNotificationEntity.create(
         validMessage,
         validDate,
-        validType
+        validType,
       );
 
       expect(notification).not.toBeInstanceOf(Error);
@@ -33,7 +35,7 @@ describe('MaintenanceNotificationEntity', () => {
       const notification = MaintenanceNotificationEntity.create(
         invalidMessage,
         validDate,
-        validType
+        validType,
       );
 
       expect(notification).toBeInstanceOf(Error);
@@ -47,7 +49,7 @@ describe('MaintenanceNotificationEntity', () => {
       const notification = MaintenanceNotificationEntity.create(
         validMessage,
         invalidDate,
-        validType
+        validType,
       );
 
       expect(notification).toBeInstanceOf(Error);
@@ -63,7 +65,7 @@ describe('MaintenanceNotificationEntity', () => {
       const notification = MaintenanceNotificationEntity.create(
         validMessage,
         validDate,
-        validType
+        validType,
       );
 
       if (notification instanceof Error) {
@@ -99,7 +101,7 @@ describe('MaintenanceNotificationMessage', () => {
 
 describe('MaintenanceNotificationDate', () => {
   it('should create a valid MaintenanceNotificationDate', () => {
-    const validDate = new Date(Date.now() + 1000 * 60 * 60 * 24); 
+    const validDate = new Date(Date.now() + 1000 * 60 * 60 * 24);
     const date = MaintenanceNotificationDate.from(validDate);
 
     expect(date).not.toBeInstanceOf(Error);

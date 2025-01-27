@@ -1,5 +1,8 @@
 import { WarrantyRepository } from '@triumph-motorcycles/application/repositories';
-import { MotorcycleEntity,  WarrantyEntity } from '@triumph-motorcycles/domain/entities';
+import {
+  MotorcycleEntity,
+  WarrantyEntity,
+} from '@triumph-motorcycles/domain/entities';
 
 export class AddWarrantyUsecase {
   constructor(private readonly warrantyRepository: WarrantyRepository) {}

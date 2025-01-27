@@ -3,7 +3,6 @@ import { CompanyEntity } from '@triumph-motorcycles/domain/entities';
 import { UserEntity } from '@triumph-motorcycles/domain/entities';
 import { UnexpectedError } from '@triumph-motorcycles/domain/errors';
 
-
 export class CreateCompanyUsecase {
   public constructor(private readonly companyRepository: CompanyRepository) {}
 

@@ -1,17 +1,7 @@
 import { SparePartNotificationEntity } from '../SparePartNotificationEntity';
-import { SparePartEntity } from '../SparePartEntity';
+import { sparePart, sufficientStockPart } from '../../../../tests/testUtils';
 
 describe('SparePartNotificationEntity', () => {
-  let sparePart: SparePartEntity;
-  const name = 'Spare Part 1';
-  const quantityInStock = 20;
-  const criticalLevel = 20;
-  const cost = 50;
-
-  beforeEach(() => {
-    sparePart = SparePartEntity.create(name, quantityInStock, criticalLevel, cost) as SparePartEntity;
-  });
-
   test('should create a SparePartNotificationEntity with a unique id', () => {
     const notificationEntity = SparePartNotificationEntity.create([sparePart]);
     expect(notificationEntity).toBeInstanceOf(SparePartNotificationEntity);
@@ -53,8 +43,9 @@ describe('SparePartNotificationEntity', () => {
   });
 
   test('should not add notifications for stock that is not low', () => {
-    const sufficientStockPart = SparePartEntity.create('Spare Part 2', 100, 50, 100) as SparePartEntity;
-    const notificationEntity = SparePartNotificationEntity.create([sufficientStockPart]);
+    const notificationEntity = SparePartNotificationEntity.create([
+      sufficientStockPart,
+    ]);
     if (notificationEntity instanceof SparePartNotificationEntity) {
       notificationEntity.checkStockLevels();
       const notifications = notificationEntity.getNotifications();

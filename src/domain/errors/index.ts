@@ -78,9 +78,42 @@ import { MotorcycleTryStartDateError } from './motorcycleTry/MotorcycleTryStartD
 import { MotorcycleTryEndDateError } from './motorcycleTry/MotorcycleTryEndDateError';
 import { MotorcycleTryNotFoundError } from './motorcycleTry/MotorcycleTestNotFoundError';
 
-export * as DriversErrors from './drivers';
-export * as MaintenancesErrors from './maintenances';
-export * as PartsErrors from './parts';
+import {
+  DriverError,
+  ContactInfoError,
+  DriverEmailError,
+  DriverPhoneError,
+  DrivingRecordError,
+  ExperienceError,
+  InvalidLicenseError as InvalidLicenseErrorDrivers,
+  InvalidTestIDError,
+  MileageError,
+  MissingDriverError,
+  MissingMotorcycleError as MissingMotorcycleErrorDrivers,
+  NegativeMileageError,
+  NegativeNextServiceMileageError,
+  ServiceDetailsError,
+  TestEndDateError as TestEndDateErrorDrivers,
+} from './drivers';
+import {
+  IncompleteRepairError,
+  InvalidBreakdownError,
+  InvalidMaintenanceIntervalError,
+  InvalidMaintenanceRecordError,
+  InvalidNotificationError,
+  InvalidRepairActionError,
+  InvalidWarrantyError,
+  MaintenanceRecordNotFoundError,
+  MissingMotorcycleError,
+} from './maintenances';
+import {
+  DeliveryError,
+  InsufficientStockError,
+  InvalidOrderError,
+  InvalidQuantityError,
+  InvalidSparePartError,
+  InvalidWarrantyError as InvalidWarrantyErrorParts,
+} from './parts';
 
 export {
   AppointmentNotFoundError,
@@ -162,4 +195,34 @@ export {
   MotorcycleTryEndDateError,
   MotorcycleTryNotFoundError,
   StartDateError,
+  ContactInfoError,
+  DeliveryError,
+  DriverEmailError,
+  DriverError,
+  DriverPhoneError,
+  DrivingRecordError,
+  ExperienceError,
+  IncompleteRepairError,
+  InsufficientStockError,
+  InvalidBreakdownError,
+  InvalidMaintenanceIntervalError,
+  InvalidMaintenanceRecordError,
+  InvalidNotificationError,
+  InvalidOrderError,
+  InvalidQuantityError,
+  InvalidRepairActionError,
+  InvalidSparePartError,
+  InvalidTestIDError,
+  InvalidWarrantyError,
+  InvalidWarrantyErrorParts,
+  MaintenanceRecordNotFoundError,
+  MileageError,
+  MissingDriverError,
+  MissingMotorcycleError,
+  NegativeMileageError,
+  NegativeNextServiceMileageError,
+  ServiceDetailsError,
+  InvalidLicenseErrorDrivers,
+  MissingMotorcycleErrorDrivers,
+  TestEndDateErrorDrivers,
 };

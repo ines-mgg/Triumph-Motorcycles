@@ -1,4 +1,7 @@
-import { DriverEntity, CompanyEntity } from '@triumph-motorcycles/domain/entities';
+import {
+  DriverEntity,
+  CompanyEntity,
+} from '@triumph-motorcycles/domain/entities';
 
 export class AssignDriverToCompanyUseCase {
   execute(driver: DriverEntity, company: CompanyEntity): void {

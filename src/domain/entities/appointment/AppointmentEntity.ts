@@ -1,9 +1,10 @@
+import { v4 as uuidv4 } from 'uuid';
+import {
+  AppointmentReason,
+  AppointmentStatus,
+} from '@triumph-motorcycles/domain/types';
 import { UserEntity } from '../user/UserEntity';
-import { AppointmentStatus } from '../../types/AppointmentStatus';
-import { Notes } from '../../values/appointment/Notes';
-import { TimeRange } from '../../values/appointment/TimeRange';
-import crypto from 'crypto';
-import { AppointmentReason } from '@triumph-motorcycles/domain/types';
+import { Notes, TimeRange } from '@triumph-motorcycles/domain/values';
 
 export class AppointmentEntity {
   private constructor(
@@ -24,7 +25,7 @@ export class AppointmentEntity {
     reason: AppointmentReason,
     notes: string | null,
   ): AppointmentEntity | Error {
-    const appointmentId = crypto.randomUUID();
+    const appointmentId = uuidv4();
 
     const timeRange = TimeRange.from(startTime, endTime);
     if (timeRange instanceof Error) return timeRange;

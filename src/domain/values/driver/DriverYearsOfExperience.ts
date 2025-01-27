@@ -1,11 +1,11 @@
-import { ExperienceError } from 'src/domain/errors/drivers';
-import { Value } from '../Value'; 
+import { ExperienceError } from '@triumph-motorcycles/domain/errors';
+import { Value } from '../Value';
 
 export class DriveYearsOfExperience implements Value<number> {
   private constructor(public readonly value: number) {}
 
   public static from(value: number): DriveYearsOfExperience | ExperienceError {
-    if ( value < 3) {
+    if (value < 3) {
       return new ExperienceError();
     }
     return new DriveYearsOfExperience(value);

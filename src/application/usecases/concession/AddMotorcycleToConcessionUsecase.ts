@@ -1,7 +1,9 @@
 import { ConcessionRepository } from '@triumph-motorcycles/application/repositories';
-import { ConcessionEntity, MotorcycleEntity } from '@triumph-motorcycles/domain/entities';
+import {
+  ConcessionEntity,
+  MotorcycleEntity,
+} from '@triumph-motorcycles/domain/entities';
 import { UnexpectedError } from '@triumph-motorcycles/domain/errors';
-
 
 export class AddMotorcycleToConcessionUsecase {
   public constructor(

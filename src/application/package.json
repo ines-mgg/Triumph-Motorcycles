@@ -3,6 +3,10 @@
   "name": "@triumph-motorcycles/application",
   "description": "Application for Triumph Motorcycles",
   "dependencies": {
-    "@triumph-motorcycles/application": "file:"
+    "@triumph-motorcycles/application": "file:",
+    "uuid": "^11.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.10"
   }
 }

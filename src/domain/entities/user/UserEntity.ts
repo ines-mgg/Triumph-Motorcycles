@@ -1,8 +1,6 @@
-import { Password } from "../../values/user/Password";
-import { Username } from "../../values/user/Username";
-import { DriverEntity } from "../drives";
-import crypto from 'crypto';
-
+import { v4 as uuidv4 } from 'uuid';
+import { DriverEntity } from '../drives/DriverEntity';
+import { Password, Username } from '@triumph-motorcycles/domain/values';
 
 export class UserEntity {
   private drivers: DriverEntity[] = [];
@@ -22,11 +20,10 @@ export class UserEntity {
     createdAt: Date,
     updatedAt: Date,
   ): UserEntity | Error {
+    const administrator = false;
 
-    const  administrator =  false;
+    const identifier = uuidv4();
 
-    const identifier = crypto.randomUUID();
-    
     const username = Username.from(usernameValue);
     if (username instanceof Error) return username;
 
@@ -43,12 +40,11 @@ export class UserEntity {
     );
   }
 
- 
   public updatePassword(newPasswordValue: string): void | Error {
     const newPassword = Password.from(newPasswordValue);
 
-    if (newPassword instanceof Error) return newPassword
-    
+    if (newPassword instanceof Error) return newPassword;
+
     this.password = newPassword;
     this.updatedAt = new Date();
   }
@@ -58,7 +54,9 @@ export class UserEntity {
   }
 
   public removeDriver(driverId: string): void {
-    this.drivers = this.drivers.filter((driver) => driver.driverId !== driverId);
+    this.drivers = this.drivers.filter(
+      (driver) => driver.driverId !== driverId,
+    );
   }
 
   public getDrivers(): DriverEntity[] {
@@ -72,22 +70,23 @@ export class UserEntity {
   public updateUsername(newUsernameValue: string): void | Error {
     const newUsername = Username.from(newUsernameValue);
 
-    if (newUsername instanceof Error) return newUsername
+    if (newUsername instanceof Error) return newUsername;
 
     this.username = newUsername;
     this.updatedAt = new Date();
   }
 
   public getRole(): string {
-    return this.administrator ? "Administrator" : "User";
+    return this.administrator ? 'Administrator' : 'User';
   }
 
-
-  public validateCredentials(usernameValue: string, passwordValue: string): boolean {
+  public validateCredentials(
+    usernameValue: string,
+    passwordValue: string,
+  ): boolean {
     return (
       this.username.value === usernameValue.toLowerCase() &&
       this.password.compare(passwordValue)
     );
   }
-  
 }

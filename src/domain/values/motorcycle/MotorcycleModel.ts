@@ -1,5 +1,5 @@
 import { MotorcycleModelError } from '@triumph-motorcycles/domain/errors';
-import { Value } from "../Value";
+import { Value } from '../Value';
 
 export class MotorcycleModel implements Value<string> {
   private constructor(public readonly value: string) {}

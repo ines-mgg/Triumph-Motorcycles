@@ -1,10 +1,12 @@
-import { UsernameTooShortError } from '@triumph-motorcycles/domain/errors';
-import { DriverEntity } from '../drives';
+import {
+  PasswordTooShortError,
+  UsernameTooShortError,
+} from '@triumph-motorcycles/domain/errors';
+import { DriverEntity } from '../drives/DriverEntity';
 import { UserEntity } from './UserEntity';
-import { PasswordTooShortError } from '../../errors/user/PasswordTooShortError';
+import { now } from '../../../tests/testUtils';
 
 describe('UserEntity', () => {
-  const now = new Date();
   let driver: DriverEntity;
   let driver1: DriverEntity;
   let driver2: DriverEntity;

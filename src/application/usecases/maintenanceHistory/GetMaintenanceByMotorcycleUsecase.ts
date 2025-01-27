@@ -1,4 +1,3 @@
-
 import { MaintenanceHistoryRepository } from '@triumph-motorcycles/application/repositories';
 import { MaintenanceRecord } from '@triumph-motorcycles/domain/types';
 

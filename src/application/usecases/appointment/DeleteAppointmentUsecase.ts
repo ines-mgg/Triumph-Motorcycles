@@ -8,9 +8,8 @@ export class DeleteAppointmentUsecase {
 
   public async execute(appointmentId: string): Promise<boolean | Error> {
     try {
-      const appointment = await this.appointmentRepository.findById(
-        appointmentId,
-      );
+      const appointment =
+        await this.appointmentRepository.findById(appointmentId);
       if (appointment instanceof Error) return appointment;
 
       await this.appointmentRepository.delete(appointmentId);

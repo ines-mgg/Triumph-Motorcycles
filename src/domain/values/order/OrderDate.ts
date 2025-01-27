@@ -1,5 +1,5 @@
 import { OrderDateError } from '@triumph-motorcycles/domain/errors';
-import { Value } from "../Value";
+import { Value } from '../Value';
 
 export class OrderDate implements Value<Date> {
   public readonly value: Date;
@@ -10,12 +10,12 @@ export class OrderDate implements Value<Date> {
 
   public static from(value: Date): OrderDate | Error {
     const now = new Date();
-    now.setMilliseconds(0); 
-    now.setSeconds(0);     
+    now.setMilliseconds(0);
+    now.setSeconds(0);
     if (value < now) {
-      return new OrderDateError(); 
+      return new OrderDateError();
     }
-    return new OrderDate(value); 
+    return new OrderDate(value);
   }
 
   public is(item: Value<Date>): boolean {

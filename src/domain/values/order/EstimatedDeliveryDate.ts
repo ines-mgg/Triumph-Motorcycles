@@ -1,5 +1,5 @@
 import { EstimatedDeliveryDateError } from '@triumph-motorcycles/domain/errors';
-import { Value } from "../Value";
+import { Value } from '../Value';
 
 export class EstimatedDeliveryDate implements Value<Date> {
   public readonly value: Date;
@@ -8,13 +8,16 @@ export class EstimatedDeliveryDate implements Value<Date> {
     this.value = value;
   }
 
-  public static from(value: Date, orderDate: Date): EstimatedDeliveryDate | Error {
+  public static from(
+    value: Date,
+    orderDate: Date,
+  ): EstimatedDeliveryDate | Error {
     if (value < new Date()) {
       return new EstimatedDeliveryDateError();
     }
 
     const maxDeliveryDate = new Date(orderDate);
-    maxDeliveryDate.setDate(maxDeliveryDate.getDate() + 365); 
+    maxDeliveryDate.setDate(maxDeliveryDate.getDate() + 365);
 
     if (value > maxDeliveryDate) {
       return new EstimatedDeliveryDateError();

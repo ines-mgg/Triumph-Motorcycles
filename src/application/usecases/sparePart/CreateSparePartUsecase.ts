@@ -1,7 +1,6 @@
 import { SparePartRepository } from '@triumph-motorcycles/application/repositories';
 import { SparePartEntity } from '@triumph-motorcycles/domain/entities';
 
-
 export class CreateSparePartUsecase {
   constructor(private readonly sparePartRepository: SparePartRepository) {}
 

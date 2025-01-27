@@ -13,9 +13,8 @@ export class UpdateAppointmentStatusUsecase {
     newStatus: AppointmentStatus,
   ): Promise<AppointmentEntity | Error> {
     try {
-      const appointment = await this.appointmentRepository.findById(
-        appointmentId,
-      );
+      const appointment =
+        await this.appointmentRepository.findById(appointmentId);
       if (appointment instanceof Error) return appointment;
 
       appointment.updateStatus(newStatus);

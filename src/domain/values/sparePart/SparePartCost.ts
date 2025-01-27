@@ -1,5 +1,5 @@
 import { SparePartCostError } from '@triumph-motorcycles/domain/errors';
-import { Value } from "../Value";
+import { Value } from '../Value';
 
 export class SparePartCost implements Value<number> {
   public readonly value: number;

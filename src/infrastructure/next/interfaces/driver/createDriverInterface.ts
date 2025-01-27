@@ -1,4 +1,4 @@
-import { LicenseType } from "@triumph-motorcycles/types";
+import { LicenseType } from '@triumph-motorcycles/types';
 
 export default interface CreateDriver {
   name: string;

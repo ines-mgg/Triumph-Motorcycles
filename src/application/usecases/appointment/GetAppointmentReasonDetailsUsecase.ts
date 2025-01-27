@@ -8,9 +8,8 @@ export class GetAppointmentReasonDetailsUsecase {
 
   public async execute(appointmentId: string): Promise<unknown | Error> {
     try {
-      const appointment = await this.appointmentRepository.findById(
-        appointmentId,
-      );
+      const appointment =
+        await this.appointmentRepository.findById(appointmentId);
       if (appointment instanceof Error) return appointment;
 
       const reasonDetails = appointment.getReasonDetails();
