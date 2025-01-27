@@ -1,7 +1,7 @@
-import { Drivers } from '@triumph-motorcycles/domain/errors';
+import { DriversErrors } from '@triumph-motorcycles/domain/errors';
 import { Value } from '../Value';
 
-const { ExperienceError } = Drivers;
+const { ExperienceError } = DriversErrors;
 
 export class DriveLicense implements Value<string> {
   private constructor(public readonly value: string) {}

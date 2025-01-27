@@ -1,4 +1,4 @@
-import { MotorcycleModelError } from "../../errors/motorcycle/MotorcycleModelError";
+import { MotorcycleModelError } from '@triumph-motorcycles/domain/errors';
 import { Value } from "../Value";
 
 export class MotorcycleModel implements Value<string> {

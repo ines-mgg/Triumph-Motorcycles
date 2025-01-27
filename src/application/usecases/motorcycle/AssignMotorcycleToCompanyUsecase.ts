@@ -1,17 +1,18 @@
-import { MotorcycleRepository } from "../../repositories/MotorcycleRepository";
-import { CompanyRepository } from "../../repositories/CompanyRepository";
+import { MotorcycleRepository, CompanyRepository } from '@triumph-motorcycles/application/repositories';
 
 export class AssignMotorcycleToCompanyUsecase {
   constructor(
     private readonly motorcycleRepository: MotorcycleRepository,
-    private readonly companyRepository: CompanyRepository
+    private readonly companyRepository: CompanyRepository,
   ) {}
 
   public async execute(
     motorcycleId: string,
-    companyId: string
+    companyId: string,
   ): Promise<void | Error> {
-    const motorcycle = await this.motorcycleRepository.findOneById(motorcycleId);
+    const motorcycle = await this.motorcycleRepository.findOneById(
+      motorcycleId,
+    );
     if (motorcycle instanceof Error) return motorcycle;
 
     const company = await this.companyRepository.findById(companyId);

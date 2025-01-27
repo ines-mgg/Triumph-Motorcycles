@@ -1,11 +1,8 @@
-import { UsernameTooShortError } from "../../errors/user/UsernameTooShortError";
-import { Value } from "../Value";
-
+import { UsernameTooShortError } from '@triumph-motorcycles/domain/errors';
+import { Value } from '../Value';
 
 export class Username implements Value<string> {
-  private constructor(
-    public readonly value: string,
-  ) { }
+  private constructor(public readonly value: string) {}
 
   public static from(value: string) {
     const normalizedValue = value.trim().toLowerCase();

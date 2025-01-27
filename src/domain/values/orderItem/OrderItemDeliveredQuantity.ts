@@ -1,4 +1,4 @@
-import { OrderItemQuantityExceedError } from "../../errors/orderItem/OrderItemQuantityExceedError";
+import { OrderItemQuantityExceedError } from '@triumph-motorcycles/domain/errors';
 import { OrderItemQuantityOrdered } from "./OrderItemQuantityOrdered";
 
 export class OrderItemDeliveredQuantity {

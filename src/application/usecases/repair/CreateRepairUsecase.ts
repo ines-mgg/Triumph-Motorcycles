@@ -1,11 +1,12 @@
-import { BreakdownEntity, RepairEntity } from "@triumph-motorcycles/domain/entities/maintenances";
-import { RepairRepository } from "../../repositories/RepairRepository";
-import { CommonRepairAction } from "../../../domain/types/motorcycle";
+import {
+  BreakdownEntity,
+  RepairEntity,
+} from '@triumph-motorcycles/domain/entities';
+import { RepairRepository } from '@triumph-motorcycles/application/repositories';
+import { CommonRepairAction } from '@triumph-motorcycles/domain/types';
 
 export class CreateRepairUsecase {
-  constructor(
-    private readonly repairRepository: RepairRepository,
-  ) {}
+  constructor(private readonly repairRepository: RepairRepository) {}
 
   public async execute(
     breakdown: BreakdownEntity,
@@ -17,10 +18,10 @@ export class CreateRepairUsecase {
       breakdown,
       repairDateValue,
       actions,
-      costValue
+      costValue,
     );
 
-    if(repair instanceof Error) return repair
+    if (repair instanceof Error) return repair;
 
     await this.repairRepository.save(repair);
   }

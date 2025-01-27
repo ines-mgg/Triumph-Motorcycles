@@ -1,12 +1,12 @@
-import { SparePartEntity } from "../entities/parts";
+import { SparePartEntity } from '../entities';
 
-export type MotorStatus =  'Available' | 'InMaintenance' | 'OnTest' | 'Sold'
+export type MotorStatus = 'Available' | 'InMaintenance' | 'OnTest' | 'Sold';
 
 export interface DrivingRecord {
-    date: Date;
-    motorcycleId: string;
-    type: 'Test Drive' | 'Incident';
-    details: string;
+  date: Date;
+  motorcycleId: string;
+  type: 'Test Drive' | 'Incident';
+  details: string;
 }
 
 export interface MaintenanceRecord {
@@ -21,9 +21,12 @@ export interface MaintenanceRecord {
   managerId: string;
 }
 
-export type MaintenanceNotificationType =  'StockAlert' | 'ServiceReminder' | 'IncidentReport'
+export type MaintenanceNotificationType =
+  | 'StockAlert'
+  | 'ServiceReminder'
+  | 'IncidentReport';
 
-export type CommonRepairAction = 
+export type CommonRepairAction =
   | 'Oil Change'
   | 'Brake Replacement'
   | 'Tire Replacement'
@@ -43,17 +46,17 @@ export type CommonRepairAction =
   | 'Engine Repair'
   | 'Clutch Repair';
 
-  export interface SparePartOrderRecord {
-    orderId: string;
-    sparePartId: string;
-    partName: string;
-    orderDate: Date;
-    quantityOrdered: number;
-    costPerUnit: number;
-    totalCost: number;
-    estimatedDeliveryDate: Date;
-    deliveredQuantity: number;
-    remainingQuantity: number;
-  }
+export interface SparePartOrderRecord {
+  orderId: string;
+  sparePartId: string;
+  partName: string;
+  orderDate: Date;
+  quantityOrdered: number;
+  costPerUnit: number;
+  totalCost: number;
+  estimatedDeliveryDate: Date;
+  deliveredQuantity: number;
+  remainingQuantity: number;
+}
 
 export type LicenseType = 'A' | 'B' | 'C';

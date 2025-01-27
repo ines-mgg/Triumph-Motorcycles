@@ -1,5 +1,5 @@
-import { CompanyNotFoundError } from "src/domain/errors/company/CompanyNotFoundError";
-import { CompanyEntity } from "../../domain/entities/company/CompanyEntity";
+import { CompanyNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { CompanyEntity } from '@triumph-motorcycles/domain/entities';
 
 export interface CompanyRepository {
   save(company: CompanyEntity): Promise<void>;

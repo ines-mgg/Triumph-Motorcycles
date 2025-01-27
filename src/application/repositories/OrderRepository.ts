@@ -1,5 +1,6 @@
-import { OrderEntity } from "@triumph-motorcycles/domain/entities/parts";
-import { OrderNotFoundError } from "src/domain/errors/order/OrderNotFoundError";
+import { OrderEntity } from "@triumph-motorcycles/domain/entities";
+import { OrderNotFoundError } from "@triumph-motorcycles/domain/errors";
+
 
 export interface OrderRepository {
   save(order: OrderEntity): Promise<void>;

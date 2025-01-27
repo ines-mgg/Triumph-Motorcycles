@@ -1,6 +1,9 @@
-import { MotorcycleEntity } from "@triumph-motorcycles/domain/entities/drives";
-import { BreakdownEntity, WarrantyEntity } from "@triumph-motorcycles/domain/entities/maintenances";
-import { BreakdownRepository } from "../../repositories/BreakdownRepository";
+import { MotorcycleEntity } from '@triumph-motorcycles/domain/entities';
+import {
+  BreakdownEntity,
+  WarrantyEntity,
+} from '@triumph-motorcycles/domain/entities';
+import { BreakdownRepository } from '@triumph-motorcycles/application/repositories';
 
 export class ReportBreakdownUsecase {
   constructor(private readonly breakdownRepository: BreakdownRepository) {}

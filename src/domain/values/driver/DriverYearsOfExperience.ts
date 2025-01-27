@@ -1,4 +1,4 @@
-import { ExperienceError } from '../../errors/drivers';
+import { ExperienceError } from 'src/domain/errors/drivers';
 import { Value } from '../Value'; 
 
 export class DriveYearsOfExperience implements Value<number> {

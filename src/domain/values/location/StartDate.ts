@@ -1,4 +1,4 @@
-import { StartDateError } from "../../errors/location/StartDateError";
+import { StartDateError } from '@triumph-motorcycles/domain/errors';
 
 export class StartDate {
     private constructor(public readonly value: Date) {}

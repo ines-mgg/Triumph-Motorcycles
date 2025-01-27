@@ -1,9 +1,8 @@
-import { DriverEntity } from "@triumph-motorcycles/domain/entities/drives";
-import { CompanyEntity } from "src/domain/entities/company/CompanyEntity";
+import { CompanyEntity, DriverEntity } from '@triumph-motorcycles/domain/entities';
+
 
 export class GetCompanyDriversUsecase {
-    public execute(company: CompanyEntity): DriverEntity[] {
-      return company.getDrivers();
-    }
+  public execute(company: CompanyEntity): DriverEntity[] {
+    return company.getDrivers();
   }
-  
+}

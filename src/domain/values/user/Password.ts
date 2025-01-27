@@ -1,10 +1,12 @@
-import bcrypt from "bcrypt";
-import { PasswordTooShortError } from "../../errors/user/PasswordTooShortError";
-import { Value } from "../Value";
-import { PasswordDoesNotIncludeNumberError } from "../../errors/user/PasswordDoesNotIncludeNumberError";
-import { PasswordDoesNotIncludeLowercaseLetterError } from "../../errors/user/PasswordDoesNotIncludeLowercaseLetterError";
-import { PasswordDoesNotIncludeUppercaseLetterError } from "../../errors/user/PasswordDoesNotIncludeUppercaseLetterError";
-import { PasswordDoesNotIncludeSymbolError } from "../../errors/user/PasswordDoesNotIncludeSymbolError";
+import bcrypt from 'bcrypt';
+import {
+  PasswordTooShortError,
+  PasswordDoesNotIncludeLowercaseLetterError,
+  PasswordDoesNotIncludeUppercaseLetterError,
+  PasswordDoesNotIncludeSymbolError,
+  PasswordDoesNotIncludeNumberError,
+} from '@triumph-motorcycles/domain/errors';
+import { Value } from '../Value';
 
 export class Password implements Value<string> {
   private constructor(private readonly hashedValue: string) {}
@@ -14,13 +16,16 @@ export class Password implements Value<string> {
 
     if (!/(?=\d)/.test(value)) return new PasswordDoesNotIncludeNumberError();
 
-    if (!/(?=[a-z])/.test(value)) return new PasswordDoesNotIncludeLowercaseLetterError();
+    if (!/(?=[a-z])/.test(value))
+      return new PasswordDoesNotIncludeLowercaseLetterError();
 
-    if (!/(?=[A-Z])/.test(value)) return new PasswordDoesNotIncludeUppercaseLetterError();
+    if (!/(?=[A-Z])/.test(value))
+      return new PasswordDoesNotIncludeUppercaseLetterError();
 
-    if (!/(?=[^a-zA-Z0-9])/.test(value)) return new PasswordDoesNotIncludeSymbolError();
+    if (!/(?=[^a-zA-Z0-9])/.test(value))
+      return new PasswordDoesNotIncludeSymbolError();
 
-    const hashedValue = bcrypt.hashSync(value, 10); 
+    const hashedValue = bcrypt.hashSync(value, 10);
     return new Password(hashedValue);
   }
 

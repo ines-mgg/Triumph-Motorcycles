@@ -1,5 +1,5 @@
-import { NameLengthError } from "../../errors/concession/NameLengthError";
-import { NameAlphanumericError } from "../../errors/concession/NameAlphanumericError";
+import { NameAlphanumericError, NameLengthError } from "@triumph-motorcycles/domain/errors";
+
 
 export class Name {
   private constructor(public readonly value: string) {}

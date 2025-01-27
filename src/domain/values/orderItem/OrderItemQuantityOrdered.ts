@@ -1,4 +1,4 @@
-import { OrderItemQuantityOrderedError } from "../../errors/orderItem/OrderItemQuantityOrderedError";
+import { OrderItemQuantityOrderedError } from '@triumph-motorcycles/domain/errors';
 import { Value } from "../Value";
 
 export class OrderItemQuantityOrdered implements Value<number> {

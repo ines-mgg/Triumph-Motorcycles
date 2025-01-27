@@ -1,10 +1,8 @@
-import { OrderEntity } from "@triumph-motorcycles/domain/entities/parts";
-import { OrderRepository } from "../../repositories/OrderRepository";
+import { OrderEntity } from '@triumph-motorcycles/domain/entities';
+import { OrderRepository } from '@triumph-motorcycles/application/repositories';
 
 export class GetOrderByIdUsecase {
-  constructor(
-    private readonly orderRepository: OrderRepository,
-  ) {}
+  constructor(private readonly orderRepository: OrderRepository) {}
 
   public async execute(orderId: string): Promise<OrderEntity | Error> {
     return await this.orderRepository.findById(orderId);

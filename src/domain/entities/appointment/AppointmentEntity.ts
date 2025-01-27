@@ -1,10 +1,9 @@
-import { UserEntity } from "../user/UserEntity";
-import { AppointmentStatus } from "../../types/AppointmentStatus";
-import { Notes } from "../../values/appointment/Notes";
-import { TimeRange } from "../../values/appointment/TimeRange";
-import crypto from "crypto";
-import { AppointmentReason } from "src/domain/types/AppointmentReason";
-
+import { UserEntity } from '../user/UserEntity';
+import { AppointmentStatus } from '../../types/AppointmentStatus';
+import { Notes } from '../../values/appointment/Notes';
+import { TimeRange } from '../../values/appointment/TimeRange';
+import crypto from 'crypto';
+import { AppointmentReason } from '@triumph-motorcycles/domain/types';
 
 export class AppointmentEntity {
   private constructor(
@@ -15,7 +14,7 @@ export class AppointmentEntity {
     private appointmentStatus: AppointmentStatus,
     public readonly createdAt: Date,
     private updatedAt: Date,
-    public appointmentReason: AppointmentReason
+    public appointmentReason: AppointmentReason,
   ) {}
 
   public static create(
@@ -23,7 +22,7 @@ export class AppointmentEntity {
     startTime: Date,
     endTime: Date,
     reason: AppointmentReason,
-    notes: string | null
+    notes: string | null,
   ): AppointmentEntity | Error {
     const appointmentId = crypto.randomUUID();
 
@@ -42,10 +41,10 @@ export class AppointmentEntity {
       user,
       timeRange,
       notesValue,
-      "Pending",
+      'Pending',
       new Date(),
       new Date(),
-      reason
+      reason,
     );
   }
 
@@ -100,18 +99,18 @@ export class AppointmentEntity {
 
   public getReasonDetails(): object {
     switch (this.appointmentReason.type) {
-      case "Location":
+      case 'Location':
         return this.appointmentReason.entity.getDetails();
-      case "Maintenance":
+      case 'Maintenance':
         return {
           needsMaintenance: this.appointmentReason.entity.needsMaintenance(),
         };
-      case "Repair":
+      case 'Repair':
         return {
           repairActions: this.appointmentReason.entity.actions,
           cost: this.appointmentReason.entity.cost.value,
         };
-      case "MotorcycleTry":
+      case 'MotorcycleTry':
         return {
           summary: this.appointmentReason.entity.getTestSummary(),
         };

@@ -1,4 +1,4 @@
-import { MaintenanceIntervalTimeError } from "../../errors/maintenance/MaintenanceIntervalTime";
+import { MaintenanceIntervalTimeError } from '@triumph-motorcycles/domain/errors';
 import { Value } from "../Value";
 
 const MAX_TIME_DAYS = 365;

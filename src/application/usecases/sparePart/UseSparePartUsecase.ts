@@ -1,14 +1,12 @@
-import { SparePartRepository } from "../../repositories/SparePartRepository";
+import { SparePartRepository } from '@triumph-motorcycles/application/repositories';
 
 export class UseSparePartUsecase {
-  constructor(
-    private readonly sparePartRepository: SparePartRepository,
-  ) {}
+  constructor(private readonly sparePartRepository: SparePartRepository) {}
 
   public async execute(id: string, quantity: number): Promise<boolean | Error> {
     const sparePart = await this.sparePartRepository.findById(id);
-    
-    if(sparePart instanceof Error) return sparePart
+
+    if (sparePart instanceof Error) return sparePart;
 
     return sparePart.use(quantity);
   }

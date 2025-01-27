@@ -1,10 +1,11 @@
-import { OrderItemEntity, SparePartEntity } from "@triumph-motorcycles/domain/entities/parts";
-import { OrderItemRepository } from "../../repositories/OrderItemRepository";
+import {
+  OrderItemEntity,
+  SparePartEntity,
+} from '@triumph-motorcycles/domain/entities';
+import { OrderItemRepository } from '@triumph-motorcycles/application/repositories';
 
 export class CreateOrderItemUsecase {
-  constructor(
-    private readonly orderItemRepository: OrderItemRepository,
-  ) {}
+  constructor(private readonly orderItemRepository: OrderItemRepository) {}
 
   public async execute(
     sparePart: SparePartEntity,
@@ -16,10 +17,10 @@ export class CreateOrderItemUsecase {
       sparePart,
       quantityOrderedValue,
       costPerUnitValue,
-      deliveredQuantityValue
+      deliveredQuantityValue,
     );
 
-    if(orderItem instanceof Error) return orderItem
+    if (orderItem instanceof Error) return orderItem;
 
     await this.orderItemRepository.save(orderItem);
   }

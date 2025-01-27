@@ -1,5 +1,6 @@
-import { MotorcycleTryEntity } from "@triumph-motorcycles/domain/entities/drives";
-import { MotorcycleTryNotFoundError } from "src/domain/errors/motorcycleTry/MotorcycleTestNotFoundError";
+import { MotorcycleTryEntity } from "@triumph-motorcycles/domain/entities";
+import { MotorcycleTryNotFoundError } from "@triumph-motorcycles/domain/errors";
+
 
 export interface MotorcycleTryRepository {
   save(motorcycleTry: MotorcycleTryEntity): Promise<void>;

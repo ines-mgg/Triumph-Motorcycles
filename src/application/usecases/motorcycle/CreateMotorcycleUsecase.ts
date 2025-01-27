@@ -1,6 +1,6 @@
-import { MotorcycleEntity } from "@triumph-motorcycles/domain/entities/drives";
-import { MotorStatus } from "../../../domain/types/motorcycle";
-import { MotorcycleRepository } from "../../repositories/MotorcycleRepository";
+import { MotorcycleEntity } from '@triumph-motorcycles/domain/entities';
+import { MotorStatus } from '@triumph-motorcycles/domain/types';
+import { MotorcycleRepository } from '@triumph-motorcycles/application/repositories';
 
 export class CreateMotorcycleUsecase {
   constructor(private readonly motorcycleRepository: MotorcycleRepository) {}
@@ -12,7 +12,6 @@ export class CreateMotorcycleUsecase {
     purchaseDate: Date,
     status: MotorStatus,
   ): Promise<void | Error> {
-
     const motorcycle = MotorcycleEntity.create(
       brand,
       model,
@@ -21,7 +20,7 @@ export class CreateMotorcycleUsecase {
       status,
     );
 
-    if(motorcycle instanceof Error) return motorcycle
+    if (motorcycle instanceof Error) return motorcycle;
 
     await this.motorcycleRepository.save(motorcycle);
   }

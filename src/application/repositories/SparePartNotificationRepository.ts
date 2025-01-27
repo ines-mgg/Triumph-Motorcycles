@@ -1,5 +1,5 @@
-import { SparePartNotificationEntity } from "@triumph-motorcycles/domain/entities/parts";
-import { SparePartNotificationNotFoundError } from "src/domain/errors/sparePart/SparePartNotificationNotFoundError";
+import { SparePartNotificationEntity } from "@triumph-motorcycles/domain/entities";
+import { SparePartNotificationNotFoundError } from "@triumph-motorcycles/domain/errors";
 
 export interface SparePartNotificationRepository {
   save(notification: SparePartNotificationEntity): Promise<void>;

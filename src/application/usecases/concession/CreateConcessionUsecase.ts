@@ -1,16 +1,18 @@
-import { ConcessionRepository } from "src/application/repositories/ConcessionRepository";
-import { ConcessionEntity } from "src/domain/entities/concession/ConcessionEntity";
-import { UserEntity } from "src/domain/entities/user/UserEntity";
-import { UnexpectedError } from "src/domain/errors/user/UnexpectedError";
+import { ConcessionRepository } from '@triumph-motorcycles/application/repositories';
+import {
+  ConcessionEntity,
+  UserEntity,
+} from '@triumph-motorcycles/domain/entities';
+import { UnexpectedError } from '@triumph-motorcycles/domain/errors';
 
 export class CreateConcessionUsecase {
   public constructor(
-    private readonly concessionRepository: ConcessionRepository
+    private readonly concessionRepository: ConcessionRepository,
   ) {}
 
   public async execute(
     nameValue: string,
-    user: UserEntity
+    user: UserEntity,
   ): Promise<ConcessionEntity | Error> {
     try {
       const newConcession = ConcessionEntity.create(nameValue, user);
@@ -19,10 +21,9 @@ export class CreateConcessionUsecase {
       await this.concessionRepository.save(newConcession);
       return newConcession;
     } catch (error) {
-      return new UnexpectedError(error instanceof Error ? error.message : String(error));
+      return new UnexpectedError(
+        error instanceof Error ? error.message : String(error),
+      );
     }
   }
 }
-
-
-

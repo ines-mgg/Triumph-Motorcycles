@@ -1,4 +1,5 @@
-import { SparePartRepository } from "../../repositories/SparePartRepository";
+import { SparePartRepository } from "@triumph-motorcycles/application/repositories";
+
 
 export class RestockSparePartUsecase {
   constructor(

@@ -1,6 +1,6 @@
-import { DriverEntity } from "@triumph-motorcycles/domain/entities/drives";
-import { LicenseType } from "../../../domain/types/motorcycle";
-import { DriverRepository } from "../../repositories/DriverRepository";
+import { DriverEntity } from '@triumph-motorcycles/domain/entities';
+import { LicenseType } from '@triumph-motorcycles/domain/types';
+import { DriverRepository } from '@triumph-motorcycles/application/repositories';
 
 export class CreateDriverUsecase {
   constructor(private readonly driverRepository: DriverRepository) {}
@@ -22,7 +22,7 @@ export class CreateDriverUsecase {
       phone,
     );
 
-    if(driver instanceof Error) return driver
+    if (driver instanceof Error) return driver;
 
     await this.driverRepository.save(driver);
   }

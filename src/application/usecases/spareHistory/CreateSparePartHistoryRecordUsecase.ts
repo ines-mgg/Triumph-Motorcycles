@@ -1,5 +1,8 @@
-import { SparePartEntity, SparePartHistoryEntity } from "@triumph-motorcycles/domain/entities/parts";
-import { SparePartHistoryRecordRepository } from "../../repositories/SparePartHistoryRecordRepository";
+import {
+  SparePartEntity,
+  SparePartHistoryEntity,
+} from '@triumph-motorcycles/domain/entities';
+import { SparePartHistoryRecordRepository } from '@triumph-motorcycles/application/repositories';
 
 export class CreateSparePartOrderRecordUsecase {
   constructor(
@@ -16,7 +19,7 @@ export class CreateSparePartOrderRecordUsecase {
       sparePart,
       quantityOrdered,
       costPerUnit,
-      estimatedDeliveryDate
+      estimatedDeliveryDate,
     );
 
     await this.sparePartOrderRecordRepository.save(orderRecord);

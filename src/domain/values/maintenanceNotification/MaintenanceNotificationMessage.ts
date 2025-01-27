@@ -1,4 +1,4 @@
-import { MaintenanceNotificationMessageError } from "../../errors/maintenance/MaintenanceNotificationMessageError";
+import { MaintenanceNotificationMessageError } from '@triumph-motorcycles/domain/errors';
 import { Value } from "../Value";
 
 

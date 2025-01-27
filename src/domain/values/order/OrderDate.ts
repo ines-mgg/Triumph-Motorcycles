@@ -1,4 +1,4 @@
-import { OrderDateError } from "../../errors/order/OrderDateError";
+import { OrderDateError } from '@triumph-motorcycles/domain/errors';
 import { Value } from "../Value";
 
 export class OrderDate implements Value<Date> {

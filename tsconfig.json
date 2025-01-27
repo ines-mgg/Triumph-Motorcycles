@@ -25,17 +25,24 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@triumph-motorcycles/application": ["./src/app"],
-      "@triumph-motorcycles/domain/entities/drives": [
-        "src/domain/entities/drives/index.ts"
+      "@triumph-motorcycles/application/repositories": [
+        "./src/application/repositories/index.ts"
       ],
-      "@triumph-motorcycles/domain/entities/maintenances": [
-        "./src/domain/entities/maintenances/index.ts"
+      "@triumph-motorcycles/application/responses": [
+        "./src/application/responses/index.ts"
       ],
-      "@triumph-motorcycles/domain/entities/parts": [
-        "./src/domain/entities/parts/index.ts"
+      "@triumph-motorcycles/application/services": [
+        "./src/application/services/index.ts"
       ],
-      "@triumph-motorcycles/domain/errors": ["./src/domain/errors/index.ts"]
+      "@triumph-motorcycles/application/usecases": [
+        "./src/application/usecases/index.ts"
+      ],
+      "@triumph-motorcycles/domain/entities": [
+        "./src/domain/entities/index.ts"
+      ],
+      "@triumph-motorcycles/domain/errors": ["./src/domain/errors/index.ts"],
+      "@triumph-motorcycles/domain/types": ["./src/domain/types/index.ts"],
+      "@triumph-motorcycles/domain/values": ["./src/domain/values/index.ts"]
     }
   },
   "include": ["src"],

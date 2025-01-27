@@ -1,4 +1,5 @@
-import { SparePartHistoryRecordRepository } from "../../repositories/SparePartHistoryRecordRepository";
+import { SparePartHistoryRecordRepository } from "@triumph-motorcycles/application/repositories";
+
 
 export class UpdateSparePartHistoryRecordDeliveryUsecase {
   constructor(

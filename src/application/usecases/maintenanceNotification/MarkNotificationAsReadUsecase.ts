@@ -1,4 +1,4 @@
-import { MaintenanceNotificationRepository } from "../../repositories/MaintenanceNotificationRepository";
+import { MaintenanceNotificationRepository } from '@triumph-motorcycles/application/repositories';
 
 export class MarkNotificationAsReadUsecase {
   constructor(

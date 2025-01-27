@@ -1,10 +1,10 @@
-import { SparePartOrderRecordCostPerUnit } from "../../values/SparePartOrderRecord/SparePartOrderRecordCostPerUnit";
-import { SparePartOrderRecordDeliveredQuantity } from "../../values/SparePartOrderRecord/SparePartOrderRecordDeliveredQuantity";
-import { SparePartOrderRecordPartName } from "../../values/SparePartOrderRecord/SparePartOrderRecordPartName";
-import { SparePartOrderRecordQuantityOrdered } from "../../values/SparePartOrderRecord/SparePartOrderRecordQuantityOrdered typescript Copier le code";
-import { SparePartOrderRecordRemainingQuantity } from "../../values/SparePartOrderRecord/SparePartOrderRecordRemainingQuantity";
-import { SparePartOrderRecordTotalCost } from "../../values/SparePartOrderRecord/SparePartOrderRecordTotalCost";
-import { SparePartEntity } from "./SparePartEntity";
+import { SparePartOrderRecordCostPerUnit } from '../../values/sparePartOrderRecord/SparePartOrderRecordCostPerUnit';
+import { SparePartOrderRecordDeliveredQuantity } from '../../values/sparePartOrderRecord/SparePartOrderRecordDeliveredQuantity';
+import { SparePartOrderRecordPartName } from '../../values/sparePartOrderRecord/SparePartOrderRecordPartName';
+import { SparePartOrderRecordQuantityOrdered } from '../../values/sparePartOrderRecord/SparePartOrderRecordQuantityOrdered';
+import { SparePartOrderRecordRemainingQuantity } from '../../values/sparePartOrderRecord/SparePartOrderRecordRemainingQuantity';
+import { SparePartOrderRecordTotalCost } from '../../values/sparePartOrderRecord/SparePartOrderRecordTotalCost';
+import { SparePartEntity } from './SparePartEntity';
 import crypto from 'crypto';
 
 export class SparePartHistoryEntity {
@@ -27,9 +27,8 @@ export class SparePartHistoryEntity {
     costPerUnit: number,
     estimatedDeliveryDate: Date,
   ): SparePartHistoryEntity {
-    
     const id = crypto.randomUUID();
-    
+
     const totalCostValue = quantityOrdered * costPerUnit;
 
     const instance = new SparePartHistoryEntity(
@@ -46,5 +45,4 @@ export class SparePartHistoryEntity {
     );
     return instance;
   }
-
 }

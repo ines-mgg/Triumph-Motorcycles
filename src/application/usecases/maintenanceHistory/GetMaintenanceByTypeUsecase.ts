@@ -1,5 +1,5 @@
-import { MaintenanceRecord } from "../../../domain/types/motorcycle";
-import { MaintenanceHistoryRepository } from "../../repositories/MaintenanceHistoryRepository";
+import { MaintenanceHistoryRepository } from '@triumph-motorcycles/application/repositories';
+import { MaintenanceRecord } from '@triumph-motorcycles/domain/types';
 
 export class GetMaintenanceByTypeUsecase {
   constructor(
@@ -8,7 +8,7 @@ export class GetMaintenanceByTypeUsecase {
 
   public async execute(
     maintenanceType: 'Preventive' | 'Corrective',
-  ): Promise<MaintenanceRecord[] |Error> {
+  ): Promise<MaintenanceRecord[] | Error> {
     return await this.maintenanceHistoryRepository.findByType(maintenanceType);
   }
 }

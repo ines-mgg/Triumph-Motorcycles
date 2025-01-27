@@ -1,6 +1,6 @@
-import { MotorcycleTryEntity } from "../entities/drives";
+
+import { MaintenanceEntity, MotorcycleTryEntity, RepairEntity } from "../entities";
 import { LocationEntity } from "../entities/location/LocationEntity";
-import { MaintenanceEntity, RepairEntity } from "../entities/maintenances";
 
 export type AppointmentReason =
   | { type: "Location"; entity: LocationEntity }

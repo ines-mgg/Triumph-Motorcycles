@@ -1,4 +1,4 @@
-import { MotorcycleTryStartDateError } from "../../errors/motorcycleTry/MotorcycleTryStartDateError";
+import { MotorcycleTryStartDateError } from '@triumph-motorcycles/domain/errors';
 import { Value } from "../Value";
 
 export class StartDate implements Value<Date> {

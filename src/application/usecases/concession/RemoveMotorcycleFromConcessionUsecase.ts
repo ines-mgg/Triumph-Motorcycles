@@ -1,6 +1,7 @@
-import { ConcessionRepository } from "src/application/repositories/ConcessionRepository";
-import { ConcessionEntity } from "src/domain/entities/concession/ConcessionEntity";
-import { UnexpectedError } from "src/domain/errors/user/UnexpectedError";
+import { ConcessionRepository } from "@triumph-motorcycles/application/repositories";
+import { ConcessionEntity } from "@triumph-motorcycles/domain/entities";
+import { UnexpectedError } from "@triumph-motorcycles/domain/errors";
+
 
 export class RemoveMotorcycleFromConcessionUsecase {
     public constructor(

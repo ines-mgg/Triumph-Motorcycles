@@ -1,5 +1,5 @@
-import { SparePartNotificationEntity } from "@triumph-motorcycles/domain/entities/parts";
-import { SparePartNotificationRepository } from "../../repositories/SparePartNotificationRepository";
+import { SparePartNotificationRepository } from '@triumph-motorcycles/application/repositories';
+import { SparePartNotificationEntity } from '@triumph-motorcycles/domain/entities';
 
 export class GetAllSparePartNotificationsUsecase {
   constructor(

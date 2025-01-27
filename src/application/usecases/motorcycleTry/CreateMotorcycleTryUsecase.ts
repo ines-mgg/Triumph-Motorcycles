@@ -1,8 +1,14 @@
-import { DriverEntity, MotorcycleEntity, MotorcycleTryEntity } from "@triumph-motorcycles/domain/entities/drives";
-import { MotorcycleTryRepository } from "../../repositories/MotorcycleTryRepository";
+import {
+  DriverEntity,
+  MotorcycleEntity,
+  MotorcycleTryEntity,
+} from '@triumph-motorcycles/domain/entities';
+import { MotorcycleTryRepository } from '@triumph-motorcycles/application/repositories';
 
 export class CreateMotorcycleTryUsecase {
-  constructor(private readonly motorcycleTryRepository: MotorcycleTryRepository) {}
+  constructor(
+    private readonly motorcycleTryRepository: MotorcycleTryRepository,
+  ) {}
 
   public async execute(
     motorcycle: MotorcycleEntity,
@@ -10,9 +16,14 @@ export class CreateMotorcycleTryUsecase {
     startDate: Date,
     endDateDate: Date,
   ): Promise<void | Error> {
-    const motorcycleTry = MotorcycleTryEntity.create(motorcycle, driver, startDate, endDateDate);
+    const motorcycleTry = MotorcycleTryEntity.create(
+      motorcycle,
+      driver,
+      startDate,
+      endDateDate,
+    );
 
-    if(motorcycleTry instanceof Error) return motorcycleTry
+    if (motorcycleTry instanceof Error) return motorcycleTry;
 
     await this.motorcycleTryRepository.save(motorcycleTry);
   }

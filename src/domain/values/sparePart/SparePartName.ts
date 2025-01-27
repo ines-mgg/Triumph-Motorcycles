@@ -1,5 +1,5 @@
-import { SparePartNameError } from "../../errors/sparePart/SparePartNameError";
-import { Value } from "../Value";
+import { SparePartNameError } from '@triumph-motorcycles/domain/errors';
+import { Value } from '../Value';
 
 export class SparePartName implements Value<string> {
   public readonly value: string;

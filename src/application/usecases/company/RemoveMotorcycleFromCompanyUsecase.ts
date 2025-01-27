@@ -1,6 +1,7 @@
-import { CompanyRepository } from "src/application/repositories/CompanyRepository";
-import { CompanyEntity } from "src/domain/entities/company/CompanyEntity";
-import { UnexpectedError } from "src/domain/errors/user/UnexpectedError";
+import { CompanyRepository } from "@triumph-motorcycles/application/repositories";
+import { CompanyEntity } from "@triumph-motorcycles/domain/entities";
+import { UnexpectedError } from "@triumph-motorcycles/domain/errors";
+
 
 export class RemoveMotorcycleFromCompanyUsecase {
   public constructor(
