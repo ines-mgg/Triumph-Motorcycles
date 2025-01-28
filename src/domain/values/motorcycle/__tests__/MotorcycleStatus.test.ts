@@ -1,5 +1,5 @@
 import { MotorcycleStatus } from '../MotorcycleStatus';
-import { MotorcycleStatusError } from '@triumph-motorcycles/domain/errors';
+import { MotorcycleStatusError } from '@triumph-motorcycles/domain/errors/motorcycle/MotorcycleStatusError';
 
 describe('MotorcycleStatus', () => {
   it('should create a valid MotorcycleStatus instance', () => {

@@ -1,8 +1,6 @@
-import {
-  OrderItemEntity,
-  SparePartEntity,
-} from '@triumph-motorcycles/domain/entities';
-import { OrderItemRepository } from '@triumph-motorcycles/application/repositories';
+import { OrderItemEntity } from '@triumph-motorcycles/domain/entities/parts/OrderItemEntity';
+import { SparePartEntity } from '@triumph-motorcycles/domain/entities/parts/SparePartEntity';
+import { OrderItemRepository } from '@triumph-motorcycles/application/repositories/OrderItemRepository';
 
 export class CreateOrderItemUsecase {
   constructor(private readonly orderItemRepository: OrderItemRepository) {}

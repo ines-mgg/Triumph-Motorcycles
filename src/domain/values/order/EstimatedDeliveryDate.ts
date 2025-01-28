@@ -1,4 +1,4 @@
-import { EstimatedDeliveryDateError } from '@triumph-motorcycles/domain/errors';
+import { EstimatedDeliveryDateError } from '@triumph-motorcycles/domain/errors/order/EstimatedDeliveryDateError';
 import { Value } from '../Value';
 
 export class EstimatedDeliveryDate implements Value<Date> {

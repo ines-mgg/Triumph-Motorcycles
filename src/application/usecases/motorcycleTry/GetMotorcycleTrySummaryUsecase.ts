@@ -1,4 +1,4 @@
-import { MotorcycleTryRepository } from '@triumph-motorcycles/application/repositories';
+import { MotorcycleTryRepository } from '@triumph-motorcycles/application/repositories/MotorcycleTryRepository';
 export class GetMotorcycleTrySummaryUsecase {
   constructor(
     private readonly motorcycleTryRepository: MotorcycleTryRepository,

@@ -1,4 +1,4 @@
-import { MaintenanceHistoryRepository } from '@triumph-motorcycles/application/repositories';
+import { MaintenanceHistoryRepository } from '@triumph-motorcycles/application/repositories/MaintenanceHistoryRepository';
 
 export class GetTotalMaintenanceCostUsecase {
   constructor(

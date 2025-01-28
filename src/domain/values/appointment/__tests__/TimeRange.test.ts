@@ -1,4 +1,4 @@
-import { InvalidTimeRangeError } from '@triumph-motorcycles/domain/errors';
+import { InvalidTimeRangeError } from '@triumph-motorcycles/domain/errors/appointment/InvalidTimeRangeError';
 import { TimeRange } from '../TimeRange';
 import { now, tomorrow } from '../../../../tests/testUtils';
 

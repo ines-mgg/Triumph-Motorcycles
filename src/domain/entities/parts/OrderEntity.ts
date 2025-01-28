@@ -1,14 +1,10 @@
-import {
-  EstimatedDeliveryDate,
-  OrderDate,
-} from '@triumph-motorcycles/domain/values';
+import { OrderDate } from '@triumph-motorcycles/domain/values/order/OrderDate';
+import { EstimatedDeliveryDate } from '@triumph-motorcycles/domain/values/order/EstimatedDeliveryDate';
 import { OrderItemEntity } from './OrderItemEntity';
 import { SparePartEntity } from './SparePartEntity';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  OrderItemQuantityExceedError,
-  SparePartQuantityInStockError,
-} from '@triumph-motorcycles/domain/errors';
+import { OrderItemQuantityExceedError } from '@triumph-motorcycles/domain/errors/orderItem/OrderItemQuantityExceedError';
+import { SparePartQuantityInStockError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartQuantityInStockError';
 
 export class OrderEntity {
   private readonly items: OrderItemEntity[] = [];

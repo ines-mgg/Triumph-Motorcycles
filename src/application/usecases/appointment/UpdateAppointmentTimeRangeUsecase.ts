@@ -1,6 +1,6 @@
-import { AppointmentRepository } from '@triumph-motorcycles/application/repositories';
-import { AppointmentEntity } from '@triumph-motorcycles/domain/entities';
-import { UnexpectedError } from '@triumph-motorcycles/domain/errors';
+import { AppointmentRepository } from '@triumph-motorcycles/application/repositories/AppointmentRepository';
+import { AppointmentEntity } from '@triumph-motorcycles/domain/entities/appointment/AppointmentEntity';
+import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
 
 export class UpdateAppointmentTimeRangeUsecase {
   public constructor(

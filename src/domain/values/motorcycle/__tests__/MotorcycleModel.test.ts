@@ -1,5 +1,5 @@
 import { MotorcycleModel } from '../MotorcycleModel';
-import { MotorcycleModelError } from '@triumph-motorcycles/domain/errors';
+import { MotorcycleModelError } from '@triumph-motorcycles/domain/errors/motorcycle/MotorcycleModelError';
 
 describe('MotorcycleModel', () => {
   it('should create a valid MotorcycleModel instance', () => {

@@ -1,5 +1,5 @@
-import { MaintenanceEntity } from '@triumph-motorcycles/domain/entities';
-import { MaintenanceRepository } from '@triumph-motorcycles/application/repositories';
+import { MaintenanceEntity } from '@triumph-motorcycles/domain/entities/maintenances/MaintenanceEntity';
+import { MaintenanceRepository } from '@triumph-motorcycles/application/repositories/MaintenanceRepository';
 
 export class FindMaintenanceByIdUsecase {
   constructor(private readonly maintenanceRepository: MaintenanceRepository) {}

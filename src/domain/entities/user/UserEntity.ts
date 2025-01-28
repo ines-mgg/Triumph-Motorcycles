@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { DriverEntity } from '../drives/DriverEntity';
-import { Password, Username } from '@triumph-motorcycles/domain/values';
+import { Password } from '@triumph-motorcycles/domain/values/user/Password';
+import { Username } from '@triumph-motorcycles/domain/values/user/Username';
 
 export class UserEntity {
   private drivers: DriverEntity[] = [];

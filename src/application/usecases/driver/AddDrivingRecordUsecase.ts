@@ -1,5 +1,5 @@
-import { DrivingRecord } from '@triumph-motorcycles/domain/types';
-import { DriverRepository } from '@triumph-motorcycles/application/repositories';
+import { DrivingRecord } from '@triumph-motorcycles/domain/types/motorcycle';
+import { DriverRepository } from '@triumph-motorcycles/application/repositories/DriverRepository';
 
 export class AddDrivingRecordUsecase {
   constructor(private readonly driverRepository: DriverRepository) {}

@@ -1,4 +1,4 @@
-import { DriverEntity } from '@triumph-motorcycles/domain/entities';
+import { DriverEntity } from '@triumph-motorcycles/domain/entities/drives/DriverEntity';
 
 export class RemoveDriverFromCompanyUseCase {
   execute(driver: DriverEntity): void {

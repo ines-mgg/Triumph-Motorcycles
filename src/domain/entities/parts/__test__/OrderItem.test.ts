@@ -1,10 +1,8 @@
-import {
-  OrderItemCostPerUnit,
-  OrderItemDeliveredQuantity,
-  OrderItemQuantityOrdered,
-} from '@triumph-motorcycles/domain/values';
 import { OrderItemEntity } from '../OrderItemEntity';
 import { sparePart } from '../../../../tests/testUtils';
+import { OrderItemCostPerUnit } from '@triumph-motorcycles/domain/values/orderItem/OrderItemCostPerUnit';
+import { OrderItemDeliveredQuantity } from '@triumph-motorcycles/domain/values/orderItem/OrderItemDeliveredQuantity';
+import { OrderItemQuantityOrdered } from '@triumph-motorcycles/domain/values/orderItem/OrderItemQuantityOrdered';
 
 describe('OrderItemEntity', () => {
   describe('create', () => {

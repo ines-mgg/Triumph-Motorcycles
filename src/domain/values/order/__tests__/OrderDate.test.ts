@@ -1,13 +1,13 @@
 import { OrderDate } from '../OrderDate';
-import { OrderDateError } from '@triumph-motorcycles/domain/errors';
-import { now } from '../../../../tests/testUtils';
+import { OrderDateError } from '@triumph-motorcycles/domain/errors/order/OrderDateError';
 
 describe('OrderDate', () => {
   it('should create a valid OrderDate instance', () => {
-    const orderDate = OrderDate.from(now);
+    const date = new Date();
+    const orderDate = OrderDate.from(date);
     expect(orderDate).toBeInstanceOf(OrderDate);
     if (orderDate instanceof OrderDate) {
-      expect(orderDate.value).toBe(now);
+      expect(orderDate.value).toBe(date);
     }
   });
 
@@ -17,9 +17,10 @@ describe('OrderDate', () => {
   });
 
   it('should compare note value correctly', () => {
-    const orderDate = OrderDate.from(now);
+    const date = new Date();
+    const orderDate = OrderDate.from(date);
     if (orderDate instanceof OrderDate) {
-      expect(orderDate.isValue(now)).toBe(true);
+      expect(orderDate.isValue(date)).toBe(true);
     }
   });
 });

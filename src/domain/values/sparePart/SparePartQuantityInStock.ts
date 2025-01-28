@@ -1,4 +1,4 @@
-import { SparePartQuantityInStockError } from '@triumph-motorcycles/domain/errors';
+import { SparePartQuantityInStockError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartQuantityInStockError';
 import { Value } from '../Value';
 
 export class SparePartQuantityInStock implements Value<number> {

@@ -1,5 +1,5 @@
 import { AppointmentRepository } from '../AppointmentRepository';
-import { AppointmentNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { AppointmentNotFoundError } from '@triumph-motorcycles/domain/errors/appointment/AppointmentNotFoundError';
 import { appointment } from '../../../tests/testUtils';
 
 describe('AppointmentRepository', () => {

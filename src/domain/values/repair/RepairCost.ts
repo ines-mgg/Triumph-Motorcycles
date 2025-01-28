@@ -1,4 +1,4 @@
-import { RepairCostError } from '@triumph-motorcycles/domain/errors';
+import { RepairCostError } from '@triumph-motorcycles/domain/errors/repair/RepairCostError';
 import { Value } from '../Value';
 
 export class RepairCost implements Value<number> {

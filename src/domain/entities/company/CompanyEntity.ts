@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { MotorcycleEntity } from '../drives/MotorcycleEntity';
 import { DriverEntity } from '../drives/DriverEntity';
-import { Name } from '@triumph-motorcycles/domain/values';
+import { Name } from '@triumph-motorcycles/domain/values/company/Name';
 import { UserEntity } from '../user/UserEntity';
 
 export class CompanyEntity {

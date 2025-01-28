@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { MotorcycleEntity } from '../drives/MotorcycleEntity';
 import { UserEntity } from '../user/UserEntity';
-import { Name } from '@triumph-motorcycles/domain/values';
+import { Name } from '@triumph-motorcycles/domain/values/concession/name';
 
 export class ConcessionEntity {
   private motorcycles: MotorcycleEntity[] = [];

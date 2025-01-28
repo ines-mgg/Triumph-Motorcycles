@@ -1,6 +1,6 @@
-import { MotorcycleEntity } from '@triumph-motorcycles/domain/entities';
-import { MotorStatus } from '@triumph-motorcycles/domain/types';
-import { MotorcycleRepository } from '@triumph-motorcycles/application/repositories';
+import { MotorcycleEntity } from '@triumph-motorcycles/domain/entities/drives/MotorcycleEntity';
+import { MotorStatus } from '@triumph-motorcycles/domain/types/motorcycle';
+import { MotorcycleRepository } from '@triumph-motorcycles/application/repositories/MotorcycleRepository';
 
 export class CreateMotorcycleUsecase {
   constructor(private readonly motorcycleRepository: MotorcycleRepository) {}

@@ -1,17 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
 import { BaseEntity } from '../BaseEntity';
-import {
-  MotorcycleBrand,
-  MotorcycleModel,
-  MotorcycleYear,
-} from '@triumph-motorcycles/domain/values';
-import { MotorStatus } from '@triumph-motorcycles/domain/types';
+
+import { MotorStatus } from '@triumph-motorcycles/domain/types/motorcycle';
 import { CompanyEntity } from '../company/CompanyEntity';
 import { ConcessionEntity } from '../concession/ConcessionEntity';
-import {
-  MotorcycleMileageError,
-  MotorcycleUpdateServiceDetailsError,
-} from '@triumph-motorcycles/domain/errors';
+import { MotorcycleMileageError } from '@triumph-motorcycles//domain/errors/motorcycle/MotorcycleMileageError';
+import { MotorcycleUpdateServiceDetailsError } from '@triumph-motorcycles//domain/errors/motorcycle/MotorcycleUpdateServiceDetailsError';
+import { MotorcycleBrand } from '@triumph-motorcycles//domain/values/motorcycle/MotorcycleBrand';
+import { MotorcycleModel } from '@triumph-motorcycles//domain/values/motorcycle/MotorcycleModel';
+import { MotorcycleYear } from '@triumph-motorcycles//domain/values/motorcycle/MotorcycleYear';
 
 export class MotorcycleEntity {
   private constructor(

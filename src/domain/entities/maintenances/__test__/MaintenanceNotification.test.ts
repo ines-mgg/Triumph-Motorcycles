@@ -1,9 +1,7 @@
-import { MaintenanceNotificationType } from '@triumph-motorcycles/domain/types';
+import { MaintenanceNotificationType } from '@triumph-motorcycles/domain/types/motorcycle';
 import { MaintenanceNotificationEntity } from '../MaintenanceNotificationEntity';
-import {
-  MaintenanceNotificationDate,
-  MaintenanceNotificationMessage,
-} from '@triumph-motorcycles/domain/values';
+import { MaintenanceNotificationDate } from '@triumph-motorcycles/domain/values/maintenanceNotification/MaintenanceNotificationDate';
+import { MaintenanceNotificationMessage } from '@triumph-motorcycles/domain/values/maintenanceNotification/MaintenanceNotificationMessage';
 
 describe('MaintenanceNotificationEntity', () => {
   describe('create', () => {

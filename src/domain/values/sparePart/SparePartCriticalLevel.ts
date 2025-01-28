@@ -1,4 +1,4 @@
-import { SparePartCriticalLevelError } from '@triumph-motorcycles/domain/errors';
+import { SparePartCriticalLevelError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartCriticalLevelError';
 import { Value } from '../Value';
 
 export class SparePartCriticalLevel implements Value<number> {

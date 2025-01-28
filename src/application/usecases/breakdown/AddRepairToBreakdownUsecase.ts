@@ -1,5 +1,5 @@
-import { RepairEntity } from '@triumph-motorcycles/domain/entities';
-import { BreakdownRepository } from '@triumph-motorcycles/application/repositories';
+import { RepairEntity } from '@triumph-motorcycles/domain/entities/maintenances/RepairEntity';
+import { BreakdownRepository } from '@triumph-motorcycles/application/repositories/BreakdownRepository';
 
 export class AddRepairToBreakdownUsecase {
   constructor(private readonly breakdownRepository: BreakdownRepository) {}

@@ -1,5 +1,5 @@
-import { MotorcycleRepository } from '@triumph-motorcycles/application/repositories';
-import { MotorStatus } from '@triumph-motorcycles/domain/types';
+import { MotorcycleRepository } from '@triumph-motorcycles/application/repositories/MotorcycleRepository';
+import { MotorStatus } from '@triumph-motorcycles/domain/types/motorcycle';
 
 export class UpdateMotorcycleStatusUsecase {
   constructor(private readonly motorcycleRepository: MotorcycleRepository) {}

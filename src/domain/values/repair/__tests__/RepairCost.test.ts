@@ -1,5 +1,5 @@
 import { RepairCost } from '../RepairCost';
-import { RepairCostError } from '@triumph-motorcycles/domain/errors';
+import { RepairCostError } from '@triumph-motorcycles/domain/errors/repair/RepairCostError';
 
 describe('RepairCost', () => {
   it('should create a valid RepairCost instance', () => {

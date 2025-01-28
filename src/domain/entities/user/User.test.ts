@@ -1,10 +1,8 @@
-import {
-  PasswordTooShortError,
-  UsernameTooShortError,
-} from '@triumph-motorcycles/domain/errors';
 import { DriverEntity } from '../drives/DriverEntity';
 import { UserEntity } from './UserEntity';
 import { now } from '../../../tests/testUtils';
+import { PasswordTooShortError } from '@triumph-motorcycles/domain/errors/user/PasswordTooShortError';
+import { UsernameTooShortError } from '@triumph-motorcycles/domain/errors/user/UsernameTooShortError';
 
 describe('UserEntity', () => {
   let driver: DriverEntity;

@@ -1,8 +1,7 @@
+import { PasswordDoesNotIncludeSymbolError } from '@triumph-motorcycles/domain/errors/user/PasswordDoesNotIncludeSymbolError';
+import { PasswordDoesNotIncludeUppercaseLetterError } from '@triumph-motorcycles/domain/errors/user/PasswordDoesNotIncludeUppercaseLetterError';
 import { Password } from '../Password';
-import {
-  PasswordDoesNotIncludeUppercaseLetterError,
-  PasswordDoesNotIncludeSymbolError,
-} from '@triumph-motorcycles/domain/errors';
+
 import bcrypt from 'bcrypt';
 
 describe('Password', () => {

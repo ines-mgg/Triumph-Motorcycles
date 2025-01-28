@@ -1,5 +1,5 @@
 import { WarrantyStartDate } from '../WarrantyStartDate';
-import { WarrantyStartDateError } from '@triumph-motorcycles/domain/errors';
+import { WarrantyStartDateError } from '@triumph-motorcycles/domain/errors/warranty/WarrantyStartDateError';
 
 describe('WarrantyStartDate', () => {
   it('should create a valid WarrantyStartDate instance', () => {

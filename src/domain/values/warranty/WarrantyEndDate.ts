@@ -1,4 +1,4 @@
-import { WarrantyEndDateError } from '@triumph-motorcycles/domain/errors';
+import { WarrantyEndDateError } from '@triumph-motorcycles/domain/errors/warranty/WarrantyEndDateError';
 import { Value } from '../Value';
 
 export class WarrantyEndDate implements Value<Date> {

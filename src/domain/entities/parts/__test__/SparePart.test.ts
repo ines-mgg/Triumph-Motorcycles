@@ -1,4 +1,4 @@
-import { OrderItemQuantityOrderedError } from '@triumph-motorcycles/domain/errors';
+import { OrderItemQuantityOrderedError } from '@triumph-motorcycles/domain/errors/orderItem/OrderItemQuantityOrderedError';
 import { SparePartEntity } from '../SparePartEntity';
 
 describe('SparePartEntity', () => {

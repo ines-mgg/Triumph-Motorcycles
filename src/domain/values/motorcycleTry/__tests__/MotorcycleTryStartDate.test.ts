@@ -1,5 +1,5 @@
 import { StartDate } from '../MotorcycleTryStartDate';
-import { MotorcycleTryStartDateError } from '@triumph-motorcycles/domain/errors';
+import { MotorcycleTryStartDateError } from '@triumph-motorcycles/domain/errors/motorcycleTry/MotorcycleTryStartDateError';
 describe('MotorcycleTryStartDate', () => {
   it('should create a valid MotorcycleTryStartDate instance', () => {
     const now = new Date();

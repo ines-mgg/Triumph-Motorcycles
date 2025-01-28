@@ -1,5 +1,5 @@
-import { AppointmentRepository } from '@triumph-motorcycles/application/repositories';
-import { UnexpectedError } from '@triumph-motorcycles/domain/errors';
+import { AppointmentRepository } from '@triumph-motorcycles/application/repositories/AppointmentRepository';
+import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
 
 export class GetAppointmentReasonDetailsUsecase {
   public constructor(

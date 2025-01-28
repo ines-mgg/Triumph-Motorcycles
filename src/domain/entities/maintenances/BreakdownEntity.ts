@@ -1,13 +1,11 @@
-import {
-  BreakdownDescription,
-  BreakdownReportedDate,
-} from '@triumph-motorcycles/domain/values';
+import { BreakdownDescription } from '@triumph-motorcycles/domain/values/breakdown/BreakdownDescription';
+import { BreakdownReportedDate } from '@triumph-motorcycles/domain/values/breakdown/BreakdownReportedDate';
 import { MotorcycleEntity } from '../drives/MotorcycleEntity';
 import { BreakdownRepairHistoryEntity } from './BreakdownRepairHistoryEntity';
 import { RepairEntity } from './RepairEntity';
 import { WarrantyEntity } from './WarrantyEntity';
 import { v4 as uuidv4 } from 'uuid';
-import { BreakdownInvalidWarrantyError } from '@triumph-motorcycles/domain/errors';
+import { BreakdownInvalidWarrantyError } from '@triumph-motorcycles/domain/errors/breakdown/BreakdownInvalidWarrantyError';
 
 export class BreakdownEntity {
   private readonly repairHistory: BreakdownRepairHistoryEntity;

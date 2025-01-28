@@ -1,4 +1,4 @@
-import { SparePartEntity } from '../entities';
+import { SparePartEntity } from '@triumph-motorcycles/domain/entities/parts/SparePartEntity';
 
 export type MotorStatus = 'Available' | 'InMaintenance' | 'OnTest' | 'Sold';
 

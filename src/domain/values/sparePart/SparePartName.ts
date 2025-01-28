@@ -1,4 +1,4 @@
-import { SparePartNameError } from '@triumph-motorcycles/domain/errors';
+import { SparePartNameError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartNameError';
 import { Value } from '../Value';
 
 export class SparePartName implements Value<string> {

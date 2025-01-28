@@ -1,5 +1,5 @@
 import { MaintenanceNotificationDate } from '../MaintenanceNotificationDate';
-import { MaintenanceNotificationDateError } from '@triumph-motorcycles/domain/errors';
+import { MaintenanceNotificationDateError } from '@triumph-motorcycles/domain/errors/maintenance/MaintenanceNotificationDateError';
 
 describe('MaintenanceNotificationDate', () => {
   it('should create a valid MaintenanceNotificationDate instance', () => {

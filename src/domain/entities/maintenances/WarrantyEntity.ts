@@ -1,10 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 import { MotorcycleEntity } from '../drives/MotorcycleEntity';
-import {
-  WarrantyCoverageDetails,
-  WarrantyEndDate,
-  WarrantyStartDate,
-} from '@triumph-motorcycles/domain/values';
+import { WarrantyEndDate } from '@triumph-motorcycles/domain/values/warranty/WarrantyEndDate';
+import { WarrantyStartDate } from '@triumph-motorcycles/domain/values/warranty/WarrantyStartDate';
+import { WarrantyCoverageDetails } from '@triumph-motorcycles/domain/values/warranty/WarrantyCoverageDetails';
 
 export class WarrantyEntity {
   private constructor(

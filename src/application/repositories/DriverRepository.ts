@@ -1,5 +1,5 @@
-import { DriverEntity } from '@triumph-motorcycles/domain/entities';
-import { DriverNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { DriverEntity } from '@triumph-motorcycles/domain/entities/drives/DriverEntity';
+import { DriverNotFoundError } from '@triumph-motorcycles/domain/errors/driver/DriverNotFoundError';
 
 export interface DriverRepository {
   save(driver: DriverEntity): Promise<void>;

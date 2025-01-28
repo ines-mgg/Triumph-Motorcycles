@@ -1,9 +1,7 @@
-import { MotorcycleEntity } from '@triumph-motorcycles/domain/entities';
-import {
-  BreakdownEntity,
-  WarrantyEntity,
-} from '@triumph-motorcycles/domain/entities';
-import { BreakdownRepository } from '@triumph-motorcycles/application/repositories';
+import { MotorcycleEntity } from '@triumph-motorcycles/domain/entities/drives/MotorcycleEntity';
+import { WarrantyEntity } from '@triumph-motorcycles/domain/entities/maintenances/WarrantyEntity';
+import { BreakdownEntity } from '@triumph-motorcycles/domain/entities/maintenances/BreakdownEntity';
+import { BreakdownRepository } from '@triumph-motorcycles/application/repositories/BreakdownRepository';
 
 export class ReportBreakdownUsecase {
   constructor(private readonly breakdownRepository: BreakdownRepository) {}

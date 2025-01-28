@@ -1,5 +1,5 @@
-import { AppointmentEntity } from '@triumph-motorcycles/domain/entities';
-import { AppointmentNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { AppointmentEntity } from '@triumph-motorcycles/domain/entities/appointment/AppointmentEntity';
+import { AppointmentNotFoundError } from '@triumph-motorcycles/domain/errors/appointment/AppointmentNotFoundError';
 
 export interface AppointmentRepository {
   save(appointment: AppointmentEntity): Promise<void>;

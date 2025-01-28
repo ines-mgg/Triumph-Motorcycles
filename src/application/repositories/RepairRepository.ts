@@ -1,5 +1,5 @@
-import { RepairEntity } from '@triumph-motorcycles/domain/entities';
-import { RepairNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { RepairEntity } from '@triumph-motorcycles/domain/entities/maintenances/RepairEntity';
+import { RepairNotFoundError } from '@triumph-motorcycles/domain/errors/repair/RepairNotFoundError';
 
 export interface RepairRepository {
   save(repair: RepairEntity): Promise<void>;

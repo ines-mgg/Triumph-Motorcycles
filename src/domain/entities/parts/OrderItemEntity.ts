@@ -1,11 +1,9 @@
-import {
-  OrderItemCostPerUnit,
-  OrderItemDeliveredQuantity,
-  OrderItemQuantityOrdered,
-} from '@triumph-motorcycles/domain/values';
+import { OrderItemCostPerUnit } from '@triumph-motorcycles/domain/values/orderItem/OrderItemCostPerUnit';
+import { OrderItemQuantityOrdered } from '@triumph-motorcycles/domain/values/orderItem/OrderItemQuantityOrdered';
+import { OrderItemDeliveredQuantity } from '@triumph-motorcycles/domain/values/orderItem/OrderItemDeliveredQuantity';
 import { SparePartEntity } from './SparePartEntity';
 import { v4 as uuidv4 } from 'uuid';
-import { OrderItemQuantityExceedError } from '@triumph-motorcycles/domain/errors';
+import { OrderItemQuantityExceedError } from '@triumph-motorcycles/domain/errors/orderItem/OrderItemQuantityExceedError';
 
 export class OrderItemEntity {
   private constructor(

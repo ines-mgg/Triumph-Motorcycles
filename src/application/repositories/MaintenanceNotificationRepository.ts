@@ -1,5 +1,5 @@
-import { MaintenanceNotificationEntity } from '@triumph-motorcycles/domain/entities';
-import { MaintenanceNotificationNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { MaintenanceNotificationEntity } from '@triumph-motorcycles/domain/entities/maintenances/MaintenanceNotificationEntity';
+import { MaintenanceNotificationNotFoundError } from '@triumph-motorcycles/domain/errors/maintenance/MaintenanceNotificationNotFoundError';
 
 export interface MaintenanceNotificationRepository {
   save(notification: MaintenanceNotificationEntity): Promise<void>;

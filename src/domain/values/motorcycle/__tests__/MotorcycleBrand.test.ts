@@ -1,5 +1,5 @@
 import { MotorcycleBrand } from '../MotorcycleBrand';
-import { MotorcycleBrandError } from '@triumph-motorcycles/domain/errors';
+import { MotorcycleBrandError } from '@triumph-motorcycles/domain/errors/motorcycle/MotorcycleBrandError';
 
 describe('MotorcycleBrand', () => {
   it('should create a valid MotorcycleBrand instance', () => {

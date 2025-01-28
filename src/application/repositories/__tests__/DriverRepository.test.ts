@@ -1,5 +1,5 @@
 import { DriverRepository } from '../DriverRepository';
-import { DriverNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { DriverNotFoundError } from '@triumph-motorcycles/domain/errors/driver/DriverNotFoundError';
 import { driver, user } from '../../../tests/testUtils';
 
 describe('DriverRepository', () => {

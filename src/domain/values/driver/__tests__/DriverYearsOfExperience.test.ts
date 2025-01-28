@@ -1,5 +1,5 @@
 import { DriverYearsOfExperience } from '../DriverYearsOfExperience';
-import { ExperienceError } from '@triumph-motorcycles/domain/errors';
+import { ExperienceError } from '@triumph-motorcycles/domain/errors/drivers';
 
 describe('DriverYearsOfExperience', () => {
   it('should create a valid DriverYearsOfExperience instance', () => {

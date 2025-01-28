@@ -1,7 +1,8 @@
-import { CommonRepairAction } from '@triumph-motorcycles/domain/types';
+import { CommonRepairAction } from '@triumph-motorcycles/domain/types/motorcycle';
 import { RepairEntity } from '../RepairEntity';
-import { RepairCost, RepairDate } from '@triumph-motorcycles/domain/values';
 import { breakdown } from '../../../../tests/testUtils';
+import { RepairCost } from '@triumph-motorcycles/domain/values/repair/RepairCost';
+import { RepairDate } from '@triumph-motorcycles/domain/values/repair/RepairDate';
 
 describe('RepairEntity', () => {
   describe('create', () => {

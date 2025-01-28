@@ -1,4 +1,4 @@
-import { OrderRepository } from '@triumph-motorcycles/application/repositories';
+import { OrderRepository } from '@triumph-motorcycles/application/repositories/OrderRepository';
 export class UpdateItemDeliveryUsecase {
   constructor(private readonly orderRepository: OrderRepository) {}
 

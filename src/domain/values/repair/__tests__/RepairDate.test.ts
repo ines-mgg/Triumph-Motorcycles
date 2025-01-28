@@ -1,5 +1,5 @@
 import { RepairDate } from '../RepairDate';
-import { RepairDateError } from '@triumph-motorcycles/domain/errors';
+import { RepairDateError } from '@triumph-motorcycles/domain/errors/repair/RepairDateError';
 import { tomorrow } from '../../../../tests/testUtils';
 
 describe('RepairDate', () => {

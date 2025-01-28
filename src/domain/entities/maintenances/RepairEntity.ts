@@ -1,4 +1,5 @@
-import { RepairCost, RepairDate } from '@triumph-motorcycles/domain/values';
+import { RepairCost } from '@triumph-motorcycles/domain/values/repair/RepairCost';
+import { RepairDate } from '@triumph-motorcycles/domain/values/repair/RepairDate';
 import { CommonRepairAction } from '../../types/motorcycle';
 import { BreakdownEntity } from './BreakdownEntity';
 import { v4 as uuidv4 } from 'uuid';

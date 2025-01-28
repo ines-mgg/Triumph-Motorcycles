@@ -1,4 +1,4 @@
-import { MaintenanceRepository } from '@triumph-motorcycles/application/repositories';
+import { MaintenanceRepository } from '@triumph-motorcycles/application/repositories/MaintenanceRepository';
 
 export class DeleteMaintenanceUsecase {
   constructor(private readonly maintenanceRepository: MaintenanceRepository) {}

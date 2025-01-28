@@ -1,5 +1,5 @@
 import { DriverName } from '../DriverName';
-import { DriverNameError } from '@triumph-motorcycles/domain/errors';
+import { DriverNameError } from '@triumph-motorcycles/domain/errors/driver/DriverNameError';
 
 describe('DriverName', () => {
   it('should create a valid DriverName instance', () => {

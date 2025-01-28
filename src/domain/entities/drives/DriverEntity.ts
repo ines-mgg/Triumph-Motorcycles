@@ -1,19 +1,15 @@
-import {
-  DriverEmailError,
-  DriverPhoneError,
-  ExperienceError,
-} from '@triumph-motorcycles/domain/errors';
-
+import { DriverEmailError } from '@triumph-motorcycles/domain/errors/drivers';
+import { DriverPhoneError } from '@triumph-motorcycles/domain/errors/drivers';
+import { ExperienceError } from '@triumph-motorcycles/domain/errors/drivers';
 import { v4 as uuidv4 } from 'uuid';
 import { CompanyEntity } from '../company/CompanyEntity';
-import {
-  DriverLicense,
-  DriverName,
-  DriverEmail,
-  DriverPhone,
-  DriverYearsOfExperience,
-} from '@triumph-motorcycles/domain/values';
-import { DrivingRecord, LicenseType } from '@triumph-motorcycles/domain/types';
+import { DrivingRecord } from '@triumph-motorcycles/domain/types/motorcycle';
+import { LicenseType } from '@triumph-motorcycles/domain/types/motorcycle';
+import { DriverEmail } from '@triumph-motorcycles/domain/values/driver/DriverEmail';
+import { DriverLicense } from '@triumph-motorcycles/domain/values/driver/DriverLicense';
+import { DriverName } from '@triumph-motorcycles/domain/values/driver/DriverName';
+import { DriverPhone } from '@triumph-motorcycles/domain/values/driver/DriverPhone';
+import { DriverYearsOfExperience } from '@triumph-motorcycles/domain/values/driver/DriverYearsOfExperience';
 
 export class DriverEntity {
   private constructor(

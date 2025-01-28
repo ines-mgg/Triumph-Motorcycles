@@ -1,4 +1,4 @@
-import { MotorcycleTryNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { MotorcycleTryNotFoundError } from '@triumph-motorcycles/domain/errors/motorcycleTry/MotorcycleTestNotFoundError';
 import { motorcycleTry } from '../../../tests/testUtils';
 import { MotorcycleTryRepository } from '../MotorcycleTryRepository';
 

@@ -1,13 +1,9 @@
-import {
-  OrderItemQuantityOrderedError,
-  SparePartQuantityInStockError,
-} from '@triumph-motorcycles/domain/errors';
-import {
-  SparePartCost,
-  SparePartCriticalLevel,
-  SparePartName,
-  SparePartQuantityInStock,
-} from '@triumph-motorcycles/domain/values';
+import { OrderItemQuantityOrderedError } from '@triumph-motorcycles/domain/errors/orderItem/OrderItemQuantityOrderedError.ts';
+import { SparePartQuantityInStockError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartQuantityInStockError';
+import { SparePartCost } from '@triumph-motorcycles/domain/values/sparePart/SparePartCost';
+import { SparePartCriticalLevel } from '@triumph-motorcycles/domain/values/sparePart/SparePartCriticalLevel';
+import { SparePartName } from '@triumph-motorcycles/domain/values/sparePart/SparePartName';
+import { SparePartQuantityInStock } from '@triumph-motorcycles/domain/values/sparePart/SparePartQuantityInStock';
 import { v4 as uuidv4 } from 'uuid';
 
 export class SparePartEntity {

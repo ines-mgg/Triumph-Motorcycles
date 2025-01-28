@@ -1,12 +1,11 @@
-import { UserRepository } from '@triumph-motorcycles/application/repositories';
-import { SignUpResponse } from '@triumph-motorcycles/application/responses';
-import { AuthenticationService } from '@triumph-motorcycles/application/services';
-import { UserEntity } from '@triumph-motorcycles/domain/entities';
-import {
-  UnexpectedError,
-  UserAlreadyExistsError,
-} from '@triumph-motorcycles/domain/errors';
-import { Password, Username } from '@triumph-motorcycles/domain/values';
+import { UserRepository } from '@triumph-motorcycles/application/repositories/UserRepository';
+import { SignUpResponse } from '@triumph-motorcycles/application/responses/SignUpResponse';
+import { AuthenticationService } from '@triumph-motorcycles/application/services/AuthenticationService';
+import { UserEntity } from '@triumph-motorcycles/domain/entities/user/UserEntity';
+import { UserAlreadyExistsError } from '@triumph-motorcycles/domain/errors/user/UserAlreadyExistsError';
+import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
+import { Password } from '@triumph-motorcycles/domain/values/user/Password';
+import { Username } from '@triumph-motorcycles/domain/values/user/Username';
 
 export class SignUpUsecase {
   public constructor(

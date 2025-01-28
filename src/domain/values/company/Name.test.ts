@@ -1,8 +1,6 @@
 import { Name } from './Name';
-import {
-  NameAlphanumericError,
-  NameLengthError,
-} from '@triumph-motorcycles/domain/errors';
+import { NameLengthError } from '@triumph-motorcycles/domain/errors/company/NameLengthError';
+import { NameAlphanumericError } from '@triumph-motorcycles/domain/errors/company/NameAlphanumericError';
 
 describe('Name', () => {
   it('should create a valid Name instance', () => {

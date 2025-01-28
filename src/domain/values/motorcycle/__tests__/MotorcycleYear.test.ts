@@ -1,5 +1,5 @@
 import { MotorcycleYear } from '../MotorcycleYear';
-import { MotorcycleYearError } from '@triumph-motorcycles/domain/errors';
+import { MotorcycleYearError } from '@triumph-motorcycles/domain/errors/motorcycle/MotorcycleYearError';
 
 describe('MotorcycleYear', () => {
   it('should create a valid MotorcycleYear instance', () => {

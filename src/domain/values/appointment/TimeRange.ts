@@ -1,4 +1,4 @@
-import { InvalidTimeRangeError } from '@triumph-motorcycles/domain/errors';
+import { InvalidTimeRangeError } from '@triumph-motorcycles/domain/errors/appointment/InvalidTimeRangeError';
 import { Value } from '../Value';
 
 export class TimeRange implements Value<{ startTime: Date; endTime: Date }> {

@@ -1,4 +1,4 @@
-import { SparePartCostError } from '@triumph-motorcycles/domain/errors';
+import { SparePartCostError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartCostError';
 import { Value } from '../Value';
 
 export class SparePartCost implements Value<number> {

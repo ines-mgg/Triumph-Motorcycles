@@ -1,4 +1,4 @@
-import { MotorcycleBrandError } from '@triumph-motorcycles/domain/errors';
+import { MotorcycleBrandError } from '@triumph-motorcycles/domain/errors/motorcycle/MotorcycleBrandError';
 import { Value } from '../Value';
 
 export class MotorcycleBrand implements Value<string> {

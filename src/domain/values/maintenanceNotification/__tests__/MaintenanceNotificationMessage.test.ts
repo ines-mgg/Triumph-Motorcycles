@@ -1,5 +1,5 @@
 import { MaintenanceNotificationMessage } from '../MaintenanceNotificationMessage';
-import { MaintenanceNotificationMessageError } from '@triumph-motorcycles/domain/errors';
+import { MaintenanceNotificationMessageError } from '@triumph-motorcycles/domain/errors/maintenance/MaintenanceNotificationMessageError';
 
 const MAX_MESSAGE_LENGTH = 10000;
 

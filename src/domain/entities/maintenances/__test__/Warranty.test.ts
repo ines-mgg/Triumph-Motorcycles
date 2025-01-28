@@ -1,10 +1,8 @@
-import {
-  WarrantyCoverageDetailsError,
-  WarrantyEndDateError,
-  WarrantyStartDateError,
-} from '@triumph-motorcycles/domain/errors';
 import { WarrantyEntity } from '../WarrantyEntity';
 import { motorcycle } from '../../../../tests/testUtils';
+import { WarrantyCoverageDetailsError } from '@triumph-motorcycles/domain/errors/warranty/WarrantyCoverageDetailsError';
+import { WarrantyEndDateError } from '@triumph-motorcycles/domain/errors/warranty/WarrantyEndDateError';
+import { WarrantyStartDateError } from '@triumph-motorcycles/domain/errors/warranty/WarrantyStartDateError';
 
 describe('WarrantyEntity', () => {
   let startDate: Date;

@@ -1,4 +1,4 @@
-import { MaintenanceNotificationDateError } from '@triumph-motorcycles/domain/errors';
+import { MaintenanceNotificationDateError } from '@triumph-motorcycles/domain/errors/maintenance/MaintenanceNotificationDateError';
 import { Value } from '../Value';
 
 export class MaintenanceNotificationDate implements Value<Date> {

@@ -1,4 +1,4 @@
-import { RepairEntity } from '@triumph-motorcycles/domain/entities';
+import { RepairEntity } from '@triumph-motorcycles/domain/entities/maintenances/RepairEntity';
 
 export interface BreakdownRepairHistoryRepository {
   saveRepair(repair: RepairEntity): Promise<void>;

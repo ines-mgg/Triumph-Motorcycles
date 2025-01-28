@@ -1,5 +1,5 @@
 import { MaintenanceIntervalTime } from '../MaintenanceIntervalTime';
-import { MaintenanceIntervalTimeError } from '@triumph-motorcycles/domain/errors';
+import { MaintenanceIntervalTimeError } from '@triumph-motorcycles/domain/errors/maintenance/MaintenanceIntervalTime';
 
 describe('MaintenanceIntervalTime', () => {
   it('should create a valid MaintenanceIntervalTime instance', () => {

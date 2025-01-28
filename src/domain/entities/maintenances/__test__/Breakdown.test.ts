@@ -1,13 +1,11 @@
-import {
-  BreakdownDescriptionError,
-  BreakdownInvalidWarrantyError,
-  BreakdownReportedDateError,
-} from '@triumph-motorcycles/domain/errors';
 import { BreakdownEntity } from '../BreakdownEntity';
-import { CommonRepairAction } from '@triumph-motorcycles/domain/types';
+import { CommonRepairAction } from '@triumph-motorcycles/domain/types/motorcycle';
 import { RepairEntity } from '../RepairEntity';
 import { WarrantyEntity } from '../WarrantyEntity';
 import { motorcycle } from '../../../../tests/testUtils';
+import { BreakdownDescriptionError } from '@triumph-motorcycles/domain/errors/breakdown/BreakdownDescriptionError';
+import { BreakdownInvalidWarrantyError } from '@triumph-motorcycles/domain/errors/breakdown/BreakdownInvalidWarrantyError';
+import { BreakdownReportedDateError } from '@triumph-motorcycles/domain/errors/breakdown/BreakdownReportedDateError';
 
 describe('BreakdownEntity', () => {
   describe('create', () => {

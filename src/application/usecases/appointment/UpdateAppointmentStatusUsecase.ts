@@ -1,7 +1,7 @@
-import { AppointmentRepository } from '@triumph-motorcycles/application/repositories';
-import { AppointmentEntity } from '@triumph-motorcycles/domain/entities';
-import { UnexpectedError } from '@triumph-motorcycles/domain/errors';
-import { AppointmentStatus } from '@triumph-motorcycles/domain/types';
+import { AppointmentRepository } from '@triumph-motorcycles/application/repositories/AppointmentRepository';
+import { AppointmentEntity } from '@triumph-motorcycles/domain/entities/appointment/AppointmentEntity';
+import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
+import { AppointmentStatus } from '@triumph-motorcycles/domain/types/AppointmentStatus';
 
 export class UpdateAppointmentStatusUsecase {
   public constructor(

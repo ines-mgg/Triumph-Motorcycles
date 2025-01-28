@@ -1,5 +1,5 @@
 import { OrderItemQuantityOrdered } from '../OrderItemQuantityOrdered';
-import { OrderItemQuantityOrderedError } from '@triumph-motorcycles/domain/errors';
+import { OrderItemQuantityOrderedError } from '@triumph-motorcycles/domain/errors/orderItem/OrderItemQuantityOrderedError';
 
 describe('OrderItemQuantityOrdered', () => {
   it('should create a valid OrderItemQuantityOrdered instance', () => {

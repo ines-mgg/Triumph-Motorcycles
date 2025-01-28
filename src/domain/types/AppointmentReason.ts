@@ -1,9 +1,7 @@
-import {
-  LocationEntity,
-  MaintenanceEntity,
-  MotorcycleTryEntity,
-  RepairEntity,
-} from '@triumph-motorcycles/domain/entities';
+import { LocationEntity } from '@triumph-motorcycles/domain/entities/location/LocationEntity.ts';
+import { MotorcycleTryEntity } from '@triumph-motorcycles/domain/entities/drives/MotorcycleTryEntity';
+import { MaintenanceEntity } from '@triumph-motorcycles/domain/entities/maintenances/MaintenanceEntity';
+import { RepairEntity } from '@triumph-motorcycles/domain/entities/maintenances/RepairEntity';
 
 export type AppointmentReason =
   | { type: 'Location'; entity: LocationEntity }

@@ -1,5 +1,5 @@
 import { OrderItemRepository } from '../OrderItemRepository';
-import { OrderItemNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { OrderItemNotFoundError } from '@triumph-motorcycles/domain/errors/orderItem/OrderItemNotFoundError';
 import { orderItem } from '../../../tests/testUtils';
 
 describe('OrderItemRepository', () => {

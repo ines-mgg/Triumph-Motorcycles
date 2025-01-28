@@ -1,5 +1,5 @@
-import { InvalidMaintenanceRecordError } from '@triumph-motorcycles/domain/errors';
-import { MaintenanceRecord } from '@triumph-motorcycles/domain/types';
+import { InvalidMaintenanceRecordError } from '@triumph-motorcycles/domain/errors/maintenances';
+import { MaintenanceRecord } from '@triumph-motorcycles/domain/types/motorcycle';
 import { SparePartEntity } from '../parts/SparePartEntity';
 
 export class MaintenanceHistoryEntity {

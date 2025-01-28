@@ -1,5 +1,5 @@
 import { SparePartName } from '../SparePartName';
-import { SparePartNameError } from '@triumph-motorcycles/domain/errors';
+import { SparePartNameError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartNameError';
 
 describe('SparePartName', () => {
   it('should create a valid SparePartName instance', () => {

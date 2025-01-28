@@ -1,5 +1,5 @@
 import { Username } from '../Username';
-import { UsernameTooShortError } from '@triumph-motorcycles/domain/errors';
+import { UsernameTooShortError } from '@triumph-motorcycles/domain/errors/user/UsernameTooShortError';
 
 describe('Username', () => {
   it('should create a valid Username instance', () => {

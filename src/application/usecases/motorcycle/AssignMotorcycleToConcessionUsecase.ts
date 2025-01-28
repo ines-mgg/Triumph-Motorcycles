@@ -1,8 +1,5 @@
-import {
-  MotorcycleRepository,
-  ConcessionRepository,
-} from '@triumph-motorcycles/application/repositories';
-
+import { MotorcycleRepository } from '@triumph-motorcycles/application/repositories/MotorcycleRepository';
+import { ConcessionRepository } from '@triumph-motorcycles/application/repositories/ConcessionRepository';
 export class AssignMotorcycleToConcessionUsecase {
   constructor(
     private readonly motorcycleRepository: MotorcycleRepository,

@@ -1,5 +1,5 @@
 import { AuthenticationService } from '../AuthenticationService';
-import { UnauthorizedError } from '@triumph-motorcycles/domain/errors';
+import { UnauthorizedError } from '@triumph-motorcycles/domain/errors/user/UnauthorizedError';
 
 describe('AuthenticationService', () => {
   let authenticationService: AuthenticationService;

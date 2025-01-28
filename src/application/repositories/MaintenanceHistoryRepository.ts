@@ -1,5 +1,5 @@
-import { MaintenanceHistoryNotFoundError } from '@triumph-motorcycles/domain/errors';
-import { MaintenanceRecord } from '@triumph-motorcycles/domain/types';
+import { MaintenanceHistoryNotFoundError } from '@triumph-motorcycles/domain/errors/maintenance/MaintenanceHistoryNotFoundError';
+import { MaintenanceRecord } from '@triumph-motorcycles/domain/types/motorcycle';
 
 export interface MaintenanceHistoryRepository {
   save(record: MaintenanceRecord): Promise<void>;

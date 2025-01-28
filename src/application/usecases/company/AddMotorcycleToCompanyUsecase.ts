@@ -1,9 +1,7 @@
-import {
-  CompanyEntity,
-  MotorcycleEntity,
-} from '@triumph-motorcycles/domain/entities';
-import { CompanyRepository } from '@triumph-motorcycles/application/repositories';
-import { UnexpectedError } from '@triumph-motorcycles/domain/errors';
+import { CompanyEntity } from '@triumph-motorcycles/domain/entities/company/CompanyEntity';
+import { MotorcycleEntity } from '@triumph-motorcycles/domain/entities/drives/MotorcycleEntity';
+import { CompanyRepository } from '@triumph-motorcycles/application/repositories/CompanyRepository';
+import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
 
 export class AddMotorcycleToCompanyUsecase {
   public constructor(private readonly companyRepository: CompanyRepository) {}

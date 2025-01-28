@@ -1,5 +1,5 @@
 import { MaintenanceRepository } from '../MaintenanceRepository';
-import { MaintenanceNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { MaintenanceNotFoundError } from '@triumph-motorcycles/domain/errors/maintenance/MaintenanceNotFoundError';
 import { maintenance } from '../../../tests/testUtils';
 
 describe('MaintenanceRepository', () => {

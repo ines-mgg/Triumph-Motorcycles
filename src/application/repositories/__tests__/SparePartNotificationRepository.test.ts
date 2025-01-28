@@ -1,5 +1,5 @@
 import { SparePartNotificationRepository } from '../SparePartNotificationRepository';
-import { SparePartNotificationNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { SparePartNotificationNotFoundError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartNotificationNotFoundError';
 import { notificationEntity } from '../../../tests/testUtils';
 
 describe('SparePartNotificationRepository', () => {

@@ -1,4 +1,4 @@
-import { UserRepository } from '@triumph-motorcycles/application/repositories';
+import { UserRepository } from '@triumph-motorcycles/application/repositories/UserRepository';
 
 export class UpdateUserPasswordUsecase {
   constructor(private readonly userRepository: UserRepository) {}

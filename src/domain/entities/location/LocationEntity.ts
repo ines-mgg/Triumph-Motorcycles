@@ -1,12 +1,11 @@
-import { EndDate, StartDate } from '@triumph-motorcycles/domain/values';
+import { CancelLocationError } from '@triumph-motorcycles/domain/errors/location/CancelLocationError';
+import { EndDateError } from '@triumph-motorcycles/domain/errors/location/EndDateError';
+import { EndLocationError } from '@triumph-motorcycles/domain/errors/location/EndLocationError';
+import { EndDate } from '@triumph-motorcycles/domain/values/motorcycleTry/MotorcycleTryEndDate';
+import { StartDate } from '@triumph-motorcycles/domain/values/motorcycleTry/MotorcycleTryStartDate';
 import { MotorcycleEntity } from '../drives/MotorcycleEntity';
 import { UserEntity } from '../user/UserEntity';
-import { LocationStatus } from '@triumph-motorcycles/domain/types';
-import {
-  CancelLocationError,
-  EndDateError,
-  EndLocationError,
-} from '@triumph-motorcycles/domain/errors';
+import { LocationStatus } from '@triumph-motorcycles/domain/types/LocationStatus';
 import { v4 as uuidv4 } from 'uuid';
 
 export class LocationEntity {
@@ -49,7 +48,7 @@ export class LocationEntity {
     if (this.status === 'completed' || this.status === 'canceled')
       return new EndLocationError();
 
-    const end = EndDate.from(endDate, this.startDate);
+    const end = EndDate.from(endDate, this.startDate.value);
     if (end instanceof Error) return end;
 
     this.endDate = end;

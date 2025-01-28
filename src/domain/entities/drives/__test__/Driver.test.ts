@@ -1,11 +1,11 @@
+import { DriverNameError } from '@triumph-motorcycles/domain/errors/driver/DriverNameError';
 import {
   DriverEmailError,
-  DriverNameError,
   ExperienceError,
-} from '@triumph-motorcycles/domain/errors';
+} from '@triumph-motorcycles/domain/errors/drivers';
 import { DriverEntity } from '../DriverEntity';
 
-import { DrivingRecord } from '@triumph-motorcycles/domain/types';
+import { DrivingRecord } from '@triumph-motorcycles/domain/types/motorcycle';
 
 describe('DriverEntity', () => {
   it('should create a driver entity successfully with valid inputs', () => {

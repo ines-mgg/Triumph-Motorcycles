@@ -1,4 +1,4 @@
-import { DriverRepository } from '@triumph-motorcycles/application/repositories';
+import { DriverRepository } from '@triumph-motorcycles/application/repositories/DriverRepository';
 
 export class UpdateDriverExperienceUsecase {
   constructor(private readonly driverRepository: DriverRepository) {}

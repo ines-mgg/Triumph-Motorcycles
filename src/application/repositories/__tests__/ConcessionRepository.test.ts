@@ -1,5 +1,5 @@
 import { ConcessionRepository } from '../ConcessionRepository';
-import { ConcessionNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { ConcessionNotFoundError } from '@triumph-motorcycles/domain/errors/concession/ConcessionNotFoundError';
 import { concession } from '../../../tests/testUtils';
 
 describe('ConcessionRepository', () => {

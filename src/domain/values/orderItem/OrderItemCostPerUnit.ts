@@ -1,4 +1,4 @@
-import { OrderItemCostPerUnitError } from '@triumph-motorcycles/domain/errors';
+import { OrderItemCostPerUnitError } from '@triumph-motorcycles/domain/errors/orderItem/OrderItemCostPerUnitError';
 import { Value } from '../Value';
 
 export class OrderItemCostPerUnit implements Value<number> {

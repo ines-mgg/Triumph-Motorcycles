@@ -1,4 +1,4 @@
-import { UsernameTooShortError } from '@triumph-motorcycles/domain/errors';
+import { UsernameTooShortError } from '@triumph-motorcycles/domain/errors/user/UsernameTooShortError';
 import { Value } from '../Value';
 
 export class Username implements Value<string> {

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "allowJs": true,
     "composite": true,
     "declaration": true,
@@ -26,23 +26,17 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@triumph-motorcycles/application/repositories": [
-        "./src/application/repositories/index.ts"
+        "src/application/repositories"
       ],
       "@triumph-motorcycles/application/responses": [
-        "./src/application/responses/index.ts"
+        "src/application/responses"
       ],
-      "@triumph-motorcycles/application/services": [
-        "./src/application/services/index.ts"
-      ],
-      "@triumph-motorcycles/application/usecases": [
-        "./src/application/usecases/index.ts"
-      ],
-      "@triumph-motorcycles/domain/entities": [
-        "./src/domain/entities/index.ts"
-      ],
-      "@triumph-motorcycles/domain/errors": ["./src/domain/errors/index.ts"],
-      "@triumph-motorcycles/domain/types": ["./src/domain/types/index.ts"],
-      "@triumph-motorcycles/domain/values": ["./src/domain/values/index.ts"]
+      "@triumph-motorcycles/application/services": ["src/application/services"],
+      "@triumph-motorcycles/application/usecases": ["src/application/usecases"],
+      "@triumph-motorcycles/domain/entities": ["src/domain/entities"],
+      "@triumph-motorcycles/domain/errors": ["src/domain/errors"],
+      "@triumph-motorcycles/domain/types": ["src/domain/types"],
+      "@triumph-motorcycles/domain/values": ["src/domain/values"]
     }
   },
   "include": ["src"],

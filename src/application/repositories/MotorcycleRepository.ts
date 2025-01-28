@@ -1,5 +1,5 @@
-import { MotorcycleEntity } from '@triumph-motorcycles/domain/entities';
-import { MotorcycleNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { MotorcycleEntity } from '@triumph-motorcycles/domain/entities/drives/MotorcycleEntity';
+import { MotorcycleNotFoundError } from '@triumph-motorcycles/domain/errors/motorcycle/MotorcycleNotFoundError';
 
 export interface MotorcycleRepository {
   save(motorcycle: MotorcycleEntity): Promise<void>;

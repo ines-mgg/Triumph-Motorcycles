@@ -1,6 +1,6 @@
-import { MaintenanceNotificationEntity } from '@triumph-motorcycles/domain/entities';
-import { MaintenanceNotificationRepository } from '@triumph-motorcycles/application/repositories';
-import { MaintenanceNotificationType } from '@triumph-motorcycles/domain/types';
+import { MaintenanceNotificationEntity } from '@triumph-motorcycles/domain/entities/maintenances/MaintenanceNotificationEntity';
+import { MaintenanceNotificationRepository } from '@triumph-motorcycles/application/repositories/MaintenanceNotificationRepository';
+import { MaintenanceNotificationType } from '@triumph-motorcycles/domain/types/motorcycle';
 
 export class CreateMaintenanceNotificationUsecase {
   constructor(

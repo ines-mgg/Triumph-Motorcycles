@@ -1,7 +1,5 @@
-import {
-  MotorcycleRepository,
-  CompanyRepository,
-} from '@triumph-motorcycles/application/repositories';
+import { MotorcycleRepository } from '@triumph-motorcycles/application/repositories/MotorcycleRepository';
+import { CompanyRepository } from '@triumph-motorcycles/application/repositories/CompanyRepository';
 
 export class AssignMotorcycleToCompanyUsecase {
   constructor(

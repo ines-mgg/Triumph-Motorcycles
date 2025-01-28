@@ -1,9 +1,7 @@
-import {
-  MotorcycleTryEndDateError,
-  MotorcycleTryStartDateError,
-} from '@triumph-motorcycles/domain/errors';
 import { MotorcycleTryEntity } from '../MotorcycleTryEntity';
 import { motorcycle, driver } from '../../../../tests/testUtils';
+import { MotorcycleTryEndDateError } from '@triumph-motorcycles/domain/errors/motorcycleTry/MotorcycleTryEndDateError';
+import { MotorcycleTryStartDateError } from '@triumph-motorcycles/domain/errors/motorcycleTry/MotorcycleTryStartDateError';
 
 describe('MotorcycleTryEntity', () => {
   it('should create a valid MotorcycleTryEntity', () => {

@@ -1,5 +1,5 @@
 import { WarrantyRepository } from '../WarrantyRepository';
-import { WarrantyNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { WarrantyNotFoundError } from '@triumph-motorcycles/domain/errors/warranty/WarrantyNotFoundError';
 import { warranty, motorcycle } from '../../../tests/testUtils';
 
 describe('WarrantyRepository', () => {

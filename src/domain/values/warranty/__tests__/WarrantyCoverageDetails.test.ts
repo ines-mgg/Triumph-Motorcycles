@@ -1,5 +1,5 @@
 import { WarrantyCoverageDetails } from '../WarrantyCoverageDetails';
-import { WarrantyCoverageDetailsError } from '@triumph-motorcycles/domain/errors';
+import { WarrantyCoverageDetailsError } from '@triumph-motorcycles/domain/errors/warranty/WarrantyCoverageDetailsError';
 
 describe('WarrantyCoverageDetails', () => {
   it('should create a valid WarrantyCoverageDetails instance', () => {

@@ -1,4 +1,4 @@
-import { UnauthorizedError } from '@triumph-motorcycles/domain/errors';
+import { UnauthorizedError } from '@triumph-motorcycles/domain/errors/user/UnauthorizedError';
 
 export interface PasswordService {
   hashPassword: (plainPassword: string) => Promise<string>;

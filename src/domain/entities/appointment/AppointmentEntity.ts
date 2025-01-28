@@ -1,10 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
-import {
-  AppointmentReason,
-  AppointmentStatus,
-} from '@triumph-motorcycles/domain/types';
+import { AppointmentReason } from '@triumph-motorcycles/domain/types/AppointmentReason';
+import { AppointmentStatus } from '@triumph-motorcycles/domain/types/AppointmentStatus';
 import { UserEntity } from '../user/UserEntity';
-import { Notes, TimeRange } from '@triumph-motorcycles/domain/values';
+import { Notes } from '@triumph-motorcycles/domain/values/appointment/Notes';
+import { TimeRange } from '@triumph-motorcycles/domain/values/appointment/TimeRange';
 
 export class AppointmentEntity {
   private constructor(

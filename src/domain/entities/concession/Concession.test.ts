@@ -1,6 +1,7 @@
 import { ConcessionEntity } from './ConcessionEntity';
-import { NameAlphanumericError } from '@triumph-motorcycles/domain/errors';
+
 import { user, motorcycle } from '../../../tests/testUtils';
+import { NameAlphanumericError } from '@triumph-motorcycles/domain/errors/concession/NameAlphanumericError';
 
 describe('ConcessionEntity', () => {
   describe('create', () => {

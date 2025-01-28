@@ -1,11 +1,9 @@
-import {
-  SparePartOrderRecordCostPerUnit,
-  SparePartOrderRecordDeliveredQuantity,
-  SparePartOrderRecordPartName,
-  SparePartOrderRecordQuantityOrdered,
-  SparePartOrderRecordRemainingQuantity,
-  SparePartOrderRecordTotalCost,
-} from '@triumph-motorcycles/domain/values';
+import { SparePartOrderRecordCostPerUnit } from '@triumph-motorcycles/domain/values/sparePartOrderRecord/SparePartOrderRecordCostPerUnit.ts';
+import { SparePartOrderRecordPartName } from '@triumph-motorcycles/domain/values/sparePartOrderRecord/SparePartOrderRecordPartName';
+import { SparePartOrderRecordQuantityOrdered } from '@triumph-motorcycles/domain/values/sparePartOrderRecord/SparePartOrderRecordQuantityOrdered';
+import { SparePartOrderRecordTotalCost } from '@triumph-motorcycles/domain/values/sparePartOrderRecord/SparePartOrderRecordTotalCost';
+import { SparePartOrderRecordRemainingQuantity } from '@triumph-motorcycles/domain/values/sparePartOrderRecord/SparePartOrderRecordRemainingQuantity';
+import { SparePartOrderRecordDeliveredQuantity } from '@triumph-motorcycles/domain/values/sparePartOrderRecord/SparePartOrderRecordDeliveredQuantity';
 import { SparePartEntity } from './SparePartEntity';
 import { v4 as uuidv4 } from 'uuid';
 

@@ -1,4 +1,4 @@
-import { BreakdownReportedDateError } from '@triumph-motorcycles/domain/errors';
+import { BreakdownReportedDateError } from '@triumph-motorcycles/domain/errors/breakdown/BreakdownReportedDateError';
 import { Value } from '../Value';
 
 export class BreakdownReportedDate implements Value<Date> {

@@ -1,5 +1,5 @@
-import { SparePartHistoryRecordRepository } from '@triumph-motorcycles/application/repositories';
-import { SparePartHistoryEntity } from '@triumph-motorcycles/domain/entities';
+import { SparePartHistoryRecordRepository } from '@triumph-motorcycles/application/repositories/SparePartHistoryRecordRepository';
+import { SparePartHistoryEntity } from '@triumph-motorcycles/domain/entities/parts/SparePartHistoryEntity';
 
 export class GetSparePartOrderHistoryByOrderIdUsecase {
   constructor(

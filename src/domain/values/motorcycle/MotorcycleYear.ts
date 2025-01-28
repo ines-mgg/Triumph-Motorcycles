@@ -1,4 +1,4 @@
-import { MotorcycleYearError } from '@triumph-motorcycles/domain/errors';
+import { MotorcycleYearError } from '@triumph-motorcycles/domain/errors/motorcycle/MotorcycleYearError';
 import { Value } from '../Value';
 
 export class MotorcycleYear implements Value<number> {

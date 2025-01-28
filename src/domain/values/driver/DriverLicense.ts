@@ -1,4 +1,4 @@
-import { ExperienceError } from '@triumph-motorcycles/domain/errors';
+import { ExperienceError } from '@triumph-motorcycles/domain/errors/drivers';
 import { Value } from '../Value';
 
 export class DriverLicense implements Value<string> {

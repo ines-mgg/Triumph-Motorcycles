@@ -1,5 +1,5 @@
 import { DriverPhone } from '../DriverPhone';
-import { DriverPhoneError } from '@triumph-motorcycles/domain/errors';
+import { DriverPhoneError } from '@triumph-motorcycles/domain/errors/drivers';
 
 describe('DriverPhone', () => {
   it('should create a valid DriverPhone instance', () => {

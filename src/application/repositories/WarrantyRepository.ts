@@ -1,5 +1,5 @@
-import { WarrantyEntity } from '@triumph-motorcycles/domain/entities';
-import { WarrantyNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { WarrantyEntity } from '@triumph-motorcycles/domain/entities/maintenances/WarrantyEntity';
+import { WarrantyNotFoundError } from '@triumph-motorcycles/domain/errors/warranty/WarrantyNotFoundError';
 
 export interface WarrantyRepository {
   save(warranty: WarrantyEntity): Promise<void>;

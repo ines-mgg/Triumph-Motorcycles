@@ -1,4 +1,4 @@
-import { InvalidNoteError } from '@triumph-motorcycles/domain/errors';
+import { InvalidNoteError } from '@triumph-motorcycles/domain/errors/appointment/InvalidNoteError';
 import { Value } from '../Value';
 
 export class Notes implements Value<string> {

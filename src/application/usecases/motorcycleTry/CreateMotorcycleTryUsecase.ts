@@ -1,9 +1,7 @@
-import {
-  DriverEntity,
-  MotorcycleEntity,
-  MotorcycleTryEntity,
-} from '@triumph-motorcycles/domain/entities';
-import { MotorcycleTryRepository } from '@triumph-motorcycles/application/repositories';
+import { DriverEntity } from '@triumph-motorcycles/domain/entities/drives/DriverEntity';
+import { MotorcycleEntity } from '@triumph-motorcycles/domain/entities/drives/MotorcycleEntity';
+import { MotorcycleTryEntity } from '@triumph-motorcycles/domain/entities/drives/MotorcycleTryEntity';
+import { MotorcycleTryRepository } from '@triumph-motorcycles/application/repositories/MotorcycleTryRepository';
 
 export class CreateMotorcycleTryUsecase {
   constructor(

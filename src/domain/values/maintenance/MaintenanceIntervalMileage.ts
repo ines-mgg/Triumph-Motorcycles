@@ -1,4 +1,4 @@
-import { BreakdownDescriptionError } from '@triumph-motorcycles/domain/errors';
+import { BreakdownDescriptionError } from '@triumph-motorcycles/domain/errors/breakdown/BreakdownDescriptionError';
 import { Value } from '../Value';
 
 const MAX_MILEAGE = 100000;

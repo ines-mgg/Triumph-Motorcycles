@@ -1,5 +1,5 @@
 import { SparePartCriticalLevel } from '../SparePartCriticalLevel';
-import { SparePartCriticalLevelError } from '@triumph-motorcycles/domain/errors';
+import { SparePartCriticalLevelError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartCriticalLevelError';
 
 describe('SparePartCriticalLevel', () => {
   it('should create a valid SparePartCriticalLevel instance', () => {

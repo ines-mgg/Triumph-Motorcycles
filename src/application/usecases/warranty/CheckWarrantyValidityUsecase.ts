@@ -1,4 +1,4 @@
-import { WarrantyRepository } from '@triumph-motorcycles/application/repositories';
+import { WarrantyRepository } from '@triumph-motorcycles/application/repositories/WarrantyRepository';
 
 export class CheckWarrantyValidityUsecase {
   constructor(private readonly warrantyRepository: WarrantyRepository) {}

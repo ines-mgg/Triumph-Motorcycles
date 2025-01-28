@@ -1,5 +1,5 @@
 import { SparePartRepository } from '../SparePartRepository';
-import { SparePartNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { SparePartNotFoundError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartNotFoundError';
 import { sparePart } from '../../../tests/testUtils';
 
 describe('SparePartRepository', () => {

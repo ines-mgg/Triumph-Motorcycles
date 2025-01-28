@@ -1,10 +1,8 @@
-import { RepairHistory } from '@triumph-motorcycles/application/usecases';
+import { RepairHistory } from '@triumph-motorcycles/application/usecases/repairHistory/RepairHistoryUsecases';
+import { BreakdownDescription } from '@triumph-motorcycles/domain/values/breakdown/BreakdownDescription';
+import { BreakdownReportedDate } from '@triumph-motorcycles/domain/values/breakdown/BreakdownReportedDate';
 import { MotorcycleEntity } from '../../drives/MotorcycleEntity';
 import { BreakdownEntity } from '../BreakdownEntity';
-import {
-  BreakdownDescription,
-  BreakdownReportedDate,
-} from '@triumph-motorcycles/domain/values';
 
 describe('RepairHistory', () => {
   let motorcycle1: MotorcycleEntity;

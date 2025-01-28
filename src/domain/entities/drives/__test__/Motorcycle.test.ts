@@ -1,9 +1,7 @@
-import { MotorStatus } from '@triumph-motorcycles/domain/types';
+import { MotorStatus } from '@triumph-motorcycles/domain/types/motorcycle';
 import { MotorcycleEntity } from '../MotorcycleEntity';
-import {
-  MotorcycleMileageError,
-  MotorcycleUpdateServiceDetailsError,
-} from '@triumph-motorcycles/domain/errors';
+import { MotorcycleMileageError } from '@triumph-motorcycles/domain/errors/motorcycle/MotorcycleMileageError';
+import { MotorcycleUpdateServiceDetailsError } from '@triumph-motorcycles/domain/errors/motorcycle/MotorcycleUpdateServiceDetailsError';
 
 describe('MotorcycleEntity', () => {
   let motorcycle: MotorcycleEntity;

@@ -1,5 +1,5 @@
 import { UserRepository } from '../UserRepository';
-import { UserNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { UserNotFoundError } from '@triumph-motorcycles/domain/errors/user/UserNotFoundError';
 import { user } from '../../../tests/testUtils';
 
 describe('UserRepository', () => {

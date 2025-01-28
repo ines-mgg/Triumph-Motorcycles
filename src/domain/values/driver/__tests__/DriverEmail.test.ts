@@ -1,5 +1,5 @@
 import { DriverEmail } from '../DriverEmail';
-import { DriverEmailError } from '@triumph-motorcycles/domain/errors';
+import { DriverEmailError } from '@triumph-motorcycles/domain/errors/drivers';
 
 describe('DriverEmail', () => {
   it('should create a valid DriverEmail instance', () => {

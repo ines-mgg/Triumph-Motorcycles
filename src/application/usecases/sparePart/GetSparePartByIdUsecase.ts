@@ -1,5 +1,5 @@
-import { SparePartRepository } from '@triumph-motorcycles/application/repositories';
-import { SparePartEntity } from '@triumph-motorcycles/domain/entities';
+import { SparePartRepository } from '@triumph-motorcycles/application/repositories/SparePartRepository';
+import { SparePartEntity } from '@triumph-motorcycles/domain/entities/parts/SparePartEntity';
 
 export class GetSparePartByIdUsecase {
   constructor(private readonly sparePartRepository: SparePartRepository) {}

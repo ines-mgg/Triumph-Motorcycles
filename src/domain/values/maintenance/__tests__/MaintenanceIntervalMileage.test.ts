@@ -1,5 +1,5 @@
 import { MaintenanceIntervalMileage } from '../MaintenanceIntervalMileage';
-import { BreakdownDescriptionError } from '@triumph-motorcycles/domain/errors';
+import { BreakdownDescriptionError } from '@triumph-motorcycles/domain/errors/breakdown/BreakdownDescriptionError';
 
 describe('MaintenanceIntervalMileage', () => {
   it('should create a valid MaintenanceIntervalMileage instance', () => {

@@ -1,4 +1,4 @@
-import { BreakdownEntity } from '@triumph-motorcycles/domain/entities';
+import { BreakdownEntity } from '@triumph-motorcycles/domain/entities/maintenances/BreakdownEntity';
 import { RepairHistory } from './RepairHistoryUsecases';
 
 export class GetBreakdownHistoryUsecase {

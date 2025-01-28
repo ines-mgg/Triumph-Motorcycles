@@ -1,5 +1,5 @@
-import { BreakdownEntity } from '@triumph-motorcycles/domain/entities';
-import { BreakdownNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { BreakdownEntity } from '@triumph-motorcycles/domain/entities/maintenances/BreakdownEntity';
+import { BreakdownNotFoundError } from '@triumph-motorcycles/domain/errors/breakdown/BreakdownNotFoundError';
 
 export interface BreakdownRepository {
   save(breakdown: BreakdownEntity): Promise<void>;

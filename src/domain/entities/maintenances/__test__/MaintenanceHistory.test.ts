@@ -1,7 +1,7 @@
-import { MaintenanceRecord } from '@triumph-motorcycles/domain/types';
+import { MaintenanceRecord } from '@triumph-motorcycles/domain/types/motorcycle';
 import { SparePartEntity } from '../../parts/SparePartEntity';
 import { MaintenanceHistoryEntity } from '../MaintenanceHistoryEntity';
-import { InvalidMaintenanceRecordError } from '@triumph-motorcycles/domain/errors';
+import { InvalidMaintenanceRecordError } from '@triumph-motorcycles/domain/errors/maintenances';
 
 describe('MaintenanceHistoryEntity', () => {
   let maintenanceHistory: MaintenanceHistoryEntity;

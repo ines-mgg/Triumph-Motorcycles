@@ -1,27 +1,26 @@
-import { Password, Username } from '@triumph-motorcycles/domain/values';
+import { Password } from '@triumph-motorcycles/domain/values/user/Password';
+import { Username } from '@triumph-motorcycles/domain/values/user/Username';
+import { AppointmentEntity } from '@triumph-motorcycles//domain/entities/appointment/AppointmentEntity';
+import { CompanyEntity } from '@triumph-motorcycles//domain/entities/company/CompanyEntity';
+import { ConcessionEntity } from '@triumph-motorcycles//domain/entities/concession/ConcessionEntity';
+import { DriverEntity } from '@triumph-motorcycles//domain/entities/drives/DriverEntity';
+import { MotorcycleEntity } from '@triumph-motorcycles//domain/entities/drives/MotorcycleEntity';
+import { MotorcycleTryEntity } from '@triumph-motorcycles//domain/entities/drives/MotorcycleTryEntity';
+import { LocationEntity } from '@triumph-motorcycles//domain/entities/location/LocationEntity';
+import { BreakdownEntity } from '@triumph-motorcycles//domain/entities/maintenances/BreakdownEntity';
+import { MaintenanceEntity } from '@triumph-motorcycles//domain/entities/maintenances/MaintenanceEntity';
+import { RepairEntity } from '@triumph-motorcycles//domain/entities/maintenances/RepairEntity';
+import { WarrantyEntity } from '@triumph-motorcycles//domain/entities/maintenances/WarrantyEntity';
+import { OrderEntity } from '@triumph-motorcycles//domain/entities/parts/OrderEntity';
+import { OrderItemEntity } from '@triumph-motorcycles//domain/entities/parts/OrderItemEntity';
+import { SparePartEntity } from '@triumph-motorcycles//domain/entities/parts/SparePartEntity';
+import { SparePartNotificationEntity } from '@triumph-motorcycles//domain/entities/parts/SparePartNotificationEntity';
+import { UserEntity } from '@triumph-motorcycles//domain/entities/user/UserEntity';
+import { AppointmentReason } from '@triumph-motorcycles//domain/types/AppointmentReason';
 import {
-  AppointmentReason,
-  CommonRepairAction,
   MotorStatus,
-} from '@triumph-motorcycles/domain/types';
-import {
-  AppointmentEntity,
-  UserEntity,
-  LocationEntity,
-  MotorcycleEntity,
-  BreakdownEntity,
-  DriverEntity,
-  MaintenanceEntity,
-  RepairEntity,
-  SparePartEntity,
-  CompanyEntity,
-  ConcessionEntity,
-  WarrantyEntity,
-  SparePartNotificationEntity,
-  OrderEntity,
-  OrderItemEntity,
-  MotorcycleTryEntity,
-} from '@triumph-motorcycles/domain/entities';
+  CommonRepairAction,
+} from '@triumph-motorcycles//domain/types/motorcycle';
 
 export const now = new Date();
 export const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
@@ -39,7 +38,7 @@ export const motorcycle = MotorcycleEntity.create(
   'Yamaha',
   'MT-09',
   2023,
-  new Date('2023-01-01'),
+  now,
   'Available' as MotorStatus,
 ) as MotorcycleEntity;
 export const location = LocationEntity.create(

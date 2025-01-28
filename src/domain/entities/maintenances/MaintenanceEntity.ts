@@ -1,9 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { MotorcycleEntity } from '../drives/MotorcycleEntity';
-import {
-  MaintenanceIntervalMileage,
-  MaintenanceIntervalTime,
-} from '@triumph-motorcycles/domain/values';
+import { MaintenanceIntervalMileage } from '@triumph-motorcycles/domain/values/maintenance/MaintenanceIntervalMileage';
+import { MaintenanceIntervalTime } from '@triumph-motorcycles/domain/values/maintenance/MaintenanceIntervalTime';
 
 export class MaintenanceEntity {
   private constructor(

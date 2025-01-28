@@ -1,5 +1,5 @@
-import { ConcessionEntity } from '@triumph-motorcycles/domain/entities';
-import { ConcessionNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { ConcessionEntity } from '@triumph-motorcycles/domain/entities/concession/ConcessionEntity';
+import { ConcessionNotFoundError } from '@triumph-motorcycles/domain/errors/concession/ConcessionNotFoundError';
 
 export interface ConcessionRepository {
   save(concession: ConcessionEntity): Promise<void>;

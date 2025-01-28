@@ -1,8 +1,7 @@
-import { MaintenanceNotificationType } from '@triumph-motorcycles/domain/types';
-import {
-  MaintenanceNotificationDate,
-  MaintenanceNotificationMessage,
-} from '@triumph-motorcycles/domain/values';
+import { MaintenanceNotificationType } from '@triumph-motorcycles/domain/types/motorcycle';
+import { MaintenanceNotificationDate } from '@triumph-motorcycles//domain/values/maintenanceNotification/MaintenanceNotificationDate';
+import { MaintenanceNotificationMessage } from '@triumph-motorcycles//domain/values/maintenanceNotification/MaintenanceNotificationMessage';
+
 import { v4 as uuidv4 } from 'uuid';
 
 export class MaintenanceNotificationEntity {

@@ -1,10 +1,8 @@
-import { AppointmentRepository } from '@triumph-motorcycles/application/repositories';
-import {
-  AppointmentEntity,
-  UserEntity,
-} from '@triumph-motorcycles/domain/entities';
-import { UnexpectedError } from '@triumph-motorcycles/domain/errors';
-import { AppointmentReason } from '@triumph-motorcycles/domain/types';
+import { AppointmentRepository } from '@triumph-motorcycles/application/repositories/AppointmentRepository';
+import { AppointmentEntity } from '@triumph-motorcycles/domain/entities/appointment/AppointmentEntity';
+import { UserEntity } from '@triumph-motorcycles/domain/entities/user/UserEntity';
+import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
+import { AppointmentReason } from '@triumph-motorcycles/domain/types/AppointmentReason';
 
 export class CreateAppointmentUsecase {
   public constructor(

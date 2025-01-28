@@ -1,4 +1,4 @@
-import { WarrantyCoverageDetailsError } from '@triumph-motorcycles/domain/errors';
+import { WarrantyCoverageDetailsError } from '@triumph-motorcycles/domain/errors/warranty/WarrantyCoverageDetailsError';
 import { Value } from '../Value';
 
 export class WarrantyCoverageDetails implements Value<string> {

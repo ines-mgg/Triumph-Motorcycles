@@ -1,4 +1,4 @@
-import { DriverPhoneError } from '@triumph-motorcycles/domain/errors';
+import { DriverPhoneError } from '@triumph-motorcycles/domain/errors/drivers';
 import { Value } from '../Value';
 
 export class DriverPhone implements Value<string> {

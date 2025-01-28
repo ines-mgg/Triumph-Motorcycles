@@ -1,4 +1,4 @@
-import { BreakdownRepository } from '@triumph-motorcycles/application/repositories';
+import { BreakdownRepository } from '@triumph-motorcycles/application/repositories/BreakdownRepository';
 
 export class CheckWarrantyCoverageUsecase {
   constructor(private readonly breakdownRepository: BreakdownRepository) {}

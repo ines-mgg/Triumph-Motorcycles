@@ -3,7 +3,7 @@ import { MotorcycleEntity } from './MotorcycleEntity';
 import { StartDate } from '../../values/motorcycleTry/MotorcycleTryStartDate';
 import { EndDate } from '../../values/motorcycleTry/MotorcycleTryEndDate';
 import { v4 as uuidv4 } from 'uuid';
-import { MotorcycleTryEndDateError } from '@triumph-motorcycles/domain/errors';
+import { MotorcycleTryEndDateError } from '@triumph-motorcycles/domain/errors/motorcycleTry/MotorcycleTryEndDateError';
 
 export class MotorcycleTryEntity {
   private constructor(

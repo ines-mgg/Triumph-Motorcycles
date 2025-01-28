@@ -1,6 +1,6 @@
 import { OrderEntity } from '../OrderEntity';
-import { SparePartQuantityInStockError } from '@triumph-motorcycles/domain/errors';
 import { sparePart } from '../../../../tests/testUtils';
+import { SparePartQuantityInStockError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartQuantityInStockError';
 
 describe('OrderEntity', () => {
   let orderDate: Date;

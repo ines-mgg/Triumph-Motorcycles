@@ -1,5 +1,5 @@
 import { Notes } from '../Notes';
-import { InvalidNoteError } from '@triumph-motorcycles/domain/errors';
+import { InvalidNoteError } from '@triumph-motorcycles/domain/errors/appointment/InvalidNoteError';
 
 describe('Notes', () => {
   it('should create a valid Notes instance', () => {

@@ -1,5 +1,5 @@
 import { MotorcycleRepository } from '../MotorcycleRepository';
-import { MotorcycleNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { MotorcycleNotFoundError } from '@triumph-motorcycles/domain/errors/motorcycle/MotorcycleNotFoundError';
 import { motorcycle } from '../../../tests/testUtils';
 
 describe('MotorcycleRepository', () => {

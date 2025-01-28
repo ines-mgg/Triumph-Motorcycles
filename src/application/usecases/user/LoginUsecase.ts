@@ -1,10 +1,8 @@
-import { UserRepository } from '@triumph-motorcycles/application/repositories';
-import { LoginResponse } from '@triumph-motorcycles/application/responses';
-import { AuthenticationService } from '@triumph-motorcycles/application/services';
-import {
-  UnauthorizedError,
-  UnexpectedError,
-} from '@triumph-motorcycles/domain/errors';
+import { UserRepository } from '@triumph-motorcycles/application/repositories/UserRepository';
+import { LoginResponse } from '@triumph-motorcycles/application/responses/LoginResponse';
+import { AuthenticationService } from '@triumph-motorcycles/application/services/AuthenticationService';
+import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
+import { UnauthorizedError } from '@triumph-motorcycles/domain/errors/user/UnauthorizedError';
 
 export class LoginUsecase {
   public constructor(

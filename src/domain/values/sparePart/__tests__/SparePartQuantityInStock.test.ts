@@ -1,5 +1,5 @@
 import { SparePartQuantityInStock } from '../SparePartQuantityInStock';
-import { SparePartQuantityInStockError } from '@triumph-motorcycles/domain/errors';
+import { SparePartQuantityInStockError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartQuantityInStockError';
 
 describe('SparePartQuantityInStock', () => {
   it('should create a valid SparePartQuantityInStock instance', () => {

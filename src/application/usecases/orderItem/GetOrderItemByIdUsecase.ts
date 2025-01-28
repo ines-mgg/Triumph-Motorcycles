@@ -1,5 +1,5 @@
-import { OrderItemEntity } from '@triumph-motorcycles/domain/entities';
-import { OrderItemRepository } from '@triumph-motorcycles/application/repositories';
+import { OrderItemEntity } from '@triumph-motorcycles/domain/entities/parts/OrderItemEntity';
+import { OrderItemRepository } from '@triumph-motorcycles/application/repositories/OrderItemRepository';
 
 export class GetOrderItemByIdUsecase {
   constructor(private readonly orderItemRepository: OrderItemRepository) {}

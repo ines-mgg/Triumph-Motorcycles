@@ -1,5 +1,5 @@
 import { RepairRepository } from '../RepairRepository';
-import { RepairNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { RepairNotFoundError } from '@triumph-motorcycles/domain/errors/repair/RepairNotFoundError';
 import { repair } from '../../../tests/testUtils';
 
 describe('RepairRepository', () => {

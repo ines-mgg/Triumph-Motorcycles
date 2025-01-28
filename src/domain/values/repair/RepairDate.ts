@@ -1,4 +1,4 @@
-import { RepairDateError } from '@triumph-motorcycles/domain/errors';
+import { RepairDateError } from '@triumph-motorcycles/domain/errors/repair/RepairDateError';
 import { Value } from '../Value';
 
 export class RepairDate implements Value<Date> {

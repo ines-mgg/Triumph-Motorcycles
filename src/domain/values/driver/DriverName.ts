@@ -1,4 +1,4 @@
-import { DriverNameError } from '@triumph-motorcycles/domain/errors';
+import { DriverNameError } from '@triumph-motorcycles/domain/errors/driver/DriverNameError';
 import { Value } from '../Value';
 
 export class DriverName implements Value<string> {

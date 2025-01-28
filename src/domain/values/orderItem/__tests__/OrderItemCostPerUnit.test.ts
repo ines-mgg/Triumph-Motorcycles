@@ -1,5 +1,5 @@
 import { OrderItemCostPerUnit } from '../OrderItemCostPerUnit';
-import { OrderItemCostPerUnitError } from '@triumph-motorcycles/domain/errors';
+import { OrderItemCostPerUnitError } from '@triumph-motorcycles/domain/errors/orderItem/OrderItemCostPerUnitError';
 
 describe('OrderItemCostPerUnit', () => {
   it('should create a valid OrderItemCostPerUnit instance', () => {

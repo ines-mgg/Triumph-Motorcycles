@@ -1,5 +1,5 @@
 import { DriverLicense } from '../DriverLicense';
-import { ExperienceError } from '@triumph-motorcycles/domain/errors';
+import { ExperienceError } from '@triumph-motorcycles/domain/errors/drivers';
 
 describe('DriverLicense', () => {
   it('should create a valid DriverLicense instance', () => {

@@ -1,5 +1,5 @@
-import { UserEntity } from '@triumph-motorcycles/domain/entities';
-import { UserNotFoundError } from '@triumph-motorcycles/domain/errors';
+import { UserEntity } from '@triumph-motorcycles/domain/entities/user/UserEntity';
+import { UserNotFoundError } from '@triumph-motorcycles/domain/errors/user/UserNotFoundError';
 
 export interface UserRepository {
   findById(identifier: string): Promise<UserEntity | UserNotFoundError>;

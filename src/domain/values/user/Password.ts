@@ -1,12 +1,10 @@
 import bcrypt from 'bcrypt';
-import {
-  PasswordTooShortError,
-  PasswordDoesNotIncludeLowercaseLetterError,
-  PasswordDoesNotIncludeUppercaseLetterError,
-  PasswordDoesNotIncludeSymbolError,
-  PasswordDoesNotIncludeNumberError,
-} from '@triumph-motorcycles/domain/errors';
+import { PasswordTooShortError } from '@triumph-motorcycles/domain/errors/user/PasswordTooShortError.ts';
 import { Value } from '../Value';
+import { PasswordDoesNotIncludeNumberError } from '@triumph-motorcycles/domain/errors/user/PasswordDoesNotIncludeNumberError';
+import { PasswordDoesNotIncludeLowercaseLetterError } from '@triumph-motorcycles/domain/errors/user/PasswordDoesNotIncludeLowercaseLetterError';
+import { PasswordDoesNotIncludeUppercaseLetterError } from '@triumph-motorcycles/domain/errors/user/PasswordDoesNotIncludeUppercaseLetterError';
+import { PasswordDoesNotIncludeSymbolError } from '@triumph-motorcycles/domain/errors/user/PasswordDoesNotIncludeSymbolError';
 
 export class Password implements Value<string> {
   private constructor(private readonly hashedValue: string) {}

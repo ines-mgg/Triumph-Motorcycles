@@ -1,5 +1,5 @@
 import { EstimatedDeliveryDate } from '../EstimatedDeliveryDate';
-import { EstimatedDeliveryDateError } from '@triumph-motorcycles/domain/errors';
+import { EstimatedDeliveryDateError } from '@triumph-motorcycles/domain/errors/order/EstimatedDeliveryDateError';
 
 describe('EstimatedDeliveryDate', () => {
   it('should create a valid EstimatedDeliveryDate instance', () => {

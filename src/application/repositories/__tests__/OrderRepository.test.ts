@@ -1,6 +1,6 @@
 import { OrderRepository } from '../OrderRepository';
-import { OrderNotFoundError } from '@triumph-motorcycles/domain/errors';
 import { order } from '../../../tests/testUtils';
+import { OrderNotFoundError } from '@triumph-motorcycles/domain/errors/order/OrderNotFoundError';
 
 describe('OrderRepository', () => {
   let orderRepository: OrderRepository;

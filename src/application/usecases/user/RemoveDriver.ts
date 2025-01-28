@@ -1,7 +1,5 @@
-import {
-  DriverRepository,
-  UserRepository,
-} from '@triumph-motorcycles/application/repositories';
+import { UserRepository } from '@triumph-motorcycles/application/repositories/UserRepository';
+import { DriverRepository } from '@triumph-motorcycles/application/repositories/DriverRepository';
 
 export class RemoveDriverFromUserUsecase {
   constructor(

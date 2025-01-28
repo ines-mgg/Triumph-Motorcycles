@@ -1,4 +1,4 @@
-import { EndDateError } from '@triumph-motorcycles/domain/errors';
+import { EndDateError } from '@triumph-motorcycles/domain/errors/location/EndDateError';
 import { StartDate } from './StartDate';
 
 export class EndDate {

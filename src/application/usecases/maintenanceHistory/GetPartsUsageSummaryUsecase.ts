@@ -1,5 +1,5 @@
-import { MaintenanceHistoryRepository } from '@triumph-motorcycles/application/repositories';
-import { SparePartEntity } from '@triumph-motorcycles/domain/entities';
+import { MaintenanceHistoryRepository } from '@triumph-motorcycles/application/repositories/MaintenanceHistoryRepository';
+import { SparePartEntity } from '@triumph-motorcycles/domain/entities/parts/SparePartEntity';
 
 export class GetPartsUsageSummaryUsecase {
   constructor(

@@ -1,4 +1,4 @@
-import { SparePartRepository } from '@triumph-motorcycles/application/repositories';
+import { SparePartRepository } from '@triumph-motorcycles/application/repositories/SparePartRepository';
 
 export class ReserveSparePartUsecase {
   constructor(private readonly sparePartRepository: SparePartRepository) {}

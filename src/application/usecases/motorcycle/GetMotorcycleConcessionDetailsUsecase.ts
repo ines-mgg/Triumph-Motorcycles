@@ -1,4 +1,4 @@
-import { MotorcycleRepository } from '@triumph-motorcycles/application/repositories';
+import { MotorcycleRepository } from '@triumph-motorcycles/application/repositories/MotorcycleRepository';
 
 export class GetMotorcycleConcessionDetailsUsecase {
   constructor(private readonly motorcycleRepository: MotorcycleRepository) {}

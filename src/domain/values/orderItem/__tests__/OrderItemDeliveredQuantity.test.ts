@@ -1,6 +1,6 @@
 import { OrderItemDeliveredQuantity } from '../OrderItemDeliveredQuantity';
 import { OrderItemQuantityOrdered } from '../OrderItemQuantityOrdered';
-import { OrderItemQuantityExceedError } from '@triumph-motorcycles/domain/errors';
+import { OrderItemQuantityExceedError } from '@triumph-motorcycles/domain/errors/orderItem/OrderItemQuantityExceedError';
 
 describe('OrderItemDeliveredQuantity', () => {
   it('should create a valid OrderItemDeliveredQuantity instance', () => {

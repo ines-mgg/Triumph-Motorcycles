@@ -1,5 +1,5 @@
 import { SparePartCost } from '../SparePartCost';
-import { SparePartCostError } from '@triumph-motorcycles/domain/errors';
+import { SparePartCostError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartCostError';
 
 describe('SparePartCost', () => {
   it('should create a valid SparePartCost instance', () => {

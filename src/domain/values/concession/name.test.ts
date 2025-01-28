@@ -1,8 +1,6 @@
 import { Name } from './name';
-import {
-  ConcessionNameAlphanumericError,
-  ConcessionNameLengthError,
-} from '@triumph-motorcycles/domain/errors';
+import { NameLengthError } from '@triumph-motorcycles/domain/errors/concession/NameLengthError';
+import { NameAlphanumericError } from '@triumph-motorcycles/domain/errors/concession/NameAlphanumericError';
 
 describe('Name', () => {
   it('should create a valid Name instance', () => {
@@ -17,11 +15,11 @@ describe('Name', () => {
   it('should return an error for invalid name (too short)', () => {
     const value = 'no';
     const name = Name.from(value);
-    expect(name).toBeInstanceOf(ConcessionNameLengthError);
+    expect(name).toBeInstanceOf(NameLengthError);
   });
   it('should return an error for invalid name (symbol)', () => {
     const value = 'Valid!Name@';
     const name = Name.from(value);
-    expect(name).toBeInstanceOf(ConcessionNameAlphanumericError);
+    expect(name).toBeInstanceOf(NameAlphanumericError);
   });
 });

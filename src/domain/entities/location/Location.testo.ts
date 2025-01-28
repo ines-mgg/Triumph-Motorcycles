@@ -1,10 +1,10 @@
+// TODO: fix not working tests
 import { LocationEntity } from './LocationEntity';
-import {
-  CancelLocationError,
-  EndDateError,
-  EndLocationError,
-} from '@triumph-motorcycles/domain/errors';
+
 import { user, motorcycle } from '../../../tests/testUtils';
+import { CancelLocationError } from '@triumph-motorcycles/domain/errors/location/CancelLocationError';
+import { EndDateError } from '@triumph-motorcycles/domain/errors/location/EndDateError';
+import { EndLocationError } from '@triumph-motorcycles/domain/errors/location/EndLocationError';
 
 describe('LocationEntity', () => {
   const cost = 100;
