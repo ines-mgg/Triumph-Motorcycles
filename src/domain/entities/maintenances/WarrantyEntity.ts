@@ -1,8 +1,8 @@
-import { WarrantyStartDate } from '../../values/warranty/WarrantyStartDate';
-import { WarrantyEndDate } from '../../values/warranty/WarrantyEndDate';
-import { WarrantyCoverageDetails } from '../../values/warranty/WarrantyCoverageDetails';
-import { MotorcycleEntity } from '../drives';
-import crypto from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
+import { MotorcycleEntity } from '../drives/MotorcycleEntity';
+import { WarrantyEndDate } from '@triumph-motorcycles/domain/values/warranty/WarrantyEndDate';
+import { WarrantyStartDate } from '@triumph-motorcycles/domain/values/warranty/WarrantyStartDate';
+import { WarrantyCoverageDetails } from '@triumph-motorcycles/domain/values/warranty/WarrantyCoverageDetails';
 
 export class WarrantyEntity {
   private constructor(
@@ -21,9 +21,8 @@ export class WarrantyEntity {
     coverageDetailsValue: string,
     isActive: boolean,
   ): WarrantyEntity | Error {
+    const id = uuidv4();
 
-    const id = crypto.randomUUID();
-    
     const startDate = WarrantyStartDate.from(startDateValue);
     if (startDate instanceof Error) return startDate;
 
@@ -39,12 +38,12 @@ export class WarrantyEntity {
       startDate,
       endDate,
       coverageDetails,
-      isActive
+      isActive,
     );
   }
 
   private normalizeDate(date: Date): Date {
-    return new Date(date.setHours(0, 0, 0, 0)); 
+    return new Date(date.setHours(0, 0, 0, 0));
   }
 
   public isWarrantyValid(checkDate: Date): boolean {
@@ -52,7 +51,11 @@ export class WarrantyEntity {
     const normalizedStartDate = this.normalizeDate(this.startDate.value);
     const normalizedEndDate = this.normalizeDate(this.endDate.value);
 
-    return normalizedCheckDate >= normalizedStartDate && normalizedCheckDate <= normalizedEndDate && this.isActive;
+    return (
+      normalizedCheckDate >= normalizedStartDate &&
+      normalizedCheckDate <= normalizedEndDate &&
+      this.isActive
+    );
   }
 
   public isRepairCovered(repairDate: Date): boolean {

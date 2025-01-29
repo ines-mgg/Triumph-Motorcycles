@@ -1,27 +1,27 @@
-import { Drivers } from '@triumph-motorcycles/domain/errors';
-import { DrivingRecord, LicenseType } from '../../types/motorcycle';
-import { DriverEmail } from '../../values/driver/DriverEmail';
-import { DriverPhone } from '../../values/driver/DriverPhone';
-import { DriveName } from '../../values/driver/DriverName';
-import { DriveLicense } from '../../values/driver/DriverLicense';
-import { DriveYearsOfExperience } from '../../values/driver/DriverYearsOfExperience';
-import { DriverEmailError, DriverPhoneError } from '../../errors/drivers';
-import crypto from 'crypto';
+import { DriverEmailError } from '@triumph-motorcycles/domain/errors/drivers';
+import { DriverPhoneError } from '@triumph-motorcycles/domain/errors/drivers';
+import { ExperienceError } from '@triumph-motorcycles/domain/errors/drivers';
+import { v4 as uuidv4 } from 'uuid';
 import { CompanyEntity } from '../company/CompanyEntity';
-
-const { ExperienceError } = Drivers;
+import { DrivingRecord } from '@triumph-motorcycles/domain/types/motorcycle';
+import { LicenseType } from '@triumph-motorcycles/domain/types/motorcycle';
+import { DriverEmail } from '@triumph-motorcycles/domain/values/driver/DriverEmail';
+import { DriverLicense } from '@triumph-motorcycles/domain/values/driver/DriverLicense';
+import { DriverName } from '@triumph-motorcycles/domain/values/driver/DriverName';
+import { DriverPhone } from '@triumph-motorcycles/domain/values/driver/DriverPhone';
+import { DriverYearsOfExperience } from '@triumph-motorcycles/domain/values/driver/DriverYearsOfExperience';
 
 export class DriverEntity {
   private constructor(
     public readonly driverId: string,
-    public name: DriveName,
-    public license: DriveLicense,
+    public name: DriverName,
+    public license: DriverLicense,
     public licenseType: LicenseType,
-    public yearsOfExperience: DriveYearsOfExperience,
+    public yearsOfExperience: DriverYearsOfExperience,
     public email: DriverEmail,
     public phone: DriverPhone,
     private readonly drivingHistory: DrivingRecord[] = [],
-    public company: CompanyEntity | null = null 
+    public company: CompanyEntity | null = null,
   ) {}
 
   public static create(
@@ -31,17 +31,19 @@ export class DriverEntity {
     yearsOfExperienceValue: number,
     emailValue: string,
     phoneValue: string,
-    company: CompanyEntity | null = null
+    company: CompanyEntity | null = null,
   ): DriverEntity | Error {
-    const driverId = crypto.randomUUID();
+    const driverId = uuidv4();
 
-    const name = DriveName.from(nameValue);
+    const name = DriverName.from(nameValue);
     if (name instanceof Error) return name;
 
-    const license = DriveLicense.from(licenseValue);
+    const license = DriverLicense.from(licenseValue);
     if (license instanceof Error) return license;
 
-    const yearsOfExperience = DriveYearsOfExperience.from(yearsOfExperienceValue);
+    const yearsOfExperience = DriverYearsOfExperience.from(
+      yearsOfExperienceValue,
+    );
     if (yearsOfExperience instanceof Error) return yearsOfExperience;
 
     const email = DriverEmail.from(emailValue);
@@ -59,7 +61,7 @@ export class DriverEntity {
       email,
       phone,
       [],
-      company
+      company,
     );
   }
 
@@ -92,7 +94,8 @@ export class DriverEntity {
   }
 
   public updateExperience(newYearsOfExperience: number): void {
-    const updatedExperience = DriveYearsOfExperience.from(newYearsOfExperience);
+    const updatedExperience =
+      DriverYearsOfExperience.from(newYearsOfExperience);
     if (updatedExperience instanceof Error) {
       throw updatedExperience;
     }
@@ -102,15 +105,18 @@ export class DriverEntity {
     this.yearsOfExperience = updatedExperience;
   }
 
-  public updateContactInfo(newContactInfo: { email: string; phone: string }): void {
+  public updateContactInfo(newContactInfo: {
+    email: string;
+    phone: string;
+  }): void {
     const updatedEmail = DriverEmail.from(newContactInfo.email);
     if (updatedEmail instanceof DriverEmailError) {
-      throw updatedEmail; 
+      throw updatedEmail;
     }
 
     const updatedPhone = DriverPhone.from(newContactInfo.phone);
     if (updatedPhone instanceof DriverPhoneError) {
-      throw updatedPhone; 
+      throw updatedPhone;
     }
 
     this.email = updatedEmail;

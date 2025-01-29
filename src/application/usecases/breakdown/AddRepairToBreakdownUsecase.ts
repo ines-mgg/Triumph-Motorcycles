@@ -1,5 +1,6 @@
-import { RepairEntity } from "@triumph-motorcycles/domain/entities/maintenances";
-import { BreakdownRepository } from "../../repositories/BreakdownRepository";
+import { RepairEntity } from '@triumph-motorcycles/domain/entities/maintenances/RepairEntity';
+import { BreakdownRepository } from '@triumph-motorcycles/application/repositories/BreakdownRepository';
+
 export class AddRepairToBreakdownUsecase {
   constructor(private readonly breakdownRepository: BreakdownRepository) {}
 
@@ -7,11 +8,10 @@ export class AddRepairToBreakdownUsecase {
     breakdownId: string,
     repair: RepairEntity,
   ): Promise<void | Error> {
-
     const breakdown = await this.breakdownRepository.findOneById(breakdownId);
 
-    if(breakdown instanceof Error) return breakdown
-    
+    if (breakdown instanceof Error) return breakdown;
+
     breakdown.addRepair(repair);
     await this.breakdownRepository.save(breakdown);
   }

@@ -1,10 +1,10 @@
-import { SparePartName } from '../../values/sparePart/SparePartName';
-import { SparePartQuantityInStock } from '../../values/sparePart/SparePartQuantityInStock';
-import { SparePartCriticalLevel } from '../../values/sparePart/SparePartCriticalLevel';
-import { SparePartCost } from '../../values/sparePart/SparePartCost';
-import crypto from 'crypto';
-import { OrderItemQuantityOrderedError } from '../../errors/orderItem/OrderItemQuantityOrderedError';
-import { SparePartQuantityInStockError } from '../../errors/sparePart/SparePartQuantityInStockError';
+import { OrderItemQuantityOrderedError } from '@triumph-motorcycles/domain/errors/orderItem/OrderItemQuantityOrderedError.ts';
+import { SparePartQuantityInStockError } from '@triumph-motorcycles/domain/errors/sparePart/SparePartQuantityInStockError';
+import { SparePartCost } from '@triumph-motorcycles/domain/values/sparePart/SparePartCost';
+import { SparePartCriticalLevel } from '@triumph-motorcycles/domain/values/sparePart/SparePartCriticalLevel';
+import { SparePartName } from '@triumph-motorcycles/domain/values/sparePart/SparePartName';
+import { SparePartQuantityInStock } from '@triumph-motorcycles/domain/values/sparePart/SparePartQuantityInStock';
+import { v4 as uuidv4 } from 'uuid';
 
 export class SparePartEntity {
   private totalUsage: number = 0;
@@ -22,10 +22,9 @@ export class SparePartEntity {
     nameValue: string,
     quantityInStockValue: number,
     criticalLevelValue: number,
-    costValue: number
+    costValue: number,
   ): SparePartEntity | Error {
-
-    const id = crypto.randomUUID();
+    const id = uuidv4();
 
     const name = SparePartName.from(nameValue);
     if (name instanceof Error) return name;

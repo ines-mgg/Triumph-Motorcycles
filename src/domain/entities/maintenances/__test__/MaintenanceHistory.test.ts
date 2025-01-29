@@ -1,7 +1,7 @@
-import { MaintenanceRecord } from "../../../types/motorcycle";
-import { SparePartEntity } from "../../parts";
-import { MaintenanceHistoryEntity } from "../MaintenanceHistoryEntity";
-import { InvalidMaintenanceRecordError } from "../../../errors/maintenances";
+import { MaintenanceRecord } from '@triumph-motorcycles/domain/types/motorcycle';
+import { SparePartEntity } from '../../parts/SparePartEntity';
+import { MaintenanceHistoryEntity } from '../MaintenanceHistoryEntity';
+import { InvalidMaintenanceRecordError } from '@triumph-motorcycles/domain/errors/maintenances';
 
 describe('MaintenanceHistoryEntity', () => {
   let maintenanceHistory: MaintenanceHistoryEntity;
@@ -11,22 +11,32 @@ describe('MaintenanceHistoryEntity', () => {
   beforeEach(() => {
     maintenanceHistory = new MaintenanceHistoryEntity();
 
-    sparePart1 = SparePartEntity.create('Brake Pad', 50, 10, 30) as SparePartEntity;
-    sparePart2 = SparePartEntity.create('Oil Filter', 30, 5, 15) as SparePartEntity; 
+    sparePart1 = SparePartEntity.create(
+      'Brake Pad',
+      50,
+      10,
+      30,
+    ) as SparePartEntity;
+    sparePart2 = SparePartEntity.create(
+      'Oil Filter',
+      30,
+      5,
+      15,
+    ) as SparePartEntity;
   });
 
   describe('addMaintenanceRecord', () => {
     it('should add a valid maintenance record', () => {
       const record: MaintenanceRecord = {
-          maintenanceId: '1',
-          motorcycleId: 'moto1',
-          date: new Date(),
-          cost: 100,
-          maintenanceType: 'Preventive',
-          partsUsed: [sparePart1, sparePart2],
-          mileageAtService: 0,
-          technicianRecommendation: "",
-          managerId: ""
+        maintenanceId: '1',
+        motorcycleId: 'moto1',
+        date: new Date(),
+        cost: 100,
+        maintenanceType: 'Preventive',
+        partsUsed: [sparePart1, sparePart2],
+        mileageAtService: 0,
+        technicianRecommendation: '',
+        managerId: '',
       };
 
       maintenanceHistory.addMaintenanceRecord(record);
@@ -43,8 +53,12 @@ describe('MaintenanceHistoryEntity', () => {
         partsUsed: [sparePart1],
       } as MaintenanceRecord;
 
-      expect(() => maintenanceHistory.addMaintenanceRecord(invalidRecord)).toThrow(
-        new InvalidMaintenanceRecordError('Maintenance ID and Motorcycle ID are required.')
+      expect(() =>
+        maintenanceHistory.addMaintenanceRecord(invalidRecord),
+      ).toThrow(
+        new InvalidMaintenanceRecordError(
+          'Maintenance ID and Motorcycle ID are required.',
+        ),
       );
     });
 
@@ -57,8 +71,12 @@ describe('MaintenanceHistoryEntity', () => {
         partsUsed: [sparePart1],
       } as MaintenanceRecord;
 
-      expect(() => maintenanceHistory.addMaintenanceRecord(invalidRecord)).toThrow(
-        new InvalidMaintenanceRecordError('Maintenance ID and Motorcycle ID are required.')
+      expect(() =>
+        maintenanceHistory.addMaintenanceRecord(invalidRecord),
+      ).toThrow(
+        new InvalidMaintenanceRecordError(
+          'Maintenance ID and Motorcycle ID are required.',
+        ),
       );
     });
 
@@ -72,23 +90,25 @@ describe('MaintenanceHistoryEntity', () => {
         partsUsed: [sparePart1],
       } as MaintenanceRecord;
 
-      expect(() => maintenanceHistory.addMaintenanceRecord(invalidRecord)).toThrow(
-        new InvalidMaintenanceRecordError('Cost cannot be negative.')
-      );
+      expect(() =>
+        maintenanceHistory.addMaintenanceRecord(invalidRecord),
+      ).toThrow(new InvalidMaintenanceRecordError('Cost cannot be negative.'));
     });
 
     it('should throw an error when partsUsed is not an array', () => {
       const invalidRecord = {
-          maintenanceId: '1',
-          motorcycleId: 'moto1',
-          date: new Date(),
-          cost: 100,
-          maintenanceType: 'Preventive',
-          partsUsed: null, 
+        maintenanceId: '1',
+        motorcycleId: 'moto1',
+        date: new Date(),
+        cost: 100,
+        maintenanceType: 'Preventive',
+        partsUsed: null,
       } as unknown as MaintenanceRecord;
 
-      expect(() => maintenanceHistory.addMaintenanceRecord(invalidRecord)).toThrow(
-        new InvalidMaintenanceRecordError('Parts used must be an array.')
+      expect(() =>
+        maintenanceHistory.addMaintenanceRecord(invalidRecord),
+      ).toThrow(
+        new InvalidMaintenanceRecordError('Parts used must be an array.'),
       );
     });
   });

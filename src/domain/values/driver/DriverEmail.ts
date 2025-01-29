@@ -1,4 +1,4 @@
-import { DriverEmailError } from '../../errors/drivers';
+import { DriverEmailError } from '@triumph-motorcycles/domain/errors/drivers';
 import { Value } from '../Value';
 
 export class DriverEmail implements Value<string> {

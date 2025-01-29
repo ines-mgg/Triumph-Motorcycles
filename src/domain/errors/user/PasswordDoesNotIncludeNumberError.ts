@@ -1,3 +1,3 @@
 export class PasswordDoesNotIncludeNumberError extends Error {
-    public override readonly name = "PasswordDoesNotIncludeNumberError";
-  }
+  public override readonly name = 'PasswordDoesNotIncludeNumberError';
+}

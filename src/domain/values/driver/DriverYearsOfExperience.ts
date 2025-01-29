@@ -1,14 +1,14 @@
-import { ExperienceError } from '../../errors/drivers';
-import { Value } from '../Value'; 
+import { ExperienceError } from '@triumph-motorcycles/domain/errors/drivers';
+import { Value } from '../Value';
 
-export class DriveYearsOfExperience implements Value<number> {
+export class DriverYearsOfExperience implements Value<number> {
   private constructor(public readonly value: number) {}
 
-  public static from(value: number): DriveYearsOfExperience | ExperienceError {
-    if ( value < 3) {
+  public static from(value: number): DriverYearsOfExperience | ExperienceError {
+    if (value < 3) {
       return new ExperienceError();
     }
-    return new DriveYearsOfExperience(value);
+    return new DriverYearsOfExperience(value);
   }
 
   public is(item: Value<number>): boolean {

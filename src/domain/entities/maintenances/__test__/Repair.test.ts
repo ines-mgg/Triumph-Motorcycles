@@ -1,61 +1,47 @@
-import { CommonRepairAction } from "../../../types/motorcycle";
-import { RepairEntity } from "../RepairEntity";
-import { BreakdownEntity } from "../BreakdownEntity";
-import { RepairDate } from "../../../values/repair/RepairDate";
-import { RepairCost } from "../../../values/repair/RepairCost";
-import { MotorcycleEntity } from "../../drives";
+import { CommonRepairAction } from '@triumph-motorcycles/domain/types/motorcycle';
+import { RepairEntity } from '../RepairEntity';
+import { breakdown } from '../../../../tests/testUtils';
+import { RepairCost } from '@triumph-motorcycles/domain/values/repair/RepairCost';
+import { RepairDate } from '@triumph-motorcycles/domain/values/repair/RepairDate';
 
 describe('RepairEntity', () => {
-  let motorcycle: MotorcycleEntity;
-  let validBreakdown: BreakdownEntity;
-
-  const description = "Engine failure";
-  const reportedDate = new Date(Date.now() - 1000 * 60 * 60 * 24);
-  const warranty = null;
-
-  beforeEach(() => {
-    motorcycle = MotorcycleEntity.create("Triumph", "Bonneville", 2023, new Date(), "Available") as MotorcycleEntity;
-    const breakdownResult = BreakdownEntity.create(motorcycle, description, reportedDate, warranty);
-    
-    if (breakdownResult instanceof Error) {
-      throw breakdownResult; 
-    }
-    
-    validBreakdown = breakdownResult; 
-  });
-
   describe('create', () => {
     it('should successfully create a RepairEntity with valid inputs', () => {
       const validRepairDate = new Date(Date.now() + 1000 * 60 * 60 * 24);
-      const validActions: CommonRepairAction[] = ['Oil Change', 'Brake Replacement'];
+      const validActions: CommonRepairAction[] = [
+        'Oil Change',
+        'Brake Replacement',
+      ];
       const validCost = 500;
 
       const repair = RepairEntity.create(
-        validBreakdown,
+        breakdown,
         validRepairDate,
         validActions,
-        validCost
+        validCost,
       );
 
       expect(repair).not.toBeInstanceOf(Error);
       if (!(repair instanceof Error)) {
-        expect(repair.breakdown).toBe(validBreakdown);
-        expect(repair.repairDate.value.getTime()).toBe(validRepairDate.getTime());
+        expect(repair.breakdown).toBe(breakdown);
+        expect(repair.repairDate.value.getTime()).toBe(
+          validRepairDate.getTime(),
+        );
         expect(repair.actions).toEqual(validActions);
         expect(repair.cost.value).toBe(validCost);
       }
     });
 
     it('should return an error when the repair date is in the past', () => {
-      const invalidRepairDate = new Date(Date.now() - 1000 * 60 * 60 * 24); 
+      const invalidRepairDate = new Date(Date.now() - 1000 * 60 * 60 * 24);
       const validActions: CommonRepairAction[] = ['Tire Replacement'];
       const validCost = 200;
 
       const repair = RepairEntity.create(
-        validBreakdown,
+        breakdown,
         invalidRepairDate,
         validActions,
-        validCost
+        validCost,
       );
 
       expect(repair).toBeInstanceOf(Error);
@@ -67,10 +53,10 @@ describe('RepairEntity', () => {
       const invalidCost = -100;
 
       const repair = RepairEntity.create(
-        validBreakdown,
+        breakdown,
         validRepairDate,
         validActions,
-        invalidCost
+        invalidCost,
       );
 
       expect(repair).toBeInstanceOf(Error);

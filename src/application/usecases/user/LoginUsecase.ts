@@ -1,8 +1,8 @@
-import { UserRepository } from "src/application/repositories/UserRepository";
-import { LoginResponse } from "src/application/responses/LoginResponse";
-import { AuthenticationService } from "src/application/services/AuthenticationService";
-import { UnauthorizedError } from "src/domain/errors/user/UnauthorizedError";
-import { UnexpectedError } from "src/domain/errors/user/UnexpectedError";
+import { UserRepository } from '@triumph-motorcycles/application/repositories/UserRepository';
+import { LoginResponse } from '@triumph-motorcycles/application/responses/LoginResponse';
+import { AuthenticationService } from '@triumph-motorcycles/application/services/AuthenticationService';
+import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
+import { UnauthorizedError } from '@triumph-motorcycles/domain/errors/user/UnauthorizedError';
 
 export class LoginUsecase {
   public constructor(
@@ -12,7 +12,7 @@ export class LoginUsecase {
 
   public async execute(
     username: string,
-    password: string
+    password: string,
   ): Promise<LoginResponse | Error> {
     try {
       const user = await this.userRepository.findByUsername(username);
@@ -21,9 +21,12 @@ export class LoginUsecase {
 
       const credentialsValid = user.validateCredentials(username, password);
 
-      if (!credentialsValid) return new UnauthorizedError(); 
+      if (!credentialsValid) return new UnauthorizedError();
 
-      const authenticationToken = await this.authenticationService.createAuthenticationToken(user.identifier);
+      const authenticationToken =
+        await this.authenticationService.createAuthenticationToken(
+          user.identifier,
+        );
 
       const response: LoginResponse = {
         authenticationToken,
@@ -32,7 +35,9 @@ export class LoginUsecase {
 
       return response;
     } catch (error) {
-      return new UnexpectedError(error instanceof Error ? error.message : String(error));
+      return new UnexpectedError(
+        error instanceof Error ? error.message : String(error),
+      );
     }
   }
 }

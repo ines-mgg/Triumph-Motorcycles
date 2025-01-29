@@ -1,8 +1,7 @@
-import { MaintenanceNotificationMessageError } from "../../errors/maintenance/MaintenanceNotificationMessageError";
-import { Value } from "../Value";
+import { MaintenanceNotificationMessageError } from '@triumph-motorcycles/domain/errors/maintenance/MaintenanceNotificationMessageError';
+import { Value } from '../Value';
 
-
-const MAX_MESSAGE_LENGTH = 10000; 
+const MAX_MESSAGE_LENGTH = 10000;
 
 export class MaintenanceNotificationMessage implements Value<string> {
   private constructor(public readonly value: string) {}

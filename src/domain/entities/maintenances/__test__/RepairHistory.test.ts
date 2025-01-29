@@ -1,8 +1,8 @@
-import { BreakdownDescription } from "../../../values/brealdown/BreakdownDescription";
-import { MotorcycleEntity } from "../../drives";
-import { BreakdownEntity } from "../BreakdownEntity";
-import { RepairHistory } from "../RepairHistoryEntity";
-import { BreakdownReportedDate } from "../../../values/brealdown/BreakdownReportedDate";
+import { RepairHistory } from '@triumph-motorcycles/application/usecases/repairHistory/RepairHistoryUsecases';
+import { BreakdownDescription } from '@triumph-motorcycles/domain/values/breakdown/BreakdownDescription';
+import { BreakdownReportedDate } from '@triumph-motorcycles/domain/values/breakdown/BreakdownReportedDate';
+import { MotorcycleEntity } from '../../drives/MotorcycleEntity';
+import { BreakdownEntity } from '../BreakdownEntity';
 
 describe('RepairHistory', () => {
   let motorcycle1: MotorcycleEntity;
@@ -12,25 +12,53 @@ describe('RepairHistory', () => {
   let repairHistory: RepairHistory;
 
   beforeEach(() => {
-    motorcycle1 = MotorcycleEntity.create("Harley", "Sportster", 2022, new Date(), "Available") as MotorcycleEntity;
-    motorcycle2 = MotorcycleEntity.create("Kawasaki", "Ninja", 2023, new Date(), "Available") as MotorcycleEntity;
+    motorcycle1 = MotorcycleEntity.create(
+      'Harley',
+      'Sportster',
+      2022,
+      new Date(),
+      'Available',
+    ) as MotorcycleEntity;
+    motorcycle2 = MotorcycleEntity.create(
+      'Kawasaki',
+      'Ninja',
+      2023,
+      new Date(),
+      'Available',
+    ) as MotorcycleEntity;
 
-    const description1 = BreakdownDescription.from("Engine failure");
+    const description1 = BreakdownDescription.from('Engine failure');
     if (description1 instanceof Error) {
-      throw new Error('Failed to create BreakdownDescription: ' + description1.message);
+      throw new Error(
+        'Failed to create BreakdownDescription: ' + description1.message,
+      );
     }
 
-    const description2 = BreakdownDescription.from("Tire puncture");
+    const description2 = BreakdownDescription.from('Tire puncture');
     if (description2 instanceof Error) {
-      throw new Error('Failed to create BreakdownDescription: ' + description2.message);
+      throw new Error(
+        'Failed to create BreakdownDescription: ' + description2.message,
+      );
     }
 
-    const reportedDate1 = BreakdownReportedDate.from(new Date("2025-01-10"));
+    const reportedDate1 = BreakdownReportedDate.from(new Date('2025-01-10'));
 
-    if(reportedDate1 instanceof BreakdownReportedDate) breakdown1 = BreakdownEntity.create(motorcycle1, description1.value, reportedDate1.value, null) as BreakdownEntity;
+    if (reportedDate1 instanceof BreakdownReportedDate)
+      breakdown1 = BreakdownEntity.create(
+        motorcycle1,
+        description1.value,
+        reportedDate1.value,
+        null,
+      ) as BreakdownEntity;
 
-    const reportedDate2 = BreakdownReportedDate.from(new Date("2025-01-15"));
-    if(reportedDate2 instanceof BreakdownReportedDate) breakdown2 = BreakdownEntity.create(motorcycle2, description2.value, reportedDate2.value, null) as BreakdownEntity;
+    const reportedDate2 = BreakdownReportedDate.from(new Date('2025-01-15'));
+    if (reportedDate2 instanceof BreakdownReportedDate)
+      breakdown2 = BreakdownEntity.create(
+        motorcycle2,
+        description2.value,
+        reportedDate2.value,
+        null,
+      ) as BreakdownEntity;
 
     repairHistory = new RepairHistory();
   });
@@ -52,11 +80,15 @@ describe('RepairHistory', () => {
       repairHistory.addBreakdown(breakdown1);
       repairHistory.addBreakdown(breakdown2);
 
-      const breakdownsForMotorcycle1 = repairHistory.getBreakdownsByMotorcycle(motorcycle1.id);
+      const breakdownsForMotorcycle1 = repairHistory.getBreakdownsByMotorcycle(
+        motorcycle1.id,
+      );
       expect(breakdownsForMotorcycle1).toHaveLength(1);
       expect(breakdownsForMotorcycle1[0]).toBe(breakdown1);
 
-      const breakdownsForMotorcycle2 = repairHistory.getBreakdownsByMotorcycle(motorcycle2.id);
+      const breakdownsForMotorcycle2 = repairHistory.getBreakdownsByMotorcycle(
+        motorcycle2.id,
+      );
       expect(breakdownsForMotorcycle2).toHaveLength(1);
       expect(breakdownsForMotorcycle2[0]).toBe(breakdown2);
     });
@@ -65,7 +97,8 @@ describe('RepairHistory', () => {
       repairHistory.addBreakdown(breakdown1);
       repairHistory.addBreakdown(breakdown2);
 
-      const breakdownsForNonExistentMotorcycle = repairHistory.getBreakdownsByMotorcycle('non-existent-id');
+      const breakdownsForNonExistentMotorcycle =
+        repairHistory.getBreakdownsByMotorcycle('non-existent-id');
       expect(breakdownsForNonExistentMotorcycle).toHaveLength(0);
     });
   });

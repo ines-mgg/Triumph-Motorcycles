@@ -1,9 +1,9 @@
-import { OrderItemQuantityExceedError } from '../../errors/orderItem/OrderItemQuantityExceedError';
-import { OrderItemCostPerUnit } from '../../values/orderItem/OrderItemCostPerUnit';
-import { OrderItemDeliveredQuantity } from '../../values/orderItem/OrderItemDeliveredQuantity';
-import { OrderItemQuantityOrdered } from '../../values/orderItem/OrderItemQuantityOrdered';
+import { OrderItemCostPerUnit } from '@triumph-motorcycles/domain/values/orderItem/OrderItemCostPerUnit';
+import { OrderItemQuantityOrdered } from '@triumph-motorcycles/domain/values/orderItem/OrderItemQuantityOrdered';
+import { OrderItemDeliveredQuantity } from '@triumph-motorcycles/domain/values/orderItem/OrderItemDeliveredQuantity';
 import { SparePartEntity } from './SparePartEntity';
-import crypto from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
+import { OrderItemQuantityExceedError } from '@triumph-motorcycles/domain/errors/orderItem/OrderItemQuantityExceedError';
 
 export class OrderItemEntity {
   private constructor(
@@ -18,9 +18,9 @@ export class OrderItemEntity {
     sparePart: SparePartEntity,
     quantityOrderedValue: number,
     costPerUnitValue: number,
-    deliveredQuantityValue: number = 0
+    deliveredQuantityValue: number = 0,
   ): OrderItemEntity | Error {
-    const id = crypto.randomUUID();
+    const id = uuidv4();
 
     const quantityOrdered = OrderItemQuantityOrdered.from(quantityOrderedValue);
     if (quantityOrdered instanceof Error) return quantityOrdered;
@@ -28,10 +28,19 @@ export class OrderItemEntity {
     const costPerUnit = OrderItemCostPerUnit.from(costPerUnitValue);
     if (costPerUnit instanceof Error) return costPerUnit;
 
-    const deliveredQuantity = OrderItemDeliveredQuantity.from(deliveredQuantityValue, quantityOrdered);
+    const deliveredQuantity = OrderItemDeliveredQuantity.from(
+      deliveredQuantityValue,
+      quantityOrdered,
+    );
     if (deliveredQuantity instanceof Error) return deliveredQuantity;
 
-    return new OrderItemEntity(id, sparePart, quantityOrdered, costPerUnit, deliveredQuantity);
+    return new OrderItemEntity(
+      id,
+      sparePart,
+      quantityOrdered,
+      costPerUnit,
+      deliveredQuantity,
+    );
   }
 
   getId(): string {
@@ -46,13 +55,15 @@ export class OrderItemEntity {
     if (deliveredQty > this.quantityOrdered.value) {
       return new OrderItemQuantityExceedError();
     }
-  
-    const deliveredQuantity = OrderItemDeliveredQuantity.from(deliveredQty, this.quantityOrdered);
+
+    const deliveredQuantity = OrderItemDeliveredQuantity.from(
+      deliveredQty,
+      this.quantityOrdered,
+    );
     if (deliveredQuantity instanceof Error) return deliveredQuantity;
-  
+
     this.deliveredQuantity = deliveredQuantity;
   }
-  
 
   isFullyDelivered(): boolean {
     return this.deliveredQuantity.value >= this.quantityOrdered.value;

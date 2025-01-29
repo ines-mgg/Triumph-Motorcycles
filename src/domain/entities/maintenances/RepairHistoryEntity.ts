@@ -1,5 +1,5 @@
 import { BreakdownEntity } from './BreakdownEntity';
-export class RepairHistory {
+export class RepairHistoryEntity {
   private readonly breakdownRecords: BreakdownEntity[] = [];
 
   addBreakdown(breakdown: BreakdownEntity): void {

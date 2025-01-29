@@ -1,4 +1,4 @@
 export interface LoginResponse {
-    authenticationToken: string,
-    administrator: boolean,
+  authenticationToken: string;
+  administrator: boolean;
 }

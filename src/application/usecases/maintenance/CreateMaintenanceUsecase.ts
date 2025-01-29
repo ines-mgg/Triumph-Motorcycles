@@ -1,6 +1,6 @@
-import { MotorcycleEntity } from "@triumph-motorcycles/domain/entities/drives";
-import { MaintenanceRepository } from "../../repositories/MaintenanceRepository";
-import { MaintenanceEntity } from "@triumph-motorcycles/domain/entities/maintenances";
+import { MotorcycleEntity } from '@triumph-motorcycles/domain/entities/drives/MotorcycleEntity';
+import { MaintenanceRepository } from '@triumph-motorcycles/application/repositories/MaintenanceRepository';
+import { MaintenanceEntity } from '@triumph-motorcycles/domain/entities/maintenances/MaintenanceEntity';
 
 export class CreateMaintenanceUsecase {
   constructor(private readonly maintenanceRepository: MaintenanceRepository) {}
@@ -16,7 +16,7 @@ export class CreateMaintenanceUsecase {
       maintenanceIntervalTime,
     );
 
-    if(maintenance instanceof Error) return maintenance
+    if (maintenance instanceof Error) return maintenance;
 
     await this.maintenanceRepository.save(maintenance);
   }

@@ -1,7 +1,8 @@
-import { MaintenanceNotificationType } from '../../types/motorcycle';
-import { MaintenanceNotificationDate } from '../../values/maintenanceNotification/MaintenanceNotificationDate';
-import { MaintenanceNotificationMessage } from '../../values/maintenanceNotification/MaintenanceNotificationMessage';
-import crypto from 'crypto';
+import { MaintenanceNotificationType } from '@triumph-motorcycles/domain/types/motorcycle';
+import { MaintenanceNotificationDate } from '@triumph-motorcycles//domain/values/maintenanceNotification/MaintenanceNotificationDate';
+import { MaintenanceNotificationMessage } from '@triumph-motorcycles//domain/values/maintenanceNotification/MaintenanceNotificationMessage';
+
+import { v4 as uuidv4 } from 'uuid';
 
 export class MaintenanceNotificationEntity {
   private constructor(
@@ -18,12 +19,11 @@ export class MaintenanceNotificationEntity {
     type: MaintenanceNotificationType,
     isRead: boolean = false,
   ): Error | MaintenanceNotificationEntity {
-    
-    const recipientId = crypto.randomUUID();
-   
+    const recipientId = uuidv4();
+
     const messageValue = MaintenanceNotificationMessage.from(message);
     if (messageValue instanceof Error) return messageValue;
-    
+
     const dateValue = MaintenanceNotificationDate.from(date);
     if (dateValue instanceof Error) return dateValue;
 
@@ -32,7 +32,7 @@ export class MaintenanceNotificationEntity {
       messageValue,
       dateValue,
       type,
-      isRead
+      isRead,
     );
   }
 

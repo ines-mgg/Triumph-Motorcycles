@@ -1,15 +1,15 @@
-import { ConcessionRepository } from "src/application/repositories/ConcessionRepository";
-import { ConcessionEntity } from "src/domain/entities/concession/ConcessionEntity";
-import { UnexpectedError } from "src/domain/errors/user/UnexpectedError";
+import { ConcessionRepository } from '@triumph-motorcycles/application/repositories/ConcessionRepository';
+import { ConcessionEntity } from '@triumph-motorcycles/domain/entities/concession/ConcessionEntity';
+import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
 
 export class UpdateConcessionNameUsecase {
   public constructor(
-    private readonly concessionRepository: ConcessionRepository
+    private readonly concessionRepository: ConcessionRepository,
   ) {}
 
   public async execute(
     concessionId: string,
-    newNameValue: string
+    newNameValue: string,
   ): Promise<ConcessionEntity | Error> {
     try {
       const concession = await this.concessionRepository.findById(concessionId);
@@ -21,7 +21,9 @@ export class UpdateConcessionNameUsecase {
       await this.concessionRepository.save(concession);
       return concession;
     } catch (error) {
-      return new UnexpectedError(error instanceof Error ? error.message : String(error));
+      return new UnexpectedError(
+        error instanceof Error ? error.message : String(error),
+      );
     }
   }
 }

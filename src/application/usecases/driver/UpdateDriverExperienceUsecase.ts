@@ -1,15 +1,18 @@
-import { DriverRepository } from "../../repositories/DriverRepository";
+import { DriverRepository } from '@triumph-motorcycles/application/repositories/DriverRepository';
 
 export class UpdateDriverExperienceUsecase {
   constructor(private readonly driverRepository: DriverRepository) {}
 
-  public async execute(driverId: string, newYearsOfExperience: number): Promise<void | Error> {
+  public async execute(
+    driverId: string,
+    newYearsOfExperience: number,
+  ): Promise<void | Error> {
     const driver = await this.driverRepository.findOneById(driverId);
 
-    if(driver instanceof Error) return driver
-    
+    if (driver instanceof Error) return driver;
+
     driver.updateExperience(newYearsOfExperience);
-      
+
     await this.driverRepository.save(driver);
   }
 }

@@ -1,11 +1,11 @@
-import { BreakdownInvalidWarrantyError } from '../../errors/breakdown/BreakdownInvalidWarrantyError';
-import { BreakdownDescription } from '../../values/brealdown/BreakdownDescription';
-import { BreakdownReportedDate } from '../../values/brealdown/BreakdownReportedDate';
-import { MotorcycleEntity } from '../drives';
+import { BreakdownDescription } from '@triumph-motorcycles/domain/values/breakdown/BreakdownDescription';
+import { BreakdownReportedDate } from '@triumph-motorcycles/domain/values/breakdown/BreakdownReportedDate';
+import { MotorcycleEntity } from '../drives/MotorcycleEntity';
 import { BreakdownRepairHistoryEntity } from './BreakdownRepairHistoryEntity';
 import { RepairEntity } from './RepairEntity';
 import { WarrantyEntity } from './WarrantyEntity';
-import crypto from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
+import { BreakdownInvalidWarrantyError } from '@triumph-motorcycles/domain/errors/breakdown/BreakdownInvalidWarrantyError';
 
 export class BreakdownEntity {
   private readonly repairHistory: BreakdownRepairHistoryEntity;
@@ -27,21 +27,24 @@ export class BreakdownEntity {
     reportedDateValue: Date,
     warranty: WarrantyEntity | null,
   ): BreakdownEntity | Error {
-    
-    const id = crypto.randomUUID();
-    
+    const id = uuidv4();
+
     const description = BreakdownDescription.from(descriptionValue);
-    if (description instanceof Error) return description
-  
+    if (description instanceof Error) return description;
 
     const reportedDate = BreakdownReportedDate.from(reportedDateValue);
-    if (reportedDate instanceof Error) return reportedDate
+    if (reportedDate instanceof Error) return reportedDate;
 
-    return new BreakdownEntity(id, motorcycle, description, reportedDate, warranty);
+    return new BreakdownEntity(
+      id,
+      motorcycle,
+      description,
+      reportedDate,
+      warranty,
+    );
   }
 
   public addRepair(repair: RepairEntity): void {
-
     this.repairHistory.addRepairRecord(repair);
 
     this.motorcycle.status = 'InMaintenance';

@@ -1,9 +1,7 @@
-import { OrderItemRepository } from "../../repositories/OrderItemRepository";
+import { OrderItemRepository } from '@triumph-motorcycles/application/repositories/OrderItemRepository';
 
 export class UpdateOrderItemDeliveryUsecase {
-  constructor(
-    private readonly orderItemRepository: OrderItemRepository,
-  ) {}
+  constructor(private readonly orderItemRepository: OrderItemRepository) {}
 
   public async execute(
     orderItemId: string,
@@ -11,7 +9,7 @@ export class UpdateOrderItemDeliveryUsecase {
   ): Promise<void | Error> {
     const orderItem = await this.orderItemRepository.findById(orderItemId);
 
-    if(orderItem instanceof Error) return orderItem
+    if (orderItem instanceof Error) return orderItem;
 
     orderItem.updateDelivery(deliveredQty);
     await this.orderItemRepository.save(orderItem);

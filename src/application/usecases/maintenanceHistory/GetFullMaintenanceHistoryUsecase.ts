@@ -1,5 +1,5 @@
-import { MaintenanceRecord } from "../../../domain/types/motorcycle";
-import { MaintenanceHistoryRepository } from "../../repositories/MaintenanceHistoryRepository";
+import { MaintenanceRecord } from '@triumph-motorcycles/domain/types/motorcycle';
+import { MaintenanceHistoryRepository } from '@triumph-motorcycles/application/repositories/MaintenanceHistoryRepository';
 
 export class GetFullMaintenanceHistoryUsecase {
   constructor(

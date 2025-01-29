@@ -1,8 +1,7 @@
-import { MotorStatus } from "../../../types/motorcycle";
-import { MotorcycleEntity } from "../MotorcycleEntity";
-import { MotorcycleMileageError } from "../../../errors/motorcycle/MotorcycleMileageError";
-import { MotorcycleUpdateServiceDetailsError } from '../../../errors/motorcycle/MotorcycleUpdateServiceDetailsError'
-
+import { MotorStatus } from '@triumph-motorcycles/domain/types/motorcycle';
+import { MotorcycleEntity } from '../MotorcycleEntity';
+import { MotorcycleMileageError } from '@triumph-motorcycles/domain/errors/motorcycle/MotorcycleMileageError';
+import { MotorcycleUpdateServiceDetailsError } from '@triumph-motorcycles/domain/errors/motorcycle/MotorcycleUpdateServiceDetailsError';
 
 describe('MotorcycleEntity', () => {
   let motorcycle: MotorcycleEntity;
@@ -14,7 +13,13 @@ describe('MotorcycleEntity', () => {
     const purchaseDate = new Date('2023-01-01');
     const status: MotorStatus = 'Available';
 
-    motorcycle = MotorcycleEntity.create(brand, model, year, purchaseDate, status) as MotorcycleEntity;
+    motorcycle = MotorcycleEntity.create(
+      brand,
+      model,
+      year,
+      purchaseDate,
+      status,
+    ) as MotorcycleEntity;
   });
 
   it('should create a motorcycle entity successfully with valid inputs', () => {
@@ -28,7 +33,9 @@ describe('MotorcycleEntity', () => {
   });
 
   it('should throw an error if mileage is updated to a lower value', () => {
-    expect(() => motorcycle.updateMileage(-500)).toThrow(MotorcycleMileageError);
+    expect(() => motorcycle.updateMileage(-500)).toThrow(
+      MotorcycleMileageError,
+    );
   });
 
   it('should update mileage correctly', () => {
@@ -38,12 +45,14 @@ describe('MotorcycleEntity', () => {
 
   it('should correctly determine if service is needed', () => {
     motorcycle.updateMileage(5000);
-    expect(motorcycle.needsService()).toBe(true); 
+    expect(motorcycle.needsService()).toBe(true);
   });
 
   it('should throw an error when updating service details with lower mileage than current', () => {
     motorcycle.updateMileage(5000);
-    expect(() => motorcycle.updateServiceDetails(4000, new Date())).toThrow(MotorcycleUpdateServiceDetailsError);
+    expect(() => motorcycle.updateServiceDetails(4000, new Date())).toThrow(
+      MotorcycleUpdateServiceDetailsError,
+    );
   });
 
   it('should update service details correctly', () => {

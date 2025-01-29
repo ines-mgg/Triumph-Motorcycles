@@ -1,18 +1,18 @@
-import crypto from 'crypto';
-import { SparePartEntity } from "./SparePartEntity";
+import { v4 as uuidv4 } from 'uuid';
+import { SparePartEntity } from './SparePartEntity';
 
 export class SparePartNotificationEntity {
   private notifications: string[] = [];
 
   private constructor(
-    public readonly id: string,  
-    private readonly spareParts: SparePartEntity[]
+    public readonly id: string,
+    private readonly spareParts: SparePartEntity[],
   ) {}
 
   public static create(
-    spareParts: SparePartEntity[]
+    spareParts: SparePartEntity[],
   ): SparePartNotificationEntity | Error {
-    const id = crypto.randomUUID();
+    const id = uuidv4();
     return new SparePartNotificationEntity(id, spareParts);
   }
 

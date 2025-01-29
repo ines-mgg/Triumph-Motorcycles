@@ -1,7 +1,7 @@
-import { Name } from "../../values/concession/name";
-import { MotorcycleEntity } from "../drives";
-import { UserEntity } from "../user/UserEntity";
-import crypto from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
+import { MotorcycleEntity } from '../drives/MotorcycleEntity';
+import { UserEntity } from '../user/UserEntity';
+import { Name } from '@triumph-motorcycles/domain/values/concession/name';
 
 export class ConcessionEntity {
   private motorcycles: MotorcycleEntity[] = [];
@@ -11,17 +11,17 @@ export class ConcessionEntity {
     public name: Name,
     public user: UserEntity,
     public createdAt: Date,
-    public updatedAt: Date
+    public updatedAt: Date,
   ) {}
 
   public static create(
     nameValue: string,
-    user: UserEntity
+    user: UserEntity,
   ): ConcessionEntity | Error {
     const name = Name.from(nameValue);
     if (name instanceof Error) return name;
 
-    const identifier = crypto.randomUUID();
+    const identifier = uuidv4();
     const createdAt = new Date();
     const updatedAt = new Date();
 
@@ -42,7 +42,7 @@ export class ConcessionEntity {
 
   public removeMotorcycle(motorcycleId: string): void {
     this.motorcycles = this.motorcycles.filter(
-      (motorcycle) => motorcycle.id !== motorcycleId
+      (motorcycle) => motorcycle.id !== motorcycleId,
     );
   }
 

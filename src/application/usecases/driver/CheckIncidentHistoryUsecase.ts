@@ -1,4 +1,4 @@
-import { DriverRepository } from "../../repositories/DriverRepository";
+import { DriverRepository } from '@triumph-motorcycles/application/repositories/DriverRepository';
 
 export class CheckIncidentHistoryUsecase {
   constructor(private readonly driverRepository: DriverRepository) {}
@@ -6,7 +6,7 @@ export class CheckIncidentHistoryUsecase {
   public async execute(driverId: string): Promise<boolean | Error> {
     const driver = await this.driverRepository.findOneById(driverId);
 
-    if(driver instanceof Error) return driver
+    if (driver instanceof Error) return driver;
 
     return driver.hasIncidentHistory();
   }

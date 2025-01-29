@@ -1,130 +1,119 @@
-import { MotorcycleEntity } from "../drives";
-import { UserEntity } from "../user/UserEntity";
-import { EndLocationError } from "../../errors/location/EndLocationError";
-import { CancelLocationError } from "../../errors/location/CancelLocationError";
-import { EndDateError } from "../../errors/location/EndDateError";
-import { Username } from "../../values/user/Username";
-import { Password } from "../../values/user/Password";
-import { LocationEntity } from "./LocationEntity";
+import { LocationEntity } from './LocationEntity';
+import { user, motorcycle } from '../../../tests/testUtils';
+import { CancelLocationError } from '@triumph-motorcycles/domain/errors/location/CancelLocationError';
+import { EndDateError } from '@triumph-motorcycles/domain/errors/location/EndDateError';
+import { EndLocationError } from '@triumph-motorcycles/domain/errors/location/EndLocationError';
 
-describe("LocationEntity", () => {
-  let motorcycle: MotorcycleEntity;
-  let user: UserEntity;
-  const now = new Date();
+describe('LocationEntity', () => {
   const cost = 100;
   const startDate = new Date();
 
-  beforeAll(() => {
-    const username = Username.from("validUsername");
-    const password = Password.from("Valid@123");
-
-    if (username instanceof Error || password instanceof Error) {
-      throw new Error("Invalid mock user creation.");
-    }
-
-    user = UserEntity.create(username.value, password.value, now, now) as UserEntity;
-
-    const brand = 'Yamaha';
-    const model = 'MT-09';
-    const year = 2023;
-    const purchaseDate = new Date('2023-01-01');
-    
-    motorcycle = MotorcycleEntity.create(brand, model, year, purchaseDate, "Available") as MotorcycleEntity;
-  });
-
-  it("should create a location entity with valid properties", () => {
+  it('should create a location entity with valid properties', () => {
     const location = LocationEntity.create(motorcycle, user, startDate, cost);
 
     expect(location).toBeDefined();
 
-    if(location instanceof LocationEntity) {
-        expect(location.id).toBeDefined();
-        expect(location.status).toBe("in-progress");
-        expect(location.cost).toBe(cost);
-        expect(location.startDate.value).toBe(startDate);
+    if (location instanceof LocationEntity) {
+      expect(location.id).toBeDefined();
+      expect(location.status).toBe('in-progress');
+      expect(location.cost).toBe(cost);
+      expect(location.startDate.value).toBe(startDate);
     }
-    
   });
 
-  it("should end location with a valid end date", () => {
-    const location = LocationEntity.create(motorcycle, user, startDate, cost) as LocationEntity;
-    const endDate = new Date(new Date().getTime() + 1000 * 60 * 60); 
-    location.endLocation(endDate);
-
-    expect(location.status).toBe("completed");
-    expect(location.endDate).toBeDefined();
-    expect(location.endDate?.value).toBe(endDate);
+  it('should end location with a valid end date', () => {
+    const location = LocationEntity.create(motorcycle, user, startDate, cost);
+    if (location instanceof LocationEntity) {
+      const endDate = new Date(new Date().getTime() + 1000 * 60 * 60);
+      location.endLocation(endDate);
+      expect(location.status).toBe('completed');
+      expect(location.endDate).toBeDefined();
+      expect(location.endDate?.value).toBe(endDate);
+    }
   });
 
-  it("should not allow ending a completed or canceled location", () => {
-    const location = LocationEntity.create(motorcycle, user, startDate, cost) as LocationEntity;
-    location.status = "completed";
-    const endDate = new Date(new Date().getTime() + 1000 * 60 * 60);
-    const result = location.endLocation(endDate);
-
-    expect(result).toBeInstanceOf(EndLocationError);
+  it('should not allow ending a completed or canceled location', () => {
+    const location = LocationEntity.create(motorcycle, user, startDate, cost);
+    if (location instanceof LocationEntity) {
+      location.status = 'completed';
+      const endDate = new Date(new Date().getTime() + 1000 * 60 * 60);
+      const result = location.endLocation(endDate);
+      expect(result).toBeInstanceOf(EndLocationError);
+    }
   });
 
-  it("should cancel location", () => {
-    const location = LocationEntity.create(motorcycle, user, startDate, cost) as LocationEntity;
-    location.cancelLocation();
-
-    expect(location.status).toBe("canceled");
-    expect(location.endDate).toBeNull();
+  it('should cancel location', () => {
+    const location = LocationEntity.create(motorcycle, user, startDate, cost);
+    if (location instanceof LocationEntity) {
+      location.cancelLocation();
+      expect(location.status).toBe('canceled');
+      expect(location.endDate).toBeNull();
+    }
   });
 
-  it("should not allow canceling a completed or canceled location", () => {
-    const location = LocationEntity.create(motorcycle, user, startDate, cost) as LocationEntity;
-    location.status = "completed";
-    const result = location.cancelLocation();
+  it('should not allow canceling a completed or canceled location', () => {
+    const location = LocationEntity.create(motorcycle, user, startDate, cost);
+    if (location instanceof LocationEntity) {
+      location.status = 'completed';
+      const result = location.cancelLocation();
 
-    expect(result).toBeInstanceOf(CancelLocationError);
+      expect(result).toBeInstanceOf(CancelLocationError);
+    }
   });
 
-  it("should calculate cost correctly when end date is provided", () => {
-    const location = LocationEntity.create(motorcycle, user, startDate, cost) as LocationEntity;
-    const endDate = new Date(startDate.getTime() + 1000 * 60 * 60); 
-    location.endLocation(endDate);
-  
-    location.calculateCost();
-    expect(location.cost).toBeCloseTo(10, 2); 
+  it('should calculate cost correctly when end date is provided', () => {
+    const location = LocationEntity.create(motorcycle, user, startDate, cost);
+    if (location instanceof LocationEntity) {
+      const endDate = new Date(startDate.getTime() + 1000 * 60 * 60);
+      location.endLocation(endDate);
+      location.calculateCost();
+      expect(location.cost).toBeCloseTo(10, 2);
+    }
   });
 
-  it("should return an error when trying to calculate cost without an end date", () => {
-    const location = LocationEntity.create(motorcycle, user, startDate, cost) as LocationEntity;
-    location.endDate = null;
-    const result = location.calculateCost();
-
-    expect(result).toBeInstanceOf(EndDateError);
+  it('should return an error when trying to calculate cost without an end date', () => {
+    const location = LocationEntity.create(motorcycle, user, startDate, cost);
+    if (location instanceof LocationEntity) {
+      location.endDate = null;
+      const result = location.calculateCost();
+      expect(result).toBeInstanceOf(EndDateError);
+    }
   });
 
-  it("should return details of the location", () => {
-    const location = LocationEntity.create(motorcycle, user, startDate, cost) as LocationEntity;
-    const details = location.getDetails();
+  it('should return details of the location', () => {
+    const location = LocationEntity.create(motorcycle, user, startDate, cost);
+    if (location instanceof LocationEntity) {
+      const details = location.getDetails();
 
-    expect(details).toHaveProperty("id");
-    expect(details).toHaveProperty("motorcycle");
-    expect(details).toHaveProperty("user");
-    expect(details).toHaveProperty("startDate");
-    expect(details).toHaveProperty("status");
-    expect(details).toHaveProperty("cost");
+      expect(details).toHaveProperty('id');
+      expect(details).toHaveProperty('motorcycle');
+      expect(details).toHaveProperty('user');
+      expect(details).toHaveProperty('startDate');
+      expect(details).toHaveProperty('status');
+      expect(details).toHaveProperty('cost');
+    }
   });
 
-  it("should not add duplicate motorcycles", () => {
-    const location = LocationEntity.create(motorcycle, user, startDate, cost) as LocationEntity;
-    
-    location.motorcycle = motorcycle;
-    const initialMotorcycle = location.motorcycle;
-    
-    location.motorcycle = initialMotorcycle;
-    
-    expect(location.motorcycle).toBe(initialMotorcycle); 
+  it('should not add duplicate motorcycles', () => {
+    const location = LocationEntity.create(motorcycle, user, startDate, cost);
+    if (location instanceof LocationEntity) {
+      location.motorcycle = motorcycle;
+      const initialMotorcycle = location.motorcycle;
+
+      location.motorcycle = initialMotorcycle;
+
+      expect(location.motorcycle).toBe(initialMotorcycle);
+    }
   });
 
-  it("should generate a new id for each location", () => {
-    const location1 = LocationEntity.create(motorcycle, user, startDate, cost) as LocationEntity;
-    const location2 = LocationEntity.create(motorcycle, user, startDate, cost) as LocationEntity;
-
-    expect(location1.id).not.toBe(location2.id); 
+  it('should generate a new id for each location', () => {
+    const location1 = LocationEntity.create(motorcycle, user, startDate, cost);
+    const location2 = LocationEntity.create(motorcycle, user, startDate, cost);
+    if (
+      location1 instanceof LocationEntity &&
+      location2 instanceof LocationEntity
+    ) {
+      expect(location1.id).not.toBe(location2.id);
+    }
   });
 });

@@ -1,3 +1,3 @@
 export class SparePartNameError extends Error {
-    public override readonly name = "SparePartNameError";
+  public override readonly name = 'SparePartNameError';
 }

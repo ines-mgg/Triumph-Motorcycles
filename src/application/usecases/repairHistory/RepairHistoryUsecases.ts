@@ -1,4 +1,4 @@
-import { BreakdownEntity } from "@triumph-motorcycles/domain/entities/maintenances";
+import { BreakdownEntity } from '@triumph-motorcycles/domain/entities/maintenances/BreakdownEntity';
 export class RepairHistory {
   private readonly breakdownRecords: BreakdownEntity[] = [];
 

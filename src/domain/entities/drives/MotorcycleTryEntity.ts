@@ -2,8 +2,8 @@ import { DriverEntity } from './DriverEntity';
 import { MotorcycleEntity } from './MotorcycleEntity';
 import { StartDate } from '../../values/motorcycleTry/MotorcycleTryStartDate';
 import { EndDate } from '../../values/motorcycleTry/MotorcycleTryEndDate';
-import { MotorcycleTryEndDateError } from '../../errors/motorcycleTry/MotorcycleTryEndDateError'
-import crypto from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
+import { MotorcycleTryEndDateError } from '@triumph-motorcycles/domain/errors/motorcycleTry/MotorcycleTryEndDateError';
 
 export class MotorcycleTryEntity {
   private constructor(
@@ -20,20 +20,25 @@ export class MotorcycleTryEntity {
     startDate: Date,
     endDate: Date,
   ): MotorcycleTryEntity | Error {
-   
-     const id = crypto.randomUUID();
+    const id = uuidv4();
 
     const startDateValue = StartDate.from(startDate);
     if (startDateValue instanceof Error) {
       return startDateValue;
     }
-    
+
     const endDateValue = EndDate.from(startDate, endDate);
     if (endDateValue instanceof Error) {
       return endDateValue;
     }
 
-    return new MotorcycleTryEntity(id, motorcycle, driver, startDateValue, endDateValue);
+    return new MotorcycleTryEntity(
+      id,
+      motorcycle,
+      driver,
+      startDateValue,
+      endDateValue,
+    );
   }
 
   public getTestDuration(): number | null {

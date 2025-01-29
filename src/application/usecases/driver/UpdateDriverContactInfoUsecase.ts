@@ -1,4 +1,4 @@
-import { DriverRepository } from "../../repositories/DriverRepository";
+import { DriverRepository } from '@triumph-motorcycles/application/repositories/DriverRepository';
 
 export class UpdateDriverContactInfoUsecase {
   constructor(private readonly driverRepository: DriverRepository) {}
@@ -10,7 +10,7 @@ export class UpdateDriverContactInfoUsecase {
   ): Promise<void | Error> {
     const driver = await this.driverRepository.findOneById(driverId);
 
-    if(driver instanceof Error) return driver
+    if (driver instanceof Error) return driver;
 
     driver.updateContactInfo({ email: newEmail, phone: newPhone });
     await this.driverRepository.save(driver);

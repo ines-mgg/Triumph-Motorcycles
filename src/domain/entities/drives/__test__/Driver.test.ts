@@ -1,9 +1,11 @@
-/// <reference types="jest" />
-
+import { DriverNameError } from '@triumph-motorcycles/domain/errors/driver/DriverNameError';
+import {
+  DriverEmailError,
+  ExperienceError,
+} from '@triumph-motorcycles/domain/errors/drivers';
 import { DriverEntity } from '../DriverEntity';
-import { DriverEmailError, ExperienceError } from '../../../errors/drivers';
-import { DrivingRecord } from '../../../types/motorcycle';
-import { DriverNameError } from '../../../errors/driver/DriverNameError';
+
+import { DrivingRecord } from '@triumph-motorcycles/domain/types/motorcycle';
 
 describe('DriverEntity', () => {
   it('should create a driver entity successfully with valid inputs', () => {
@@ -13,7 +15,7 @@ describe('DriverEntity', () => {
       'AB12345678',
       5,
       'john.doe@example.com',
-      '1234567890'
+      '1234567890',
     );
 
     expect(driver).toBeInstanceOf(DriverEntity);
@@ -25,9 +27,8 @@ describe('DriverEntity', () => {
       expect(driver.email.value).toBe('john.doe@example.com');
       expect(driver.phone.value).toBe('1234567890');
     } else {
-      fail('Failed to create driver entity'); 
+      fail('Failed to create driver entity');
     }
-
   });
 
   it('should return an error when creating a driver with invalid name', () => {
@@ -37,7 +38,7 @@ describe('DriverEntity', () => {
       'AB12345678',
       5,
       'john.doe@example.com',
-      '1234567890'
+      '1234567890',
     );
 
     expect(driver).toBeInstanceOf(DriverNameError);
@@ -50,7 +51,7 @@ describe('DriverEntity', () => {
       'AB12345678',
       5,
       'invalid-email',
-      '1234567890'
+      '1234567890',
     );
 
     expect(driver).toBeInstanceOf(DriverEmailError);
@@ -63,16 +64,16 @@ describe('DriverEntity', () => {
       'AB12345678',
       5,
       'john.doe@example.com',
-      '1234567890'
+      '1234567890',
     ) as DriverEntity;
 
-    const record: DrivingRecord = { 
+    const record: DrivingRecord = {
       motorcycleId: '1',
       type: 'Incident',
       date: new Date('2025-01-01'),
-      details: 'Speeding' 
+      details: 'Speeding',
     };
-    
+
     driver.addDrivingRecord(record);
 
     expect(driver.getDrivingHistory()).toContain(record);
@@ -85,7 +86,7 @@ describe('DriverEntity', () => {
       'AB12345678',
       5,
       'john.doe@example.com',
-      '1234567890'
+      '1234567890',
     ) as DriverEntity;
 
     driver.updateExperience(6);
@@ -99,7 +100,7 @@ describe('DriverEntity', () => {
       'AB12345678',
       5,
       'john.doe@example.com',
-      '1234567890'
+      '1234567890',
     ) as DriverEntity;
 
     expect(() => driver.updateExperience(4)).toThrow(ExperienceError);
@@ -112,10 +113,13 @@ describe('DriverEntity', () => {
       'AB12345678',
       5,
       'john.doe@example.com',
-      '1234567890'
+      '1234567890',
     ) as DriverEntity;
 
-    driver.updateContactInfo({ email: 'new.email@example.com', phone: '0987654321' });
+    driver.updateContactInfo({
+      email: 'new.email@example.com',
+      phone: '0987654321',
+    });
 
     expect(driver.email.value).toBe('new.email@example.com');
     expect(driver.phone.value).toBe('0987654321');
@@ -128,11 +132,12 @@ describe('DriverEntity', () => {
       'AB12345678',
       5,
       'john.doe@example.com',
-      '1234567890'
+      '1234567890',
     ) as DriverEntity;
 
-    expect(() => driver.updateContactInfo({ email: 'invalid-email', phone: '0987654321' }))
-      .toThrow(DriverEmailError);
+    expect(() =>
+      driver.updateContactInfo({ email: 'invalid-email', phone: '0987654321' }),
+    ).toThrow(DriverEmailError);
   });
 
   it('should detect if a driver has an incident in their driving history', () => {
@@ -142,14 +147,14 @@ describe('DriverEntity', () => {
       'AB12345678',
       5,
       'john.doe@example.com',
-      '1234567890'
+      '1234567890',
     ) as DriverEntity;
 
-    const record: DrivingRecord = { 
-      motorcycleId: "1",
-      type: 'Incident', 
-      date: new Date('2025-01-01'), 
-      details: 'Speeding' 
+    const record: DrivingRecord = {
+      motorcycleId: '1',
+      type: 'Incident',
+      date: new Date('2025-01-01'),
+      details: 'Speeding',
     };
     driver.addDrivingRecord(record);
 
@@ -163,10 +168,9 @@ describe('DriverEntity', () => {
       'AB12345678',
       5,
       'john.doe@example.com',
-      '1234567890'
+      '1234567890',
     ) as DriverEntity;
 
     expect(driver.hasIncidentHistory()).toBe(false);
   });
 });
- 

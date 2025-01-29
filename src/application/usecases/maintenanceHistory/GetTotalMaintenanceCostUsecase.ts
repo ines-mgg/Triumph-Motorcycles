@@ -1,4 +1,4 @@
-import { MaintenanceHistoryRepository } from "../../repositories/MaintenanceHistoryRepository";
+import { MaintenanceHistoryRepository } from '@triumph-motorcycles/application/repositories/MaintenanceHistoryRepository';
 
 export class GetTotalMaintenanceCostUsecase {
   constructor(
@@ -9,8 +9,8 @@ export class GetTotalMaintenanceCostUsecase {
     const records = motorcycleId
       ? await this.maintenanceHistoryRepository.findByMotorcycleId(motorcycleId)
       : await this.maintenanceHistoryRepository.findAll();
-    
-    if(records instanceof Error) return records
+
+    if (records instanceof Error) return records;
 
     return records.reduce((total, record) => total + record.cost, 0);
   }

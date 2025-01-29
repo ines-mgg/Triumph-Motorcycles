@@ -1,5 +1,5 @@
-import { WarrantyEndDateError } from "../../errors/warranty/WarrantyEndDateError";
-import { Value } from "../Value";
+import { WarrantyEndDateError } from '@triumph-motorcycles/domain/errors/warranty/WarrantyEndDateError';
+import { Value } from '../Value';
 
 export class WarrantyEndDate implements Value<Date> {
   public readonly value: Date;
@@ -12,7 +12,7 @@ export class WarrantyEndDate implements Value<Date> {
     if (value < new Date()) {
       return new WarrantyEndDateError();
     }
-    if ((value.getTime() - startDate.getTime()) > 365 * 24 * 60 * 60 * 1000) {
+    if (value.getTime() - startDate.getTime() > 365 * 24 * 60 * 60 * 1000) {
       return new WarrantyEndDateError();
     }
     return new WarrantyEndDate(value);

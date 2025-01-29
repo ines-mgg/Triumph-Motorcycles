@@ -1,5 +1,5 @@
-import { MaintenanceHistoryRepository } from "../../repositories/MaintenanceHistoryRepository";
-import { SparePartEntity } from "@triumph-motorcycles/domain/entities/parts";
+import { MaintenanceHistoryRepository } from '@triumph-motorcycles/application/repositories/MaintenanceHistoryRepository';
+import { SparePartEntity } from '@triumph-motorcycles/domain/entities/parts/SparePartEntity';
 
 export class GetPartsUsageSummaryUsecase {
   constructor(
@@ -16,7 +16,7 @@ export class GetPartsUsageSummaryUsecase {
       { part: SparePartEntity; quantityUsed: number }
     >();
 
-    if(records instanceof Error) return records
+    if (records instanceof Error) return records;
 
     for (const record of records) {
       for (const part of record.partsUsed) {

@@ -1,14 +1,15 @@
-import { WarrantyRepository } from "../../repositories/WarrantyRepository";
+import { WarrantyRepository } from '@triumph-motorcycles/application/repositories/WarrantyRepository';
 
 export class CheckWarrantyValidityUsecase {
-  constructor(
-    private readonly warrantyRepository: WarrantyRepository,
-  ) {}
+  constructor(private readonly warrantyRepository: WarrantyRepository) {}
 
-  public async execute(warrantyId: string, checkDate: Date): Promise<boolean | Error> {
+  public async execute(
+    warrantyId: string,
+    checkDate: Date,
+  ): Promise<boolean | Error> {
     const warranty = await this.warrantyRepository.findById(warrantyId);
-   
-    if(warranty instanceof Error) return warranty
+
+    if (warranty instanceof Error) return warranty;
 
     return warranty.isWarrantyValid(checkDate);
   }

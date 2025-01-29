@@ -1,11 +1,9 @@
-import { MotorcycleEntity } from "@triumph-motorcycles/domain/entities/drives";
-import { WarrantyRepository } from "../../repositories/WarrantyRepository";
-import { WarrantyEntity } from "@triumph-motorcycles/domain/entities/maintenances";
+import { WarrantyRepository } from '@triumph-motorcycles/application/repositories/WarrantyRepository';
+import { MotorcycleEntity } from '@triumph-motorcycles/domain/entities/drives/MotorcycleEntity';
+import { WarrantyEntity } from '@triumph-motorcycles/domain/entities/maintenances/WarrantyEntity';
 
 export class AddWarrantyUsecase {
-  constructor(
-    private readonly warrantyRepository: WarrantyRepository,
-  ) {}
+  constructor(private readonly warrantyRepository: WarrantyRepository) {}
 
   public async execute(
     motorcycle: MotorcycleEntity,
@@ -19,10 +17,10 @@ export class AddWarrantyUsecase {
       startDateValue,
       endDateValue,
       coverageDetailsValue,
-      isActive
+      isActive,
     );
 
-    if(warranty instanceof Error) return warranty
+    if (warranty instanceof Error) return warranty;
 
     await this.warrantyRepository.save(warranty);
   }

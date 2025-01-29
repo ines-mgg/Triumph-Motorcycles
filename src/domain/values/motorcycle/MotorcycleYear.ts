@@ -1,5 +1,5 @@
-import { MotorcycleYearError } from "../../errors/motorcycle/MotorcycleYearError";
-import { Value } from "../Value";
+import { MotorcycleYearError } from '@triumph-motorcycles/domain/errors/motorcycle/MotorcycleYearError';
+import { Value } from '../Value';
 
 export class MotorcycleYear implements Value<number> {
   private constructor(public readonly value: number) {}

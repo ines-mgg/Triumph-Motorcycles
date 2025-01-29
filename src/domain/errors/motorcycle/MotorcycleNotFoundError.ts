@@ -1,3 +1,3 @@
 export class MotorcycleNotFoundError extends Error {
-    public override readonly name = "MotorcycleNotFoundError";
+  public override readonly name = 'MotorcycleNotFoundError';
 }

@@ -1,18 +1,19 @@
-import { AppointmentRepository } from "src/application/repositories/AppointmentRepository";
-import { AppointmentEntity } from "src/domain/entities/appointment/AppointmentEntity";
-import { UnexpectedError } from "src/domain/errors/user/UnexpectedError";
+import { AppointmentRepository } from '@triumph-motorcycles/application/repositories/AppointmentRepository';
+import { AppointmentEntity } from '@triumph-motorcycles/domain/entities/appointment/AppointmentEntity';
+import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
 
 export class UpdateAppointmentNotesUsecase {
   public constructor(
-    private readonly appointmentRepository: AppointmentRepository
+    private readonly appointmentRepository: AppointmentRepository,
   ) {}
 
   public async execute(
     appointmentId: string,
-    newNotes: string | null
+    newNotes: string | null,
   ): Promise<AppointmentEntity | Error> {
     try {
-      const appointment = await this.appointmentRepository.findById(appointmentId);
+      const appointment =
+        await this.appointmentRepository.findById(appointmentId);
       if (appointment instanceof Error) return appointment;
 
       const updateResult = appointment.updateNotes(newNotes);
@@ -21,7 +22,9 @@ export class UpdateAppointmentNotesUsecase {
       await this.appointmentRepository.save(appointment);
       return appointment;
     } catch (error) {
-      return new UnexpectedError(error instanceof Error ? error.message : String(error));
+      return new UnexpectedError(
+        error instanceof Error ? error.message : String(error),
+      );
     }
   }
 }

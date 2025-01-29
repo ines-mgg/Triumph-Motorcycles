@@ -1,10 +1,8 @@
-import { SparePartEntity } from "@triumph-motorcycles/domain/entities/parts";
-import { SparePartRepository } from "../../repositories/SparePartRepository";
+import { SparePartRepository } from '@triumph-motorcycles/application/repositories/SparePartRepository';
+import { SparePartEntity } from '@triumph-motorcycles/domain/entities/parts/SparePartEntity';
 
 export class CreateSparePartUsecase {
-  constructor(
-    private readonly sparePartRepository: SparePartRepository,
-  ) {}
+  constructor(private readonly sparePartRepository: SparePartRepository) {}
 
   public async execute(
     nameValue: string,
@@ -16,10 +14,10 @@ export class CreateSparePartUsecase {
       nameValue,
       quantityInStockValue,
       criticalLevelValue,
-      costValue
+      costValue,
     );
 
-    if(sparePart instanceof Error) return sparePart
+    if (sparePart instanceof Error) return sparePart;
 
     await this.sparePartRepository.save(sparePart);
   }

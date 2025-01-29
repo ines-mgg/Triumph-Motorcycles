@@ -1,4 +1,4 @@
-import { UserRepository } from "src/application/repositories/UserRepository";
+import { UserRepository } from '@triumph-motorcycles/application/repositories/UserRepository';
 
 export class CheckUserIsAdminUsecase {
   constructor(private readonly userRepository: UserRepository) {}
@@ -6,7 +6,7 @@ export class CheckUserIsAdminUsecase {
   public async execute(userId: string): Promise<boolean | Error> {
     const user = await this.userRepository.findById(userId);
 
-    if(user instanceof Error) return user
+    if (user instanceof Error) return user;
 
     return user.isAdmin();
   }

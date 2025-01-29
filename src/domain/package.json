@@ -10,5 +10,8 @@
   },
   "scripts": {
     "test": "jest"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.10"
   }
 }

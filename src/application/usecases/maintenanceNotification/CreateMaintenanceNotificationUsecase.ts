@@ -1,6 +1,6 @@
-import { MaintenanceNotificationEntity } from "@triumph-motorcycles/domain/entities/maintenances";
-import { MaintenanceNotificationRepository } from "../../repositories/MaintenanceNotificationRepository";
-import { MaintenanceNotificationType } from "../../../domain/types/motorcycle";
+import { MaintenanceNotificationEntity } from '@triumph-motorcycles/domain/entities/maintenances/MaintenanceNotificationEntity';
+import { MaintenanceNotificationRepository } from '@triumph-motorcycles/application/repositories/MaintenanceNotificationRepository';
+import { MaintenanceNotificationType } from '@triumph-motorcycles/domain/types/motorcycle';
 
 export class CreateMaintenanceNotificationUsecase {
   constructor(
@@ -13,17 +13,15 @@ export class CreateMaintenanceNotificationUsecase {
     type: MaintenanceNotificationType,
     isRead: boolean = false,
   ): Promise<void | Error> {
-    
-      const notification = MaintenanceNotificationEntity.create(
-        message,
-        date,
-        type,
-        isRead
-      );
-      
-      if(notification instanceof Error) return notification
+    const notification = MaintenanceNotificationEntity.create(
+      message,
+      date,
+      type,
+      isRead,
+    );
 
-      await this.notificationRepository.save(notification);
-   
+    if (notification instanceof Error) return notification;
+
+    await this.notificationRepository.save(notification);
   }
 }

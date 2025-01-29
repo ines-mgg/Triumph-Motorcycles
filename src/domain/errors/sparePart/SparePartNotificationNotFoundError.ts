@@ -1,3 +1,3 @@
 export class SparePartNotificationNotFoundError extends Error {
-    public override readonly name = "SparePartNotificationNotFoundError";
+  public override readonly name = 'SparePartNotificationNotFoundError';
 }

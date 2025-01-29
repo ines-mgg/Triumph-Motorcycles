@@ -1,3 +1,3 @@
 export class PasswordDoesNotIncludeUppercaseLetterError extends Error {
-    public override readonly name = "PasswordDoesNotIncludeUppercaseLetterError";
+  public override readonly name = 'PasswordDoesNotIncludeUppercaseLetterError';
 }

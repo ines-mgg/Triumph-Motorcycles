@@ -1,12 +1,15 @@
-import { UserRepository } from "../../repositories/UserRepository";
+import { UserRepository } from '@triumph-motorcycles/application/repositories/UserRepository';
 
 export class ValidateUserCredentialsUsecase {
   constructor(private readonly userRepository: UserRepository) {}
 
-  public async execute(username: string, password: string): Promise<boolean | Error> {
+  public async execute(
+    username: string,
+    password: string,
+  ): Promise<boolean | Error> {
     const user = await this.userRepository.findByUsername(username);
 
-    if(user instanceof Error) return user
+    if (user instanceof Error) return user;
 
     return user.validateCredentials(username, password);
   }

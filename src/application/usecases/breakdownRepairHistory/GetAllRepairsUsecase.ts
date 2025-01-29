@@ -1,4 +1,5 @@
-import { BreakdownRepairHistoryEntity, RepairEntity } from "@triumph-motorcycles/domain/entities/maintenances";
+import { BreakdownRepairHistoryEntity } from '@triumph-motorcycles/domain/entities/maintenances/BreakdownRepairHistoryEntity';
+import { RepairEntity } from '@triumph-motorcycles/domain/entities/maintenances/RepairEntity';
 
 export class GetAllRepairsUsecase {
   constructor(private readonly repairHistory: BreakdownRepairHistoryEntity) {}

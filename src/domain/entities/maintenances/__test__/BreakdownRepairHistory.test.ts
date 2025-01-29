@@ -1,9 +1,7 @@
-import { MotorcycleEntity } from "../../drives";
-import { BreakdownEntity } from "../BreakdownEntity";
-import { BreakdownRepairHistoryEntity } from "../BreakdownRepairHistoryEntity";
-import { RepairEntity } from "../RepairEntity";
-
-
+import { BreakdownEntity } from '../BreakdownEntity';
+import { BreakdownRepairHistoryEntity } from '../BreakdownRepairHistoryEntity';
+import { RepairEntity } from '../RepairEntity';
+import { motorcycle } from '../../../../tests/testUtils';
 
 describe('BreakdownRepairHistoryEntity', () => {
   let breakdownRepairHistory: BreakdownRepairHistoryEntity;
@@ -11,28 +9,21 @@ describe('BreakdownRepairHistoryEntity', () => {
   let breakdown2: BreakdownEntity;
   let repair1: RepairEntity;
   let repair2: RepairEntity;
-  let motorcycle: MotorcycleEntity;
 
   beforeEach(() => {
     breakdownRepairHistory = new BreakdownRepairHistoryEntity();
-
-    const motorcycleResult = MotorcycleEntity.create("moto1", "BrandX", 2020, new Date(), "Available");
-    if (motorcycleResult instanceof Error) {
-      throw new Error(`Error creating motorcycle: ${motorcycleResult.message}`);
-    }
-    motorcycle = motorcycleResult;
 
     const breakdown1Result = BreakdownEntity.create(
       motorcycle,
       'Engine Failure',
       new Date(),
-      null 
+      null,
     );
     const breakdown2Result = BreakdownEntity.create(
       motorcycle,
       'Flat Tire',
       new Date(),
-      null 
+      null,
     );
 
     if (breakdown1Result instanceof Error) {
@@ -52,14 +43,14 @@ describe('BreakdownRepairHistoryEntity', () => {
       breakdown1,
       repairDate,
       ['Brake Replacement', 'Tire Replacement'],
-      500
+      500,
     );
 
     const repair2Result = RepairEntity.create(
       breakdown2,
       repairDate,
       ['Brake Replacement', 'Tire Replacement'],
-      100
+      100,
     );
 
     if (repair1Result instanceof Error) {
@@ -85,8 +76,10 @@ describe('BreakdownRepairHistoryEntity', () => {
     it('should return repairs for a specific breakdown', () => {
       breakdownRepairHistory.addRepairRecord(repair1);
       breakdownRepairHistory.addRepairRecord(repair2);
-      
-      const repairsForBreakdown1 = breakdownRepairHistory.getRepairsByBreakdown(breakdown1.id);
+
+      const repairsForBreakdown1 = breakdownRepairHistory.getRepairsByBreakdown(
+        breakdown1.id,
+      );
       expect(repairsForBreakdown1.length).toBe(1);
       expect(repairsForBreakdown1[0]).toBe(repair1);
     });
@@ -95,7 +88,8 @@ describe('BreakdownRepairHistoryEntity', () => {
       breakdownRepairHistory.addRepairRecord(repair1);
       breakdownRepairHistory.addRepairRecord(repair2);
 
-      const repairsForNonExistentBreakdown = breakdownRepairHistory.getRepairsByBreakdown('nonExistentBreakdown');
+      const repairsForNonExistentBreakdown =
+        breakdownRepairHistory.getRepairsByBreakdown('nonExistentBreakdown');
       expect(repairsForNonExistentBreakdown.length).toBe(0);
     });
   });

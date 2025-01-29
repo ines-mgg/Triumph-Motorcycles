@@ -1,5 +1,5 @@
-import { WarrantyStartDateError } from "../../errors/warranty/WarrantyStartDateError";
-import { Value } from "../Value";
+import { WarrantyStartDateError } from '@triumph-motorcycles/domain/errors/warranty/WarrantyStartDateError';
+import { Value } from '../Value';
 
 export class WarrantyStartDate implements Value<Date> {
   public readonly value: Date;
@@ -9,7 +9,7 @@ export class WarrantyStartDate implements Value<Date> {
   }
 
   public static from(value: Date): WarrantyStartDate | Error {
-    if (value > new Date()) { 
+    if (value > new Date()) {
       return new WarrantyStartDateError();
     }
     return new WarrantyStartDate(value);

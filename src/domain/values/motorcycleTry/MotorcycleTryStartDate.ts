@@ -1,5 +1,5 @@
-import { MotorcycleTryStartDateError } from "../../errors/motorcycleTry/MotorcycleTryStartDateError";
-import { Value } from "../Value";
+import { MotorcycleTryStartDateError } from '@triumph-motorcycles/domain/errors/motorcycleTry/MotorcycleTryStartDateError';
+import { Value } from '../Value';
 
 export class StartDate implements Value<Date> {
   constructor(public readonly value: Date) {}

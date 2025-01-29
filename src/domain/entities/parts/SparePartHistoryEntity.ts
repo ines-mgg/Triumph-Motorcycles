@@ -1,11 +1,11 @@
-import { SparePartOrderRecordCostPerUnit } from "../../values/SparePartOrderRecord/SparePartOrderRecordCostPerUnit";
-import { SparePartOrderRecordDeliveredQuantity } from "../../values/SparePartOrderRecord/SparePartOrderRecordDeliveredQuantity";
-import { SparePartOrderRecordPartName } from "../../values/SparePartOrderRecord/SparePartOrderRecordPartName";
-import { SparePartOrderRecordQuantityOrdered } from "../../values/SparePartOrderRecord/SparePartOrderRecordQuantityOrdered typescript Copier le code";
-import { SparePartOrderRecordRemainingQuantity } from "../../values/SparePartOrderRecord/SparePartOrderRecordRemainingQuantity";
-import { SparePartOrderRecordTotalCost } from "../../values/SparePartOrderRecord/SparePartOrderRecordTotalCost";
-import { SparePartEntity } from "./SparePartEntity";
-import crypto from 'crypto';
+import { SparePartOrderRecordCostPerUnit } from '@triumph-motorcycles/domain/values/sparePartOrderRecord/SparePartOrderRecordCostPerUnit.ts';
+import { SparePartOrderRecordPartName } from '@triumph-motorcycles/domain/values/sparePartOrderRecord/SparePartOrderRecordPartName';
+import { SparePartOrderRecordQuantityOrdered } from '@triumph-motorcycles/domain/values/sparePartOrderRecord/SparePartOrderRecordQuantityOrdered';
+import { SparePartOrderRecordTotalCost } from '@triumph-motorcycles/domain/values/sparePartOrderRecord/SparePartOrderRecordTotalCost';
+import { SparePartOrderRecordRemainingQuantity } from '@triumph-motorcycles/domain/values/sparePartOrderRecord/SparePartOrderRecordRemainingQuantity';
+import { SparePartOrderRecordDeliveredQuantity } from '@triumph-motorcycles/domain/values/sparePartOrderRecord/SparePartOrderRecordDeliveredQuantity';
+import { SparePartEntity } from './SparePartEntity';
+import { v4 as uuidv4 } from 'uuid';
 
 export class SparePartHistoryEntity {
   private constructor(
@@ -27,9 +27,8 @@ export class SparePartHistoryEntity {
     costPerUnit: number,
     estimatedDeliveryDate: Date,
   ): SparePartHistoryEntity {
-    
-    const id = crypto.randomUUID();
-    
+    const id = uuidv4();
+
     const totalCostValue = quantityOrdered * costPerUnit;
 
     const instance = new SparePartHistoryEntity(
@@ -46,5 +45,4 @@ export class SparePartHistoryEntity {
     );
     return instance;
   }
-
 }
