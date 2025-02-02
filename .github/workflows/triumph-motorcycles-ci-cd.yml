@@ -36,15 +36,15 @@ jobs:
   #       uses: cypress-io/github-action@v6
   #       with:
   #         runTests: false
-  #         working-directory: ./src/infrastructure/next
+  #         working-directory: ./src/infrastructure/frontend
   #     - name: Run npm ci
   #       run: npm ci
-  #       working-directory: ./src/infrastructure/next
+  #       working-directory: ./src/infrastructure/frontend
   #     - name: Run components tests
   #       uses: cypress-io/github-action@v6
   #       with:
   #         install: false
-  #         working-directory: ./src/infrastructure/next
+  #         working-directory: ./src/infrastructure/frontend
   #         component: true
   #         browser: chrome
 
@@ -58,15 +58,15 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           runTests: false
-          working-directory: ./src/infrastructure/next
+          working-directory: ./src/infrastructure/frontend
       - name: Run npm ci
         run: npm ci
-        working-directory: ./src/infrastructure/next
+        working-directory: ./src/infrastructure/frontend
       - name: Run e2e tests
         uses: cypress-io/github-action@v6
         with:
           install: false
-          working-directory: ./src/infrastructure/next
+          working-directory: ./src/infrastructure/frontend
           browser: chrome
           build: npm run build
           start: npm run dev
@@ -81,15 +81,15 @@ jobs:
   #       uses: cypress-io/github-action@v6
   #       with:
   #         runTests: false
-  #         working-directory: ./src/infrastructure/next
+  #         working-directory: ./src/infrastructure/frontend
   #     - name: Run npm ci
   #       run: npm ci
-  #       working-directory: ./src/infrastructure/next
+  #       working-directory: ./src/infrastructure/frontend
   #     - name: Run components tests
   #       uses: cypress-io/github-action@v6
   #       with:
   #         install: false
-  #         working-directory: ./src/infrastructure/next
+  #         working-directory: ./src/infrastructure/frontend
   #         component: true
   #         browser: firefox
 
@@ -103,15 +103,15 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           runTests: false
-          working-directory: ./src/infrastructure/next
+          working-directory: ./src/infrastructure/frontend
       - name: Run npm ci
         run: npm ci
-        working-directory: ./src/infrastructure/next
+        working-directory: ./src/infrastructure/frontend
       - name: Run e2e tests
         uses: cypress-io/github-action@v6
         with:
           install: false
-          working-directory: ./src/infrastructure/next
+          working-directory: ./src/infrastructure/frontend
           browser: firefox
           build: npm run build
           start: npm run dev

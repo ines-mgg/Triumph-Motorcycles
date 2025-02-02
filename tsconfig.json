@@ -51,6 +51,6 @@
     "cypress/*",
     "dist",
     "**/*spec.ts",
-    "./src/infrastructure/next"
+    "./src/infrastructure/frontend"
   ]
 }
