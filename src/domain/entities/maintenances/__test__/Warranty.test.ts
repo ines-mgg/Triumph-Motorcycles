@@ -11,7 +11,8 @@ describe('WarrantyEntity', () => {
 
   beforeEach(() => {
     startDate = new Date();
-    endDate = new Date('2025-02-01');
+    endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + 1);
     coverageDetails = 'Engine and transmission coverage';
   });
 
