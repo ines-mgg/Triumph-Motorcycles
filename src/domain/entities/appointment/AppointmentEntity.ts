@@ -1,121 +1,195 @@
-import { v4 as uuidv4 } from 'uuid';
-import { AppointmentReason } from '@triumph-motorcycles/domain/types/AppointmentReason';
-import { AppointmentStatus } from '@triumph-motorcycles/domain/types/AppointmentStatus';
-import { UserEntity } from '../user/UserEntity';
-import { Notes } from '@triumph-motorcycles/domain/values/appointment/Notes';
-import { TimeRange } from '@triumph-motorcycles/domain/values/appointment/TimeRange';
+import { AppointmentAlreadyCancelledError } from "@triumph-motorcycles/domain/errors/appointment/AppointmentAlreadyCancelledError.";
+import { AppointmentAlreadyCompletedError } from "@triumph-motorcycles/domain/errors/appointment/AppointmentAlreadyCompletedError";
+import { InvalidTimeRangeError } from "@triumph-motorcycles/domain/errors/appointment/InvalidTimeRangeError";
+import { AppointmentReason } from "@triumph-motorcycles/domain/types/AppointmentReason";
+import { AppointmentStatus } from "@triumph-motorcycles/domain/types/AppointmentStatus";
+import { CompanyEntity } from "../company/CompanyEntity";
+import { LocationEntity } from "../location/LocationEntity";
+import { MaintenanceEntity } from "../maintenance/MaintenanceEntity";
+import { MotorcycleTrialEntity } from "../motorcycle/MotorcycleTrialEntity";
+import { RepairEntity } from "../repair/RepairEntity";
+import { UserEntity } from "../user/UserEntity";
+
 
 export class AppointmentEntity {
   private constructor(
-    public readonly appointmentId: string,
+    public readonly id: string,
     public readonly user: UserEntity,
-    private timeRange: TimeRange,
-    private appointmentNotes: Notes | null,
+    public startTime: Date,
+    public endTime: Date,
     private appointmentStatus: AppointmentStatus,
     public readonly createdAt: Date,
     private updatedAt: Date,
-    public appointmentReason: AppointmentReason,
+    public reason: AppointmentReason,
+    public company: CompanyEntity,
+    public location: LocationEntity | null = null,
+    public maintenance: MaintenanceEntity | null = null,
+    public repair: RepairEntity | null = null,
+    public motorcycleTrial: MotorcycleTrialEntity | null = null
   ) {}
 
   public static create(
+    id: string,
     user: UserEntity,
     startTime: Date,
     endTime: Date,
+    appointmentStatus: AppointmentStatus,
+    createdAt: Date,
+    updatedAt: Date,
     reason: AppointmentReason,
-    notes: string | null,
+    company: CompanyEntity,
+    location: LocationEntity | null = null,
+    maintenance: MaintenanceEntity | null = null,
+    repair: RepairEntity | null = null,
+    motorcycleTrial: MotorcycleTrialEntity | null = null
   ): AppointmentEntity | Error {
-    const appointmentId = uuidv4();
-
-    const timeRange = TimeRange.from(startTime, endTime);
-    if (timeRange instanceof Error) return timeRange;
-
-    let notesValue: Notes | null = null;
-    if (notes) {
-      const notesObject = Notes.from(notes);
-      if (notesObject instanceof Error) return notesObject;
-      notesValue = notesObject;
+    if (startTime >= endTime) {
+      return new InvalidTimeRangeError();
     }
 
     return new AppointmentEntity(
-      appointmentId,
+      id,
       user,
-      timeRange,
-      notesValue,
-      'Pending',
-      new Date(),
-      new Date(),
+      startTime,
+      endTime,
+      appointmentStatus,
+      createdAt,
+      updatedAt,
       reason,
+      company,
+      location,
+      maintenance,
+      repair,
+      motorcycleTrial
     );
   }
 
-  public updateTimeRange(startTime: Date, endTime: Date): void | Error {
-    const newTimeRange = TimeRange.from(startTime, endTime);
-    if (newTimeRange instanceof Error) return newTimeRange;
-
-    this.timeRange = newTimeRange;
-    this.updatedAt = new Date();
+  public getStatus(): AppointmentStatus {
+    return this.appointmentStatus;
   }
 
-  public updateNotes(newNotes: string | null): void | Error {
-    if (newNotes) {
-      const notesValue = Notes.from(newNotes);
-      if (notesValue instanceof Error) return notesValue;
-
-      this.appointmentNotes = notesValue;
-    } else {
-      this.appointmentNotes = null;
-    }
-
-    this.updatedAt = new Date();
+  public getReason(): AppointmentReason {
+    return this.reason;
   }
 
-  public updateStatus(newStatus: AppointmentStatus): void {
-    this.appointmentStatus = newStatus;
-    this.updatedAt = new Date();
-  }
-
-  public updateReason(newReason: AppointmentReason): void {
-    this.appointmentReason = newReason;
-    this.updatedAt = new Date();
+  public getUpdatedAt(): Date {
+    return this.updatedAt;
   }
 
   public getDetails(): {
     user: UserEntity;
     timeRange: { startTime: Date; endTime: Date };
-    notes: string | null;
     status: AppointmentStatus;
     reason: AppointmentReason;
+    company: CompanyEntity;
     updatedAt: Date;
+    location: LocationEntity | null;
+    maintenance: MaintenanceEntity | null;
+    repair: RepairEntity | null;
+    motorcycleTrial: MotorcycleTrialEntity | null;
   } {
     return {
       user: this.user,
-      timeRange: this.timeRange.value,
-      notes: this.appointmentNotes ? this.appointmentNotes.value : null,
+      timeRange: { startTime: this.startTime, endTime: this.endTime },
       status: this.appointmentStatus,
-      reason: this.appointmentReason,
+      reason: this.reason,
+      company: this.company,
       updatedAt: this.updatedAt,
+      location: this.location,
+      maintenance: this.maintenance,
+      repair: this.repair,
+      motorcycleTrial: this.motorcycleTrial,
     };
   }
 
   public getReasonDetails(): object {
-    switch (this.appointmentReason.type) {
-      case 'Location':
-        return this.appointmentReason.entity.getDetails();
-      case 'Maintenance':
-        return {
-          needsMaintenance: this.appointmentReason.entity.needsMaintenance(),
-        };
-      case 'Repair':
-        return {
-          repairActions: this.appointmentReason.entity.actions,
-          cost: this.appointmentReason.entity.cost.value,
-        };
-      case 'MotorcycleTry':
-        return {
-          summary: this.appointmentReason.entity.getTestSummary(),
-        };
+    switch (this.reason) {
+      case "Location":
+        return this.location ? this.location.getDetails() : {};
+      case "Maintenance":
+        return this.maintenance
+          ? { needsMaintenance: this.maintenance.needsMaintenance() }
+          : {};
+      case "Repair":
+        return this.repair
+          ? {
+              repairActions: this.repair.actions,
+              cost: this.repair.cost.value,
+            }
+          : {};
+      case "MotorcycleTrial":
+        return this.motorcycleTrial
+          ? {
+              summary: this.motorcycleTrial.getTestSummary(),
+            }
+          : {};
       default:
         return {};
     }
+  }
+
+  public updateStatus(newStatus: AppointmentStatus): void {
+    if (newStatus !== this.appointmentStatus) {
+      this.appointmentStatus = newStatus;
+      this.updatedAt = new Date();
+    }
+  }
+
+  public updateReason(newReason: AppointmentReason): void {
+    this.reason = newReason;
+    this.updatedAt = new Date();
+  }
+
+  public updateLocation(newLocation: LocationEntity | null): void {
+    this.location = newLocation;
+    this.updatedAt = new Date();
+  }
+
+  public updateMaintenance(newMaintenance: MaintenanceEntity | null): void {
+    this.maintenance = newMaintenance;
+    this.updatedAt = new Date();
+  }
+
+  public updateRepair(newRepair: RepairEntity | null): void {
+    this.repair = newRepair;
+    this.updatedAt = new Date();
+  }
+
+  public updateMotorcycleTrial(newTrial: MotorcycleTrialEntity | null): void {
+    this.motorcycleTrial = newTrial;
+    this.updatedAt = new Date();
+  }
+
+  public isPending(): boolean {
+    return this.appointmentStatus === "Pending";
+  }
+
+  public isCompleted(): boolean {
+    return this.appointmentStatus === "Completed";
+  }
+
+  public isCancelled(): boolean {
+    return this.appointmentStatus === "Cancelled";
+  }
+
+  public overlapsWith(anotherAppointment: AppointmentEntity): boolean {
+    return (
+      this.startTime < anotherAppointment.endTime &&
+      anotherAppointment.startTime < this.endTime
+    );
+  }
+
+  public cancel(): void | Error {
+    if (this.appointmentStatus === "Cancelled") return new AppointmentAlreadyCancelledError();
+    
+    this.appointmentStatus = "Cancelled";
+    this.updatedAt = new Date();
+  }
+
+  public complete(): void | Error {
+    if (this.appointmentStatus === "Completed") return new AppointmentAlreadyCompletedError();
+    
+    this.appointmentStatus = "Completed";
+    this.updatedAt = new Date();
   }
 }

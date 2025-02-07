@@ -1,3 +1,3 @@
 export class SparePartCriticalLevelError extends Error {
-  public override readonly name = 'SparePartCriticalLevelError';
+    public override readonly name = "SparePartCriticalLevelError";
 }

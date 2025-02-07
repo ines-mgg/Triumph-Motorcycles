@@ -1,3 +1,3 @@
 export class EndDateError extends Error {
-  public override readonly name = 'EndDateError';
+    public override readonly name = "EndDateError";
 }

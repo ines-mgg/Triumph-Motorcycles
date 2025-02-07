@@ -1,19 +1,22 @@
-import { CompanyRepository } from '@triumph-motorcycles/application/repositories/CompanyRepository';
-import { CompanyEntity } from '@triumph-motorcycles/domain/entities/company/CompanyEntity';
+import { CompanyRepositoryInterface } from '@triumph-motorcycles/application/repositories/CompanyRepositoryInterface';
 import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
 
 export class RemoveDriverFromCompanyUsecase {
-  public constructor(private readonly companyRepository: CompanyRepository) {}
+  public constructor(
+    private readonly companyRepository: CompanyRepositoryInterface,
+  ) {}
 
   public async execute(
-    company: CompanyEntity,
+    companyId: string,
     driverId: string,
-  ): Promise<CompanyEntity | Error> {
+  ): Promise<void | Error> {
     try {
-      company.removeDriver(driverId);
-      await this.companyRepository.update(company);
+      const company = await this.companyRepository.findById(companyId);
+      if (company instanceof Error) return company;
 
-      return company;
+      company.removeDriver(driverId);
+
+      return await this.companyRepository.removeDriver(companyId, driverId);
     } catch (error) {
       return new UnexpectedError(
         error instanceof Error ? error.message : String(error),

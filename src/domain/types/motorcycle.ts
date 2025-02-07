@@ -1,5 +1,3 @@
-import { SparePartEntity } from '@triumph-motorcycles/domain/entities/parts/SparePartEntity';
-
 export type MotorStatus = 'Available' | 'InMaintenance' | 'OnTest' | 'Sold';
 
 export interface DrivingRecord {
@@ -16,7 +14,6 @@ export interface MaintenanceRecord {
   date: Date;
   mileageAtService: number;
   cost: number;
-  partsUsed: SparePartEntity[];
   technicianRecommendation: string;
   managerId: string;
 }

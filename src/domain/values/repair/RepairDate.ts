@@ -1,5 +1,5 @@
-import { RepairDateError } from '@triumph-motorcycles/domain/errors/repair/RepairDateError';
-import { Value } from '../Value';
+import { RepairDateError } from "../../errors/repair/RepairDateError";
+import { Value } from "../Value";
 
 export class RepairDate implements Value<Date> {
   public readonly value: Date;
@@ -10,7 +10,7 @@ export class RepairDate implements Value<Date> {
 
   public static from(value: Date): RepairDate | Error {
     const now = new Date();
-    if (value < now) {
+    if (value < now) { 
       return new RepairDateError();
     }
     return new RepairDate(value);

@@ -1,3 +1,3 @@
 export class UserNotFoundError extends Error {
-  public override readonly name = 'UserNotFoundError';
+    public override readonly name = "UserNotFoundError";
 }

@@ -1,11 +1,11 @@
-import { DriverPhoneError } from '@triumph-motorcycles/domain/errors/drivers';
+import { DriverPhoneError } from '@triumph-motorcycles/domain/errors/driver/DriverPhoneError';
 import { Value } from '../Value';
 
 export class DriverPhone implements Value<string> {
   private constructor(public readonly value: string) {}
 
   public static from(value: string): DriverPhone | DriverPhoneError {
-    const phonePattern = /^[0-9]{10}$/;
+    const phonePattern = /^(\d{10}|\d{1,2}-\d{3}-\d{3}-\d{4}( x\d{1,6})?)$/;
     if (!phonePattern.test(value)) {
       return new DriverPhoneError();
     }

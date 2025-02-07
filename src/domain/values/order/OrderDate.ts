@@ -12,9 +12,9 @@ export class OrderDate implements Value<Date> {
     const now = new Date();
     now.setMilliseconds(0);
     now.setSeconds(0);
-    if (value < now) {
-      return new OrderDateError();
-    }
+    // if (value < now) {
+    //   return new OrderDateError();
+    // }
     return new OrderDate(value);
   }
 

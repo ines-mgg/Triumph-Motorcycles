@@ -1,5 +1,6 @@
-import { WarrantyStartDateError } from '@triumph-motorcycles/domain/errors/warranty/WarrantyStartDateError';
-import { Value } from '../Value';
+import { WarrantyStartDateError } from "@triumph-motorcycles/domain/errors/warranty/WarrantyStartDateError";
+import { Value } from "../Value";
+
 
 export class WarrantyStartDate implements Value<Date> {
   public readonly value: Date;
@@ -8,11 +9,14 @@ export class WarrantyStartDate implements Value<Date> {
     this.value = value;
   }
 
-  public static from(value: Date): WarrantyStartDate | Error {
-    if (value > new Date()) {
+  public static from(value: Date | string): WarrantyStartDate | Error {
+    const startDate = value instanceof Date ? value : new Date(value);
+
+    if (startDate > new Date()) {
       return new WarrantyStartDateError();
     }
-    return new WarrantyStartDate(value);
+
+    return new WarrantyStartDate(startDate);
   }
 
   public is(item: Value<Date>): boolean {

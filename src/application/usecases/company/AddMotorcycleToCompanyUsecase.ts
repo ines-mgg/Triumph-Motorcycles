@@ -1,20 +1,30 @@
-import { CompanyEntity } from '@triumph-motorcycles/domain/entities/company/CompanyEntity';
-import { MotorcycleEntity } from '@triumph-motorcycles/domain/entities/drives/MotorcycleEntity';
-import { CompanyRepository } from '@triumph-motorcycles/application/repositories/CompanyRepository';
+import { CompanyRepositoryInterface } from '@triumph-motorcycles/application/repositories/CompanyRepositoryInterface';
+import { MotorcycleRepositoryInterface } from '@triumph-motorcycles/application/repositories/MotorcycleRepositoryInterface';
 import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
 
 export class AddMotorcycleToCompanyUsecase {
-  public constructor(private readonly companyRepository: CompanyRepository) {}
+  public constructor(
+    private readonly companyRepository: CompanyRepositoryInterface,
+    private readonly motorcycleRepository: MotorcycleRepositoryInterface,
+  ) {}
 
   public async execute(
-    company: CompanyEntity,
-    motorcycle: MotorcycleEntity,
-  ): Promise<CompanyEntity | Error> {
+    companyId: string,
+    motorcycleId: string,
+  ): Promise<void | Error> {
     try {
-      company.addMotorcycle(motorcycle);
-      await this.companyRepository.update(company);
+      const company = await this.companyRepository.findById(companyId);
+      const motorcycle = await this.motorcycleRepository.findById(companyId);
 
-      return company;
+      if (company instanceof Error) return company;
+      if (motorcycle instanceof Error) return motorcycle;
+
+      company.addMotorcycle(motorcycle);
+
+      return await this.companyRepository.addMotorcycle(
+        companyId,
+        motorcycleId,
+      );
     } catch (error) {
       return new UnexpectedError(
         error instanceof Error ? error.message : String(error),

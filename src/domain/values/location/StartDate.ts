@@ -1,12 +1,12 @@
-import { StartDateError } from '@triumph-motorcycles/domain/errors/location/StartDateError';
+import { StartDateError } from "@triumph-motorcycles/domain/errors/location/StartDateError";
 
 export class StartDate {
-  private constructor(public readonly value: Date) {}
-
-  public static from(value: Date): StartDate | Error {
-    if (value.getTime() > new Date().getTime()) {
-      return new StartDateError();
+    private constructor(public readonly value: Date) {}
+  
+    public static from(value: Date): StartDate | Error {
+      if (value.getTime() > new Date().getTime()) {
+        return new  StartDateError;
+      }
+      return new StartDate(value);
     }
-    return new StartDate(value);
   }
-}

@@ -1,9 +1,9 @@
-import { ConcessionRepository } from "@triumph-motorcycles/application/repositories/ConcessionRepository";
-import { UnexpectedError } from "@triumph-motorcycles/domain/errors/user/UnexpectedError";
+import { ConcessionRepositoryInterface } from '@triumph-motorcycles/application/repositories/ConcessionRepositoryInterface';
+import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
 
 export class DeleteConcessionUsecase {
   public constructor(
-    private readonly concessionRepository: ConcessionRepository
+    private readonly concessionRepository: ConcessionRepositoryInterface,
   ) {}
 
   public async execute(id: string): Promise<void | Error> {
@@ -13,7 +13,9 @@ export class DeleteConcessionUsecase {
 
       await this.concessionRepository.remove(id);
     } catch (error) {
-      return new UnexpectedError(error instanceof Error ? error.message : String(error));
+      return new UnexpectedError(
+        error instanceof Error ? error.message : String(error),
+      );
     }
   }
 }

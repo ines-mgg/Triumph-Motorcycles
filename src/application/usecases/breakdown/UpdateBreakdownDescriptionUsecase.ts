@@ -1,7 +1,7 @@
-import { BreakdownRepository } from "@triumph-motorcycles/application/repositories/BreakdownRepository";
+import { BreakdownRepositoryInterface } from "@triumph-motorcycles/application/repositories/BreakdownRepositoryInterface";
 
 export class UpdateBreakdownDescriptionUsecase {
-  constructor(private readonly breakdownRepository: BreakdownRepository) {}
+  constructor(private readonly breakdownRepository: BreakdownRepositoryInterface) {}
 
   public async execute(breakdownId: string, newDescription: string): Promise<void | Error> {
     const breakdown = await this.breakdownRepository.findOneById(breakdownId);

@@ -1,7 +1,9 @@
-import { BreakdownRepository } from '@triumph-motorcycles/application/repositories/BreakdownRepository';
+import { BreakdownRepositoryInterface } from '@triumph-motorcycles/application/repositories/BreakdownRepositoryInterface';
 
 export class CheckWarrantyCoverageUsecase {
-  constructor(private readonly breakdownRepository: BreakdownRepository) {}
+  constructor(
+    private readonly breakdownRepository: BreakdownRepositoryInterface,
+  ) {}
 
   public async execute(breakdownId: string): Promise<boolean | Error> {
     const breakdown = await this.breakdownRepository.findOneById(breakdownId);

@@ -1,19 +1,17 @@
-import { BreakdownDescriptionError } from '@triumph-motorcycles/domain/errors/breakdown/BreakdownDescriptionError';
-import { Value } from '../Value';
+import { MaintenanceIntervalMileageError } from "@triumph-motorcycles/domain/errors/maintenance/MaintenanceIntervalMileageError";
+import { Value } from "../Value";
 
-const MAX_MILEAGE = 100000;
+const MAX_MILEAGE = 100000; 
 
 export class MaintenanceIntervalMileage implements Value<number> {
   private constructor(public readonly value: number) {}
 
-  public static from(
-    value: number,
-  ): MaintenanceIntervalMileage | BreakdownDescriptionError {
+  public static from(value: number): MaintenanceIntervalMileage | MaintenanceIntervalMileageError {
     if (value <= 0) {
-      return new BreakdownDescriptionError();
+      return new MaintenanceIntervalMileageError();
     }
     if (value > MAX_MILEAGE) {
-      return new BreakdownDescriptionError();
+      return new MaintenanceIntervalMileageError();
     }
     return new MaintenanceIntervalMileage(value);
   }

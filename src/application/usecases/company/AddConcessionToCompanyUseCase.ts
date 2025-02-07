@@ -1,19 +1,21 @@
-import { CompanyRepository } from "@triumph-motorcycles/application/repositories/CompanyRepository";
-import { ConcessionRepository } from "@triumph-motorcycles/application/repositories/ConcessionRepository";
-
+import { CompanyRepositoryInterface } from '@triumph-motorcycles/application/repositories/CompanyRepositoryInterface';
+import { ConcessionRepositoryInterface } from '@triumph-motorcycles/application/repositories/ConcessionRepositoryInterface';
 
 export class AddConcessionToCompanyUseCase {
   constructor(
-    private readonly companyRepository: CompanyRepository,
-    private readonly concessionRepository: ConcessionRepository,
+    private readonly companyRepository: CompanyRepositoryInterface,
+    private readonly concessionRepository: ConcessionRepositoryInterface,
   ) {}
 
-  async execute(companyId: string, concessionId: string): Promise<void | Error> {
+  async execute(
+    companyId: string,
+    concessionId: string,
+  ): Promise<void | Error> {
     const company = await this.companyRepository.findById(companyId);
     const concession = await this.concessionRepository.findById(concessionId);
 
     if (company instanceof Error) return company;
-    if(concession instanceof Error) return concession;
+    if (concession instanceof Error) return concession;
 
     company.addConcession(concession);
 

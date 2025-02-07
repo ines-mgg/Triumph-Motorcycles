@@ -1,15 +1,15 @@
-import { BreakdownRepository } from '@triumph-motorcycles/application/repositories/BreakdownRepository';
-import { MotorcycleRepository } from '@triumph-motorcycles/application/repositories/MotorcycleRepository';
-import { WarrantyRepository } from '@triumph-motorcycles/application/repositories/WarrantyRepository';
-import { BreakdownEntity } from '@triumph-motorcycles/domain/entities/maintenances/BreakdownEntity';
-import { WarrantyEntity } from '@triumph-motorcycles/domain/entities/maintenances/WarrantyEntity';
+import { BreakdownRepositoryInterface } from '@triumph-motorcycles/application/repositories/BreakdownRepositoryInterface';
+import { BreakdownEntity } from '@triumph-motorcycles/domain/entities/breakdown/BreakdownEntity';
+import { MotorcycleRepositoryInterface } from '@triumph-motorcycles/application/repositories/MotorcycleRepositoryInterface';
+import { WarrantyEntity } from '@triumph-motorcycles/domain/entities/warranty/WarrantyEntity';
 import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
+import { WarrantyRepositoryInterface } from '@triumph-motorcycles/application/repositories/WarrantyRepositoryInterface';
 
 export class CreateBreakdownUsecase {
   constructor(
-    private readonly breakdownRepository: BreakdownRepository,
-    private readonly motorcycleRepository: MotorcycleRepository,
-    private readonly warrantyRepository: WarrantyRepository,
+    private readonly breakdownRepository: BreakdownRepositoryInterface,
+    private readonly motorcycleRepository: MotorcycleRepositoryInterface,
+    private readonly warrantyRepository: WarrantyRepositoryInterface,
   ) {}
 
   public async execute(
@@ -17,9 +17,7 @@ export class CreateBreakdownUsecase {
     description: string,
     warrantyId: string | null,
   ): Promise<void | Error> {
-    const motorcycle = await this.motorcycleRepository.findOneById(
-      motorcycleId,
-    );
+    const motorcycle = await this.motorcycleRepository.findById(motorcycleId);
     if (motorcycle instanceof Error) return motorcycle;
 
     let warranty: WarrantyEntity | null = null;

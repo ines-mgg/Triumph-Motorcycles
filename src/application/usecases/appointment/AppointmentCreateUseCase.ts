@@ -1,27 +1,27 @@
-import { AppointmentRepository } from '@triumph-motorcycles/application/repositories/AppointmentRepository';
-import { CompanyRepository } from '@triumph-motorcycles/application/repositories/CompanyRepository';
-import { LocationRepository } from '@triumph-motorcycles/application/repositories/LocationRepository';
-import { MaintenanceRepository } from '@triumph-motorcycles/application/repositories/MaintenanceRepository';
-import { MotorcycleTryRepository } from '@triumph-motorcycles/application/repositories/MotorcycleTryRepository';
-import { RepairRepository } from '@triumph-motorcycles/application/repositories/RepairRepository';
-import { UserRepository } from '@triumph-motorcycles/application/repositories/UserRepository';
+import { AppointmentRepositoryInterface } from '@triumph-motorcycles/application/repositories/AppointmentRepositoryInterface';
+import { CompanyRepositoryInterface } from '@triumph-motorcycles/application/repositories/CompanyRepositoryInterface';
+import { LocationRepositoryInterface } from '@triumph-motorcycles/application/repositories/LocationRepositoryInterface';
+import { MaintenanceRepositoryInterface } from '@triumph-motorcycles/application/repositories/MaintenanceRepositoryInterface';
+import { MotorcycleTrialRepositoryInterface } from '@triumph-motorcycles/application/repositories/MotorcycleTrialRepositoryInterface';
+import { RepairRepositoryInterface } from '@triumph-motorcycles/application/repositories/RepairRepositoryInterface';
+import { UserRepositoryInterface } from '@triumph-motorcycles/application/repositories/UserRepositoryInterface';
 import { AppointmentEntity } from '@triumph-motorcycles/domain/entities/appointment/AppointmentEntity';
 import { LocationEntity } from '@triumph-motorcycles/domain/entities/location/LocationEntity';
-import { MaintenanceEntity } from '@triumph-motorcycles/domain/entities/maintenances/MaintenanceEntity';
-import { RepairEntity } from '@triumph-motorcycles/domain/entities/maintenances/RepairEntity';
+import { MaintenanceEntity } from '@triumph-motorcycles/domain/entities/maintenance/MaintenanceEntity';
+import { MotorcycleTrialEntity } from '@triumph-motorcycles/domain/entities/motorcycle/MotorcycleTrialEntity';
+import { RepairEntity } from '@triumph-motorcycles/domain/entities/repair/RepairEntity';
 import { AppointmentReason } from '@triumph-motorcycles/domain/types/AppointmentReason';
 import { AppointmentStatus } from '@triumph-motorcycles/domain/types/AppointmentStatus';
-import { MotorcycleTryEntity } from 'src/domain/entities/drives/MotorcycleTryEntity';
 
 export class AppointmentCreateUseCase {
   constructor(
-    private readonly repository: AppointmentRepository,
-    private readonly userRepository: UserRepository,
-    private readonly companyRepository: CompanyRepository,
-    private readonly locationRepository: LocationRepository,
-    private readonly maintenanceRepository: MaintenanceRepository,
-    private readonly repairRepository: RepairRepository,
-    private readonly motorcycleTrialRepository: MotorcycleTryRepository,
+    private readonly repository: AppointmentRepositoryInterface,
+    private readonly userRepository: UserRepositoryInterface,
+    private readonly companyRepository: CompanyRepositoryInterface,
+    private readonly locationRepository: LocationRepositoryInterface,
+    private readonly maintenanceRepository: MaintenanceRepositoryInterface,
+    private readonly repairRepository: RepairRepositoryInterface,
+    private readonly motorcycleTrialRepository: MotorcycleTrialRepositoryInterface,
   ) {}
 
   public async createAppointment(
@@ -60,7 +60,7 @@ export class AppointmentCreateUseCase {
       if (maintenance instanceof Error) return maintenance;
     }
 
-    let motorcycleTrial: MotorcycleTryEntity | Error | null = null;
+    let motorcycleTrial: MotorcycleTrialEntity | Error | null = null;
     if (motorcycleTrialId) {
       motorcycleTrial = await this.motorcycleTrialRepository.findById(
         motorcycleTrialId,
@@ -81,7 +81,7 @@ export class AppointmentCreateUseCase {
       location as LocationEntity,
       maintenance as MaintenanceEntity,
       repair as RepairEntity,
-      motorcycleTrial as MotorcycleTryEntity,
+      motorcycleTrial as MotorcycleTrialEntity,
     );
 
     if (appointment instanceof Error) return appointment;

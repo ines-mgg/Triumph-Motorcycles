@@ -1,11 +1,12 @@
-import { ConcessionRepository } from '@triumph-motorcycles/application/repositories/ConcessionRepository';
-import { MotorcycleRepository } from '@triumph-motorcycles/application/repositories/MotorcycleRepository';
+import { ConcessionRepositoryInterface } from '@triumph-motorcycles/application/repositories/ConcessionRepositoryInterface';
+import { MotorcycleRepositoryInterface } from '@triumph-motorcycles/application/repositories/MotorcycleRepositoryInterface';
+import { ConcessionEntity } from '@triumph-motorcycles/domain/entities/concession/ConcessionEntity';
 import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
 
 export class AddMotorcycleToConcessionUsecase {
   public constructor(
-    private readonly concessionRepository: ConcessionRepository,
-    private readonly motorcycleRepository: MotorcycleRepository,
+    private readonly concessionRepository: ConcessionRepositoryInterface,
+    private readonly motorcycleRepository: MotorcycleRepositoryInterface,
   ) {}
 
   public async execute(
@@ -16,9 +17,7 @@ export class AddMotorcycleToConcessionUsecase {
       const concession = await this.concessionRepository.findById(concessionId);
       if (concession instanceof Error) return concession;
 
-      const motorcycle = await this.motorcycleRepository.findOneById(
-        motorcycleId,
-      );
+      const motorcycle = await this.motorcycleRepository.findById(motorcycleId);
       if (motorcycle instanceof Error) return motorcycle;
 
       concession.addMotorcycle(motorcycle);

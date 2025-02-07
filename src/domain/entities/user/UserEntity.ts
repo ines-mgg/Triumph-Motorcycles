@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from 'uuid';
-import { DriverEntity } from '../drives/DriverEntity';
+import { DriverEntity } from '@triumph-motorcycles/domain/entities/driver/DriverEntity';
+import { Email } from '@triumph-motorcycles/domain/values/user/Email';
 import { Password } from '@triumph-motorcycles/domain/values/user/Password';
 import { Username } from '@triumph-motorcycles/domain/values/user/Username';
 
@@ -7,47 +7,67 @@ export class UserEntity {
   private drivers: DriverEntity[] = [];
 
   private constructor(
-    public readonly identifier: string,
-    public username: Username,
+    public id: string,
+    public firstName: Username,
+    public lastName: Username,
+    public email: Email,
     public password: Password,
     public readonly createdAt: Date,
-    public updatedAt: Date,
     public readonly administrator: boolean,
+    public updatedAt: Date,
+    public isActive: boolean = true,
   ) {}
 
   public static create(
-    usernameValue: string,
-    passwordValue: string,
+    id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
     createdAt: Date,
+    administrator: boolean,
     updatedAt: Date,
+    isActive: boolean = true,
   ): UserEntity | Error {
-    const administrator = false;
+    const firstNameValue = Username.from(firstName);
+    if (firstNameValue instanceof Error) return firstNameValue;
 
-    const identifier = uuidv4();
+    const lastNameValue = Username.from(lastName);
+    if (lastNameValue instanceof Error) return lastNameValue;
 
-    const username = Username.from(usernameValue);
-    if (username instanceof Error) return username;
+    const emailValue = Email.from(email);
+    if (emailValue instanceof Error) return emailValue;
 
-    const password = Password.from(passwordValue);
-    if (password instanceof Error) return password;
+    const passwordValue = Password.from(password);
+    if (passwordValue instanceof Error) return passwordValue;
 
     return new UserEntity(
-      identifier,
-      username,
-      password,
+      id,
+      firstNameValue,
+      lastNameValue,
+      emailValue,
+      passwordValue,
       createdAt,
-      updatedAt,
       administrator,
+      updatedAt,
+      isActive,
     );
   }
 
-  public updatePassword(newPasswordValue: string): void | Error {
-    const newPassword = Password.from(newPasswordValue);
+  activate() {
+    this.isActive = true;
+  }
 
-    if (newPassword instanceof Error) return newPassword;
+  deactivate() {
+    this.isActive = false;
+  }
 
-    this.password = newPassword;
-    this.updatedAt = new Date();
+  public isAdmin(): boolean {
+    return this.administrator;
+  }
+
+  public getRole(): string {
+    return this.administrator ? 'Administrator' : 'User';
   }
 
   public addDriver(driver: DriverEntity): void {
@@ -55,39 +75,10 @@ export class UserEntity {
   }
 
   public removeDriver(driverId: string): void {
-    this.drivers = this.drivers.filter(
-      (driver) => driver.driverId !== driverId,
-    );
+    this.drivers = this.drivers.filter((driver) => driver.id !== driverId);
   }
 
   public getDrivers(): DriverEntity[] {
     return this.drivers;
-  }
-
-  public isAdmin(): boolean {
-    return this.administrator;
-  }
-
-  public updateUsername(newUsernameValue: string): void | Error {
-    const newUsername = Username.from(newUsernameValue);
-
-    if (newUsername instanceof Error) return newUsername;
-
-    this.username = newUsername;
-    this.updatedAt = new Date();
-  }
-
-  public getRole(): string {
-    return this.administrator ? 'Administrator' : 'User';
-  }
-
-  public validateCredentials(
-    usernameValue: string,
-    passwordValue: string,
-  ): boolean {
-    return (
-      this.username.value === usernameValue.toLowerCase() &&
-      this.password.compare(passwordValue)
-    );
   }
 }

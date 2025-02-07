@@ -1,3 +1,3 @@
 export class PasswordDoesNotIncludeSymbolError extends Error {
-  public override readonly name = 'PasswordDoesNotIncludeSymbolError';
-}
+    public override readonly name = "PasswordDoesNotIncludeSymbolError";
+  }

@@ -1,10 +1,10 @@
-import { DriverNameError } from '@triumph-motorcycles/domain/errors/driver/DriverNameError';
+import { DriverNameError } from '../../errors/driver/DriverNameError';
 import { Value } from '../Value';
 
-export class DriverName implements Value<string> {
+export class DriveName implements Value<string> {
   private constructor(public readonly value: string) {}
 
-  public static from(value: string): DriverName | Error {
+  public static from(value: string): DriveName | Error {
     const normalizedValue = value.trim();
 
     if (normalizedValue.length < 3 || normalizedValue.length > 30) {
@@ -15,7 +15,7 @@ export class DriverName implements Value<string> {
       return new DriverNameError();
     }
 
-    return new DriverName(normalizedValue);
+    return new DriveName(normalizedValue);
   }
 
   public is(item: Value<string>): boolean {

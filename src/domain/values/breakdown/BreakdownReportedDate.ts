@@ -1,12 +1,10 @@
-import { BreakdownReportedDateError } from '@triumph-motorcycles/domain/errors/breakdown/BreakdownReportedDateError';
-import { Value } from '../Value';
+import { BreakdownReportedDateError } from "@triumph-motorcycles/domain/errors/breakdown/BreakdownReportedDateError";
+import { Value } from "../Value";
 
 export class BreakdownReportedDate implements Value<Date> {
   private constructor(public readonly value: Date) {}
 
-  public static from(
-    value: Date,
-  ): BreakdownReportedDate | BreakdownReportedDateError {
+  public static from(value: Date): BreakdownReportedDate | BreakdownReportedDateError {
     const currentDate = new Date();
     if (value > currentDate) {
       return new BreakdownReportedDateError();

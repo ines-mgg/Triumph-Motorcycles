@@ -1,14 +1,14 @@
-import { MotorcycleRepositoryInterface } from '@application/repositories/MotorcycleRepositoryInterface';
-import { UserRepositoryInterface } from '@application/repositories/UserRepositoryInterface';
-import { LocationRepositoryInterface } from "@application/repositories/LocationRepositoryInterface";
-import { LocationEntity } from "@domain/entities/location/LocationEntity";
-import { UnexpectedError } from "@domain/errors/user/UnexpectedError";
+import { MotorcycleRepositoryInterface } from '@triumph-motorcycles/application/repositories/MotorcycleRepositoryInterface';
+import { LocationRepositoryInterface } from '@triumph-motorcycles/application/repositories/LocationRepositoryInterface';
+import { LocationEntity } from '@triumph-motorcycles/domain/entities/location/LocationEntity';
+import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
+import { UserRepositoryInterface } from '@triumph-motorcycles/application/repositories/UserRepositoryInterface';
 
 export class CreateLocationUsecase {
   constructor(
     private readonly locationRepository: LocationRepositoryInterface,
     private readonly motorcycleRepository: MotorcycleRepositoryInterface,
-    private readonly userRepository: UserRepositoryInterface
+    private readonly userRepository: UserRepositoryInterface,
   ) {}
 
   public async execute(
@@ -16,7 +16,7 @@ export class CreateLocationUsecase {
     userId: string,
     startDate: Date,
     endDate: Date,
-    cost: number
+    cost: number,
   ): Promise<void | Error> {
     try {
       const motorcycle = await this.motorcycleRepository.findById(motorcycleId);
@@ -31,15 +31,17 @@ export class CreateLocationUsecase {
         user,
         startDate,
         endDate,
-        "in-progress",
-        cost
+        'in-progress',
+        cost,
       );
 
       if (locationEntity instanceof Error) return locationEntity;
 
-    await this.locationRepository.create(locationEntity);
+      await this.locationRepository.create(locationEntity);
     } catch (error) {
-      return new UnexpectedError(error instanceof Error ? error.message : String(error));
+      return new UnexpectedError(
+        error instanceof Error ? error.message : String(error),
+      );
     }
   }
 }

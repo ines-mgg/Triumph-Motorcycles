@@ -1,10 +1,11 @@
-import { InvalidTimeRangeError } from '@triumph-motorcycles/domain/errors/appointment/InvalidTimeRangeError';
-import { Value } from '../Value';
+
+import { InvalidTimeRangeError } from "@triumph-motorcycles/domain/errors/appointment/InvalidTimeRangeError";
+import { Value } from "../Value";
 
 export class TimeRange implements Value<{ startTime: Date; endTime: Date }> {
   private constructor(
     private readonly startTimeValue: Date,
-    private readonly endTimeValue: Date,
+    private readonly endTimeValue: Date
   ) {}
 
   public static from(startTime: Date, endTime: Date): TimeRange | Error {

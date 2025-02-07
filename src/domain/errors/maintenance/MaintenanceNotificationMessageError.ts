@@ -1,3 +1,3 @@
 export class MaintenanceNotificationMessageError extends Error {
-  public override readonly name = 'MaintenanceNotificationMessageError';
+    public override readonly name = "MaintenanceNotificationMessageError";
 }

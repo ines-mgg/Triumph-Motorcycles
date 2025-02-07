@@ -1,7 +1,7 @@
-import { AppointmentRepository } from '@triumph-motorcycles/application/repositories/AppointmentRepository';
+import { AppointmentRepositoryInterface } from '@triumph-motorcycles/application/repositories/AppointmentRepositoryInterface';
 
 export class AppointmentDeleteUseCase {
-  constructor(private readonly repository: AppointmentRepository) {}
+  constructor(private readonly repository: AppointmentRepositoryInterface) {}
 
   public async deleteAppointment(id: string): Promise<void | Error> {
     const appointment = await this.repository.findById(id);

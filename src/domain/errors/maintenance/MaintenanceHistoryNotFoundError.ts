@@ -1,3 +1,3 @@
 export class MaintenanceHistoryNotFoundError extends Error {
-  public override readonly name = 'MaintenanceHistoryNotFoundError';
+    public override readonly name = "MaintenanceHistoryNotFoundError";
 }

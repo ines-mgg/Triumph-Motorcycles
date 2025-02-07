@@ -1,3 +1,3 @@
 export class OrderCreateOrderItemError extends Error {
-  public override readonly name = 'OrderCreateOrderItemError';
+    public override readonly name = "OrderCreateOrderItemError";
 }

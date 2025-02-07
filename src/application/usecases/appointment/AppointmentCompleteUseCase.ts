@@ -1,7 +1,9 @@
-import { AppointmentRepository } from '@triumph-motorcycles/application/repositories/AppointmentRepository';
+import { AppointmentRepositoryInterface } from '@triumph-motorcycles/application/repositories/AppointmentRepositoryInterface';
 
 export class AppointmentCompleteUseCase {
-  constructor(private readonly appointmentRepository: AppointmentRepository) {}
+  constructor(
+    private readonly appointmentRepository: AppointmentRepositoryInterface,
+  ) {}
 
   async execute(appointmentId: string): Promise<void | Error> {
     const appointment = await this.appointmentRepository.findById(

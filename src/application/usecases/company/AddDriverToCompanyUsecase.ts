@@ -1,20 +1,27 @@
-import { DriverEntity } from '@triumph-motorcycles/domain/entities/drives/DriverEntity';
-import { CompanyEntity } from '@triumph-motorcycles/domain/entities/company/CompanyEntity';
-import { CompanyRepository } from '@triumph-motorcycles/application/repositories/CompanyRepository';
+import { CompanyRepositoryInterface } from '@triumph-motorcycles/application/repositories/CompanyRepositoryInterface';
+import { DriverRepositoryInterface } from '@triumph-motorcycles/application/repositories/DriverRepositoryInterface';
 import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
 
 export class AddDriverToCompanyUsecase {
-  public constructor(private readonly companyRepository: CompanyRepository) {}
+  public constructor(
+    private readonly companyRepository: CompanyRepositoryInterface,
+    private readonly driverRepository: DriverRepositoryInterface,
+  ) {}
 
   public async execute(
-    company: CompanyEntity,
-    driver: DriverEntity,
-  ): Promise<CompanyEntity | Error> {
+    companyId: string,
+    driverId: string,
+  ): Promise<void | Error> {
     try {
-      company.addDriver(driver);
-      await this.companyRepository.update(company);
+      const company = await this.companyRepository.findById(companyId);
+      const driver = await this.driverRepository.findOneById(driverId);
 
-      return company;
+      if (company instanceof Error) return company;
+      if (driver instanceof Error) return driver;
+
+      company.addDriver(driver);
+
+      return await this.companyRepository.addDriver(companyId, driverId);
     } catch (error) {
       return new UnexpectedError(
         error instanceof Error ? error.message : String(error),

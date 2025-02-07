@@ -1,31 +1,33 @@
-import { v4 as uuidv4 } from 'uuid';
-import { MotorcycleEntity } from '../drives/MotorcycleEntity';
-import { UserEntity } from '../user/UserEntity';
-import { Name } from '@triumph-motorcycles/domain/values/concession/name';
+import { Name } from "@triumph-motorcycles/domain/values/company/Name";
+import { CompanyEntity } from "../company/CompanyEntity";
+import { MotorcycleEntity } from "../motorcycle/MotorcycleEntity";
+import { UserEntity } from "../user/UserEntity";
+
 
 export class ConcessionEntity {
   private motorcycles: MotorcycleEntity[] = [];
 
   private constructor(
-    public readonly identifier: string,
+    public readonly id: string,
     public name: Name,
     public user: UserEntity,
+    public company: CompanyEntity,
     public createdAt: Date,
-    public updatedAt: Date,
+    public updatedAt: Date
   ) {}
 
   public static create(
-    nameValue: string,
+    id: string,
+    name: string,
     user: UserEntity,
+    company: CompanyEntity,
+    createdAt: Date,
+    updatedAt: Date
   ): ConcessionEntity | Error {
-    const name = Name.from(nameValue);
-    if (name instanceof Error) return name;
+    const nameValue = Name.from(name);
+    if (nameValue instanceof Error) return nameValue;
 
-    const identifier = uuidv4();
-    const createdAt = new Date();
-    const updatedAt = new Date();
-
-    return new ConcessionEntity(identifier, name, user, createdAt, updatedAt);
+    return new ConcessionEntity(id, nameValue, user, company, createdAt, updatedAt);
   }
 
   public updateName(newNameValue: string): void | Error {
@@ -37,12 +39,14 @@ export class ConcessionEntity {
   }
 
   public addMotorcycle(motorcycle: MotorcycleEntity): void {
-    this.motorcycles.push(motorcycle);
+    if (!this.motorcycles.find(m => m.id === motorcycle.id)) {
+      this.motorcycles.push(motorcycle);
+    }
   }
 
   public removeMotorcycle(motorcycleId: string): void {
     this.motorcycles = this.motorcycles.filter(
-      (motorcycle) => motorcycle.id !== motorcycleId,
+      (motorcycle) => motorcycle.id !== motorcycleId
     );
   }
 
@@ -50,17 +54,29 @@ export class ConcessionEntity {
     return this.motorcycles;
   }
 
+  public assignToCompany(company: CompanyEntity): void {
+    this.company = company;
+    this.updatedAt = new Date();
+  }
+
+  public removeFromCompany(): void {
+    this.company = null!;
+    this.updatedAt = new Date();
+  }
+
   public getDetails(): {
-    identifier: string;
+    id: string;
     name: string;
     user: UserEntity;
-    motorcycles: MotorcycleEntity[];
+    motorcycles?: MotorcycleEntity[] | null;
+    company: CompanyEntity | null;
   } {
     return {
-      identifier: this.identifier,
+      id: this.id,
       name: this.name.value,
       user: this.user,
       motorcycles: this.motorcycles,
+      company: this.company,
     };
   }
 }

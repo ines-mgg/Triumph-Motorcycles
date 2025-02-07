@@ -1,8 +1,15 @@
-import { CompanyEntity } from '@triumph-motorcycles/domain/entities/company/CompanyEntity';
-import { DriverEntity } from '@triumph-motorcycles/domain/entities/drives/DriverEntity';
+import { CompanyRepositoryInterface } from '@triumph-motorcycles/application/repositories/CompanyRepositoryInterface';
+import { DriverEntity } from '@triumph-motorcycles/domain/entities/driver/DriverEntity';
 
 export class GetCompanyDriversUsecase {
-  public execute(company: CompanyEntity): DriverEntity[] {
+  public constructor(
+    private readonly companyRepository: CompanyRepositoryInterface,
+  ) {}
+
+  public async execute(companyId: string): Promise<Error | DriverEntity[]> {
+    const company = await this.companyRepository.findById(companyId);
+    if (company instanceof Error) return company;
+
     return company.getDrivers();
   }
 }

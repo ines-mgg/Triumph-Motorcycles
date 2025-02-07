@@ -1,5 +1,5 @@
-import { MotorcycleTrialRepositoryInterface } from "@application/repositories/MotorcycleTrialRepositoryInterface";
-import { MotorcycleTrialAlreadyCompletedError } from "@domain/errors/motorcycle/MotorcycleTrialAlreadyCompletedError";
+import { MotorcycleTrialRepositoryInterface } from "@triumph-motorcycles/application/repositories/MotorcycleTrialRepositoryInterface";
+import { MotorcycleTrialAlreadyCompletedError } from "@triumph-motorcycles/domain/errors/motorcycle/MotorcycleTrialAlreadyCompletedError";
 
 export class UpdateMotorcycleTrialUsecase {
   constructor(private readonly motorcycleTrialRepository: MotorcycleTrialRepositoryInterface) {}
