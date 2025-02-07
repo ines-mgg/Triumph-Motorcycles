@@ -1,27 +1,36 @@
-import { ConcessionRepository } from '@triumph-motorcycles/application/repositories/ConcessionRepository';
-import { ConcessionEntity } from '@triumph-motorcycles/domain/entities/concession/ConcessionEntity';
-import { UserEntity } from '@triumph-motorcycles/domain/entities/user/UserEntity';
-import { UnexpectedError } from '@triumph-motorcycles/domain/errors/user/UnexpectedError';
+import { CompanyRepository } from "@triumph-motorcycles/application/repositories/CompanyRepository";
+import { ConcessionRepository } from "@triumph-motorcycles/application/repositories/ConcessionRepository";
+import { UserRepository } from "@triumph-motorcycles/application/repositories/UserRepository";
+import { ConcessionEntity } from "@triumph-motorcycles/domain/entities/concession/ConcessionEntity";
+import { UnexpectedError } from "@triumph-motorcycles/domain/errors/user/UnexpectedError";
+
 
 export class CreateConcessionUsecase {
   public constructor(
     private readonly concessionRepository: ConcessionRepository,
+    private readonly companyRepository: CompanyRepository,
+    private readonly userRepository: UserRepository
   ) {}
 
   public async execute(
-    nameValue: string,
-    user: UserEntity,
-  ): Promise<ConcessionEntity | Error> {
+    name: string,
+    userId: string,
+    companyId: string,
+  ): Promise<void | Error> {
     try {
-      const newConcession = ConcessionEntity.create(nameValue, user);
-      if (newConcession instanceof Error) return newConcession;
+      const user = await this.userRepository.findById(userId);
+      if (user instanceof Error) return user 
 
+      const company = await this.companyRepository.findById(companyId);
+      if (company instanceof Error) return company
+       
+      const newConcession = ConcessionEntity.create(null, name, user, company, null, null);
+      if (newConcession instanceof Error) return newConcession;
+    
       await this.concessionRepository.save(newConcession);
-      return newConcession;
+
     } catch (error) {
-      return new UnexpectedError(
-        error instanceof Error ? error.message : String(error),
-      );
+      return new UnexpectedError(error instanceof Error ? error.message : String(error));
     }
   }
 }
