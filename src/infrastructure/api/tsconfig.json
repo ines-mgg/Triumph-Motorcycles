@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@triumph-motorcycles/application/repositories": [
+        "../../application/repositories/*"
+      ],
+      "@triumph-motorcycles/application/responses": [
+        "../../application/responses/*"
+      ],
+      "@triumph-motorcycles/application/services": [
+        "../../application/services/*"
+      ],
+      "@triumph-motorcycles/application/usecases": [
+        "../../application/usecases/*"
+      ],
+      "@triumph-motorcycles/domain/entities": ["../../domain/entities/*"],
+      "@triumph-motorcycles/domain/errors": ["../../domain/errors/*"],
+      "@triumph-motorcycles/domain/types": ["../../domain/types/*"],
+      "@triumph-motorcycles/domain/values": ["../../domain/values/*"]
+    }
+  }
+}
