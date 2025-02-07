@@ -4,7 +4,7 @@ import { UserNotFoundError } from '@triumph-motorcycles/domain/errors/user/UserN
 export interface UserRepository {
   findById(identifier: string): Promise<UserEntity | UserNotFoundError>;
   findByUsername(username: string): Promise<UserEntity | UserNotFoundError>;
-  save(user: UserEntity): Promise<void | Error>;
-  update(user: UserEntity): Promise<void | Error>;
-  delete(identifier: string): Promise<void | Error>;
+  save(user: UserEntity): Promise<void | UserNotFoundError>;
+  update(user: UserEntity): Promise<void | UserNotFoundError>;
+  delete(identifier: string): Promise<void | UserNotFoundError>;
 }

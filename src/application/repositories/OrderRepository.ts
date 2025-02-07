@@ -8,4 +8,8 @@ export interface OrderRepository {
     startDate: Date,
     endDate: Date,
   ): Promise<OrderEntity[] | OrderNotFoundError>;
+  update(order: OrderEntity): Promise<void>;
+  findAll(): Promise<OrderEntity[] | Error>;
+  addItem(orderId: string, itemId: string): Promise<void | OrderNotFoundError>;
+  delivery(orderId: string): Promise<void | OrderNotFoundError>;
 }

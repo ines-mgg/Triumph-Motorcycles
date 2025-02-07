@@ -9,4 +9,8 @@ export interface OrderItemRepository {
   findByOrderId(
     orderId: string,
   ): Promise<OrderItemEntity[] | OrderItemNotFoundError>;
+  findAll(): Promise<OrderItemEntity[] | OrderItemNotFoundError>;
+  update(orderItem: OrderItemEntity): Promise<void>;
+  delete(id: string): Promise<void>;
+  updatedeliveredQty(id: string, quantityOrdered: number): Promise<void>;
 }

@@ -8,4 +8,6 @@ export interface MotorcycleTryRepository {
   ): Promise<MotorcycleTryEntity | MotorcycleTryNotFoundError>;
   delete(id: string): Promise<void>;
   all(): Promise<MotorcycleTryEntity[] | MotorcycleTryNotFoundError>;
+  update(motorcycleTry: MotorcycleTryEntity): Promise<void>;
+  endTrial(id: string, endDate: Date): Promise<void>;
 }

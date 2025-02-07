@@ -3,10 +3,17 @@ import { BreakdownNotFoundError } from '@triumph-motorcycles/domain/errors/break
 
 export interface BreakdownRepository {
   save(breakdown: BreakdownEntity): Promise<void>;
-  findOneById(id: string): Promise<BreakdownEntity | BreakdownNotFoundError>;
+  findOneById(
+    breakdownId: string,
+  ): Promise<BreakdownEntity | BreakdownNotFoundError>;
   findByMotorcycleId(
     motorcycleId: string,
   ): Promise<BreakdownEntity[] | BreakdownNotFoundError>;
-  delete(id: string): Promise<void>;
+  delete(breakdownId: string): Promise<void>;
   all(): Promise<BreakdownEntity[]>;
+  updateDescription(breakdownId: string, description: string): Promise<void>;
+  addRepair(
+    breakdownId: string,
+    repairId: string,
+  ): Promise<void | BreakdownNotFoundError>;
 }
